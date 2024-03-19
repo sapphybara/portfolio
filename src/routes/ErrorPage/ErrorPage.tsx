@@ -1,6 +1,7 @@
 import Navbar from "@components/Navbar/Navbar";
 import Footer from "@components/Footer/Footer";
-import { useRouteError } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
+import { Link, NextUIProvider } from "@nextui-org/react";
 import "./ErrorPage.css";
 
 export default function ErrorPage() {
@@ -8,7 +9,7 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <div id="error-page">
+    <NextUIProvider id="error-page" navigate={useNavigate()}>
       <Navbar />
       <div className="error-message">
         <h1>Oops!</h1>
@@ -20,10 +21,10 @@ export default function ErrorPage() {
           </i>
         </p>
         <p>
-          Please click <a href="/">here</a> to return to the home page.
+          Please click <Link href="/">here</Link> to return to the home page.
         </p>
       </div>
       <Footer />
-    </div>
+    </NextUIProvider>
   );
 }

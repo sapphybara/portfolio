@@ -13,7 +13,7 @@
       flex: 0 0 100px;
     }
 
-    > #content {
+    > .content {
       flex: 0 0 calc(100vh - 200px - 4em);
     }
   }

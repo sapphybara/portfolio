@@ -1,7 +1,7 @@
 import { ComponentProps, ReactNode } from "react";
 
-const Home: (props: ComponentProps<"div">) => ReactNode = ({ id }) => {
-  return <div id={id}>This is the home page</div>;
+const Home: (props: ComponentProps<"div">) => ReactNode = ({ className }) => {
+  return <div className={className}>We're on the home page rn</div>;
 };
 
 export default Home;
