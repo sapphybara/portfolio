@@ -1,8 +1,7 @@
+import { PropsWithChildren, ReactNode } from "react";
 import "./MainContent.css";
-export default function MainContent() {
-  return (
-    <div className="main-content">
-      <p>here she is!</p>
-    </div>
-  );
-}
+const MainContent: (props: PropsWithChildren) => ReactNode = ({ children }) => {
+  return <div className="main-content">{children}</div>;
+};
+
+export default MainContent;

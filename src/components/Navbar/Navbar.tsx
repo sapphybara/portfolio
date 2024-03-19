@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <>
       <div className="navbar">
-        <h2>Sapphyra Wiser</h2>
+        <h1>Sapphyra Wiser</h1>
       </div>
     </>
   );
