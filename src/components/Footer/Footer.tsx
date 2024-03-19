@@ -1,8 +1,12 @@
+import { ComponentProps, ReactNode } from "react";
 import "./Footer.css";
-export default function Footer() {
+
+const Footer: (props: ComponentProps<"div">) => ReactNode = ({ id }) => {
   return (
-    <div className="footer">
+    <div className="footer" id={id}>
       <p>- contact info goes here -</p>
     </div>
   );
-}
+};
+
+export default Footer;

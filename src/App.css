@@ -4,4 +4,17 @@
   padding: 0;
   text-align: center;
   width: 100%;
+
+  .app {
+    display: flex;
+    flex-direction: column;
+
+    > #navbar, #footer {
+      flex: 0 0 100px;
+    }
+
+    > #content {
+      flex: 0 0 calc(100vh - 200px - 4em);
+    }
+  }
 }

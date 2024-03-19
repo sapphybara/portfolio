@@ -1,4 +1,8 @@
 #error-page {
   display: flex;
   flex-direction: column;
+
+  .error-message {
+    flex: 0 0 calc(100vh - 200px - 4em);
+  }
 }
