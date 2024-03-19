@@ -1,0 +1,40 @@
+on:
+  - push
+  - pull_request
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# NOTE: pnpm caching support requires pnpm version >= 6.10.0
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 14, 16, 18, 20 ]
+    name: Node ${{ matrix.node }} sample
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+        
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+          
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint
+
+      - run: pnpm build
