@@ -2,6 +2,7 @@ import Navbar from "@components/Navbar/Navbar";
 import MainContent from "@components/MainContent/MainContent";
 import Footer from "@components/Footer/Footer";
 import { useRouteError } from "react-router-dom";
+import "./ErrorPage.css";
 
 export default function ErrorPage() {
   const error = useRouteError();
