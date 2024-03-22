@@ -15,6 +15,9 @@ const theme = createTheme({
       },
     },
   },
+  palette: {
+    mode: "dark",
+  },
   typography: {
     fontFamily: [
       "Lato", // Specify Lato as the primary font
