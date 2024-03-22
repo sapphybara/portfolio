@@ -1,13 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { join, resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    tsconfigPaths(),
     checker({
       typescript: true,
       eslint: {
@@ -16,4 +15,11 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      "@components": resolve(join(__dirname, "src/components")),
+      "@routes": resolve(join(__dirname, "src/routes")),
+      "@theme": resolve(join(__dirname, "src/theme")),
+    },
+  },
 });
