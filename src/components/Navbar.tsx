@@ -8,11 +8,18 @@ import {
   Link,
   List,
   ListItem,
+  ListItemIcon,
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { GitHub, LinkedIn, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
+import "./navbar.css";
+
+const socials = [
+  { icon: <LinkedIn />, url: "https://www.linkedin.com/in/sapphybara/" },
+  { icon: <GitHub />, url: "https://www.github.com/sapphybara" },
+];
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -37,6 +44,15 @@ const Navbar = (props: PropsWithRoutes) => {
       );
     });
 
+  const renderSocialIcons = () =>
+    socials.map((site) => (
+      <ListItemIcon>
+        <Link href={site.url} target="__blank" rel="noopener noreferrer">
+          {site.icon}
+        </Link>
+      </ListItemIcon>
+    ));
+
   const drawer = (
     <Drawer
       variant="temporary"
@@ -58,7 +74,10 @@ const Navbar = (props: PropsWithRoutes) => {
           Sapphyra Wiser
         </Typography>
         <Divider />
-        <List>{renderRouteLinks(props.routes)}</List>
+        <List>
+          {renderRouteLinks(props.routes)}
+          {renderSocialIcons()}
+        </List>
       </Box>
     </Drawer>
   );
@@ -84,10 +103,11 @@ const Navbar = (props: PropsWithRoutes) => {
             Sapphyra Wiser
           </Typography>
           <List
-            className="flex-row justify-center align-left"
+            className="flex-row justify-center items-end"
             sx={{ display: { xs: "none", sm: "flex" } }}
           >
             {renderRouteLinks(props.routes)}
+            {renderSocialIcons()}
           </List>
         </Toolbar>
       </AppBar>
