@@ -20,7 +20,7 @@ const Navbar = (props: PropsWithRoutes) => {
     });
 
   return (
-    <AppBar position="static">
+    <AppBar component="nav" position="static">
       <List className="flex flex-row">{renderRoutes(props.routes)}</List>
     </AppBar>
   );
