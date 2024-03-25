@@ -1,14 +1,12 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import Navbar from "@components/Navbar";
 import { Outlet } from "react-router-dom";
-import theme from "./theme/theme";
+import { PropsWithRoutes } from "types/global";
 
-function App() {
+function App(props: PropsWithRoutes) {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline enableColorScheme />
-        <Outlet />
-      </ThemeProvider>
+      <Navbar routes={props.routes} />
+      <Outlet />
     </>
   );
 }

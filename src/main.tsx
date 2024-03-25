@@ -12,10 +12,12 @@ import Home from "@routes/Home.tsx";
 import Portfolio from "@routes/Portfolio.tsx";
 import Contact from "@routes/Contact.tsx";
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
-    element: <App />,
+    get element() {
+      return <App routes={routes} />;
+    },
     children: [
       {
         path: "",
@@ -31,7 +33,8 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+const router = createBrowserRouter(routes);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
