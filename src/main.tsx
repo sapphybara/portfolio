@@ -12,7 +12,7 @@ import "@fontsource/lato/400.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
 import createCustomTheme from "@theme/theme.ts";
-import Home from "@routes/Home.tsx";
+import Home from "@routes/Home/Home.tsx";
 import Portfolio from "@routes/Portfolio.tsx";
 import Contact from "@routes/Contact.tsx";
 import "./index.css";

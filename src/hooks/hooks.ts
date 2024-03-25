@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 export const useTitle = () => {
   const location = useLocation();
   useEffect(() => {
-    console.log("running useTitle");
     const title =
       location.pathname === "/"
         ? ""
