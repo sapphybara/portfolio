@@ -41,9 +41,8 @@ const routes = [
 ];
 const router = createBrowserRouter(routes);
 const rootElement = document.getElementById("root")!;
-const root = createRoot(rootElement);
 
-root.render(
+createRoot(rootElement).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={createCustomTheme(rootElement)}>
