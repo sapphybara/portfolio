@@ -1,12 +1,30 @@
-import { ReactNode } from "react";
-import { AppBar, Link, List, ListItem } from "@mui/material";
+import { ReactNode, useState } from "react";
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  Link,
+  List,
+  ListItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
 
 const Navbar = (props: PropsWithRoutes) => {
-  const renderRoutes = (routes: typeof props.routes): ReactNode[] =>
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
+
+  const renderRouteLinks = (routes: typeof props.routes): ReactNode[] =>
     routes.map((route) => {
       if (route.children) {
-        return renderRoutes(route.children);
+        return renderRouteLinks(route.children);
       }
 
       const { path = "" } = route;
@@ -19,10 +37,62 @@ const Navbar = (props: PropsWithRoutes) => {
       );
     });
 
+  const drawer = (
+    <Drawer
+      variant="temporary"
+      open={mobileOpen}
+      onClose={handleDrawerToggle}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+      sx={{
+        display: { xs: "block", sm: "none" },
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: 240,
+        },
+      }}
+    >
+      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+        <Typography variant="h6" sx={{ my: 2 }}>
+          Sapphyra Wiser
+        </Typography>
+        <Divider />
+        <List>{renderRouteLinks(props.routes)}</List>
+      </Box>
+    </Drawer>
+  );
+
   return (
-    <AppBar component="nav" position="static">
-      <List className="flex flex-row">{renderRoutes(props.routes)}</List>
-    </AppBar>
+    <>
+      <AppBar component="nav" position="sticky">
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          >
+            Sapphyra Wiser
+          </Typography>
+          <List
+            className="flex-row justify-center align-left"
+            sx={{ display: { xs: "none", sm: "flex" } }}
+          >
+            {renderRouteLinks(props.routes)}
+          </List>
+        </Toolbar>
+      </AppBar>
+      <nav>{drawer}</nav>
+    </>
   );
 };
 
