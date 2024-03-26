@@ -103,7 +103,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Card className={className} raised>
+    <Card className={`${className}${isOpen ? "" : " collapsed"}`} raised>
       <CardActionArea
         className="flex justify-between"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -131,7 +131,7 @@ const Resume = () => {
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <CollapsibleCard
-        className="collapse-parent pb-8 my-8"
+        className={"collapse-parent my-8"}
         collapseClassName="collapse-content"
         title="Skills"
         titleTypographyProps={{ variant: "h2" }}

@@ -1,7 +1,14 @@
-.collapse-parent .MuiCollapse-wrapperInner .collapse-content {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 2rem;
+.collapse-parent {
+  padding-bottom: 2rem;
+  &.collapsed {
+    padding-bottom: 0;
+  }
+
+  .MuiCollapse-wrapperInner .collapse-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
 }
