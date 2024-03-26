@@ -2,8 +2,8 @@ import { createTheme } from "@mui/material";
 import { LinkProps } from "@mui/material/Link";
 import LinkBehavior from "./LinkBehavior";
 
-const createCustomTheme = (rootElement: Element) =>
-  createTheme({
+const createCustomTheme = (rootElement: Element) => {
+  const theme = createTheme({
     components: {
       MuiLink: {
         defaultProps: {
@@ -44,18 +44,22 @@ const createCustomTheme = (rootElement: Element) =>
       },
     },
     palette: {
+      contrastThreshold: 4.5,
       mode: "dark",
     },
     typography: {
-      fontFamily: [
-        "Lato", // Specify Lato as the primary font
-        "Arial", // Fallback font
-        "sans-serif",
-      ].join(","),
+      fontFamily: ["Lato", "Arial", "sans-serif"].join(","),
+    },
+  });
+
+  return createTheme(theme, {
+    typography: {
       decoration: {
         textTransform: "uppercase",
+        color: theme.palette.secondary.main,
       },
     },
   });
+};
 
 export default createCustomTheme;

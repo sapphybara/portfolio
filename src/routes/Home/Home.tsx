@@ -3,13 +3,9 @@ import "./home.css";
 
 const Home = () => {
   return (
-    <section className="mt-[4rem] ml-8">
+    <Box className="mt-16 ml-8" component="section">
       <Box className="header flex flex-wrap">
-        <Typography
-          className="w-full"
-          color="secondary.main"
-          variant="decoration"
-        >
+        <Typography className="w-full" variant="decoration">
           hi, my name is
         </Typography>
         <Box className="flex flex-wrap justify-between w-4/5">
@@ -29,11 +25,7 @@ const Home = () => {
         </Box>
       </Box>
       <Box className="header flex flex-wrap items-center my-12">
-        <Typography
-          className="decorator grow w-full"
-          color="secondary.main"
-          variant="decoration"
-        >
+        <Typography className="decorator grow w-full" variant="decoration">
           I am a
         </Typography>
         <Typography variant="h2">Developer</Typography>
@@ -50,7 +42,7 @@ const Home = () => {
         <Link href="/portfolio">Check out my work</Link> or&nbsp;
         <Link href="/contact">get in touch</Link>!
       </Typography>
-    </section>
+    </Box>
   );
 };
 

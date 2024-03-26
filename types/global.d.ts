@@ -11,7 +11,7 @@ declare module "@mui/material/styles" {
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
-    decoration: React.CSSProperties;
+    decoration?: React.CSSProperties;
   }
 }
 
