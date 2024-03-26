@@ -131,7 +131,7 @@ const Resume = () => {
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <CollapsibleCard
-        className="collapse-parent pb-8"
+        className="collapse-parent pb-8 my-8"
         collapseClassName="collapse-content"
         title="Skills"
         titleTypographyProps={{ variant: "h2" }}
