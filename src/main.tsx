@@ -15,6 +15,7 @@ import createCustomTheme from "@theme/theme.ts";
 import Home from "@routes/Home/Home.tsx";
 import Portfolio from "@routes/Portfolio.tsx";
 import Contact from "@routes/Contact.tsx";
+import Resume from "@routes/Resume/Resume.tsx";
 import "./index.css";
 
 const routes = [
@@ -31,6 +32,10 @@ const routes = [
       {
         path: "portfolio",
         element: <Portfolio />,
+      },
+      {
+        path: "resume",
+        element: <Resume />,
       },
       {
         path: "contact",
