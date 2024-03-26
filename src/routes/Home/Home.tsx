@@ -11,8 +11,8 @@ const Home = () => {
         <Box className="flex flex-wrap justify-between w-4/5">
           <Typography variant="h1">Sapphyra</Typography>
           <Box
-            className="rounded-[50%]"
-            sx={{ bgcolor: "text.secondary", height: "100px", width: "100px" }}
+            className="rounded-[50%] w-[100px] h-[100px]"
+            bgcolor="text.secondary"
           >
             <img
               className="rounded-[50%]"

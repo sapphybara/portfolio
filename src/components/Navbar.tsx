@@ -55,22 +55,17 @@ const Navbar = (props: PropsWithRoutes) => {
 
   const drawer = (
     <Drawer
+      className="drawer"
       variant="temporary"
       open={mobileOpen}
       onClose={handleDrawerToggle}
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}
-      sx={{
-        display: { xs: "block", sm: "none" },
-        "& .MuiDrawer-paper": {
-          boxSizing: "border-box",
-          width: 240,
-        },
-      }}
+      sx={{ display: { xs: "block", sm: "none" } }}
     >
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-        <Typography variant="h6" sx={{ my: 2 }}>
+      <Box onClick={handleDrawerToggle} className="text-center">
+        <Typography className="my-2" variant="h6">
           Sapphyra Wiser
         </Typography>
         <Divider />
@@ -87,18 +82,20 @@ const Navbar = (props: PropsWithRoutes) => {
       <AppBar component="nav" position="sticky">
         <Toolbar>
           <IconButton
+            className="mr-2"
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
+            className="grow"
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" } }}
           >
             Sapphyra Wiser
           </Typography>
