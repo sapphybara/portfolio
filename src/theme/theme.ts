@@ -35,6 +35,13 @@ const createCustomTheme = (rootElement: Element) =>
           container: rootElement,
         },
       },
+      MuiTypography: {
+        defaultProps: {
+          variantMapping: {
+            decoration: "p",
+          },
+        },
+      },
     },
     palette: {
       mode: "dark",
@@ -45,6 +52,9 @@ const createCustomTheme = (rootElement: Element) =>
         "Arial", // Fallback font
         "sans-serif",
       ].join(","),
+      decoration: {
+        textTransform: "uppercase",
+      },
     },
   });
 
