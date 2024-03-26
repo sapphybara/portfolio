@@ -46,7 +46,7 @@ const Navbar = (props: PropsWithRoutes) => {
 
   const renderSocialIcons = () =>
     socials.map((site) => (
-      <ListItemIcon>
+      <ListItemIcon key={site.url}>
         <Link href={site.url} target="__blank" rel="noopener noreferrer">
           {site.icon}
         </Link>
