@@ -3,9 +3,13 @@ import "./home.css";
 
 const Home = () => {
   return (
-    <section className="mt-[4rem] ml-8 home">
+    <section className="mt-[4rem] ml-8">
       <Box className="header flex flex-wrap">
-        <Typography className="w-full" color="secondary.main">
+        <Typography
+          className="w-full"
+          color="secondary.main"
+          variant="decoration"
+        >
           hi, my name is
         </Typography>
         <Box className="flex flex-wrap justify-between w-4/5">
@@ -24,8 +28,12 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="header group my-12">
-        <Typography className="decorator" color="secondary.main">
+      <Box className="header flex flex-wrap items-center my-12">
+        <Typography
+          className="decorator grow w-full"
+          color="secondary.main"
+          variant="decoration"
+        >
           I am a
         </Typography>
         <Typography variant="h2">Developer</Typography>
