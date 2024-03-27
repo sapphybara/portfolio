@@ -1,29 +1,15 @@
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardHeader,
-  List,
-  ListItem,
-  Collapse,
-  Divider,
-  CardActionArea,
-  CardProps,
-  CardHeaderProps,
-} from "@mui/material";
+import { Box, Typography, CardContent, List, ListItem } from "@mui/material";
 import {
   Accessibility,
   Assignment,
   DesignServices,
   DeveloperBoard,
   Dns,
-  ExpandMore,
   Public,
   Storage,
   VerifiedUser,
 } from "@mui/icons-material";
-import { ReactNode, useState } from "react";
+import CollapsibleCard from "@components/CollapsibleCard";
 import "./resume.css";
 
 const skillGroupings = [
@@ -85,49 +71,6 @@ const skillGroupings = [
     icon: <Accessibility />,
   },
 ];
-
-interface CollapsibleCardProps extends CardProps {
-  collapseClassName?: string;
-  defaultIsOpen?: boolean;
-  headerIcon?: ReactNode;
-  title: string;
-  titleTypographyProps?: CardHeaderProps["titleTypographyProps"];
-}
-
-const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
-  children,
-  className,
-  collapseClassName,
-  defaultIsOpen = false,
-  headerIcon,
-  title,
-  titleTypographyProps = { variant: "h3" },
-}) => {
-  const [isOpen, setIsOpen] = useState(defaultIsOpen);
-  return (
-    <Card className={`${className}${isOpen ? "" : " collapsed"}`} raised>
-      <CardActionArea
-        className="flex justify-between"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        <CardHeader
-          avatar={headerIcon}
-          title={title}
-          titleTypographyProps={{ component: "h4", ...titleTypographyProps }}
-        />
-        <ExpandMore
-          className={`${
-            isOpen ? "rotate-180" : "rotate-0"
-          } transition-transform mr-4`}
-        />
-      </CardActionArea>
-      <Collapse in={isOpen}>
-        <Divider />
-        <Box className={collapseClassName}>{children}</Box>
-      </Collapse>
-    </Card>
-  );
-};
 
 const Resume = () => {
   return (
