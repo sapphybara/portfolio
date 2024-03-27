@@ -1,5 +1,5 @@
 .collapse-parent {
-  padding: 0 0 3rem 2rem;
+  padding-bottom: 3rem;
   &.collapsed {
     padding-bottom: 0;
   }

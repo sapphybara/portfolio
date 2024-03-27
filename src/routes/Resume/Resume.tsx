@@ -82,7 +82,7 @@ const Resume = () => {
         collapseClassName="collapse-content"
         defaultIsOpen
         title="Skills"
-        titleTypographyProps={{ variant: "h2" }}
+        titleTypographyProps={{ className: "ml-8", variant: "h2" }}
       >
         {skillGroupings.map(({ theme, skills, icon }) => (
           <CollapsibleCard
