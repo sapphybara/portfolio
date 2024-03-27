@@ -88,6 +88,7 @@ const skillGroupings = [
 
 interface CollapsibleCardProps extends CardProps {
   collapseClassName?: string;
+  defaultIsOpen?: boolean;
   headerIcon?: ReactNode;
   title: string;
   titleTypographyProps?: CardHeaderProps["titleTypographyProps"];
@@ -97,11 +98,12 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
   children,
   className,
   collapseClassName,
+  defaultIsOpen = false,
   headerIcon,
   title,
   titleTypographyProps = { variant: "h3" },
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(defaultIsOpen);
   return (
     <Card className={`${className}${isOpen ? "" : " collapsed"}`} raised>
       <CardActionArea
@@ -114,10 +116,12 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
           titleTypographyProps={{ component: "h4", ...titleTypographyProps }}
         />
         <ExpandMore
-          className={`rotate-${isOpen ? "180" : "0"} transition-transform`}
+          className={`${
+            isOpen ? "rotate-180" : "rotate-0"
+          } transition-transform mr-4`}
         />
       </CardActionArea>
-      <Collapse className="ml-12" in={isOpen}>
+      <Collapse in={isOpen}>
         <Divider />
         <Box className={collapseClassName}>{children}</Box>
       </Collapse>
@@ -133,6 +137,7 @@ const Resume = () => {
       <CollapsibleCard
         className={"collapse-parent my-8"}
         collapseClassName="collapse-content"
+        defaultIsOpen
         title="Skills"
         titleTypographyProps={{ variant: "h2" }}
       >
@@ -149,9 +154,7 @@ const Resume = () => {
             <CardContent>
               <List>
                 {skills.map((skill) => (
-                  <ListItem disableGutters key={skill.replace(/\s+/g, "-")}>
-                    {skill}
-                  </ListItem>
+                  <ListItem key={skill.replace(/\s+/g, "-")}>{skill}</ListItem>
                 ))}
               </List>
             </CardContent>
