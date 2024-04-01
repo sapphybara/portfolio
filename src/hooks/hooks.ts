@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export const useTitle = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
-    const title =
-      location.pathname === "/"
+    const titleSuffix =
+      pathname === "/"
         ? ""
-        : location.pathname.charAt(1).toUpperCase() +
-          location.pathname.slice(2);
+        : ` | ${pathname.charAt(1).toUpperCase()}${pathname.slice(2)}`;
 
-    document.title = `Sapphyra Wiser${title ? ` | ${title}` : ""}`;
-  }, [location.pathname]);
+    document.title = `Sapphyra Wiser${titleSuffix}`;
+  }, [pathname]);
 };

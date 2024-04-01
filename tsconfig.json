@@ -25,7 +25,9 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@routes/*": ["src/routes/*"],
-      "@theme/*": ["src/theme/*"]
+      "@theme/*": ["src/theme/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["src"],
