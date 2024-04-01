@@ -1,6 +1,5 @@
 import { ReactNode, useState } from "react";
 import {
-  Box,
   Card,
   CardHeader,
   Collapse,
@@ -8,27 +7,38 @@ import {
   CardActionArea,
   CardProps,
   CardHeaderProps,
+  Box,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
-interface CollapsibleCardProps extends CardProps {
+interface CollapsibleCardProps
+  extends Omit<CardProps, "title">,
+    Pick<CardHeaderProps, "avatar" | "subheader" | "title"> {
   collapseClassName?: string;
   defaultIsOpen?: boolean;
-  headerIcon?: ReactNode;
-  title: string;
-  titleTypographyProps?: CardHeaderProps["titleTypographyProps"];
+  // remove component property as it is overly restrictive on the titleTypographyProps
+  // but it will still accept and respect the component property if passed (idk why??)
+  titleTypographyProps?: Omit<
+    CardHeaderProps["titleTypographyProps"],
+    "component"
+  >;
 }
 
+/**
+ * A collapsible card component that can be used to display content that can be toggled.
+ */
 const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
+  avatar,
   children,
   className,
   collapseClassName,
   defaultIsOpen = false,
-  headerIcon,
+  subheader,
   title,
-  titleTypographyProps = { variant: "h3" },
+  titleTypographyProps,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
+
   return (
     <Card className={`${className}${isOpen ? "" : " collapsed"}`} raised>
       <CardActionArea
@@ -36,9 +46,10 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <CardHeader
-          avatar={headerIcon}
+          avatar={avatar}
+          subheader={subheader}
           title={title}
-          titleTypographyProps={{ component: "h4", ...titleTypographyProps }}
+          titleTypographyProps={titleTypographyProps}
         />
         <ExpandMore
           className={`${
