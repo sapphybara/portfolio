@@ -7,8 +7,17 @@
   .MuiCollapse-wrapperInner .collapse-content {
     display: flex;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 2rem;
+    padding: 0 1rem;
+
+    > .resume-section {
+      width: calc(50% - 1rem);
+
+      .MuiCardContent-root {
+        padding: 1rem 2rem 0;
+      }
+    }
   }
 }
