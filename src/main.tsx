@@ -16,6 +16,7 @@ import Home from "@routes/Home/Home.tsx";
 import Portfolio from "@routes/Portfolio.tsx";
 import Contact from "@routes/Contact.tsx";
 import Resume from "@routes/Resume/Resume.tsx";
+import Error from "@routes/Error/Error.tsx";
 import "./index.css";
 
 const routes = [
@@ -23,6 +24,9 @@ const routes = [
     path: "/",
     get element() {
       return <App routes={routes} />;
+    },
+    get errorElement() {
+      return <Error routes={routes} />;
     },
     children: [
       {
