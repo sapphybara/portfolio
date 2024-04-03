@@ -14,9 +14,18 @@
 
     > .resume-section {
       width: calc(50% - 1rem);
+      min-width: 300px;
 
       .MuiCardContent-root {
         padding: 1rem 2rem 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      justify-content: center;
+
+      > .resume-section {
+        width: 80%;
       }
     }
   }

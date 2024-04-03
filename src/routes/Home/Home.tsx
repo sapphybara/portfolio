@@ -8,7 +8,7 @@ const Home = () => {
         <Typography className="w-full" variant="decoration">
           hi, my name is
         </Typography>
-        <Box className="flex flex-wrap justify-between w-4/5">
+        <Box className="flex flex-wrap justify-between w-11/12">
           <Typography className="decorated" variant="h1">
             Sapphyra
           </Typography>
