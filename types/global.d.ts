@@ -7,11 +7,13 @@ export interface PropsWithRoutes {
 declare module "@mui/material/styles" {
   interface TypographyVariants {
     decoration: React.CSSProperties;
+    tag: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     decoration?: React.CSSProperties;
+    tag?: React.CSSProperties;
   }
 }
 
@@ -19,5 +21,6 @@ declare module "@mui/material/styles" {
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     decoration: true;
+    tag: true;
   }
 }
