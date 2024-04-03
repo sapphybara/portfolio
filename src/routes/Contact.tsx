@@ -1,11 +1,11 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Contact = () => {
   return (
-    <section>
+    <Box component="section">
       <Typography variant="h2">Contact</Typography>
       <Typography>You can reach me at &lt;places&gt;</Typography>
-    </section>
+    </Box>
   );
 };
 

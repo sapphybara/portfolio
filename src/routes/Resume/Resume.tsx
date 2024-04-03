@@ -110,9 +110,9 @@ const resumeData: { [section: string]: ResumeDataItem[] } = {
       dataType: "paragraph",
     },
     {
-      title: "Undergraduate Research Assistant",
+      title: "Undergrad Research Assistant",
       subheader:
-        "The University of Texas at Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
+        "UT Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
       data: [
         "In my role as an Undergraduate Research Assistant at The University of Texas at Austin Nuclear Engineering Teaching Lab, I led software development projects focused on autonomous outdoor air samplers. Leveraging my knowledge of Python, Django, JavaScript, and HTML/CSS, I developed a local Django server for result processing.",
         "This experience allowed me to apply my technical skills to address real-world challenges and further develop my expertise in software development and project management.",
@@ -124,7 +124,7 @@ const resumeData: { [section: string]: ResumeDataItem[] } = {
 
 const Resume = () => {
   return (
-    <Box className="mt-16 mx-8" component="section">
+    <Box component="section">
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <Box className="flex flex-col gap-8 my-4">

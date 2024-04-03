@@ -11,7 +11,7 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   return (
     <>
       <Navbar routes={routes} />
-      <Box className="mt-16 mx-8">
+      <Box className="mt-16 mx-8" component="main">
         <Typography variant="decoration">Error</Typography>
         <Typography variant="h1">Oops!</Typography>
         <Typography className="text-center" paragraph>

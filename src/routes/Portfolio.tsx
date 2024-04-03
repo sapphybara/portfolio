@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 
 const Portfolio = () => {
   return (
-    <Box component="section" className="mt-16 mx-8">
+    <Box component="section">
       <Typography variant="decoration">Check out my</Typography>
       <Typography variant="h1">Portfolio</Typography>
       <Box className="mt-12">

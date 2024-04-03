@@ -3,7 +3,7 @@ import "./home.css";
 
 const Home = () => {
   return (
-    <Box className="mt-16 ml-8" component="section">
+    <Box component="section">
       <Box className="header flex flex-wrap">
         <Typography className="w-full" variant="decoration">
           hi, my name is
