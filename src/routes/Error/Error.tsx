@@ -13,7 +13,9 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
       <Navbar routes={routes} />
       <Box className="mt-16 mx-8" component="main">
         <Typography variant="decoration">Error</Typography>
-        <Typography variant="h1">Oops!</Typography>
+        <Typography className="decorated" variant="h1">
+          Oops!
+        </Typography>
         <Typography className="text-center" paragraph>
           Sorry, an unexpected error has occurred.
         </Typography>

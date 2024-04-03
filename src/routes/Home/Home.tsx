@@ -9,7 +9,9 @@ const Home = () => {
           hi, my name is
         </Typography>
         <Box className="flex flex-wrap justify-between w-4/5">
-          <Typography variant="h1">Sapphyra</Typography>
+          <Typography className="decorated" variant="h1">
+            Sapphyra
+          </Typography>
           <Box
             className="rounded-[50%] w-[100px] h-[100px]"
             bgcolor="text.secondary"
@@ -28,7 +30,9 @@ const Home = () => {
         <Typography className="decorator grow w-full" variant="decoration">
           I am a
         </Typography>
-        <Typography variant="h2">Developer</Typography>
+        <Typography className="decorated" variant="h2">
+          Developer
+        </Typography>
         <Typography className="amp" color="secondary.main">
           &
         </Typography>

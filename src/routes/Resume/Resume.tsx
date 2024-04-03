@@ -126,7 +126,9 @@ const Resume = () => {
   return (
     <Box component="section">
       <Typography variant="decoration">View my</Typography>
-      <Typography variant="h1">Resume</Typography>
+      <Typography className="decorated" variant="h1">
+        Resume
+      </Typography>
       <Box className="flex flex-col gap-8 my-4">
         {Object.entries(resumeData).map(([sectionName, sectionData]) => (
           <CollapsibleCard

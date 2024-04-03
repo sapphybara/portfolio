@@ -4,7 +4,9 @@ const Portfolio = () => {
   return (
     <Box component="section">
       <Typography variant="decoration">Check out my</Typography>
-      <Typography variant="h1">Portfolio</Typography>
+      <Typography className="decorated" variant="h1">
+        Portfolio
+      </Typography>
       <Box className="mt-12">
         <Typography variant="h2">Overview</Typography>
         <Typography paragraph>
