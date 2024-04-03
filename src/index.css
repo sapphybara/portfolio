@@ -10,3 +10,7 @@
     margin-top: -1rem;
   }
 }
+
+.MuiCardContent-root:last-child {
+  padding-bottom: 16px;
+}

@@ -9,7 +9,7 @@ function App(props: PropsWithRoutes) {
   return (
     <Box className="flex items-center flex-col">
       <Navbar routes={props.routes} />
-      <Box className="mt-16 mx-8 max-w-[60rem]" component="main">
+      <Box className="mt-16 mx-8 max-w-4xl w-full" component="main">
         <Outlet />
       </Box>
     </Box>
