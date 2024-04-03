@@ -1,63 +1,92 @@
+import { ArrowOutward, Code, DesignServices } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
-  Link,
+  Stack,
   Typography,
 } from "@mui/material";
 
-const portfolioItems = [
+interface PortfolioCard {
+  title: string;
+  subheader: string;
+  affiliation: string;
+  description: string;
+  techStack: { name: string; type: "code" | "design" }[];
+}
+
+const portfolioCards: PortfolioCard[] = [
   {
     title: "HySCAN",
-    subtitle: "Hydrogen Safety Codes & Standards Applicability Navigator",
+    subheader: "Hydrogen Safety Codes & Standards Applicability Navigator",
     affiliation: "Pacific Northwest National Laboratory",
     description:
       "How do I as a developer support those who utilize hydrogen (H2) in identifying relevant codes and standards for their systems? How do we maintain up-to-date compliance? HySCAN, part of H2Tools, simplifies compliance with intuitive workflows. Developed with ReactJS and styled-components, it swiftly identifies areas of compliance and categorizes questions, empowering users with tailored solutions.",
-    techStack: ["ReactJS", "styled-components", "Figma"],
+    techStack: [
+      { name: "ReactJS", type: "code" },
+      { name: "styled-components", type: "code" },
+      { name: "Figma", type: "design" },
+    ],
   },
 ];
 
 const Portfolio = () => {
+  const renderPortfolioCard = ({
+    title,
+    subheader,
+    affiliation,
+    description,
+    techStack,
+  }: PortfolioCard) => (
+    <Card className="mb-4" key={title}>
+      <CardHeader
+        className="mx-4"
+        title={title}
+        titleTypographyProps={{ variant: "h3", component: "h3" }}
+        subheader={subheader}
+        subheaderTypographyProps={{ variant: "h4", component: "h4" }}
+      />
+      <CardContent className="mx-8">
+        <Typography variant="h5">Description</Typography>
+        <Typography paragraph>{description}</Typography>
+        <Typography variant="h5">Affiliation</Typography>
+        <Typography paragraph>{affiliation}</Typography>
+        <Stack direction="row">
+          {techStack.map(({ name, type }) => (
+            <Typography key={name} variant="tag">
+              {type === "code" ? (
+                <Code color="secondary" />
+              ) : (
+                <DesignServices color="secondary" />
+              )}
+              {name}
+            </Typography>
+          ))}
+          <Button
+            className="ml-auto"
+            color="secondary"
+            endIcon={<ArrowOutward fontSize="small" />}
+            variant="text"
+            href="https://h2tools.org/hyscan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </Button>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <Box className="w-full" component="section">
       <Typography variant="decoration">Check out my</Typography>
       <Typography className="decorated" variant="h1">
         Portfolio
       </Typography>
-      <Box className="mt-12 max-w-xl">
-        <Typography variant="h2">Overview</Typography>
-        <Typography className="mt-8" paragraph>
-          As a frontend developer and designer, I bring a versatile skill set
-          that combines technical expertise with a keen eye for aesthetics and
-          user experience.
-        </Typography>
-        <Typography paragraph>
-          To view more about the individual skills and experience I have,&nbsp;
-          <Link href="/resume">click here</Link>.
-        </Typography>
-      </Box>
-      {portfolioItems.map(
-        ({ title, subtitle, affiliation, description, techStack }) => (
-          <Card className="mb-4" key={title}>
-            <CardHeader
-              className="mx-4"
-              title={title}
-              titleTypographyProps={{ variant: "h3", component: "h3" }}
-              subheader={subtitle}
-              subheaderTypographyProps={{ variant: "h4", component: "h4" }}
-            />
-            <CardContent className="mx-8">
-              <Typography variant="h5">Description</Typography>
-              <Typography paragraph>{description}</Typography>
-              <Typography variant="h5">Affiliation</Typography>
-              <Typography paragraph>{affiliation}</Typography>
-              <Typography variant="h5">Tech Stack</Typography>
-              <Typography paragraph>{techStack.join(", ")}</Typography>
-            </CardContent>
-          </Card>
-        )
-      )}
+      {portfolioCards.map(renderPortfolioCard)}
     </Box>
   );
 };
