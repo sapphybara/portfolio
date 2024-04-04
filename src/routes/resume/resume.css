@@ -4,7 +4,7 @@
     padding-bottom: 0;
   }
 
-  .MuiCollapse-wrapperInner .collapse-content {
+  .MuiCollapse-wrapperInner .collapse-content .collapse-wrapper {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;

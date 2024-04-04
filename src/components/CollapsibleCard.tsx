@@ -6,22 +6,16 @@ import {
   Divider,
   CardActionArea,
   CardProps,
-  CardHeaderProps,
-  Box,
+  Paper,
 } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
+import { SharedCardHeaderProps } from "types/global";
 
 interface CollapsibleCardProps
   extends Omit<CardProps, "title">,
-    Pick<CardHeaderProps, "avatar" | "subheader" | "title"> {
+    SharedCardHeaderProps {
   collapseClassName?: string;
   defaultIsOpen?: boolean;
-  // remove component property as it is overly restrictive on the titleTypographyProps
-  // but it will still accept and respect the component property if passed (idk why??)
-  titleTypographyProps?: Omit<
-    CardHeaderProps["titleTypographyProps"],
-    "component"
-  >;
 }
 
 /**
@@ -40,7 +34,10 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
 
   return (
-    <Card className={`${className}${isOpen ? "" : " collapsed"}`} raised>
+    <Card
+      className={`${className}${isOpen ? "" : " collapsed"}`}
+      variant="outlined"
+    >
       <CardActionArea
         className="flex justify-between"
         onClick={() => setIsOpen((prev) => !prev)}
@@ -59,7 +56,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
       </CardActionArea>
       <Collapse in={isOpen}>
         <Divider />
-        <Box className={collapseClassName}>{children}</Box>
+        <Paper className={collapseClassName}>{children}</Paper>
       </Collapse>
     </Card>
   );

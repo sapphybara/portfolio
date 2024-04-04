@@ -1,4 +1,5 @@
 import { RouteObject } from "react-router-dom";
+import { CardHeaderProps } from "@mui/material/CardHeader";
 
 export interface PropsWithRoutes {
   routes: RouteObject[];
@@ -24,3 +25,15 @@ declare module "@mui/material/Typography" {
     tag: true;
   }
 }
+
+export type SharedCardHeaderProps = Pick<
+  CardHeaderProps,
+  "avatar" | "subheader" | "title"
+> & {
+  // remove component property as it is overly restrictive on the titleTypographyProps
+  // but it will still accept and respect the component property if passed (idk why??)
+  titleTypographyProps?: Omit<
+    CardHeaderProps["titleTypographyProps"],
+    "component"
+  >;
+};
