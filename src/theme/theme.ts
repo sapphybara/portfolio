@@ -63,14 +63,14 @@ const createCustomTheme = (rootElement: Element) => {
         alignItems: "center",
         justifyContent: "space-between",
         gap: theme.spacing(1),
-        fontSize: "1rem",
+        fontSize: "0.8rem",
+        fontFamily: ["Lato", "Arial", "sans-serif"].join(","),
         backgroundColor: theme.palette.grey[800],
         borderRadius: theme.shape.borderRadius * 2,
         padding: `${theme.spacing(0.25)} ${theme.spacing(1)} ${theme.spacing(
           0.25
         )} ${theme.spacing(0.5)}`,
         margin: `0 ${theme.spacing(0.5)}`,
-        lineHeight: 1.2,
       },
     },
   });
