@@ -40,30 +40,31 @@ const Portfolio = () => {
     description,
     techStack,
   }: PortfolioCard) => (
-    <Card className="mb-4" key={title}>
+    <Card className="mb-4 mx-4" key={title}>
       <CardHeader
-        className="mx-4"
         title={title}
         titleTypographyProps={{ variant: "h3", component: "h3" }}
         subheader={subheader}
         subheaderTypographyProps={{ variant: "h4", component: "h4" }}
       />
-      <CardContent className="mx-8">
-        <Typography variant="h5">Description</Typography>
-        <Typography paragraph>{description}</Typography>
-        <Typography variant="h5">Affiliation</Typography>
-        <Typography paragraph>{affiliation}</Typography>
-        <Stack direction="row">
-          {techStack.map(({ name, type }) => (
-            <Typography key={name} variant="tag">
-              {type === "code" ? (
-                <Code color="secondary" />
-              ) : (
-                <DesignServices color="secondary" />
-              )}
-              {name}
-            </Typography>
-          ))}
+      <CardContent className="pt-0">
+        {techStack.map(({ name, type }) => (
+          <Typography key={name} variant="tag">
+            {type === "code" ? (
+              <Code color="secondary" />
+            ) : (
+              <DesignServices color="secondary" />
+            )}
+            {name}
+          </Typography>
+        ))}
+        <Typography className="mt-4 mx-4" paragraph>
+          {description}
+        </Typography>
+        <Stack alignItems="center" direction="row">
+          <Typography className="mb-0" color="text.secondary" paragraph>
+            Project on behalf of: {affiliation}
+          </Typography>
           <Button
             className="ml-auto"
             color="secondary"
