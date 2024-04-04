@@ -1,13 +1,14 @@
 import { ArrowOutward, Code, DesignServices } from "@mui/icons-material";
 import {
   Box,
-  Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   Stack,
   Typography,
 } from "@mui/material";
+import { HashLink } from "react-router-hash-link";
 
 interface PortfolioCard {
   title: string;
@@ -15,7 +16,7 @@ interface PortfolioCard {
   affiliation: string;
   description: string;
   techStack: { name: string; type: "code" | "design" }[];
-  linkInfo: { href: string; target?: string; rel?: string };
+  linkInfo: { to: string; target?: string; rel?: string };
 }
 
 const portfolioCards: PortfolioCard[] = [
@@ -31,7 +32,7 @@ const portfolioCards: PortfolioCard[] = [
       { name: "Figma", type: "design" },
     ],
     linkInfo: {
-      href: "https://h2tools.org/hyscan",
+      to: "https://h2tools.org/hyscan",
       target: "_blank",
       rel: "noopener noreferrer",
     },
@@ -49,7 +50,7 @@ const portfolioCards: PortfolioCard[] = [
       { name: "Material-UI", type: "code" },
       { name: "Tailwind CSS", type: "code" },
     ],
-    linkInfo: { href: "#" },
+    linkInfo: { to: "#Developer-Portfolio" },
   },
 ];
 
@@ -62,12 +63,12 @@ const Portfolio = () => {
     techStack,
     linkInfo,
   }: PortfolioCard) => (
-    <Card className="mb-4 mx-4" key={title}>
+    <Card className="mb-4 mx-4" key={title} id={title.replace(/\s/g, "-")}>
       <CardHeader
         title={title}
         titleTypographyProps={{ variant: "h3", component: "h3" }}
         subheader={subheader}
-        subheaderTypographyProps={{ variant: "h4", component: "h4" }}
+        subheaderTypographyProps={{ variant: "h6", component: "h4" }}
       />
       <CardContent className="pt-0">
         {techStack.map(({ name, type }) => (
@@ -83,21 +84,23 @@ const Portfolio = () => {
         <Typography className="mt-4 mx-4" paragraph>
           {description}
         </Typography>
-        <Stack alignItems="center" direction="row">
+        <Stack alignItems="center" direction="row" component={CardActions}>
           <Typography className="mb-0" color="text.secondary" paragraph>
             Project on behalf of: {affiliation}
           </Typography>
-          <Button
-            className="ml-auto"
+          <HashLink
+            className="!ml-auto flex items-center"
             color="secondary"
-            endIcon={
-              linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />
-            }
-            variant="text"
             {...linkInfo}
+            scroll={(el) => {
+              const y = el.getBoundingClientRect().top + window.scrollY - 66;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }}
+            smooth
           >
             View Project
-          </Button>
+            {linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />}
+          </HashLink>
         </Stack>
       </CardContent>
     </Card>
