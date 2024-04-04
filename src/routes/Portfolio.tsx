@@ -15,6 +15,7 @@ interface PortfolioCard {
   affiliation: string;
   description: string;
   techStack: { name: string; type: "code" | "design" }[];
+  linkInfo: { href: string; target?: string; rel?: string };
 }
 
 const portfolioCards: PortfolioCard[] = [
@@ -29,6 +30,26 @@ const portfolioCards: PortfolioCard[] = [
       { name: "styled-components", type: "code" },
       { name: "Figma", type: "design" },
     ],
+    linkInfo: {
+      href: "https://h2tools.org/hyscan",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+  },
+  {
+    title: "Developer Portfolio",
+    subheader: "Personal Showcase of Projects and Skills",
+    affiliation: "Myself",
+    description:
+      "A developer portfolio showcasing my projects and skills. Built with React, Vite, TypeScript, Material-UI, and Tailwind CSS. Designed to present my work in an organized and visually appealing manner.",
+    techStack: [
+      { name: "React", type: "code" },
+      { name: "Vite", type: "code" },
+      { name: "TypeScript", type: "code" },
+      { name: "Material-UI", type: "code" },
+      { name: "Tailwind CSS", type: "code" },
+    ],
+    linkInfo: { href: "#" },
   },
 ];
 
@@ -39,6 +60,7 @@ const Portfolio = () => {
     affiliation,
     description,
     techStack,
+    linkInfo,
   }: PortfolioCard) => (
     <Card className="mb-4 mx-4" key={title}>
       <CardHeader
@@ -68,11 +90,11 @@ const Portfolio = () => {
           <Button
             className="ml-auto"
             color="secondary"
-            endIcon={<ArrowOutward fontSize="small" />}
+            endIcon={
+              linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />
+            }
             variant="text"
-            href="https://h2tools.org/hyscan"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...linkInfo}
           >
             View Project
           </Button>
