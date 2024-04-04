@@ -16,13 +16,11 @@ import {
   ScienceOutlined,
   TerminalOutlined,
 } from "@mui/icons-material";
-import { ReactNode } from "react";
 
 interface ResumeDataItem extends SharedCardHeaderProps {
   data: string[] | ResumeDataItem[];
   dataType: "list" | "paragraph";
   defaultIsOpen?: boolean;
-  renderData?: (data: string | ReactNode) => ReactNode;
 }
 
 // Type guard function to check if an element is a ResumeDataItem
@@ -132,7 +130,10 @@ const Resume = () => {
   const renderResumeData = ({
     data,
     dataType,
-    renderData = (...data) => <>{data}</>,
+    subheaderTypographyProps = {
+      component: "h4",
+      variant: "h6",
+    },
     title,
     titleTypographyProps = {
       component: "h2",
@@ -145,12 +146,13 @@ const Resume = () => {
         key={title?.toString()}
         title={title}
         variant="outlined"
+        subheaderTypographyProps={subheaderTypographyProps}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}
       >
         <CardContent component={Stack} gap={2}>
           {data.every(isResumeDataItem) ? (
-            data.map((d) => renderData(renderResumeData(d)))
+            data.map(renderResumeData)
           ) : dataType === "list" ? (
             <List
               className="p-0 list-disc grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
@@ -160,14 +162,14 @@ const Resume = () => {
             >
               {data.map((text) => (
                 <ListItem className="list-item" key={text} disableGutters>
-                  {renderData(text)}
+                  {text}
                 </ListItem>
               ))}
             </List>
           ) : dataType === "paragraph" ? (
             data.map((text) => (
               <Typography key={text} paragraph>
-                {renderData(text)}
+                {text}
               </Typography>
             ))
           ) : null}

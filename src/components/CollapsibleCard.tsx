@@ -28,6 +28,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
   collapseClassName,
   defaultIsOpen = false,
   subheader,
+  subheaderTypographyProps,
   title,
   titleTypographyProps,
 }) => {
@@ -47,6 +48,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
           subheader={subheader}
           title={title}
           titleTypographyProps={titleTypographyProps}
+          subheaderTypographyProps={subheaderTypographyProps}
         />
         <ExpandMore
           className={`${

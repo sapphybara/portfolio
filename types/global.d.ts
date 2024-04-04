@@ -36,4 +36,8 @@ export type SharedCardHeaderProps = Pick<
     CardHeaderProps["titleTypographyProps"],
     "component"
   >;
+  subheaderTypographyProps?: Omit<
+    CardHeaderProps["subheaderTypographyProps"],
+    "component"
+  >;
 };
