@@ -33,6 +33,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
   titleTypographyProps,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
+  const hasChildren = !!children;
 
   return (
     <Card
@@ -41,6 +42,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
     >
       <CardActionArea
         className="flex justify-between"
+        disabled={!hasChildren}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <CardHeader
@@ -54,12 +56,15 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
           className={`${
             isOpen ? "rotate-180" : "rotate-0"
           } transition-transform mr-4`}
+          color={hasChildren ? "inherit" : "disabled"}
         />
       </CardActionArea>
-      <Collapse in={isOpen}>
-        <Divider />
-        <Paper className={collapseClassName}>{children}</Paper>
-      </Collapse>
+      {hasChildren && (
+        <Collapse in={isOpen}>
+          <Divider />
+          <Paper className={collapseClassName}>{children}</Paper>
+        </Collapse>
+      )}
     </Card>
   );
 };
