@@ -7,7 +7,11 @@
   margin: 0 auto;
 
   .decorated {
-    margin-top: -1rem;
+    margin-top: -0.5rem;
+
+    @media (min-width: 900px) {
+      margin-top: -1rem;
+    }
   }
 }
 
