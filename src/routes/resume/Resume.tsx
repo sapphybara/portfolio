@@ -133,12 +133,28 @@ const resumeData: ResumeDataItem[] = [
         subheader: "University of Texas at Austin | 2019 - 2023",
         data: [],
         dataType: "paragraph",
+        subheaderTypographyProps: {
+          component: "h6",
+          variant: "subtitle1",
+        },
+        titleTypographyProps: {
+          component: "h3",
+          variant: "h5",
+        },
       },
       {
         title: "A.S. Mathematics",
         subheader: "Austin Community College | 2018 - 2019",
         data: [],
         dataType: "paragraph",
+        subheaderTypographyProps: {
+          component: "h6",
+          variant: "subtitle1",
+        },
+        titleTypographyProps: {
+          component: "h3",
+          variant: "h5",
+        },
       },
     ],
     dataType: "list",
@@ -148,13 +164,25 @@ const resumeData: ResumeDataItem[] = [
 
 const Resume = () => {
   const renderResumeData = (
-    { data, dataType, title, ...cardProps }: ResumeDataItem,
+    {
+      data,
+      dataType,
+      subheaderTypographyProps = {
+        component: "h4",
+        variant: "h6",
+      },
+      title,
+      titleTypographyProps,
+      ...cardProps
+    }: ResumeDataItem,
     nestLevel: 2 | 3 | 4 | 5 = 2
   ) => {
-    const titleTypographyProps = {
-      component: `h${nestLevel}` as "h2" | "h3" | "h4" | "h5",
-      variant: `h${nestLevel + 1}` as "h3" | "h4" | "h5" | "h6",
-    };
+    if (!titleTypographyProps) {
+      titleTypographyProps = {
+        component: `h${nestLevel}` as "h2" | "h3" | "h4" | "h5",
+        variant: `h${nestLevel + 1}` as "h3" | "h4" | "h5" | "h6",
+      };
+    }
     const newNestLevel = Math.min(nestLevel + 1, 5) as 2 | 3 | 4 | 5;
 
     return (
@@ -162,10 +190,7 @@ const Resume = () => {
         key={title?.toString()}
         title={title}
         variant="outlined"
-        subheaderTypographyProps={{
-          component: "h4",
-          variant: "h6",
-        }}
+        subheaderTypographyProps={subheaderTypographyProps}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}
       >
