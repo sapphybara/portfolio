@@ -13,22 +13,34 @@ import {
   BusinessCenterOutlined,
   DeveloperBoardOutlined,
   LightbulbOutlined,
+  SchoolOutlined,
   ScienceOutlined,
   TerminalOutlined,
 } from "@mui/icons-material";
 
-interface ResumeDataItem extends SharedCardHeaderProps {
-  data: string[] | ResumeDataItem[];
-  dataType: "list" | "paragraph";
+type DataType = "list" | "paragraph";
+
+interface BaseResumeDataItem extends SharedCardHeaderProps {
   defaultIsOpen?: boolean;
 }
+
+interface StringResumeDataItem extends BaseResumeDataItem {
+  data: string[];
+  dataType: DataType;
+}
+
+interface NestedResumeDataItem extends BaseResumeDataItem {
+  data: ResumeDataItem[];
+  dataType?: DataType;
+}
+
+type ResumeDataItem = StringResumeDataItem | NestedResumeDataItem;
 
 // Type guard function to check if an element is a ResumeDataItem
 const isResumeDataItem = (item: unknown): item is ResumeDataItem =>
   typeof item === "object" &&
   item !== null &&
   "data" in item &&
-  "dataType" in item &&
   Array.isArray(item.data) &&
   item.data.every(
     (dataItem: unknown) =>
@@ -85,10 +97,6 @@ const resumeData: ResumeDataItem[] = [
           "Furthermore, I played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment.",
         ],
         dataType: "paragraph",
-        titleTypographyProps: {
-          component: "h3",
-          variant: "h4",
-        },
       },
       {
         title: "Web Development Intern",
@@ -100,10 +108,6 @@ const resumeData: ResumeDataItem[] = [
           "This internship provided me with the opportunity to enhance my skills in React, Node.js, JavaScript, CSS3, and HTML5 while contributing to real-world projects in a professional environment.",
         ],
         dataType: "paragraph",
-        titleTypographyProps: {
-          component: "h3",
-          variant: "h4",
-        },
       },
       {
         title: "Undergrad Research Assistant",
@@ -115,10 +119,26 @@ const resumeData: ResumeDataItem[] = [
           "This experience allowed me to apply my technical skills to address real-world challenges and further develop my expertise in software development and project management.",
         ],
         dataType: "paragraph",
-        titleTypographyProps: {
-          component: "h3",
-          variant: "h4",
-        },
+      },
+    ],
+    defaultIsOpen: true,
+  },
+  {
+    title: "Education",
+    subheader: "",
+    avatar: <SchoolOutlined fontSize="large" />,
+    data: [
+      {
+        title: "B.S. Mathematics, Certificate in Computer Science",
+        subheader: "University of Texas at Austin | 2019 - 2023",
+        data: [],
+        dataType: "paragraph",
+      },
+      {
+        title: "A.S. Mathematics",
+        subheader: "Austin Community College | 2018 - 2019",
+        data: [],
+        dataType: "paragraph",
       },
     ],
     dataType: "list",
@@ -127,53 +147,54 @@ const resumeData: ResumeDataItem[] = [
 ];
 
 const Resume = () => {
-  const renderResumeData = ({
-    data,
-    dataType,
-    subheaderTypographyProps = {
-      component: "h4",
-      variant: "h6",
-    },
-    title,
-    titleTypographyProps = {
-      component: "h2",
-      variant: "h3",
-    },
-    ...cardProps
-  }: ResumeDataItem) => {
+  const renderResumeData = (
+    { data, dataType, title, ...cardProps }: ResumeDataItem,
+    nestLevel: 2 | 3 | 4 | 5 = 2
+  ) => {
+    const titleTypographyProps = {
+      component: `h${nestLevel}` as "h2" | "h3" | "h4" | "h5",
+      variant: `h${nestLevel + 1}` as "h3" | "h4" | "h5" | "h6",
+    };
+    const newNestLevel = Math.min(nestLevel + 1, 5) as 2 | 3 | 4 | 5;
+
     return (
       <CollapsibleCard
         key={title?.toString()}
         title={title}
         variant="outlined"
-        subheaderTypographyProps={subheaderTypographyProps}
+        subheaderTypographyProps={{
+          component: "h4",
+          variant: "h6",
+        }}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}
       >
-        <CardContent component={Stack} gap={2}>
-          {data.every(isResumeDataItem) ? (
-            data.map(renderResumeData)
-          ) : dataType === "list" ? (
-            <List
-              className="p-0 list-disc grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
-              component={Stack}
-              flexWrap="wrap"
-              gap={1}
-            >
-              {data.map((text) => (
-                <ListItem className="list-item" key={text} disableGutters>
+        {data.length && (
+          <CardContent component={Stack} gap={2} id={title?.toString()}>
+            {data.every(isResumeDataItem) ? (
+              data.map((d) => renderResumeData(d, newNestLevel))
+            ) : dataType === "list" ? (
+              <List
+                className="p-0 list-disc grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
+                component={Stack}
+                flexWrap="wrap"
+                gap={1}
+              >
+                {data.map((text) => (
+                  <ListItem className="list-item" key={text} disableGutters>
+                    {text}
+                  </ListItem>
+                ))}
+              </List>
+            ) : dataType === "paragraph" ? (
+              data.map((text) => (
+                <Typography key={text} paragraph>
                   {text}
-                </ListItem>
-              ))}
-            </List>
-          ) : dataType === "paragraph" ? (
-            data.map((text) => (
-              <Typography key={text} paragraph>
-                {text}
-              </Typography>
-            ))
-          ) : null}
-        </CardContent>
+                </Typography>
+              ))
+            ) : null}
+          </CardContent>
+        )}
       </CollapsibleCard>
     );
   };
@@ -185,7 +206,7 @@ const Resume = () => {
         Resume
       </Typography>
       <Box className="flex flex-col gap-8 my-4">
-        {resumeData.map(renderResumeData)}
+        {resumeData.map((d) => renderResumeData(d))}
       </Box>
     </Box>
   );
