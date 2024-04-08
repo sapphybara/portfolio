@@ -6,7 +6,7 @@ import {
   LocationCityOutlined,
   PhoneOutlined,
 } from "@mui/icons-material";
-import { Button, Divider, Paper, Stack } from "@mui/material";
+import { Button, Divider, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { HTMLAttributes } from "react";
 
 const contactInfo = [
@@ -43,22 +43,34 @@ const contactInfo = [
 ];
 
 function Footer(props: HTMLAttributes<HTMLDivElement>) {
+  const theme = useTheme();
+  const shouldRenderBtnTxt = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <Stack
       className={`${props.className ?? ""} flex justify-center w-full`}
-      component={Paper}
+      component="footer"
+      bgcolor="#272727"
       direction="row"
       divider={<Divider orientation="vertical" flexItem />}
-      spacing={2}
+      spacing={
+        useMediaQuery(theme.breakpoints.up("lg"))
+          ? 2
+          : shouldRenderBtnTxt
+          ? 1
+          : 0
+      }
     >
-      {contactInfo.map((item, index) => (
+      {contactInfo.map(({ children, ...item }, index) => (
         <Button
           key={index}
           {...item}
           target="_blank"
           rel="noopener noreferrer"
           variant="text"
-        />
+        >
+          {shouldRenderBtnTxt && children}
+        </Button>
       ))}
     </Stack>
   );
