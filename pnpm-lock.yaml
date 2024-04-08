@@ -11,6 +11,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.4)(@types/react@18.2.69)(react@18.2.0)
+  '@fontsource-variable/merriweather-sans':
+    specifier: ^5.0.13
+    version: 5.0.13
   '@fontsource/lato':
     specifier: ^5.0.20
     version: 5.0.20
@@ -716,6 +719,10 @@ packages:
 
   /@floating-ui/utils@0.2.1:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
+    dev: false
+
+  /@fontsource-variable/merriweather-sans@5.0.13:
+    resolution: {integrity: sha512-Bdlxn8DztWA9BGVzU7Ro3TBQhUlo7WnjJFXT1+0uROuj+XSxA1MK2NWOiC3x2OQ+N+sEkZ3626OMuZOdCPJRVg==}
     dev: false
 
   /@fontsource/lato@5.0.20:
