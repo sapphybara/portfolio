@@ -87,19 +87,19 @@ const Portfolio = () => {
   const renderTagIcon = (type: string) => {
     switch (type) {
       case "frontend":
-        return <DesktopWindowsOutlined color="secondary" fontSize="small" />;
+        return <DesktopWindowsOutlined fontSize="small" />;
       case "backend":
-        return <StorageOutlined color="secondary" fontSize="small" />;
+        return <StorageOutlined fontSize="small" />;
       case "fullstack":
-        return <CodeOutlined color="secondary" fontSize="small" />;
+        return <CodeOutlined fontSize="small" />;
       case "design":
-        return <DesignServicesOutlined color="secondary" fontSize="small" />;
+        return <DesignServicesOutlined fontSize="small" />;
       case "testing":
-        return <BugReportOutlined color="secondary" fontSize="small" />;
+        return <BugReportOutlined fontSize="small" />;
       case "tooling":
-        return <BuildOutlined color="secondary" fontSize="small" />;
+        return <BuildOutlined fontSize="small" />;
       default:
-        return <ExtensionOutlined color="secondary" fontSize="small" />;
+        return <ExtensionOutlined fontSize="small" />;
     }
   };
 
@@ -117,7 +117,7 @@ const Portfolio = () => {
       id={title.replace(/\s/g, "-")}
       variant="outlined"
     >
-      <CardActionArea className="cursor-default">
+      <CardActionArea className="cursor-default" disableRipple>
         <CardHeader
           title={title}
           titleTypographyProps={{ variant: "h3", component: "h3" }}

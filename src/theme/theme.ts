@@ -51,6 +51,11 @@ const createCustomTheme = (rootElement: Element) => {
           },
         },
       },
+      MuiSvgIcon: {
+        defaultProps: {
+          color: "secondary",
+        },
+      },
     },
     palette: {
       contrastThreshold: 4.5,
