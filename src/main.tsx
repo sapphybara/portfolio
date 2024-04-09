@@ -16,7 +16,6 @@ import '@fontsource-variable/merriweather-sans';
 import createCustomTheme from "@theme/theme.ts";
 import Home from "@routes/home/Home.tsx";
 import Portfolio from "@routes/portfolio/Portfolio.tsx";
-import Contact from "@routes/Contact.tsx";
 import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import "./index.css";
@@ -42,10 +41,6 @@ const routes = [
       {
         path: "resume",
         element: <Resume />,
-      },
-      {
-        path: "contact",
-        element: <Contact />,
       },
     ],
   },
