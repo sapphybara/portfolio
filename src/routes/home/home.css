@@ -1,12 +1,44 @@
-.header .amp {
-  font-size: 12rem;
-  min-width: 200px;
-  text-align: center;
-  line-height: 0.1;
-  opacity: 0.6;
+.header.grid {
+  grid:
+    "decorator amp ."
+    "dev amp design"
+    / 1fr 200px 1fr;
 
-  @media (max-width: 498px) {
-    line-height: 0.7;
+  @media (max-width: 520px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    & > h2.design {
+      margin-top: initial;
+    }
+  }
+
+  .decorator {
+    grid-area: decorator;
+    align-self: end;
+  }
+
+  .decorated {
+    grid-area: dev;
+  }
+
+  .amp {
+    font-size: 12rem;
+    min-width: 200px;
+    text-align: center;
+    line-height: 0.8;
+    opacity: 0.6;
+    grid-area: amp;
+  }
+
+  .design {
+    grid-area: design;
+    margin-top: -0.5rem;
+
+    @media (min-width: 900px) {
+      margin-top: -1rem;
+    }
   }
 }
 
