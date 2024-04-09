@@ -1,4 +1,4 @@
-import { Box, Typography, styled } from "@mui/material";
+import { Box, Button, Typography, styled } from "@mui/material";
 import "./home.css";
 
 const Home = () => {
@@ -39,10 +39,16 @@ const Home = () => {
           Designer
         </Typography>
       </Box>
-      <Typography className="about mt-16 mx-4">
+      <Typography className="about mt-16 mb-8">
         I build diverse front end and mobile applications, and my passion lies
         in accessibility, in every domain.
       </Typography>
+      <Button className="mr-4" href="/portfolio" variant="contained">
+        Check out my work
+      </Button>
+      <Button href="/resume" variant="outlined">
+        View my resume
+      </Button>
     </Box>
   );
 };
