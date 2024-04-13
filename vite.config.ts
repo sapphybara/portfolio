@@ -17,6 +17,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      src: resolve(join(__dirname, "src")),
       "@components": resolve(join(__dirname, "src/components")),
       "@routes": resolve(join(__dirname, "src/routes")),
       "@theme": resolve(join(__dirname, "src/theme")),
