@@ -23,6 +23,7 @@ import "./index.css";
 // configure AWS Amplify
 import { Amplify } from "aws-amplify";
 import amplifyconfig from "./amplifyconfiguration.json";
+import Admin from "@routes/Admin/Admin.tsx";
 Amplify.configure(amplifyconfig);
 
 const routes = [
@@ -47,6 +48,7 @@ const routes = [
         path: "resume",
         element: <Resume />,
       },
+      { path: "admin", element: <Admin /> },
     ],
   },
 ];
