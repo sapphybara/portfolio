@@ -8,27 +8,40 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+export const getCreditCard = /* GraphQL */ `query GetCreditCard($id: ID!) {
+  getCreditCard(id: $id) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
+` as GeneratedQuery<
+  APITypes.GetCreditCardQueryVariables,
+  APITypes.GetCreditCardQuery
+>;
+export const listCreditCards = /* GraphQL */ `query ListCreditCards(
+  $filter: ModelCreditCardFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listCreditCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
-      description
+      cardName
+      paymentDate
+      minimumPayment
+      balance
+      apr
+      isEarningInterest
+      lastInterestAmount
       createdAt
       updatedAt
       __typename
@@ -37,4 +50,7 @@ export const listTodos = /* GraphQL */ `query ListTodos(
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
+` as GeneratedQuery<
+  APITypes.ListCreditCardsQueryVariables,
+  APITypes.ListCreditCardsQuery
+>;

@@ -2,18 +2,28 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateCreditCardInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  cardName: string,
+  paymentDate: string,
+  minimumPayment: number,
+  balance: number,
+  apr: number,
+  isEarningInterest: boolean,
+  lastInterestAmount: number,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelCreditCardConditionInput = {
+  cardName?: ModelStringInput | null,
+  paymentDate?: ModelStringInput | null,
+  minimumPayment?: ModelFloatInput | null,
+  balance?: ModelFloatInput | null,
+  apr?: ModelFloatInput | null,
+  isEarningInterest?: ModelBooleanInput | null,
+  lastInterestAmount?: ModelFloatInput | null,
+  and?: Array< ModelCreditCardConditionInput | null > | null,
+  or?: Array< ModelCreditCardConditionInput | null > | null,
+  not?: ModelCreditCardConditionInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -58,34 +68,68 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Todo = {
-  __typename: "Todo",
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type CreditCard = {
+  __typename: "CreditCard",
   id: string,
-  name: string,
-  description?: string | null,
+  cardName: string,
+  paymentDate: string,
+  minimumPayment: number,
+  balance: number,
+  apr: number,
+  isEarningInterest: boolean,
+  lastInterestAmount: number,
   createdAt: string,
   updatedAt: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateCreditCardInput = {
   id: string,
-  name?: string | null,
-  description?: string | null,
+  cardName?: string | null,
+  paymentDate?: string | null,
+  minimumPayment?: number | null,
+  balance?: number | null,
+  apr?: number | null,
+  isEarningInterest?: boolean | null,
+  lastInterestAmount?: number | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteCreditCardInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type ModelCreditCardFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
+  cardName?: ModelStringInput | null,
+  paymentDate?: ModelStringInput | null,
+  minimumPayment?: ModelFloatInput | null,
+  balance?: ModelFloatInput | null,
+  apr?: ModelFloatInput | null,
+  isEarningInterest?: ModelBooleanInput | null,
+  lastInterestAmount?: ModelFloatInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  and?: Array< ModelCreditCardFilterInput | null > | null,
+  or?: Array< ModelCreditCardFilterInput | null > | null,
+  not?: ModelCreditCardFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -104,20 +148,25 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelCreditCardConnection = {
+  __typename: "ModelCreditCardConnection",
+  items:  Array<CreditCard | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionCreditCardFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
+  cardName?: ModelSubscriptionStringInput | null,
+  paymentDate?: ModelSubscriptionStringInput | null,
+  minimumPayment?: ModelSubscriptionFloatInput | null,
+  balance?: ModelSubscriptionFloatInput | null,
+  apr?: ModelSubscriptionFloatInput | null,
+  isEarningInterest?: ModelSubscriptionBooleanInput | null,
+  lastInterestAmount?: ModelSubscriptionFloatInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  and?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -150,83 +199,125 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
+export type CreateCreditCardMutationVariables = {
+  input: CreateCreditCardInput,
+  condition?: ModelCreditCardConditionInput | null,
+};
+
+export type CreateCreditCardMutation = {
+  createCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateCreditCardMutationVariables = {
+  input: UpdateCreditCardInput,
+  condition?: ModelCreditCardConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateCreditCardMutation = {
+  updateCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteCreditCardMutationVariables = {
+  input: DeleteCreditCardInput,
+  condition?: ModelCreditCardConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteCreditCardMutation = {
+  deleteCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type GetCreditCardQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetCreditCardQuery = {
+  getCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListCreditCardsQueryVariables = {
+  filter?: ModelCreditCardFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListCreditCardsQuery = {
+  listCreditCards?:  {
+    __typename: "ModelCreditCardConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "CreditCard",
       id: string,
-      name: string,
-      description?: string | null,
+      cardName: string,
+      paymentDate: string,
+      minimumPayment: number,
+      balance: number,
+      apr: number,
+      isEarningInterest: boolean,
+      lastInterestAmount: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -234,46 +325,61 @@ export type ListTodosQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnCreateCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type OnCreateCreditCardSubscription = {
+  onCreateCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnUpdateCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type OnUpdateCreditCardSubscription = {
+  onUpdateCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnDeleteCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnDeleteCreditCardSubscription = {
+  onDeleteCreditCard?:  {
+    __typename: "CreditCard",
     id: string,
-    name: string,
-    description?: string | null,
+    cardName: string,
+    paymentDate: string,
+    minimumPayment: number,
+    balance: number,
+    apr: number,
+    isEarningInterest: boolean,
+    lastInterestAmount: number,
     createdAt: string,
     updatedAt: string,
   } | null,

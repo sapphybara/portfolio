@@ -8,54 +8,69 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+export const createCreditCard = /* GraphQL */ `mutation CreateCreditCard(
+  $input: CreateCreditCardInput!
+  $condition: ModelCreditCardConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createCreditCard(input: $input, condition: $condition) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
+  APITypes.CreateCreditCardMutationVariables,
+  APITypes.CreateCreditCardMutation
 >;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+export const updateCreditCard = /* GraphQL */ `mutation UpdateCreditCard(
+  $input: UpdateCreditCardInput!
+  $condition: ModelCreditCardConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateCreditCard(input: $input, condition: $condition) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
+  APITypes.UpdateCreditCardMutationVariables,
+  APITypes.UpdateCreditCardMutation
 >;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+export const deleteCreditCard = /* GraphQL */ `mutation DeleteCreditCard(
+  $input: DeleteCreditCardInput!
+  $condition: ModelCreditCardConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteCreditCard(input: $input, condition: $condition) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
+  APITypes.DeleteCreditCardMutationVariables,
+  APITypes.DeleteCreditCardMutation
 >;

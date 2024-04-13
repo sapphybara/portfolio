@@ -8,45 +8,66 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onCreateTodo(filter: $filter) {
+export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard(
+  $filter: ModelSubscriptionCreditCardFilterInput
+) {
+  onCreateCreditCard(filter: $filter) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
+  APITypes.OnCreateCreditCardSubscriptionVariables,
+  APITypes.OnCreateCreditCardSubscription
 >;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onUpdateTodo(filter: $filter) {
+export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard(
+  $filter: ModelSubscriptionCreditCardFilterInput
+) {
+  onUpdateCreditCard(filter: $filter) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
+  APITypes.OnUpdateCreditCardSubscriptionVariables,
+  APITypes.OnUpdateCreditCardSubscription
 >;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onDeleteTodo(filter: $filter) {
+export const onDeleteCreditCard = /* GraphQL */ `subscription OnDeleteCreditCard(
+  $filter: ModelSubscriptionCreditCardFilterInput
+) {
+  onDeleteCreditCard(filter: $filter) {
     id
-    name
-    description
+    cardName
+    paymentDate
+    minimumPayment
+    balance
+    apr
+    isEarningInterest
+    lastInterestAmount
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
+  APITypes.OnDeleteCreditCardSubscriptionVariables,
+  APITypes.OnDeleteCreditCardSubscription
 >;
