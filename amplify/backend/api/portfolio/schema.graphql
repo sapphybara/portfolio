@@ -6,7 +6,7 @@ input AMPLIFY {
 type CreditCard @model {
   id: ID!
   cardName: String!
-  paymentDate: AWSDateTime!
+  paymentDate: AWSDate!
   minimumPayment: Float!
   balance: Float!
   apr: Float!
