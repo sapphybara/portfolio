@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portfolio-dev-bc2d4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-dev-bc2d4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-dev-bc2d4-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-portfolio-dev-bc2d4-deployment",
+      "UnauthRoleName": "amplify-portfolio-dev-bc2d4-unauthRole",
+      "StackName": "amplify-portfolio-dev-bc2d4",
+      "StackId": "arn:aws:cloudformation:us-west-1:905418013816:stack/amplify-portfolio-dev-bc2d4/13ac78f0-f9d3-11ee-adc7-06ea94e1a909",
+      "AmplifyAppId": "dvomf8qiulkgc"
+    },
+    "categories": {
+      "api": {
+        "portfolio": {}
+      }
+    }
+  }
+}

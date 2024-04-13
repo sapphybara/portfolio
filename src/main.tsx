@@ -20,6 +20,11 @@ import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import "./index.css";
 
+// configure AWS Amplify
+import { Amplify } from "aws-amplify";
+import amplifyconfig from "./amplifyconfiguration.json";
+Amplify.configure(amplifyconfig);
+
 const routes = [
   {
     path: "/",
