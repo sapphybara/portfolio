@@ -39,18 +39,13 @@ export const isCompleteCreditCard = (
     }
 
     switch (type) {
-      case undefined:
-        return false;
       case "date":
         return !isNaN(new Date(value as string).getTime());
       case "number":
         return !isNaN(Number(value));
       case "text":
         return typeof value === "string";
-      case "boolean":
-        return;
       default:
-        console.log("value:", typeof value, "type:", type);
         return typeof value === type;
     }
   });
