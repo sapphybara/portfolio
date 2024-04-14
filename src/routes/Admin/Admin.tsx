@@ -2,11 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
   Input,
   InputLabel,
   Typography,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
 
 import { generateClient } from "aws-amplify/api";
 
@@ -49,14 +52,14 @@ const Admin = () => {
       if (!isCompleteCreditCard(formState)) return;
 
       const creditCard = { ...formState };
+      setFormState(undefined);
       await client.graphql({
         query: createCreditCard,
         variables: {
           input: creditCard,
         },
       });
-      setCreditCards([...creditCards, creditCard]);
-      setFormState(undefined);
+      fetchCreditCards();
     } catch (err) {
       console.log("error creating todo:", err);
     }
@@ -69,6 +72,58 @@ const Admin = () => {
     setFormState({ ...formState, [id]: value });
   };
 
+  const renderFormControl = (key: keyof CreateCreditCardInput) => {
+    const type = creditCardTypeMapping[key];
+    const label = camelToSentenceCase(key);
+
+    if (type === "boolean") {
+      return (
+        <FormControl key={key}>
+          <FormControlLabel
+            control={<Checkbox />}
+            label={label}
+            onChange={(e) =>
+              setFormState({
+                ...formState,
+                [key]: (e?.target as HTMLInputElement).checked,
+              })
+            }
+            required
+          />
+        </FormControl>
+      );
+    }
+
+    if (type === "date") {
+      return (
+        <DatePicker
+          format="DD"
+          key={key}
+          label={label}
+          onChange={(value) =>
+            setFormState({ ...formState, [key]: value?.format("YYYY-MM-DD") })
+          }
+          views={["day"]}
+        />
+      );
+    }
+
+    return (
+      <FormControl key={key}>
+        <InputLabel htmlFor={key}>{label}</InputLabel>
+        <Input
+          id={key}
+          inputProps={{
+            step: 0.01,
+          }}
+          onChange={handleFormChange}
+          type={type}
+          aria-describedby={`input for ${label}`}
+        />
+      </FormControl>
+    );
+  };
+
   return (
     <Box>
       <Typography variant="decoration">Manage</Typography>
@@ -76,24 +131,7 @@ const Admin = () => {
         Admin
       </Typography>
       <Box className="flex flex-wrap" component="form">
-        {creditCardKeys.map((key) => (
-          <FormControl key={key}>
-            <InputLabel htmlFor={key}>{camelToSentenceCase(key)}</InputLabel>
-            <Input
-              id={key}
-              inputProps={{
-                step: creditCardTypeMapping[key] === "date" ? 1 : 0.01,
-              }}
-              onChange={handleFormChange}
-              type={
-                creditCardTypeMapping[key] === "boolean"
-                  ? "checkbox"
-                  : creditCardTypeMapping[key]
-              }
-              aria-describedby={`input for ${camelToSentenceCase(key)}`}
-            />
-          </FormControl>
-        ))}
+        {creditCardKeys.map(renderFormControl)}
         <Button
           disabled={!isCompleteCreditCard(formState)}
           onClick={addCreditCard}
@@ -106,7 +144,7 @@ const Admin = () => {
         <Box key={cc.id}>
           {creditCardKeys.map((key) => (
             <Typography key={key} paragraph>
-              {camelToSentenceCase(key)}: {cc[key]}
+              {camelToSentenceCase(key)}: {cc[key]?.toString()}
             </Typography>
           ))}
         </Box>
