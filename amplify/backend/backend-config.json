@@ -23,5 +23,23 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_getcardscore_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getcardscore"
+        }
+      ]
+    },
+    "AMPLIFY_function_getcardscore_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getcardscore"
+        }
+      ]
+    }
   }
 }

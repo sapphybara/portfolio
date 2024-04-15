@@ -16,7 +16,10 @@
         "portfolio": {}
       },
       "function": {
-        "getcardscore": {}
+        "getcardscore": {
+          "deploymentBucketName": "amplify-portfolio-dev-bc2d4-deployment",
+          "s3Key": "amplify-builds/getcardscore-4f3352657348444c442f-build.zip"
+        }
       }
     }
   }
