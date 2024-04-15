@@ -20,6 +20,7 @@ export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename
@@ -41,6 +42,7 @@ export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename
@@ -62,6 +64,7 @@ export const onDeleteCreditCard = /* GraphQL */ `subscription OnDeleteCreditCard
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename

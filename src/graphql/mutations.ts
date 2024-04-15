@@ -21,6 +21,7 @@ export const createCreditCard = /* GraphQL */ `mutation CreateCreditCard(
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename
@@ -43,6 +44,7 @@ export const updateCreditCard = /* GraphQL */ `mutation UpdateCreditCard(
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename
@@ -65,6 +67,7 @@ export const deleteCreditCard = /* GraphQL */ `mutation DeleteCreditCard(
     apr
     isEarningInterest
     lastInterestAmount
+    score
     createdAt
     updatedAt
     __typename

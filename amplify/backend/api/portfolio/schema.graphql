@@ -12,4 +12,5 @@ type CreditCard @model {
   apr: Float!
   isEarningInterest: Boolean!
   lastInterestAmount: Float!
+  score: Float @function(name: "getcardscore-${env}")
 }
