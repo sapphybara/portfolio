@@ -22,6 +22,7 @@ import {
   isCompleteCreditCard,
 } from "src/utils/utils";
 import { createCreditCard } from "src/graphql/mutations";
+import CreditCardTable from "src/components/CreditCardTable";
 
 const client = generateClient();
 
@@ -140,15 +141,7 @@ const Admin = () => {
           Add Credit Card
         </Button>
       </Box>
-      {creditCards.map((cc) => (
-        <Box key={cc.id}>
-          {creditCardKeys.map((key) => (
-            <Typography key={key} paragraph>
-              {camelToSentenceCase(key)}: {cc[key]?.toString()}
-            </Typography>
-          ))}
-        </Box>
-      ))}
+      <CreditCardTable creditCards={creditCards} />
     </Box>
   );
 };

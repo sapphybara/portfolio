@@ -9,7 +9,7 @@ export const camelToSentenceCase = (str: string) => {
 };
 
 export const creditCardTypeMapping: {
-  [K in keyof CreateCreditCardInput]: string;
+  [K in keyof CreateCreditCardInput]: "boolean" | "date" | "number" | "text";
 } = {
   apr: "number",
   balance: "number",
