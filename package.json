@@ -17,6 +17,7 @@
     "@fontsource/lato": "^5.0.20",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
+    "@mui/x-data-grid": "^7.2.0",
     "@mui/x-date-pickers": "^7.2.0",
     "aws-amplify": "^6.0.28",
     "dayjs": "^1.11.10",

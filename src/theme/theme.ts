@@ -1,6 +1,7 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
 import { LinkProps } from "@mui/material/Link";
+import type {} from "@mui/x-data-grid/themeAugmentation";
 import LinkBehavior from "./LinkBehavior";
 
 const createCustomTheme = (rootElement: Element) => {
