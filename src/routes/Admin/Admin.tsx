@@ -1,36 +1,21 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  Input,
-  InputLabel,
-  Typography,
-} from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
+import { useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 
 import { generateClient } from "aws-amplify/api";
 
 import { listCreditCards } from "src/graphql/queries";
 import { type CreateCreditCardInput, type CreditCard } from "src/API";
-import {
-  camelToSentenceCase,
-  creditCardKeys,
-  creditCardTypeMapping,
-  isCompleteCreditCard,
-} from "src/utils/utils";
-import { createCreditCard } from "src/graphql/mutations";
 import CreditCardTable from "src/components/CreditCardTable";
+import AddCreditCardDialog from "src/components/AddCreditCardDialog";
 
 const client = generateClient();
 
 const Admin = () => {
-  const [formState, setFormState] = useState<Partial<CreateCreditCardInput>>();
   const [creditCards, setCreditCards] = useState<
     CreditCard[] | CreateCreditCardInput[]
   >([]);
+  const [isAddCreditCardDialogOpen, setIsAddCreditCardDialogOpen] =
+    useState(false);
 
   useEffect(() => {
     fetchCreditCards();
@@ -48,81 +33,16 @@ const Admin = () => {
     }
   }
 
-  async function addCreditCard() {
-    try {
-      if (!isCompleteCreditCard(formState)) return;
-
-      const creditCard = { ...formState };
-      setFormState(undefined);
-      await client.graphql({
-        query: createCreditCard,
-        variables: {
-          input: creditCard,
-        },
-      });
-      fetchCreditCards();
-    } catch (err) {
-      console.log("error creating todo:", err);
+  const changeAddCreditCardDialogOpen = (prevState?: boolean) => {
+    if (prevState === undefined) {
+      setIsAddCreditCardDialogOpen((prevState) => !prevState);
+    } else {
+      setIsAddCreditCardDialogOpen(prevState);
     }
-  }
-
-  const handleFormChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target as HTMLInputElement | HTMLTextAreaElement;
-    setFormState({ ...formState, [id]: value });
   };
 
-  const renderFormControl = (key: keyof CreateCreditCardInput) => {
-    const type = creditCardTypeMapping[key];
-    const label = camelToSentenceCase(key);
-
-    if (type === "boolean") {
-      return (
-        <FormControl key={key}>
-          <FormControlLabel
-            control={<Checkbox />}
-            label={label}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                [key]: (e?.target as HTMLInputElement).checked,
-              })
-            }
-            required
-          />
-        </FormControl>
-      );
-    }
-
-    if (type === "date") {
-      return (
-        <DatePicker
-          format="DD"
-          key={key}
-          label={label}
-          onChange={(value) =>
-            setFormState({ ...formState, [key]: value?.format("YYYY-MM-DD") })
-          }
-          views={["day"]}
-        />
-      );
-    }
-
-    return (
-      <FormControl key={key}>
-        <InputLabel htmlFor={key}>{label}</InputLabel>
-        <Input
-          id={key}
-          inputProps={{
-            step: 0.01,
-          }}
-          onChange={handleFormChange}
-          type={type}
-          aria-describedby={`input for ${label}`}
-        />
-      </FormControl>
-    );
+  const closeCreditCardDialog = () => {
+    changeAddCreditCardDialogOpen(false);
   };
 
   return (
@@ -131,15 +51,21 @@ const Admin = () => {
       <Typography className="decorated" variant="h1">
         Admin
       </Typography>
-      <Box className="flex flex-wrap" component="form">
-        {creditCardKeys.map(renderFormControl)}
+      <Box className="flex justify-between">
+        <Typography component="h2" variant="h5">
+          Credit Cards
+        </Typography>
         <Button
-          disabled={!isCompleteCreditCard(formState)}
-          onClick={addCreditCard}
+          onClick={() => changeAddCreditCardDialogOpen()}
           variant="contained"
         >
           Add Credit Card
         </Button>
+        <AddCreditCardDialog
+          closeDialog={closeCreditCardDialog}
+          fetchCreditCards={fetchCreditCards}
+          open={isAddCreditCardDialogOpen}
+        />
       </Box>
       <CreditCardTable creditCards={creditCards} />
     </Box>

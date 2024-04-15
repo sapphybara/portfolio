@@ -23,9 +23,17 @@ const CreditCardTable = ({
       renderHeader: () => {
         if (key === "isEarningInterest") {
           return "Earning Interest";
+        } else if (key === "apr") {
+          return "APR (%)";
         } else {
           return camelToSentenceCase(key);
         }
+      },
+      valueGetter: (value) => {
+        if (key === "paymentDate") {
+          return new Date(value);
+        }
+        return value;
       },
       width:
         i === 0 ? 75 : i < 3 || i === creditCardKeys.length - 1 ? 100 : 150,
