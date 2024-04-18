@@ -15,6 +15,7 @@ import "@fontsource/lato/900.css";
 import '@fontsource-variable/merriweather-sans';
 import createCustomTheme from "@theme/theme.ts";
 import Home from "@routes/home/Home.tsx";
+import Portfolio from "@routes/portfolio/Portfolio.tsx";
 import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import "./index.css";
@@ -38,6 +39,10 @@ const routes = [
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "portfolio",
+        element: <Portfolio />,
       },
       {
         path: "resume",

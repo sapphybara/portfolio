@@ -1,6 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
 import "./home.css";
-import Portfolio from "@components/Portfolio";
 
 const Home = () => {
   const ProfilePicture = styled("img")((props) => ({
