@@ -22,10 +22,13 @@ const Navbar = (props: PropsWithRoutes) => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const renderRouteLinks = (routes: typeof props.routes): ReactNode[] =>
+  const renderRouteLinks = (
+    routes: typeof props.routes,
+    shouldRenderChildren: boolean = true
+  ): ReactNode[] =>
     routes.map((route) => {
-      if (route.children) {
-        return renderRouteLinks(route.children);
+      if (route.children && shouldRenderChildren) {
+        return renderRouteLinks(route.children, false);
       }
 
       const { path = "" } = route;
