@@ -6,11 +6,15 @@ import { CreateCreditCardInput, CreditCard } from "src/API";
 
 export const useTitle = () => {
   const { pathname } = useLocation();
+
   useEffect(() => {
+    const readablePathname = pathname.split("/")[1];
     const titleSuffix =
-      pathname === "/"
+      readablePathname === ""
         ? ""
-        : ` | ${pathname.charAt(1).toUpperCase()}${pathname.slice(2)}`;
+        : ` | ${readablePathname
+            .charAt(0)
+            .toUpperCase()}${readablePathname.slice(1)}`;
 
     document.title = `Sapphyra Wiser${titleSuffix}`;
   }, [pathname]);
