@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 import { generateClient } from "aws-amplify/api";
@@ -6,10 +6,9 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { type AuthUser } from "aws-amplify/auth";
 import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
 
-import { listCreditCards } from "src/graphql/queries";
-import { type CreateCreditCardInput, type CreditCard } from "src/API";
 import CreditCardTable from "src/components/CreditCardTable";
 import AddCreditCardDialog from "src/components/AddCreditCardDialog";
+import { useFetchCreditCards } from "src/hooks/hooks";
 
 const client = generateClient();
 
@@ -19,27 +18,10 @@ interface AdminProps {
 }
 
 const Admin = ({ signOut, user: _user }: AdminProps) => {
-  const [creditCards, setCreditCards] = useState<
-    CreditCard[] | CreateCreditCardInput[]
-  >([]);
   const [isAddCreditCardDialogOpen, setIsAddCreditCardDialogOpen] =
     useState(false);
-
-  useEffect(() => {
-    fetchCreditCards();
-  }, []);
-
-  async function fetchCreditCards() {
-    try {
-      const ccData = await client.graphql({
-        query: listCreditCards,
-      });
-      const cCs = ccData.data.listCreditCards.items;
-      setCreditCards(cCs);
-    } catch (err) {
-      console.log("error fetching credit cards");
-    }
-  }
+  const { creditCards, fetchCreditCards, error, loading } =
+    useFetchCreditCards(client);
 
   const changeAddCreditCardDialogOpen = (prevState?: boolean) => {
     if (prevState === undefined) {
@@ -52,6 +34,10 @@ const Admin = ({ signOut, user: _user }: AdminProps) => {
   const closeCreditCardDialog = () => {
     changeAddCreditCardDialogOpen(false);
   };
+
+  if (error) {
+    return <Typography>Error fetching credit cards</Typography>;
+  }
 
   return (
     <Box>
@@ -75,7 +61,7 @@ const Admin = ({ signOut, user: _user }: AdminProps) => {
           open={isAddCreditCardDialogOpen}
         />
       </Box>
-      <CreditCardTable creditCards={creditCards} />
+      <CreditCardTable creditCards={creditCards} loading={loading} />
       <Button
         className="my-2"
         color="warning"
