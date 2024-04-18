@@ -91,6 +91,18 @@ const createCustomTheme = (rootElement: Element) => {
         textTransform: "uppercase",
         color: theme.palette.secondary.main,
         fontFamily: fontFamily.header,
+        '& + [class^="MuiTypography"]': {
+          marginTop: theme.spacing(-0.5),
+        },
+        ...[1, 2, 3, 4, 5, 6].reduce(
+          (acc, val) => ({
+            ...acc,
+            [`& + .MuiTypography-h${val}`]: {
+              marginTop: theme.spacing(-(20 - val) / 12),
+            },
+          }),
+          {}
+        ),
       },
       tag: {
         display: "inline-flex",

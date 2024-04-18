@@ -42,9 +42,7 @@ const Admin = ({ signOut, user: _user }: AdminProps) => {
   return (
     <Box>
       <Typography variant="decoration">Manage</Typography>
-      <Typography className="decorated" variant="h1">
-        Admin
-      </Typography>
+      <Typography variant="h1">Admin</Typography>
       <Box className="flex justify-between my-2">
         <Typography component="h2" variant="h5">
           Credit Cards

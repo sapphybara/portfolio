@@ -112,7 +112,7 @@ const Portfolio = () => {
     linkInfo,
   }: PortfolioCard) => (
     <PortfolioWrapper
-      className="mb-4 mx-4 portfolio-card"
+      className="mb-4 portfolio-card"
       key={title}
       id={title.replace(/\s/g, "-")}
       variant="outlined"
@@ -165,9 +165,7 @@ const Portfolio = () => {
   return (
     <Box className="w-full" component="section">
       <Typography variant="decoration">Check out my</Typography>
-      <Typography className="decorated" variant="h1">
-        Portfolio
-      </Typography>
+      <Typography variant="h1">Portfolio</Typography>
       {portfolioCards.map(renderPortfolioCard)}
     </Box>
   );

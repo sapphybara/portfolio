@@ -227,9 +227,7 @@ const Resume = () => {
   return (
     <Box component="section">
       <Typography variant="decoration">View my</Typography>
-      <Typography className="decorated" variant="h1">
-        Resume
-      </Typography>
+      <Typography variant="h1">Resume</Typography>
       <Box className="flex flex-col gap-8 my-4">
         {resumeData.map((d) => renderResumeData(d))}
       </Box>
