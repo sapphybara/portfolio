@@ -42,7 +42,6 @@ const Home = () => {
         I build diverse front end and mobile applications, and my passion lies
         in accessibility, in every domain.
       </Typography>
-      <Portfolio />
     </Box>
   );
 };

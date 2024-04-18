@@ -98,7 +98,7 @@ const createCustomTheme = (rootElement: Element) => {
           (acc, val) => ({
             ...acc,
             [`& + .MuiTypography-h${val}`]: {
-              marginTop: theme.spacing(-(20 - val) / 12),
+              marginTop: theme.spacing(-(0.08 * val + 0.8)),
             },
           }),
           {}

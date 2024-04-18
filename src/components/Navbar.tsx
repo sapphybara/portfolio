@@ -29,6 +29,9 @@ const Navbar = (props: PropsWithRoutes) => {
       }
 
       const { path = "" } = route;
+      if (path === "admin") {
+        return null;
+      }
       const name =
         path === ""
           ? "Portfolio"
