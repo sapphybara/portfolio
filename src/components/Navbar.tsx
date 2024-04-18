@@ -30,7 +30,9 @@ const Navbar = (props: PropsWithRoutes) => {
 
       const { path = "" } = route;
       const name =
-        path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
+        path === ""
+          ? "Portfolio"
+          : path.charAt(0).toUpperCase() + path.slice(1);
       return (
         <ListItem key={path}>
           <Link href={path}>{name}</Link>

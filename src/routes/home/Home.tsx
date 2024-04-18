@@ -1,5 +1,6 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import "./home.css";
+import Portfolio from "@components/Portfolio";
 
 const Home = () => {
   const ProfilePicture = styled("img")((props) => ({
@@ -15,9 +16,7 @@ const Home = () => {
         <Box className="flex flex-wrap justify-between w-11/12">
           <Box>
             <Typography variant="decoration">hi, my name is</Typography>
-            <Typography className="decorated" variant="h1">
-              Sapphyra
-            </Typography>
+            <Typography variant="h1">Sapphyra</Typography>
           </Box>
           <ProfilePicture
             src="src/assets/img.png"
@@ -29,7 +28,7 @@ const Home = () => {
         <Typography className="decorator grow w-full" variant="decoration">
           I am a
         </Typography>
-        <Typography className="decorated" variant="h2">
+        <Typography className="dev" variant="h2">
           Developer
         </Typography>
         <Typography className="amp" color="secondary.main">
@@ -39,16 +38,11 @@ const Home = () => {
           Designer
         </Typography>
       </Box>
-      <Typography className="about mt-16 mb-8">
+      <Typography className="about mt-16 mb-8" paragraph>
         I build diverse front end and mobile applications, and my passion lies
         in accessibility, in every domain.
       </Typography>
-      <Button className="mr-4" href="/portfolio" variant="contained">
-        Check out my work
-      </Button>
-      <Button href="/resume" variant="outlined">
-        View my resume
-      </Button>
+      <Portfolio />
     </Box>
   );
 };
