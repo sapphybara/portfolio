@@ -41,3 +41,23 @@ export type SharedCardHeaderProps = Pick<
     "component"
   >;
 };
+
+export interface PortfolioCard {
+  id: number;
+  title: string;
+  subheader: string;
+  affiliation: string;
+  description: string;
+  techStack: {
+    name: string;
+    cardType:
+      | "frontend"
+      | "backend"
+      | "fullstack"
+      | "design"
+      | "testing"
+      | "tooling"
+      | "other";
+  }[];
+  linkInfo: { to: string; target?: string; rel?: string };
+}

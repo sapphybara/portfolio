@@ -1,4 +1,5 @@
 import { CreateCreditCardInput } from "src/API";
+import portfolioCards from "@routes/portfolio/portfolio_cards.json";
 
 export const camelToSentenceCase = (str: string) => {
   if (!str) {
@@ -50,4 +51,13 @@ export const isCompleteCreditCard = (
         return typeof value === type;
     }
   });
+};
+
+export const getPortfolioDetail = ({
+  params,
+}: {
+  params: { projectId: string };
+}) => {
+  const { projectId } = params;
+  return portfolioCards.find((card) => card.id === Number(projectId)) ?? null;
 };

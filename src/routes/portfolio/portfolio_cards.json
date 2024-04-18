@@ -1,0 +1,36 @@
+[
+  {
+    "id": 0,
+    "title": "HySCAN",
+    "subheader": "Hydrogen Safety Codes & Standards Applicability Navigator",
+    "affiliation": "Pacific Northwest National Laboratory",
+    "description": "As a developer, I supported users in navigating hydrogen (H2) codes and standards, ensuring compliance and safety in their systems. HySCAN, a vital component of the H2Tools suite, facilitated this process with intuitive workflows. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
+    "techStack": [
+      { "name": "React", "cardType": "frontend" },
+      { "name": "styled-components", "cardType": "frontend" },
+      { "name": "Figma", "cardType": "design" },
+      { "name": "Node", "cardType": "backend" },
+      { "name": "Jest", "cardType": "testing" }
+    ],
+    "linkInfo": {
+      "to": "https://h2tools.org/hyscan",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    }
+  },
+  {
+    "id": 1,
+    "title": "Developer Portfolio",
+    "subheader": "Personal Showcase of Projects and Skills",
+    "affiliation": "Myself",
+    "description": "A developer portfolio showcasing my projects and skills. Built with React, Vite, TypeScript, Material-UI, and Tailwind CSS. Designed to present my work in an organized and visually appealing manner.",
+    "techStack": [
+      { "name": "React", "cardType": "frontend" },
+      { "name": "Vite", "cardType": "tooling" },
+      { "name": "TypeScript", "cardType": "frontend" },
+      { "name": "Material-UI", "cardType": "design" },
+      { "name": "Tailwind CSS", "cardType": "frontend" }
+    ],
+    "linkInfo": { "to": "#Developer-Portfolio" }
+  }
+]

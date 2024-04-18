@@ -1,6 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider,
+} from "react-router-dom";
 import {
   CssBaseline,
   StyledEngineProvider,
@@ -12,18 +16,20 @@ import "@fontsource/lato/400.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
 // Supports weights 300-800
-import '@fontsource-variable/merriweather-sans';
+import "@fontsource-variable/merriweather-sans";
 import createCustomTheme from "@theme/theme.ts";
 import Home from "@routes/home/Home.tsx";
 import Portfolio from "@routes/portfolio/Portfolio.tsx";
+import PortfolioDetail from "./routes/portfolio/PortfolioDetail.tsx";
 import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
+import Admin from "@routes/Admin/Admin.tsx";
+import { getPortfolioDetail } from "./utils/utils.ts";
 import "./index.css";
 
 // configure AWS Amplify
 import { Amplify } from "aws-amplify";
 import amplifyconfig from "./amplifyconfiguration.json";
-import Admin from "@routes/Admin/Admin.tsx";
 Amplify.configure(amplifyconfig);
 
 const routes = [
@@ -43,6 +49,13 @@ const routes = [
       {
         path: "portfolio",
         element: <Portfolio />,
+        children: [
+          {
+            path: ":projectId",
+            element: <PortfolioDetail />,
+            loader: getPortfolioDetail,
+          },
+        ],
       },
       {
         path: "resume",
@@ -51,7 +64,7 @@ const routes = [
       { path: "admin", element: <Admin /> },
     ],
   },
-];
+] as RouteObject[];
 const router = createBrowserRouter(routes);
 const rootElement = document.getElementById("root")!;
 
