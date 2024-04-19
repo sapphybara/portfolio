@@ -20,7 +20,7 @@ import "@fontsource-variable/merriweather-sans";
 import createCustomTheme from "@theme/theme.ts";
 import Home from "@routes/home/Home.tsx";
 import Portfolio from "@routes/portfolio/Portfolio.tsx";
-import PortfolioDetail from "./routes/portfolio/PortfolioDetail.tsx";
+import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail.tsx";
 import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import Admin from "@routes/Admin/Admin.tsx";
