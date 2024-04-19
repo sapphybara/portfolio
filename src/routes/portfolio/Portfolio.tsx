@@ -20,10 +20,10 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { HashLink } from "react-router-hash-link";
+import { useNavigate, useOutlet } from "react-router-dom";
+import MyLink from "@components/MyLink";
 import { PortfolioCard } from "types/global";
 import portfolioCards from "./portfolio_cards.json";
-import { useNavigate, useOutlet } from "react-router-dom";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
   "&:hover": {
@@ -92,21 +92,12 @@ const Portfolio = () => {
           <Typography className="mb-0" color="text.secondary" paragraph>
             Project on behalf of: {affiliation}
           </Typography>
-          <HashLink
-            className="!ml-auto flex items-center gap-1"
-            color="secondary"
-            {...linkInfo}
-            scroll={(el) => {
-              const top = el.getBoundingClientRect().top + window.scrollY - 66;
-              window.scrollTo({ top, behavior: "smooth" });
-            }}
-            smooth
-          >
+          <MyLink {...linkInfo}>
             <Typography className="mb-0" paragraph>
               View Project
             </Typography>
             {linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />}
-          </HashLink>
+          </MyLink>
         </Stack>
       </CardContent>
     </PortfolioWrapper>

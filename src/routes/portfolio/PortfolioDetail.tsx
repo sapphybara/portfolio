@@ -1,4 +1,4 @@
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowBack, ArrowOutward } from "@mui/icons-material";
 import {
   Box,
   Typography,
@@ -9,14 +9,14 @@ import {
   ListItem,
   Button,
 } from "@mui/material";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
+import MyLink from "src/components/MyLink";
 import { camelToSentenceCase, isTechStack } from "src/utils/utils";
 import { PortfolioCard } from "types/global";
 
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioCard;
-  const navigate = useNavigate();
 
   if (!portfolioDetail) {
     return (
@@ -34,12 +34,12 @@ const PortfolioDetail = () => {
       <Button
         className="mb-4"
         startIcon={<ArrowBack color="primary" />}
-        onClick={() => navigate(-1)}
+        href="/portfolio"
         variant="outlined"
       >
         Back to Portfolio
       </Button>
-      <Paper className="p-4 mb-4 flex flex-col">
+      <Paper className="p-4 mb-4 flex flex-col" id="detail">
         <Typography variant="decoration">Portfolio detail</Typography>
         <Typography variant="h3">{portfolioDetail.title}</Typography>
         <Divider />
@@ -89,8 +89,12 @@ const PortfolioDetail = () => {
         )}
         <Button
           className="ml-auto"
+          endIcon={
+            portfolioDetail.linkInfo.target === "_blank" && <ArrowOutward />
+          }
           variant="contained"
           {...portfolioDetail.linkInfo}
+          LinkComponent={MyLink}
         >
           View the project
         </Button>
