@@ -34,6 +34,7 @@ const TechnologyChips = (props: { technology: TechStack[] }) => {
     <Stack direction="row" gap={1}>
       {props.technology.map((technology) => (
         <Chip
+          component="li"
           key={technology.name}
           icon={renderTagIcon(technology.cardType)}
           label={technology.name}

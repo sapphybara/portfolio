@@ -1,5 +1,6 @@
 import { CreateCreditCardInput } from "src/API";
 import portfolioCards from "@routes/portfolio/portfolio_cards.json";
+import { TechStack } from "types/global";
 
 export const camelToSentenceCase = (str: string) => {
   if (!str) {
@@ -61,3 +62,11 @@ export const getPortfolioDetail = ({
   const { projectId } = params;
   return portfolioCards.find((card) => card.id === projectId) ?? null;
 };
+
+export const isTechStack = (obj: unknown): obj is TechStack =>
+  typeof obj === "object" &&
+  obj !== null &&
+  "name" in obj &&
+  typeof (obj as { name: unknown }).name === "string" &&
+  "cardType" in obj &&
+  typeof (obj as { cardType: unknown }).cardType === "string";

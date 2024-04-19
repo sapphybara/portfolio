@@ -1,4 +1,13 @@
-import { ArrowBack, ArrowOutward } from "@mui/icons-material";
+import {
+  ArrowBack,
+  ArrowOutward,
+  AssignmentInd,
+  Build,
+  Description,
+  EmojiObjects,
+  Memory,
+  People,
+} from "@mui/icons-material";
 import {
   Box,
   Typography,
@@ -7,13 +16,23 @@ import {
   List,
   ListItem,
   Button,
+  Stack,
+  Slide,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { Fragment } from "react/jsx-runtime";
 import MyLink from "src/components/MyLink";
 import TechnologyChips from "src/components/TechnologyChips";
-import { camelToSentenceCase } from "src/utils/utils";
-import { PortfolioCard } from "types/global";
+import { camelToSentenceCase, isTechStack } from "src/utils/utils";
+import { PortfolioCard, TechStack } from "types/global";
+
+const icons: Record<string, React.ElementType> = {
+  description: Description,
+  role: AssignmentInd,
+  contributions: Build,
+  shareholderDescription: People,
+  problemSolving: EmojiObjects,
+  techStack: Memory,
+};
 
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioCard;
@@ -42,12 +61,12 @@ const PortfolioDetail = () => {
       <Paper className="p-4 mb-4 flex flex-col" id="detail">
         <Typography variant="decoration">Portfolio detail</Typography>
         <Typography variant="h3">{portfolioDetail.title}</Typography>
-        <Divider />
-        <Typography className="my-2" component="h4" variant="h5">
+        <Divider className="my-4" />
+        <Typography component="h4" variant="h5">
           {portfolioDetail.subheader}
         </Typography>
-        <Typography variant="subtitle1">
-          {portfolioDetail.affiliation}
+        <Typography color="text.secondary" variant="subtitle1">
+          I built this project while working for: {portfolioDetail.affiliation}
         </Typography>
         {[
           "description",
@@ -55,34 +74,63 @@ const PortfolioDetail = () => {
           "contributions",
           "shareholderDescription",
           "problemSolving",
+          "techStack",
         ].map((key) => {
           const data = portfolioDetail[key as keyof PortfolioCard] as
             | string
             | string[]
+            | TechStack[]
             | undefined;
           if (!data) {
             return null;
           }
+          const Icon = icons[key];
 
           return (
-            <Fragment key={key}>
-              <Typography variant="h6">{camelToSentenceCase(key)}</Typography>
-              {Array.isArray(data) ? (
-                <List>
-                  {data.map((item, index) => (
-                    <ListItem key={index}>{item}</ListItem>
-                  ))}
-                </List>
-              ) : (
-                <Typography variant="body1">{data}</Typography>
-              )}
-            </Fragment>
+            <Slide
+              className="mt-4"
+              direction="up"
+              in
+              mountOnEnter
+              unmountOnExit
+              key={key}
+            >
+              <Box>
+                <Stack
+                  alignItems="center"
+                  className="mb-2"
+                  direction="row"
+                  gap={1}
+                >
+                  <Icon />
+                  <Typography variant="h6">
+                    {camelToSentenceCase(key)}
+                  </Typography>
+                </Stack>
+                {Array.isArray(data) ? (
+                  data.every(isTechStack) ? (
+                    <TechnologyChips technology={data} />
+                  ) : (
+                    <List className="ml-8 list-disc">
+                      {data.map((item, index) => (
+                        <ListItem
+                          className="p-0 pb-2 list-item"
+                          key={index}
+                          disableGutters
+                        >
+                          {item}
+                        </ListItem>
+                      ))}
+                    </List>
+                  )
+                ) : (
+                  <Typography variant="body1">{data}</Typography>
+                )}
+              </Box>
+            </Slide>
           );
         })}
-        <Typography className="mb-2" variant="h6">
-          Technologies Used
-        </Typography>
-        <TechnologyChips technology={portfolioDetail.techStack} />
+        <Divider className="my-4" />
         <Button
           className="ml-auto"
           endIcon={
