@@ -135,7 +135,7 @@ const PortfolioDetail = () => {
           className="ml-auto"
           endIcon={
             portfolioDetail.linkInfo.target === "_blank" && (
-              <ArrowOutward sx={{ color: "#000" }} />
+              <ArrowOutward className="text-black" />
             )
           }
           variant="contained"
