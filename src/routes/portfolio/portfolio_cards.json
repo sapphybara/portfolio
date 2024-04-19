@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": "developer-portfolio",
     "title": "Developer Portfolio",
     "subheader": "Personal Showcase of Projects and Skills",
     "affiliation": "Myself",
@@ -28,7 +28,7 @@
     "shortDescription": "A personal showcase of my projects and skills."
   },
   {
-    "id": 1,
+    "id": "hyscan",
     "title": "HySCAN",
     "subheader": "Hydrogen Safety Codes & Standards Applicability Navigator",
     "affiliation": "Pacific Northwest National Laboratory",

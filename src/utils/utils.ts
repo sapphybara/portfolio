@@ -60,7 +60,7 @@ export const getPortfolioDetail = ({
   params: { projectId: string };
 }) => {
   const { projectId } = params;
-  return portfolioCards.find((card) => card.id === Number(projectId)) ?? null;
+  return portfolioCards.find((card) => card.id === projectId) ?? null;
 };
 
 export const isTechStack = (object: unknown): object is TechStack => {

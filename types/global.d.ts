@@ -54,7 +54,7 @@ interface LinkInfo {
 }
 
 export interface PortfolioCard {
-  id: number;
+  id: string;
   title: string;
   subheader: string;
   affiliation: string;
