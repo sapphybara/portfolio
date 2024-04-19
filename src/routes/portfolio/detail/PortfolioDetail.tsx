@@ -2,7 +2,6 @@ import { ArrowBack, ArrowOutward } from "@mui/icons-material";
 import {
   Box,
   Typography,
-  Chip,
   Paper,
   Divider,
   List,
@@ -13,7 +12,7 @@ import { useLoaderData } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import MyLink from "src/components/MyLink";
 import TechnologyChips from "src/components/TechnologyChips";
-import { camelToSentenceCase, isTechStack } from "src/utils/utils";
+import { camelToSentenceCase } from "src/utils/utils";
 import { PortfolioCard } from "types/global";
 
 const PortfolioDetail = () => {
@@ -50,38 +49,36 @@ const PortfolioDetail = () => {
         <Typography variant="subtitle1">
           {portfolioDetail.affiliation}
         </Typography>
-        <Typography variant="h6">Description</Typography>
-        <Typography variant="body1">{portfolioDetail.description}</Typography>
-        <Typography variant="h6">Role</Typography>
-        <Typography variant="body1">{portfolioDetail.role}</Typography>
-        {["contributions", "shareholderDescription", "problemSolving"].map(
-          (key) => {
-            const data = portfolioDetail[key as keyof PortfolioCard] as
-              | string
-              | string[]
-              | undefined;
-            if (!data) {
-              return null;
-            }
-
-            return (
-              <Fragment key={key}>
-                <Typography variant="h6">{camelToSentenceCase(key)}</Typography>
-                {Array.isArray(data) ? (
-                  <List>
-                    {data.map((item, index) => (
-                      <ListItem key={index}>
-                        {isTechStack(item) ? <Chip label={item.name} /> : item}
-                      </ListItem>
-                    ))}
-                  </List>
-                ) : (
-                  <Typography variant="body1">{data}</Typography>
-                )}
-              </Fragment>
-            );
+        {[
+          "description",
+          "role",
+          "contributions",
+          "shareholderDescription",
+          "problemSolving",
+        ].map((key) => {
+          const data = portfolioDetail[key as keyof PortfolioCard] as
+            | string
+            | string[]
+            | undefined;
+          if (!data) {
+            return null;
           }
-        )}
+
+          return (
+            <Fragment key={key}>
+              <Typography variant="h6">{camelToSentenceCase(key)}</Typography>
+              {Array.isArray(data) ? (
+                <List>
+                  {data.map((item, index) => (
+                    <ListItem key={index}>{item}</ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Typography variant="body1">{data}</Typography>
+              )}
+            </Fragment>
+          );
+        })}
         <Typography className="mb-2" variant="h6">
           Technologies Used
         </Typography>
