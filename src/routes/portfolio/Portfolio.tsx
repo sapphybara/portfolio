@@ -23,7 +23,7 @@ import {
 import { HashLink } from "react-router-hash-link";
 import { PortfolioCard } from "types/global";
 import portfolioCards from "./portfolio_cards.json";
-import { useOutlet } from "react-router-dom";
+import { useNavigate, useOutlet } from "react-router-dom";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
   "&:hover": {
@@ -33,6 +33,7 @@ const PortfolioWrapper = styled(Card)(({ theme }) => ({
 
 const Portfolio = () => {
   const outlet = useOutlet();
+  const navigate = useNavigate();
 
   const renderTagIcon = (type: string) => {
     switch (type) {
@@ -54,12 +55,13 @@ const Portfolio = () => {
   };
 
   const renderPortfolioCard = ({
+    id,
     title,
     subheader,
     affiliation,
-    description,
     techStack,
     linkInfo,
+    shortDescription,
   }: PortfolioCard) => (
     <PortfolioWrapper
       className="mb-4 portfolio-card"
@@ -67,47 +69,46 @@ const Portfolio = () => {
       id={title.replace(/\s/g, "-")}
       variant="outlined"
     >
-      <CardActionArea className="cursor-default" disableRipple>
-        <CardHeader
-          title={title}
-          titleTypographyProps={{ variant: "h3", component: "h3" }}
-          subheader={subheader}
-          subheaderTypographyProps={{ variant: "h6", component: "h4" }}
-        />
+      <CardActionArea onClick={() => navigate(`/portfolio/${id}`)}>
         <CardContent className="pt-0">
+          <CardHeader
+            title={title}
+            titleTypographyProps={{ variant: "h3", component: "h3" }}
+            subheader={subheader}
+            subheaderTypographyProps={{ variant: "h6", component: "h4" }}
+          />
           <Stack direction="row" gap={1}>
             {techStack.map(({ name, cardType }) => (
               <Chip key={name} label={name} icon={renderTagIcon(cardType)} />
             ))}
           </Stack>
           <Typography className="mt-4 mx-4" paragraph>
-            {description}
+            {shortDescription}
           </Typography>
-          <Stack alignItems="center" direction="row" component={CardActions}>
-            <Typography className="mb-0" color="text.secondary" paragraph>
-              Project on behalf of: {affiliation}
-            </Typography>
-            <HashLink
-              className="!ml-auto flex items-center gap-1"
-              color="secondary"
-              {...linkInfo}
-              scroll={(el) => {
-                const top =
-                  el.getBoundingClientRect().top + window.scrollY - 66;
-                window.scrollTo({ top, behavior: "smooth" });
-              }}
-              smooth
-            >
-              <Typography className="mb-0" paragraph>
-                View Project
-              </Typography>
-              {linkInfo.target === "_blank" && (
-                <ArrowOutward fontSize="small" />
-              )}
-            </HashLink>
-          </Stack>
         </CardContent>
       </CardActionArea>
+      <CardContent className="pt-0">
+        <Stack alignItems="center" direction="row" component={CardActions}>
+          <Typography className="mb-0" color="text.secondary" paragraph>
+            Project on behalf of: {affiliation}
+          </Typography>
+          <HashLink
+            className="!ml-auto flex items-center gap-1"
+            color="secondary"
+            {...linkInfo}
+            scroll={(el) => {
+              const top = el.getBoundingClientRect().top + window.scrollY - 66;
+              window.scrollTo({ top, behavior: "smooth" });
+            }}
+            smooth
+          >
+            <Typography className="mb-0" paragraph>
+              View Project
+            </Typography>
+            {linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />}
+          </HashLink>
+        </Stack>
+      </CardContent>
     </PortfolioWrapper>
   );
 
