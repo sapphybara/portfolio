@@ -1,4 +1,4 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Button, Tooltip, Typography, styled } from "@mui/material";
 import "./home.css";
 
 const Home = () => {
@@ -44,9 +44,11 @@ const Home = () => {
       <Button className="mr-4" href="/portfolio" variant="contained">
         Check out my work
       </Button>
-      <Button href="/resume" variant="outlined">
-        View my resume
-      </Button>
+      <Tooltip title="Don't worry, this won't download a pesky file!">
+        <Button href="/resume" variant="outlined">
+          View my resume
+        </Button>
+      </Tooltip>
     </Box>
   );
 };
