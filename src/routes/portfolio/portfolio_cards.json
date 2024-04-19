@@ -4,7 +4,7 @@
     "title": "HySCAN",
     "subheader": "Hydrogen Safety Codes & Standards Applicability Navigator",
     "affiliation": "Pacific Northwest National Laboratory",
-    "description": "As a developer, I supported users in navigating hydrogen (H2) codes and standards, ensuring compliance and safety in their systems. HySCAN, a vital component of the H2Tools suite, facilitated this process with intuitive workflows. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
+    "description": "As a developer, I supported users in navigating hydrogen (H2) codes and standards, ensuring compliance and safety in their systems. HySCAN facilitated this process with intuitive, accessible workflows. It is a part of the H2Tools Suite, which is a group of tools developed and maintained by Pacific Northwest National Laboratory. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
     "techStack": [
       { "name": "React", "cardType": "frontend" },
       { "name": "styled-components", "cardType": "frontend" },
@@ -16,7 +16,19 @@
       "to": "https://h2tools.org/hyscan",
       "target": "_blank",
       "rel": "noopener noreferrer"
-    }
+    },
+    "shareholderDescription": "HySCAN was jointly developed by Sandia National Laboratories (Sandia), National Renewable Energy Laboratory (NREL), and Pacific Northwest National Laboratory (PNNL) and operated and maintained by PNNL, with funding from the U.S. Department of Energy's Office of Energy Efficiency and Renewable Energy (EERE) under the Hydrogen and Fuel Cell Technologies Office (HFTO).",
+    "role": "I was one of the primary developers on the HySCAN project, contributing to the development of this front-end-only application. I also collaborated with the design team to implement the user interface and user experience design.",
+    "contributions": [
+      "Created and maintained React components for the application using styled-components.",
+      "Key to the creation of algorithms to understand the user's system, identify applicable codes and standards, and group related questions.",
+      "Implemented bug fixes and design changes to improve the user experience after demos and sponsor feedback."
+    ],
+    "problemSolving": [
+      "Developed a solution to dynamically generate questions based on the user's system and the codes and standards applicable to it.",
+      "Designed a system to categorize and group questions based on the codes and standards they relate to.",
+      "Implemented responsive design principles for optimal viewing across devices."
+    ]
   },
   {
     "id": 1,
@@ -31,6 +43,18 @@
       { "name": "Material-UI", "cardType": "design" },
       { "name": "Tailwind CSS", "cardType": "frontend" }
     ],
-    "linkInfo": { "to": "#Developer-Portfolio" }
+    "linkInfo": { "to": "#Developer-Portfolio" },
+    "role": "As the sole developer of this project, I was responsible for both the design and implementation of the portfolio. I used React and TypeScript for the frontend, and Material-UI and Tailwind CSS for the design.",
+    "contributions": [
+      "Developed the entire frontend of the portfolio using React and TypeScript.",
+      "Designed the portfolio using Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface.",
+      "Implemented a responsive design to ensure the portfolio looks good on all devices.",
+      "Used Vite and PNPM for a faster and leaner development experience."
+    ],
+    "problemSolving": [
+      "Implemented a dynamic project display system that allows me to easily add, remove, or update projects.",
+      "Designed the portfolio to be responsive, ensuring it looks good on all devices.",
+      "Used Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface."
+    ]
   }
 ]
