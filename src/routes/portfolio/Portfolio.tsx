@@ -10,8 +10,16 @@ const Portfolio = () => {
     <Box className="w-full" component="section">
       <Typography variant="decoration">Check out my</Typography>
       <Typography variant="h1">Portfolio</Typography>
-      {outlet ??
-        portfolioCards.map((card) => <PortfolioCard key={card.id} {...card} />)}
+      {outlet ?? (
+        <>
+          <Typography className="mb-2" component="h2" variant="h6">
+            Click on a project to learn more.
+          </Typography>
+          {portfolioCards.map((card) => (
+            <PortfolioCard key={card.id} {...card} />
+          ))}
+        </>
+      )}
     </Box>
   );
 };
