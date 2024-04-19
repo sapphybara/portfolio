@@ -24,6 +24,7 @@ const contactInfo = [
     children: "Denver, CO",
     href: "",
     startIcon: <LocationCityOutlined />,
+    isInvisibleOnMobile: true,
   },
   {
     children: "LinkedIn",
@@ -61,17 +62,24 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
           : 0
       }
     >
-      {contactInfo.map(({ children, ...item }, index) => (
-        <Button
-          key={index}
-          {...item}
-          target="_blank"
-          rel="noopener noreferrer"
-          variant="text"
-        >
-          {shouldRenderBtnTxt && children}
-        </Button>
-      ))}
+      {contactInfo.map(({ children, isInvisibleOnMobile, ...item }, index) => {
+        if (isInvisibleOnMobile && !shouldRenderBtnTxt) {
+          return null;
+        }
+
+        return (
+          <Button
+            className="normal-case"
+            key={index}
+            {...item}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="text"
+          >
+            {shouldRenderBtnTxt && children}
+          </Button>
+        );
+      })}
     </Stack>
   );
 }
