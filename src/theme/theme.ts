@@ -57,6 +57,11 @@ const createCustomTheme = (rootElement: Element) => {
           color: "secondary",
         },
       },
+      MuiStack: {
+        defaultProps: {
+          useFlexGap: true,
+        },
+      },
     },
     palette: {
       contrastThreshold: 4.5,
