@@ -17,15 +17,14 @@
     "contributions": [
       "Developed the entire frontend of the portfolio using React and TypeScript.",
       "Designed the portfolio using Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface.",
-      "Implemented a responsive design to ensure the portfolio looks good on all devices.",
-      "Used Vite and PNPM for a faster and leaner development experience."
+      "Implemented a responsive design to ensure the portfolio looks good on all devices."
     ],
     "problemSolving": [
       "Implemented a dynamic project display system that allows me to easily add, remove, or update projects.",
       "Designed the portfolio to be responsive, ensuring it looks good on all devices.",
       "Used Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface."
     ],
-    "shortDescription": "A personal showcase of my projects and skills."
+    "shortDescription": "A website to showcase my expertise as a developer and designer."
   },
   {
     "id": "hyscan",
