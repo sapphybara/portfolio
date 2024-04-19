@@ -4,7 +4,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Chip,
   Stack,
   Typography,
   styled,
@@ -12,16 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { PortfolioCard as PortfolioCardType } from "types/global";
 import MyLink from "./MyLink";
-import {
-  ArrowOutward,
-  BugReportOutlined,
-  BuildOutlined,
-  CodeOutlined,
-  DesignServicesOutlined,
-  DesktopWindowsOutlined,
-  ExtensionOutlined,
-  StorageOutlined,
-} from "@mui/icons-material";
+import { ArrowOutward } from "@mui/icons-material";
+import TechnologyChips from "./TechnologyChips";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
   "&:hover": {
@@ -40,25 +31,6 @@ const PortfolioCard = ({
 }: PortfolioCardType) => {
   const navigate = useNavigate();
 
-  const renderTagIcon = (type: string) => {
-    switch (type) {
-      case "frontend":
-        return <DesktopWindowsOutlined color="secondary" fontSize="small" />;
-      case "backend":
-        return <StorageOutlined color="secondary" fontSize="small" />;
-      case "fullstack":
-        return <CodeOutlined color="secondary" fontSize="small" />;
-      case "design":
-        return <DesignServicesOutlined color="secondary" fontSize="small" />;
-      case "testing":
-        return <BugReportOutlined color="secondary" fontSize="small" />;
-      case "tooling":
-        return <BuildOutlined color="secondary" fontSize="small" />;
-      default:
-        return <ExtensionOutlined color="secondary" fontSize="small" />;
-    }
-  };
-
   return (
     <PortfolioWrapper
       className="mb-4 portfolio-card"
@@ -74,11 +46,7 @@ const PortfolioCard = ({
             subheader={subheader}
             subheaderTypographyProps={{ variant: "h6", component: "h4" }}
           />
-          <Stack direction="row" gap={1}>
-            {techStack.map(({ name, cardType }) => (
-              <Chip key={name} label={name} icon={renderTagIcon(cardType)} />
-            ))}
-          </Stack>
+          <TechnologyChips technology={techStack} />
           <Typography className="mt-4 mx-4" paragraph>
             {shortDescription}
           </Typography>

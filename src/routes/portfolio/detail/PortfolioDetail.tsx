@@ -12,6 +12,7 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import MyLink from "src/components/MyLink";
+import TechnologyChips from "src/components/TechnologyChips";
 import { camelToSentenceCase, isTechStack } from "src/utils/utils";
 import { PortfolioCard } from "types/global";
 
@@ -53,12 +54,6 @@ const PortfolioDetail = () => {
         <Typography variant="body1">{portfolioDetail.description}</Typography>
         <Typography variant="h6">Role</Typography>
         <Typography variant="body1">{portfolioDetail.role}</Typography>
-        <Typography variant="h6">Technologies Used</Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, marginTop: 2 }}>
-          {portfolioDetail.techStack.map((tech, index) => (
-            <Chip key={index} label={tech.name} variant="filled" />
-          ))}
-        </Box>
         {["contributions", "shareholderDescription", "problemSolving"].map(
           (key) => {
             const data = portfolioDetail[key as keyof PortfolioCard] as
@@ -87,6 +82,10 @@ const PortfolioDetail = () => {
             );
           }
         )}
+        <Typography className="mb-2" variant="h6">
+          Technologies Used
+        </Typography>
+        <TechnologyChips technology={portfolioDetail.techStack} />
         <Button
           className="ml-auto"
           endIcon={
