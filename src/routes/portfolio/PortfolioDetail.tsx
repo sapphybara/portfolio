@@ -90,7 +90,9 @@ const PortfolioDetail = () => {
         <Button
           className="ml-auto"
           endIcon={
-            portfolioDetail.linkInfo.target === "_blank" && <ArrowOutward />
+            portfolioDetail.linkInfo.target === "_blank" && (
+              <ArrowOutward sx={{ color: "#000" }} />
+            )
           }
           variant="contained"
           {...portfolioDetail.linkInfo}
