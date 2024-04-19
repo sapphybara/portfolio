@@ -12,7 +12,7 @@
       { "name": "Material-UI", "cardType": "design" },
       { "name": "Tailwind CSS", "cardType": "frontend" }
     ],
-    "linkInfo": { "to": "#Developer-Portfolio" },
+    "linkInfo": { "to": "/portfolio#Developer-Portfolio" },
     "role": "As the sole developer of this project, I was responsible for both the design and implementation of the portfolio. I used React and TypeScript for the frontend, and Material-UI and Tailwind CSS for the design.",
     "contributions": [
       "Developed the entire frontend of the portfolio using React and TypeScript.",

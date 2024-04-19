@@ -115,7 +115,7 @@ const Portfolio = () => {
   return (
     <Box className="w-full" component="section">
       <Typography variant="decoration">Check out my</Typography>
-      <Typography variant="h2">Portfolio</Typography>
+      <Typography variant="h1">Portfolio</Typography>
       {outlet ??
         portfolioCards.map((card) =>
           renderPortfolioCard(card as PortfolioCard)

@@ -7,12 +7,11 @@ import {
   Divider,
   List,
   ListItem,
-  Link,
   Button,
 } from "@mui/material";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { camelToSentenceCase, isLinkInfo, isTechStack } from "src/utils/utils";
+import { camelToSentenceCase, isTechStack } from "src/utils/utils";
 import { PortfolioCard } from "types/global";
 
 const PortfolioDetail = () => {
@@ -40,7 +39,7 @@ const PortfolioDetail = () => {
       >
         Back to Portfolio
       </Button>
-      <Paper className="p-4 mb-4">
+      <Paper className="p-4 mb-4 flex flex-col">
         <Typography variant="decoration">Portfolio detail</Typography>
         <Typography variant="h3">{portfolioDetail.title}</Typography>
         <Divider />
@@ -62,10 +61,14 @@ const PortfolioDetail = () => {
         </Box>
         {["contributions", "shareholderDescription", "problemSolving"].map(
           (key) => {
-            const data = portfolioDetail[key as keyof PortfolioCard];
+            const data = portfolioDetail[key as keyof PortfolioCard] as
+              | string
+              | string[]
+              | undefined;
             if (!data) {
               return null;
             }
+
             return (
               <Fragment key={key}>
                 <Typography variant="h6">{camelToSentenceCase(key)}</Typography>
@@ -78,14 +81,19 @@ const PortfolioDetail = () => {
                     ))}
                   </List>
                 ) : (
-                  <Typography variant="body1">
-                    {isLinkInfo(data) ? <Link {...data} /> : data}
-                  </Typography>
+                  <Typography variant="body1">{data}</Typography>
                 )}
               </Fragment>
             );
           }
         )}
+        <Button
+          className="ml-auto"
+          variant="contained"
+          {...portfolioDetail.linkInfo}
+        >
+          View the project
+        </Button>
       </Paper>
     </>
   );
