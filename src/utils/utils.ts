@@ -1,5 +1,6 @@
 import { CreateCreditCardInput } from "src/API";
 import portfolioCards from "@routes/portfolio/portfolio_cards.json";
+import { LinkInfo, TechStack } from "types/global";
 
 export const camelToSentenceCase = (str: string) => {
   if (!str) {
@@ -60,4 +61,34 @@ export const getPortfolioDetail = ({
 }) => {
   const { projectId } = params;
   return portfolioCards.find((card) => card.id === Number(projectId)) ?? null;
+};
+
+export const isTechStack = (object: unknown): object is TechStack => {
+  return (
+    typeof object === "object" &&
+    object !== null &&
+    "name" in object &&
+    "cardType" in object
+  );
+};
+
+export const isLinkInfo = (object: unknown): object is LinkInfo => {
+  const urlPattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name and extension
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?" + // port
+      "(\\/[-a-z\\d%_.~+]*)*" + // path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+
+  return (
+    typeof object === "object" &&
+    object !== null &&
+    "to" in object &&
+    (urlPattern.test(object["to"] as string) ||
+      (object["to"] as string).startsWith("#"))
+  );
 };
