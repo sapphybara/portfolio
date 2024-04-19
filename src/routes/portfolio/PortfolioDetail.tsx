@@ -33,7 +33,7 @@ const PortfolioDetail = () => {
     <>
       <Button
         className="mb-4"
-        startIcon={<ArrowBack />}
+        startIcon={<ArrowBack color="primary" />}
         onClick={() => navigate(-1)}
         variant="outlined"
       >
