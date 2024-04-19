@@ -65,4 +65,5 @@ export interface PortfolioCard {
   role: string;
   contributions: string[];
   problemSolving: string[];
+  shortDescription: string;
 }
