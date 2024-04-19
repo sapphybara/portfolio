@@ -31,7 +31,13 @@ const TechnologyChips = (props: { technology: TechStack[] }) => {
   };
 
   return (
-    <Stack direction="row" flexWrap="wrap" gap={1}>
+    <Stack
+      className="pl-4"
+      component="ul"
+      direction="row"
+      flexWrap="wrap"
+      gap={1}
+    >
       {props.technology.map((technology) => (
         <Chip
           component="li"

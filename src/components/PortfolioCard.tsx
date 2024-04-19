@@ -23,7 +23,6 @@ const PortfolioWrapper = styled(Card)(({ theme }) => ({
 const PortfolioCard = ({
   id,
   title,
-  subheader,
   affiliation,
   techStack,
   linkInfo,
@@ -43,8 +42,6 @@ const PortfolioCard = ({
           <CardHeader
             title={title}
             titleTypographyProps={{ variant: "h3", component: "h3" }}
-            subheader={subheader}
-            subheaderTypographyProps={{ variant: "h6", component: "h4" }}
           />
           <TechnologyChips technology={techStack} />
           <Typography className="mt-4 mx-4" paragraph>
