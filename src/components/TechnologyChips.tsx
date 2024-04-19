@@ -1,3 +1,4 @@
+import { ElementType } from "react";
 import { Chip, Stack } from "@mui/material";
 import {
   BugReportOutlined,
@@ -6,28 +7,27 @@ import {
   DesignServicesOutlined,
   DesktopWindowsOutlined,
   ExtensionOutlined,
+  LibraryBooksOutlined,
   StorageOutlined,
+  WebAssetOutlined,
 } from "@mui/icons-material";
 import { TechStack } from "types/global";
 
+const iconMap: Record<string, ElementType> = {
+  frontend: DesktopWindowsOutlined,
+  backend: StorageOutlined,
+  fullstack: WebAssetOutlined,
+  design: DesignServicesOutlined,
+  testing: BugReportOutlined,
+  tooling: BuildOutlined,
+  language: CodeOutlined,
+  library: LibraryBooksOutlined,
+};
+
 const TechnologyChips = (props: { technology: TechStack[] }) => {
   const renderTagIcon = (type: string) => {
-    switch (type) {
-      case "frontend":
-        return <DesktopWindowsOutlined color="secondary" fontSize="small" />;
-      case "backend":
-        return <StorageOutlined color="secondary" fontSize="small" />;
-      case "fullstack":
-        return <CodeOutlined color="secondary" fontSize="small" />;
-      case "design":
-        return <DesignServicesOutlined color="secondary" fontSize="small" />;
-      case "testing":
-        return <BugReportOutlined color="secondary" fontSize="small" />;
-      case "tooling":
-        return <BuildOutlined color="secondary" fontSize="small" />;
-      default:
-        return <ExtensionOutlined color="secondary" fontSize="small" />;
-    }
+    const Icon = iconMap[type] || ExtensionOutlined;
+    return <Icon color="secondary" fontSize="small" />;
   };
 
   return (
