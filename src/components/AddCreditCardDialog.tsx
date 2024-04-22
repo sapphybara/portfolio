@@ -71,6 +71,10 @@ const AddCreditCardDialog = ({
     const type = creditCardTypeMapping[key];
     const label = camelToSentenceCase(key);
 
+    if (key === "score") {
+      return null;
+    }
+
     if (type === "boolean") {
       return (
         <FormControl key={key}>
