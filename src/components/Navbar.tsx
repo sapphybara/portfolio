@@ -11,7 +11,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { Logout, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
 import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
@@ -47,10 +47,11 @@ const Navbar = (props: PropsWithRoutes) => {
           );
         })}
         {user && shouldRenderChildren && (
-          <ListItem>
+          <ListItem className="whitespace-nowrap gap-2">
             <Link component="button" onClick={signOut}>
               Sign Out
             </Link>
+            <Logout color="primary" fontSize="small" />
           </ListItem>
         )}
       </Fragment>
