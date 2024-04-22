@@ -1,17 +1,16 @@
 import {
+  AuthUser,
   getCurrentUser,
   signIn,
   signOut,
   signUp,
-  type AuthUser,
 } from "aws-amplify/auth";
 import {
-  useState,
-  useEffect,
-  useCallback,
   PropsWithChildren,
-  useContext,
   createContext,
+  useCallback,
+  useEffect,
+  useState,
 } from "react";
 
 type AuthContextType = {
@@ -27,19 +26,11 @@ type AuthContextType = {
   signOut: () => Promise<void>;
 };
 
-const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: PropsWithChildren) => {
+const AuthProvider = ({ children }: PropsWithChildren) => {
   const auth = useProvideAuth();
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === null) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };
 
 const useProvideAuth = () => {
@@ -153,3 +144,5 @@ const useProvideAuth = () => {
     signOut: appSignOut,
   };
 };
+
+export default AuthProvider;
