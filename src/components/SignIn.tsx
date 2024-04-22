@@ -1,16 +1,26 @@
-import { Button, FormControl, Input, InputLabel, Stack } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  Stack,
+  Tab,
+  Tabs,
+} from "@mui/material";
 import { useState } from "react";
 
 const SignIn = (props: {
   signIn: (username: string, password: string) => Promise<void>;
+  signUp: (username: string, password: string) => Promise<void>;
 }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [tabIndex, setTabIndex] = useState(0);
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
-    if (id === "username") {
-      setUsername(value);
+    if (id === "email") {
+      setEmail(value);
     } else {
       setPassword(value);
     }
@@ -22,17 +32,29 @@ const SignIn = (props: {
       component="form"
       onSubmit={(e) => {
         e.preventDefault();
-        props.signIn(username, password);
+        if (tabIndex === 0) {
+          props.signIn(email, password);
+        } else {
+          props.signUp(email, password);
+        }
       }}
     >
+      <Tabs
+        className="mb-4"
+        onChange={(_e, value) => setTabIndex(value)}
+        value={tabIndex}
+      >
+        <Tab label="Sign In" />
+        <Tab label="Sign Up" />
+      </Tabs>
       <FormControl>
-        <InputLabel htmlFor="username">Username</InputLabel>
+        <InputLabel htmlFor="email">Email</InputLabel>
         <Input
           className="w-[200px]"
-          id="username"
+          id="email"
           type="text"
           onChange={handleFormChange}
-          value={username}
+          value={email}
         />
       </FormControl>
       <FormControl>
