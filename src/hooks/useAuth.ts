@@ -2,6 +2,7 @@ import {
   getCurrentUser,
   signIn,
   signOut,
+  signUp,
   type AuthUser,
 } from "aws-amplify/auth";
 import { useState, useEffect, useCallback } from "react";
@@ -40,11 +41,35 @@ export const useAuth = () => {
     setIsLoading(true);
     try {
       await signIn({ username, password });
-      const { username: signedInUsername, userId } = await getCurrentUser();
-      setUser({ username: signedInUsername, userId });
+      await getCurrentUserAndUpdateState();
       setError(null);
     } catch (error) {
       console.error("Error signing in", error);
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const appSignUp = async (username: string, password: string) => {
+    setIsLoading(true);
+    try {
+      const { isSignUpComplete, nextStep } = await signUp({
+        username,
+        password,
+        options: {
+          autoSignIn: true,
+          userAttributes: {},
+        },
+      });
+      if (!isSignUpComplete) {
+        console.log("Sign up not complete", nextStep);
+      } else {
+        await getCurrentUserAndUpdateState();
+      }
+      setError(null);
+    } catch (error) {
+      console.error("Error signing up", error);
       setError(error);
     } finally {
       setIsLoading(false);
@@ -65,5 +90,12 @@ export const useAuth = () => {
     }
   };
 
-  return { error, user, isLoading, signIn: appSignIn, signOut: appSignOut };
+  return {
+    error,
+    user,
+    isLoading,
+    signIn: appSignIn,
+    signUp: appSignUp,
+    signOut: appSignOut,
+  };
 };
