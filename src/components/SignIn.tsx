@@ -9,20 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from "@hooks/hooks";
 
-const SignIn = (props: {
-  error: Error | null;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (
-    email: string,
-    password: string,
-    confirmPassword: string
-  ) => Promise<void>;
-}) => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
+  const { error, signIn, signUp } = useAuth();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -42,13 +36,13 @@ const SignIn = (props: {
       onSubmit={(e) => {
         e.preventDefault();
         if (tabIndex === 0) {
-          props.signIn(email, password);
+          signIn(email, password);
         } else {
-          props.signUp(email, password, confirmPassword);
+          signUp(email, password, confirmPassword);
         }
       }}
     >
-      <Typography color="error">{props.error?.toString()}</Typography>
+      <Typography color="error">{error?.toString()}</Typography>
       <Tabs
         className="mb-4"
         onChange={(_e, value) => setTabIndex(value)}

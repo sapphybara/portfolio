@@ -20,14 +20,7 @@ const Admin = () => {
     error: ccError,
     loading: ccIsLoading,
   } = useFetchCreditCards(client);
-  const {
-    error: userError,
-    isLoading: userIsLoading,
-    user,
-    signIn,
-    signUp,
-    signOut,
-  } = useAuth();
+  const { isLoading: userIsLoading, user, signOut } = useAuth();
 
   const changeAddCreditCardDialogOpen = (prevState?: boolean) => {
     if (prevState === undefined) {
@@ -52,7 +45,7 @@ const Admin = () => {
       {userIsLoading ? (
         <Typography paragraph>Loading...</Typography>
       ) : !user ? (
-        <SignIn error={userError} signIn={signIn} signUp={signUp} />
+        <SignIn />
       ) : (
         <>
           <Box className="flex justify-between my-2">
