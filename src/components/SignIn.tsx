@@ -4,25 +4,34 @@ import {
   Input,
   InputLabel,
   Stack,
-  Tab,
   Tabs,
+  Tab,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
 const SignIn = (props: {
-  signIn: (username: string, password: string) => Promise<void>;
-  signUp: (username: string, password: string) => Promise<void>;
+  error: Error | null;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (
+    email: string,
+    password: string,
+    confirmPassword: string
+  ) => Promise<void>;
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     if (id === "email") {
       setEmail(value);
-    } else {
+    } else if (id === "password") {
       setPassword(value);
+    } else {
+      setConfirmPassword(value);
     }
   };
 
@@ -35,10 +44,11 @@ const SignIn = (props: {
         if (tabIndex === 0) {
           props.signIn(email, password);
         } else {
-          props.signUp(email, password);
+          props.signUp(email, password, confirmPassword);
         }
       }}
     >
+      <Typography color="error">{props.error?.toString()}</Typography>
       <Tabs
         className="mb-4"
         onChange={(_e, value) => setTabIndex(value)}
@@ -67,8 +77,20 @@ const SignIn = (props: {
           value={password}
         />
       </FormControl>
+      {tabIndex === 1 && (
+        <FormControl>
+          <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+          <Input
+            className="w-[200px]"
+            id="confirmPassword"
+            type="password"
+            onChange={handleFormChange}
+            value={confirmPassword}
+          />
+        </FormControl>
+      )}
       <Button color="primary" type="submit" variant="contained">
-        Sign In
+        Sign {tabIndex === 0 ? "In" : "Up"}
       </Button>
     </Stack>
   );
