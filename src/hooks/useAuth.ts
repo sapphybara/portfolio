@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from "react";
 
 export const useAuth = () => {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const getCurrentUserAndUpdateState = useCallback(async () => {
@@ -26,7 +26,7 @@ export const useAuth = () => {
         )
       ) {
         console.error("Error checking auth state", error);
-        setError(error);
+        setError(error as Error);
       }
     } finally {
       setIsLoading(false);
@@ -45,14 +45,24 @@ export const useAuth = () => {
       setError(null);
     } catch (error) {
       console.error("Error signing in", error);
-      setError(error);
+      setError(error as Error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const appSignUp = async (username: string, password: string) => {
+  const appSignUp = async (
+    username: string,
+    password: string,
+    confirmPassword: string
+  ) => {
     setIsLoading(true);
+    if (password !== confirmPassword) {
+      setError(new Error("Passwords do not match"));
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const { isSignUpComplete, nextStep } = await signUp({
         username,
@@ -70,7 +80,7 @@ export const useAuth = () => {
       setError(null);
     } catch (error) {
       console.error("Error signing up", error);
-      setError(error);
+      setError(error as Error);
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +94,7 @@ export const useAuth = () => {
       setError(null);
     } catch (error) {
       console.error("Error signing out", error);
-      setError(error);
+      setError(error as Error);
     } finally {
       setIsLoading(false);
     }
