@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { listCreditCards } from "src/graphql/queries";
 import { Client } from "aws-amplify/api";
 import { CreateCreditCardInput, CreditCard } from "src/API";
+import { AuthContext } from "src/context/AuthProvider";
 
 export const useTitle = () => {
   const { pathname } = useLocation();
@@ -46,4 +47,12 @@ export const useFetchCreditCards = (client: Client) => {
   }, [client, fetchCreditCards]);
 
   return { creditCards, error, fetchCreditCards, loading };
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === null) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 };
