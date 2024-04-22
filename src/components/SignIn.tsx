@@ -1,11 +1,11 @@
 import { Button, FormControl, Input, InputLabel, Stack } from "@mui/material";
 import { useState } from "react";
-import { useAuth } from "src/hooks/useAuth";
 
-const SignIn = () => {
+const SignIn = (props: {
+  signIn: (username: string, password: string) => Promise<void>;
+}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -22,7 +22,7 @@ const SignIn = () => {
       component="form"
       onSubmit={(e) => {
         e.preventDefault();
-        signIn(username, password);
+        props.signIn(username, password);
       }}
     >
       <FormControl>

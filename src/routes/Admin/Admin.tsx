@@ -24,6 +24,7 @@ const Admin = () => {
     error: _userError,
     isLoading: userIsLoading,
     user,
+    signIn,
     signOut,
   } = useAuth();
 
@@ -50,7 +51,7 @@ const Admin = () => {
       {userIsLoading ? (
         <Typography paragraph>Loading...</Typography>
       ) : !user ? (
-        <SignIn />
+        <SignIn signIn={signIn} />
       ) : (
         <>
           <Box className="flex justify-between my-2">
