@@ -6,7 +6,7 @@ import { generateClient } from "aws-amplify/api";
 import CreditCardTable from "@components/CreditCardTable";
 import AddCreditCardDialog from "@components/AddCreditCardDialog";
 import { useFetchCreditCards } from "@hooks/hooks";
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from "@hooks/hooks";
 import SignIn from "src/components/SignIn";
 
 const client = generateClient();
