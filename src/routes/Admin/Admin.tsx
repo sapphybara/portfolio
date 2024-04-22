@@ -21,7 +21,7 @@ const Admin = () => {
     loading: ccIsLoading,
   } = useFetchCreditCards(client);
   const {
-    error: _userError,
+    error: userError,
     isLoading: userIsLoading,
     user,
     signIn,
@@ -52,7 +52,7 @@ const Admin = () => {
       {userIsLoading ? (
         <Typography paragraph>Loading...</Typography>
       ) : !user ? (
-        <SignIn signIn={signIn} signUp={signUp} />
+        <SignIn error={userError} signIn={signIn} signUp={signUp} />
       ) : (
         <>
           <Box className="flex justify-between my-2">
