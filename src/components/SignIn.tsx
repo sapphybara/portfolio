@@ -89,7 +89,14 @@ const SignIn = (props: {
           />
         </FormControl>
       )}
-      <Button color="primary" type="submit" variant="contained">
+      <Button
+        color="primary"
+        disabled={
+          !email || !password || (tabIndex === 1 ? !confirmPassword : false)
+        }
+        type="submit"
+        variant="contained"
+      >
         Sign {tabIndex === 0 ? "In" : "Up"}
       </Button>
     </Stack>
