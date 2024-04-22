@@ -5,9 +5,44 @@ import {
   signUp,
   type AuthUser,
 } from "aws-amplify/auth";
-import { useState, useEffect, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  PropsWithChildren,
+  useContext,
+  createContext,
+} from "react";
+
+type AuthContextType = {
+  user: AuthUser | null;
+  error: Error | null;
+  isLoading: boolean;
+  signIn: (username: string, password: string) => Promise<void>;
+  signUp: (
+    username: string,
+    password: string,
+    confirmPassword: string
+  ) => Promise<void>;
+  signOut: () => Promise<void>;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const auth = useProvideAuth();
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+};
 
 export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === null) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
+const useProvideAuth = () => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(true);
