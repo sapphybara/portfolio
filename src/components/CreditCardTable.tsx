@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import dayjs from "dayjs";
+
 import { CreateCreditCardInput, CreditCard } from "src/API";
 import {
   camelToSentenceCase,
@@ -15,8 +17,20 @@ const CreditCardTable = ({
   creditCards: CreditCard[] | CreateCreditCardInput[];
   loading: boolean;
 }) => {
+  const formatNumber = (value: number, isDollars = true) => {
+    const formattedValue =
+      Math.abs(value) >= 10000
+        ? value.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        : value.toFixed(2);
+
+    return isDollars ? `$${formattedValue}` : formattedValue;
+  };
+
   const columns = useMemo(() => {
-    return creditCardKeys.map((key, i) => ({
+    return creditCardKeys.map((key) => ({
       field: key,
       headerName: camelToSentenceCase(key),
       type:
@@ -25,12 +39,34 @@ const CreditCardTable = ({
           : "string",
       renderHeader: () => {
         if (key === "isEarningInterest") {
-          return "Earning Interest";
-        } else if (key === "apr") {
-          return "APR (%)";
+          return "Interest?";
+        } else if (key === "score") {
+          return <strong>Score</strong>;
+        } else if (key === "minimumPayment") {
+          return "Min. Payment";
         } else {
           return camelToSentenceCase(key);
         }
+      },
+      valueFormatter: (value?: boolean | number | string | Date) => {
+        const type = creditCardTypeMapping[key];
+        if (!value) {
+          return "";
+        }
+
+        if (key === "apr") {
+          return `${value}%`;
+        } else if (key === "score") {
+          return formatNumber(value as number, false);
+        }
+
+        if (type === "number") {
+          return formatNumber(value as number);
+        } else if (type === "date") {
+          return dayjs(value as Date).format("D");
+        }
+
+        return value;
       },
       valueGetter: (value) => {
         if (key === "paymentDate") {
@@ -38,8 +74,17 @@ const CreditCardTable = ({
         }
         return value;
       },
-      width:
-        i === 0 ? 75 : i < 3 || i === creditCardKeys.length - 1 ? 100 : 150,
+      get width() {
+        if (["apr", "score", "isEarningInterest"].includes(key)) {
+          return 75;
+        } else if (["balance", "paymentDate"].includes(key)) {
+          return 100;
+        } else if (["cardName", "minimumPayment"].includes(key)) {
+          return 125;
+        } else {
+          return 150;
+        }
+      },
     })) as GridColDef[];
   }, []);
 
