@@ -13,14 +13,14 @@ export const camelToSentenceCase = (str: string) => {
 export const creditCardTypeMapping: {
   [K in keyof CreateCreditCardInput]: "boolean" | "date" | "number" | "text";
 } = {
+  cardName: "text",
+  score: "number",
   apr: "number",
   balance: "number",
-  cardName: "text",
   isEarningInterest: "boolean",
   lastInterestAmount: "number",
-  minimumPayment: "number",
   paymentDate: "date",
-  score: "number",
+  minimumPayment: "number",
 };
 export const creditCardKeys = Object.keys(
   creditCardTypeMapping
