@@ -27,8 +27,14 @@ export const useFetchCreditCards = (client: Client) => {
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
+  const { user } = useAuth();
 
   const fetchCreditCards = useCallback(async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const ccData = await client.graphql({
         query: listCreditCards,
@@ -40,7 +46,7 @@ export const useFetchCreditCards = (client: Client) => {
     } finally {
       setLoading(false);
     }
-  }, [client]);
+  }, [client, user]);
 
   useEffect(() => {
     fetchCreditCards();
