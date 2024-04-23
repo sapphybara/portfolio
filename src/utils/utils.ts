@@ -34,6 +34,10 @@ export const isCompleteCreditCard = (
   }
 
   return creditCardKeys.every((key) => {
+    if (key === "score") {
+      return true;
+    }
+    
     const value = card[key];
     const type = creditCardTypeMapping[key];
 
