@@ -10,6 +10,20 @@ import {
   creditCardTypeMapping,
 } from "src/utils/utils";
 
+const columnWidths: Record<
+  Exclude<keyof CreateCreditCardInput, "id">,
+  number
+> = {
+  cardName: 125,
+  score: 75,
+  apr: 75,
+  balance: 100,
+  isEarningInterest: 75,
+  lastInterestAmount: 100,
+  paymentDate: 100,
+  minimumPayment: 125,
+};
+
 const CreditCardTable = ({
   creditCards,
   loading,
@@ -74,17 +88,7 @@ const CreditCardTable = ({
         }
         return value;
       },
-      get width() {
-        if (["apr", "score", "isEarningInterest"].includes(key)) {
-          return 75;
-        } else if (["balance", "paymentDate"].includes(key)) {
-          return 100;
-        } else if (["cardName", "minimumPayment"].includes(key)) {
-          return 125;
-        } else {
-          return 150;
-        }
-      },
+      width: key === "id" ? 150 : columnWidths[key],
     })) as GridColDef[];
   }, []);
 
@@ -92,7 +96,16 @@ const CreditCardTable = ({
     return <Typography variant="h3">Loading...</Typography>;
   }
 
-  return <DataGrid autoHeight columns={columns} rows={creditCards} />;
+  return (
+    <DataGrid
+      autoHeight
+      columns={columns}
+      rows={creditCards}
+      initialState={{
+        sorting: { sortModel: [{ field: "score", sort: "desc" }] },
+      }}
+    />
+  );
 };
 
 export default CreditCardTable;
