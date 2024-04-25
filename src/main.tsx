@@ -24,6 +24,7 @@ import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail.tsx";
 import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import Admin from "@routes/Admin/Admin.tsx";
+import AuthProvider from "./context/AuthProvider.tsx";
 import { getPortfolioDetail } from "./utils/utils.ts";
 import "./index.css";
 
@@ -73,7 +74,9 @@ createRoot(rootElement).render(
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={createCustomTheme(rootElement)}>
         <CssBaseline enableColorScheme />
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>
