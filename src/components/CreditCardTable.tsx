@@ -46,17 +46,17 @@ const getSelectedBackgroundColor = (color: string, mode: string) =>
 const getSelectedHoverBackgroundColor = (color: string, mode: string) =>
   mode === "dark" ? darken(color, 0.4) : lighten(color, 0.4);
 
-type levels = 1 | 2 | 3 | 4;
+type Levels = 1 | 2 | 3 | 4;
 
-const levels: levels[] = [1, 2, 3, 4];
-const levelColors: Record<levels, "success" | "info" | "warning" | "error"> = {
+const levels: Levels[] = [1, 2, 3, 4];
+const levelColors: Record<Levels, "success" | "info" | "warning" | "error"> = {
   1: "success",
   2: "info",
   3: "warning",
   4: "error",
 };
 
-const generateLevelStyles = (level: levels, theme: Theme) => {
+const generateLevelStyles = (level: Levels, theme: Theme) => {
   const color = theme.palette[levelColors[level]].main;
   const { mode } = theme.palette;
   const content = level === 3 ? "⚠️" : level === 4 ? "❌" : undefined;
