@@ -1,5 +1,15 @@
 import { useMemo } from "react";
-import { type Theme, Typography, darken, lighten, styled } from "@mui/material";
+import {
+  type Theme,
+  Typography,
+  darken,
+  lighten,
+  styled,
+  Grid,
+  Box,
+  useTheme,
+  Paper,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -38,6 +48,7 @@ const getSelectedHoverBackgroundColor = (color: string, mode: string) =>
 
 type levels = 1 | 2 | 3 | 4;
 
+const levels: levels[] = [1, 2, 3, 4];
 const levelColors: Record<levels, "success" | "info" | "warning" | "error"> = {
   1: "success",
   2: "info",
@@ -74,10 +85,13 @@ const generateLevelStyles = (level: levels, theme: Theme) => {
 };
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  ...generateLevelStyles(1, theme),
-  ...generateLevelStyles(2, theme),
-  ...generateLevelStyles(3, theme),
-  ...generateLevelStyles(4, theme),
+  ...levels.reduce(
+    (acc, level) => ({
+      ...acc,
+      ...generateLevelStyles(level, theme),
+    }),
+    {}
+  ),
 }));
 
 const CreditCardTable = ({
@@ -87,6 +101,8 @@ const CreditCardTable = ({
   creditCards: CreditCard[] | CreateCreditCardInput[];
   loading: boolean;
 }) => {
+  const theme = useTheme();
+
   const formatNumber = (value: number, isDollars = true) => {
     const formattedValue =
       Math.abs(value) >= 10000
@@ -155,32 +171,59 @@ const CreditCardTable = ({
   }
 
   return (
-    <StyledDataGrid
-      autoHeight
-      columns={columns}
-      rows={creditCards}
-      initialState={{
-        sorting: { sortModel: [{ field: "score", sort: "desc" }] },
-      }}
-      getCellClassName={({ field }) => {
-        if (field === "score") {
-          // make the component have relative positioning so
-          //  the ::before pseudo-element can be positioned absolutely
-          return "relative score";
-        }
-        return "";
-      }}
-      getRowClassName={({ row: { score } }) => {
-        if (score < 0.3) {
-          return "level-1";
-        } else if (score < 0.6) {
-          return "level-2";
-        } else if (score < 0.8) {
-          return "level-3";
-        }
-        return "level-4";
-      }}
-    />
+    <>
+      <Paper className="mb-2 p-2">
+        <Typography component="h3" variant="h6" className="mb-4">
+          Score Key
+        </Typography>
+        <Grid container spacing={2}>
+          {levels.map((level) => (
+            <Grid
+              item
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+              key={level}
+              gap={1}
+            >
+              <Box
+                bgcolor={theme.palette[levelColors[level]].main}
+                className={`level-${level} score`}
+                sx={{ width: 20, height: 20 }}
+              />
+              <Typography variant="body2">{levelColors[level]}</Typography>
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
+      <StyledDataGrid
+        autoHeight
+        columns={columns}
+        rows={creditCards}
+        initialState={{
+          sorting: { sortModel: [{ field: "score", sort: "desc" }] },
+        }}
+        getCellClassName={({ field }) => {
+          if (field === "score") {
+            // make the component have relative positioning so
+            //  the ::before pseudo-element can be positioned absolutely
+            return "relative score";
+          }
+          return "";
+        }}
+        getRowClassName={({ row: { score } }) => {
+          if (score < 0.3) {
+            return "level-1";
+          } else if (score < 0.6) {
+            return "level-2";
+          } else if (score < 0.8) {
+            return "level-3";
+          }
+          return "level-4";
+        }}
+      />
+    </>
   );
 };
 
