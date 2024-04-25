@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Typography, darken, lighten, styled } from "@mui/material";
+import { type Theme, Typography, darken, lighten, styled } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -36,79 +36,48 @@ const getSelectedBackgroundColor = (color: string, mode: string) =>
 const getSelectedHoverBackgroundColor = (color: string, mode: string) =>
   mode === "dark" ? darken(color, 0.4) : lighten(color, 0.4);
 
+type levels = 1 | 2 | 3 | 4;
+
+const levelColors: Record<levels, "success" | "info" | "warning" | "error"> = {
+  1: "success",
+  2: "info",
+  3: "warning",
+  4: "error",
+};
+
+const generateLevelStyles = (level: levels, theme: Theme) => {
+  const color = theme.palette[levelColors[level]].main;
+  const { mode } = theme.palette;
+  const content = level === 3 ? "⚠️" : level === 4 ? "❌" : undefined;
+
+  return {
+    [`& .level-${level} .score`]: {
+      backgroundColor: getBackgroundColor(color, mode),
+      "&:hover": {
+        backgroundColor: getHoverBackgroundColor(color, mode),
+      },
+      "&.Mui-selected": {
+        backgroundColor: getSelectedBackgroundColor(color, mode),
+        "&:hover": {
+          backgroundColor: getSelectedHoverBackgroundColor(color, mode),
+        },
+      },
+      ...(content && {
+        "&::before": {
+          content: `"${content}"`,
+          position: "absolute",
+          left: theme.spacing(0.5),
+        },
+      }),
+    },
+  };
+};
+
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  "& .level-2": {
-    backgroundColor: getBackgroundColor(
-      theme.palette.grey[300],
-      theme.palette.mode
-    ),
-    "&:hover": {
-      backgroundColor: getHoverBackgroundColor(
-        theme.palette.grey[300],
-        theme.palette.mode
-      ),
-    },
-    "&.Mui-selected": {
-      backgroundColor: getSelectedBackgroundColor(
-        theme.palette.grey[300],
-        theme.palette.mode
-      ),
-      "&:hover": {
-        backgroundColor: getSelectedHoverBackgroundColor(
-          theme.palette.grey[300],
-          theme.palette.mode
-        ),
-      },
-    },
-  },
-  "& .level-3": {
-    backgroundColor: getBackgroundColor(
-      theme.palette.warning.main,
-      theme.palette.mode
-    ),
-    "&:hover": {
-      backgroundColor: getHoverBackgroundColor(
-        theme.palette.warning.main,
-        theme.palette.mode
-      ),
-    },
-    "&.Mui-selected": {
-      backgroundColor: getSelectedBackgroundColor(
-        theme.palette.warning.main,
-        theme.palette.mode
-      ),
-      "&:hover": {
-        backgroundColor: getSelectedHoverBackgroundColor(
-          theme.palette.warning.main,
-          theme.palette.mode
-        ),
-      },
-    },
-  },
-  "& .level-4": {
-    backgroundColor: getBackgroundColor(
-      theme.palette.error.main,
-      theme.palette.mode
-    ),
-    "&:hover": {
-      backgroundColor: getHoverBackgroundColor(
-        theme.palette.error.main,
-        theme.palette.mode
-      ),
-    },
-    "&.Mui-selected": {
-      backgroundColor: getSelectedBackgroundColor(
-        theme.palette.error.main,
-        theme.palette.mode
-      ),
-      "&:hover": {
-        backgroundColor: getSelectedHoverBackgroundColor(
-          theme.palette.error.main,
-          theme.palette.mode
-        ),
-      },
-    },
-  },
+  ...generateLevelStyles(1, theme),
+  ...generateLevelStyles(2, theme),
+  ...generateLevelStyles(3, theme),
+  ...generateLevelStyles(4, theme),
 }));
 
 const CreditCardTable = ({
@@ -192,6 +161,14 @@ const CreditCardTable = ({
       rows={creditCards}
       initialState={{
         sorting: { sortModel: [{ field: "score", sort: "desc" }] },
+      }}
+      getCellClassName={({ field }) => {
+        if (field === "score") {
+          // make the component have relative positioning so
+          //  the ::before pseudo-element can be positioned absolutely
+          return "relative score";
+        }
+        return "";
       }}
       getRowClassName={({ row: { score } }) => {
         if (score < 0.3) {
