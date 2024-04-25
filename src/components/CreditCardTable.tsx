@@ -5,11 +5,11 @@ import {
   darken,
   lighten,
   styled,
-  Grid,
-  Box,
-  useTheme,
   Paper,
+  Chip,
+  Stack,
 } from "@mui/material";
+import { Circle } from "@mui/icons-material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -101,8 +101,6 @@ const CreditCardTable = ({
   creditCards: CreditCard[] | CreateCreditCardInput[];
   loading: boolean;
 }) => {
-  const theme = useTheme();
-
   const formatNumber = (value: number, isDollars = true) => {
     const formattedValue =
       Math.abs(value) >= 10000
@@ -176,26 +174,15 @@ const CreditCardTable = ({
         <Typography component="h3" variant="h6" className="mb-4">
           Score Key
         </Typography>
-        <Grid container spacing={2}>
+        <Stack direction="row" spacing={1}>
           {levels.map((level) => (
-            <Grid
-              item
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
+            <Chip
+              icon={<Circle color={levelColors[level]} />}
+              label={levelColors[level]}
               key={level}
-              gap={1}
-            >
-              <Box
-                bgcolor={theme.palette[levelColors[level]].main}
-                className={`level-${level} score`}
-                sx={{ width: 20, height: 20 }}
-              />
-              <Typography variant="body2">{levelColors[level]}</Typography>
-            </Grid>
+            />
           ))}
-        </Grid>
+        </Stack>
       </Paper>
       <StyledDataGrid
         autoHeight
