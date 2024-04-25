@@ -14,14 +14,14 @@ const columnWidths: Record<
   Exclude<keyof CreateCreditCardInput, "id">,
   number
 > = {
-  cardName: 125,
-  score: 75,
-  apr: 75,
-  balance: 100,
-  isEarningInterest: 75,
-  lastInterestAmount: 100,
+  cardName: 132,
+  score: 82,
+  apr: 82,
+  balance: 107,
+  isEarningInterest: 82,
+  lastInterestAmount: 125,
   paymentDate: 100,
-  minimumPayment: 125,
+  minimumPayment: 121,
 };
 
 const getBackgroundColor = (color: string, mode: string) =>
@@ -145,6 +145,8 @@ const CreditCardTable = ({
           return <strong>Score</strong>;
         } else if (key === "minimumPayment") {
           return "Min. Payment";
+        } else if (key === "lastInterestAmount") {
+          return "Last Interest Amt.";
         } else {
           return camelToSentenceCase(key);
         }
