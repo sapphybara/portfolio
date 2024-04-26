@@ -67,3 +67,15 @@ export interface PortfolioCard {
   problemSolving: string[];
   shortDescription: string;
 }
+
+export type CCScoreLevel = 1 | 2 | 3 | 4;
+
+export type CCLevelMapping = Record<
+  CCScoreLevel,
+  "success" | "info" | "warning" | "error"
+>;
+
+export interface CCLevelConsumerProps {
+  levelColors: CCLevelMapping;
+  levels: CCScoreLevel[];
+}

@@ -37,7 +37,7 @@ export const isCompleteCreditCard = (
     if (key === "score") {
       return true;
     }
-    
+
     const value = card[key];
     const type = creditCardTypeMapping[key];
 
@@ -74,3 +74,25 @@ export const isTechStack = (obj: unknown): obj is TechStack =>
   typeof (obj as { name: unknown }).name === "string" &&
   "cardType" in obj &&
   typeof (obj as { cardType: unknown }).cardType === "string";
+
+export const formatFinancialNumber = (
+  value: number,
+  isDollars = true,
+  isPercent = false
+) => {
+  const formattedValue =
+    Math.abs(value) >= 10000
+      ? value.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      : value.toFixed(2);
+
+  if (isPercent) {
+    return `${formattedValue}%`;
+  }
+  if (isDollars) {
+    return `$${formattedValue}`;
+  }
+  return formattedValue;
+};

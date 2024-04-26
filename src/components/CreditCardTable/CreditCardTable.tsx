@@ -1,16 +1,6 @@
 import { useMemo } from "react";
-import {
-  type Theme,
-  Typography,
-  darken,
-  lighten,
-  styled,
-  Paper,
-  Chip,
-  Stack,
-} from "@mui/material";
-import { Circle } from "@mui/icons-material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Typography } from "@mui/material";
+import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
 import { CreateCreditCardInput, CreditCard } from "src/API";
@@ -18,7 +8,11 @@ import {
   camelToSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
-} from "src/utils/utils";
+  formatFinancialNumber,
+} from "@utils/utils";
+import StyledDataGrid from "./CreditCardTable/StyledDataGrid";
+import ScoreKey from "./CreditCardTable/ScoreKey";
+import { CCScoreLevel } from "types/global";
 
 const columnWidths: Record<
   Exclude<keyof CreateCreditCardInput, "id">,
@@ -34,65 +28,16 @@ const columnWidths: Record<
   minimumPayment: 121,
 };
 
-const getBackgroundColor = (color: string, mode: string) =>
-  mode === "dark" ? darken(color, 0.7) : lighten(color, 0.7);
-
-const getHoverBackgroundColor = (color: string, mode: string) =>
-  mode === "dark" ? darken(color, 0.6) : lighten(color, 0.6);
-
-const getSelectedBackgroundColor = (color: string, mode: string) =>
-  mode === "dark" ? darken(color, 0.5) : lighten(color, 0.5);
-
-const getSelectedHoverBackgroundColor = (color: string, mode: string) =>
-  mode === "dark" ? darken(color, 0.4) : lighten(color, 0.4);
-
-type Levels = 1 | 2 | 3 | 4;
-
-const levels: Levels[] = [1, 2, 3, 4];
-const levelColors: Record<Levels, "success" | "info" | "warning" | "error"> = {
+const levels: CCScoreLevel[] = [1, 2, 3, 4];
+const levelColors: Record<
+  CCScoreLevel,
+  "success" | "info" | "warning" | "error"
+> = {
   1: "success",
   2: "info",
   3: "warning",
   4: "error",
 };
-
-const generateLevelStyles = (level: Levels, theme: Theme) => {
-  const color = theme.palette[levelColors[level]].main;
-  const { mode } = theme.palette;
-  const content = level === 3 ? "⚠️" : level === 4 ? "❌" : undefined;
-
-  return {
-    [`& .level-${level} .score`]: {
-      backgroundColor: getBackgroundColor(color, mode),
-      "&:hover": {
-        backgroundColor: getHoverBackgroundColor(color, mode),
-      },
-      "&.Mui-selected": {
-        backgroundColor: getSelectedBackgroundColor(color, mode),
-        "&:hover": {
-          backgroundColor: getSelectedHoverBackgroundColor(color, mode),
-        },
-      },
-      ...(content && {
-        "&::before": {
-          content: `"${content}"`,
-          position: "absolute",
-          left: theme.spacing(0.5),
-        },
-      }),
-    },
-  };
-};
-
-const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
-  ...levels.reduce(
-    (acc, level) => ({
-      ...acc,
-      ...generateLevelStyles(level, theme),
-    }),
-    {}
-  ),
-}));
 
 const CreditCardTable = ({
   creditCards,
@@ -101,18 +46,6 @@ const CreditCardTable = ({
   creditCards: CreditCard[] | CreateCreditCardInput[];
   loading: boolean;
 }) => {
-  const formatNumber = (value: number, isDollars = true) => {
-    const formattedValue =
-      Math.abs(value) >= 10000
-        ? value.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-        : value.toFixed(2);
-
-    return isDollars ? `$${formattedValue}` : formattedValue;
-  };
-
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
       field: key,
@@ -141,13 +74,13 @@ const CreditCardTable = ({
         }
 
         if (key === "apr") {
-          return `${value}%`;
+          return formatFinancialNumber(value as number, false);
         } else if (key === "score") {
-          return formatNumber(value as number, false);
+          return formatFinancialNumber(value as number, false);
         }
 
         if (type === "number") {
-          return formatNumber(value as number);
+          return formatFinancialNumber(value as number);
         } else if (type === "date") {
           return dayjs(value as Date).format("D");
         }
@@ -164,29 +97,19 @@ const CreditCardTable = ({
     })) as GridColDef[];
   }, []);
 
+  // todo remove loading and put it higher in the component tree
   if (loading) {
     return <Typography variant="h3">Loading...</Typography>;
   }
 
   return (
     <>
-      <Paper className="mb-2 p-2">
-        <Typography component="h3" variant="h6" className="mb-4">
-          Score Key
-        </Typography>
-        <Stack direction="row" spacing={1}>
-          {levels.map((level) => (
-            <Chip
-              icon={<Circle color={levelColors[level]} />}
-              label={levelColors[level]}
-              key={level}
-            />
-          ))}
-        </Stack>
-      </Paper>
+      <ScoreKey levels={levels} levelColors={levelColors} />
       <StyledDataGrid
         autoHeight
         columns={columns}
+        levelColors={levelColors}
+        levels={levels}
         rows={creditCards}
         initialState={{
           sorting: { sortModel: [{ field: "score", sort: "desc" }] },

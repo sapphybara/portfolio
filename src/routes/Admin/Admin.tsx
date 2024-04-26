@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 
 import { generateClient } from "aws-amplify/api";
 
-import CreditCardTable from "@components/CreditCardTable";
+import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import AddCreditCardDialog from "@components/AddCreditCardDialog";
 import { useFetchCreditCards } from "@hooks/hooks";
 import { useAuth } from "@hooks/hooks";
