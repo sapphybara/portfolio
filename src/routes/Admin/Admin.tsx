@@ -42,7 +42,7 @@ const Admin = () => {
     <Box>
       <Typography variant="decoration">Manage</Typography>
       <Typography variant="h1">Admin</Typography>
-      {userIsLoading ? (
+      {userIsLoading || ccIsLoading ? (
         <Typography paragraph>Loading...</Typography>
       ) : !user ? (
         <SignIn />
@@ -64,7 +64,7 @@ const Admin = () => {
               open={isAddCreditCardDialogOpen}
             />
           </Box>
-          <CreditCardTable creditCards={creditCards} loading={ccIsLoading} />
+          <CreditCardTable creditCards={creditCards} />
           <Button
             className="my-2"
             color="warning"

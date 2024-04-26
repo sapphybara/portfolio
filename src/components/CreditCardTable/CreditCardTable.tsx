@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -10,8 +9,8 @@ import {
   creditCardTypeMapping,
   formatFinancialNumber,
 } from "@utils/utils";
-import StyledDataGrid from "./CreditCardTable/StyledDataGrid";
-import ScoreKey from "./CreditCardTable/ScoreKey";
+import StyledDataGrid from "./StyledDataGrid";
+import ScoreKey from "./ScoreKey";
 import { CCScoreLevel } from "types/global";
 
 const columnWidths: Record<
@@ -41,10 +40,8 @@ const levelColors: Record<
 
 const CreditCardTable = ({
   creditCards,
-  loading,
 }: {
   creditCards: CreditCard[] | CreateCreditCardInput[];
-  loading: boolean;
 }) => {
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
@@ -96,11 +93,6 @@ const CreditCardTable = ({
       width: key === "id" ? 150 : columnWidths[key],
     })) as GridColDef[];
   }, []);
-
-  // todo remove loading and put it higher in the component tree
-  if (loading) {
-    return <Typography variant="h3">Loading...</Typography>;
-  }
 
   return (
     <>
