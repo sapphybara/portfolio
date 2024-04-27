@@ -17,6 +17,8 @@ import {
   Button,
   Stack,
   Slide,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
@@ -35,8 +37,19 @@ const icons: Record<string, React.ElementType> = {
   techStack: Memory,
 };
 
+const headers: (keyof PortfolioCard)[] = [
+  "roles",
+  "description",
+  "contributions",
+  "problemSolving",
+  "shareholderDescription",
+  "techStack",
+];
+
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioCard;
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   if (!portfolioDetail) {
     return (
@@ -51,92 +64,109 @@ const PortfolioDetail = () => {
 
   return (
     <>
-      <Paper className="p-4 mb-4 flex flex-col" id="detail">
-        <Typography variant="decoration">Portfolio detail</Typography>
-        <Typography variant="h3">{portfolioDetail.title}</Typography>
-        <Divider className="my-4" />
-        <Typography component="h4" variant="h5">
-          {portfolioDetail.subheader}
-        </Typography>
-        <Typography color="text.secondary" variant="subtitle1">
-          I built this project while working for: {portfolioDetail.affiliation}
-        </Typography>
-        {[
-          "roles",
-          "description",
-          "contributions",
-          "problemSolving",
-          "shareholderDescription",
-          "techStack",
-        ].map((key) => {
-          const data = portfolioDetail[key as keyof PortfolioCard] as
-            | string
-            | string[]
-            | TechStack[]
-            | Roles[]
-            | undefined;
-          if (!data) {
-            return null;
-          }
-          const Icon = icons[key];
+      <Stack direction="row">
+        {isMdUp && (
+          <Box className="sticky top-16 h-screen pr-2">
+            <Typography variant="h5">Overview</Typography>
+            <List>
+              <ListItem className="text-right">
+                <MyLink to="#detail">Portfolio Detail</MyLink>
+              </ListItem>
+              {headers.map((header) =>
+                portfolioDetail[header] ? (
+                  <ListItem className="text-right" key={header}>
+                    <MyLink to={`#${header}`}>{toSentenceCase(header)}</MyLink>
+                  </ListItem>
+                ) : null
+              )}
+            </List>
+          </Box>
+        )}
+        <Box>
+          <Paper className="p-4 mb-4 flex flex-col" id="detail">
+            <Typography variant="decoration">Portfolio detail</Typography>
+            <Typography variant="h3">{portfolioDetail.title}</Typography>
+            <Divider className="my-4" />
+            <Typography component="h4" variant="h5">
+              {portfolioDetail.subheader}
+            </Typography>
+            <Typography color="text.secondary" variant="subtitle1">
+              I built this project while working for:&nbsp;
+              {portfolioDetail.affiliation}
+            </Typography>
+            {headers.map((key) => {
+              const data = portfolioDetail[key] as
+                | string
+                | string[]
+                | TechStack[]
+                | Roles[]
+                | undefined;
+              if (!data) {
+                return null;
+              }
+              const Icon = icons[key];
 
-          return (
-            <Slide
-              className="mt-4"
-              direction="up"
-              in
-              mountOnEnter
-              unmountOnExit
-              key={key}
-            >
-              <Box>
-                <Stack
-                  alignItems="center"
-                  className="mb-2"
-                  direction="row"
-                  gap={1}
+              return (
+                <Slide
+                  className="mt-4"
+                  direction="up"
+                  in
+                  mountOnEnter
+                  unmountOnExit
+                  key={key}
                 >
-                  <Icon />
-                  <Typography variant="h6">{toSentenceCase(key)}</Typography>
-                </Stack>
-                {Array.isArray(data) ? (
-                  data.every(isTechStack) || data.every(isRole) ? (
-                    <TagChips items={data as TechStack[] | Roles[]} />
-                  ) : (
-                    <List className="ml-8 list-disc">
-                      {data.map((item, index) => (
-                        <ListItem
-                          className="p-0 pb-2 list-item"
-                          key={index}
-                          disableGutters
-                        >
-                          {item}
-                        </ListItem>
-                      ))}
-                    </List>
-                  )
-                ) : (
-                  <Typography variant="body1">{data}</Typography>
-                )}
-              </Box>
-            </Slide>
-          );
-        })}
-        <Divider className="my-4" />
-        <Button
-          className="ml-auto"
-          endIcon={
-            portfolioDetail.linkInfo.target === "_blank" && (
-              <ArrowOutward className="text-black" />
-            )
-          }
-          variant="contained"
-          {...portfolioDetail.linkInfo}
-          LinkComponent={MyLink}
-        >
-          View the project
-        </Button>
-      </Paper>
+                  <Box id={key}>
+                    <Stack
+                      alignItems="center"
+                      className="mb-2"
+                      direction="row"
+                      gap={1}
+                    >
+                      <Icon />
+                      <Typography variant="h6">
+                        {key === "roles" ? "Role(s)" : toSentenceCase(key)}
+                      </Typography>
+                    </Stack>
+                    {Array.isArray(data) ? (
+                      data.every(isTechStack) || data.every(isRole) ? (
+                        <TagChips items={data as TechStack[] | Roles[]} />
+                      ) : (
+                        <List className="ml-8 list-disc">
+                          {data.map((item, index) => (
+                            <ListItem
+                              className="p-0 pb-2 list-item"
+                              key={index}
+                              disableGutters
+                            >
+                              {item}
+                            </ListItem>
+                          ))}
+                        </List>
+                      )
+                    ) : (
+                      <Typography variant="body1">{data}</Typography>
+                    )}
+                  </Box>
+                </Slide>
+              );
+            })}
+            <Divider className="my-4" />
+            <Button
+              className="ml-auto"
+              endIcon={
+                portfolioDetail.linkInfo.target === "_blank" && (
+                  <ArrowOutward className="text-black" />
+                )
+              }
+              variant="contained"
+              {...portfolioDetail.linkInfo}
+              LinkComponent={MyLink}
+            >
+              View the project
+            </Button>
+          </Paper>
+        </Box>
+      </Stack>
     </>
   );
 };
