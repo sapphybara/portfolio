@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { PortfolioCard as PortfolioCardType } from "types/global";
 import MyLink from "./MyLink";
 import { ArrowOutward } from "@mui/icons-material";
-import TechnologyChips from "./TechnologyChips";
+import TagChips from "./TagChips";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
   "&:hover": {
@@ -43,7 +43,7 @@ const PortfolioCard = ({
             title={title}
             titleTypographyProps={{ variant: "h3", component: "h3" }}
           />
-          <TechnologyChips technology={techStack} />
+          <TagChips items={techStack} />
           <Typography className="mt-4 mx-4" paragraph>
             {shortDescription}
           </Typography>

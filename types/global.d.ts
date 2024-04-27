@@ -42,9 +42,23 @@ export type SharedCardHeaderProps = Pick<
   >;
 };
 
+type PortfolioIconName =
+  | "frontend"
+  | "backend"
+  | "fullstack"
+  | "design"
+  | "testing"
+  | "tooling"
+  | "language"
+  | "library"
+  | "developer"
+  | "designer";
+
+type Roles = "designer" | "developer";
+
 interface TechStack {
   name: string;
-  cardType: string;
+  cardType: Exclude<PortfolioIconName, Roles>;
 }
 
 interface LinkInfo {
@@ -62,7 +76,7 @@ export interface PortfolioCard {
   techStack: TechStack[];
   linkInfo: LinkInfo;
   shareholderDescription?: string;
-  role: string;
+  roles: Roles[];
   contributions: string[];
   problemSolving: string[];
   shortDescription: string;

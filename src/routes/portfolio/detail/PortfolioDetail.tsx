@@ -20,13 +20,14 @@ import {
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
-import TechnologyChips from "@components/TechnologyChips";
+import TagChips from "@components/TagChips";
 import { toSentenceCase, isTechStack } from "@utils/utils";
-import { PortfolioCard, TechStack } from "types/global";
+import { PortfolioCard, Roles, TechStack } from "types/global";
+import { isRole } from "@utils/typeGuards";
 
 const icons: Record<string, React.ElementType> = {
   description: Description,
-  role: AssignmentInd,
+  roles: AssignmentInd,
   contributions: Build,
   shareholderDescription: People,
   problemSolving: EmojiObjects,
@@ -60,17 +61,18 @@ const PortfolioDetail = () => {
           I built this project while working for: {portfolioDetail.affiliation}
         </Typography>
         {[
+          "roles",
           "description",
-          "role",
           "contributions",
-          "shareholderDescription",
           "problemSolving",
+          "shareholderDescription",
           "techStack",
         ].map((key) => {
           const data = portfolioDetail[key as keyof PortfolioCard] as
             | string
             | string[]
             | TechStack[]
+            | Roles[]
             | undefined;
           if (!data) {
             return null;
@@ -97,8 +99,8 @@ const PortfolioDetail = () => {
                   <Typography variant="h6">{toSentenceCase(key)}</Typography>
                 </Stack>
                 {Array.isArray(data) ? (
-                  data.every(isTechStack) ? (
-                    <TechnologyChips technology={data} />
+                  data.every(isTechStack) || data.every(isRole) ? (
+                    <TagChips items={data as TechStack[] | Roles[]} />
                   ) : (
                     <List className="ml-8 list-disc">
                       {data.map((item, index) => (
