@@ -1,5 +1,4 @@
 import {
-  ArrowBack,
   ArrowOutward,
   AssignmentInd,
   Build,
@@ -20,9 +19,9 @@ import {
   Slide,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import MyLink from "src/components/MyLink";
-import TechnologyChips from "src/components/TechnologyChips";
-import { camelToSentenceCase, isTechStack } from "src/utils/utils";
+import MyLink from "@components/MyLink";
+import TechnologyChips from "@components/TechnologyChips";
+import { camelToSentenceCase, isTechStack } from "@utils/utils";
 import { PortfolioCard, TechStack } from "types/global";
 
 const icons: Record<string, React.ElementType> = {
@@ -50,14 +49,6 @@ const PortfolioDetail = () => {
 
   return (
     <>
-      <Button
-        className="mb-4"
-        startIcon={<ArrowBack color="primary" />}
-        href="/portfolio"
-        variant="outlined"
-      >
-        Back to Portfolio
-      </Button>
       <Paper className="p-4 mb-4 flex flex-col" id="detail">
         <Typography variant="decoration">Portfolio detail</Typography>
         <Typography variant="h3">{portfolioDetail.title}</Typography>
