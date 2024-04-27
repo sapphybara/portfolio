@@ -1,5 +1,5 @@
 import { CreateCreditCardInput } from "src/API";
-import portfolioCards from "@routes/portfolio/portfolio_cards.json";
+import portfolioCards from "src/assets/portfolio_cards.json";
 import { TechStack } from "types/global";
 
 export const toSentenceCase = (str: string) => {
