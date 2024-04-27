@@ -48,23 +48,17 @@ const Admin = () => {
         <SignIn />
       ) : (
         <>
-          <Box className="flex justify-between my-2">
-            <Typography component="h2" variant="h5">
-              Credit Cards
-            </Typography>
-            <Button
-              onClick={() => changeAddCreditCardDialogOpen()}
-              variant="contained"
-            >
-              Add Credit Card
-            </Button>
-            <AddCreditCardDialog
-              closeDialog={closeCreditCardDialog}
-              fetchCreditCards={fetchCreditCards}
-              open={isAddCreditCardDialogOpen}
-            />
-          </Box>
-          <CreditCardTable creditCards={creditCards} />
+          <AddCreditCardDialog
+            closeDialog={closeCreditCardDialog}
+            fetchCreditCards={fetchCreditCards}
+            open={isAddCreditCardDialogOpen}
+          />
+          <CreditCardTable
+            creditCards={creditCards}
+            toggleAddCreditCardDialogOpen={() =>
+              changeAddCreditCardDialogOpen()
+            }
+          />
           <Button
             className="my-2"
             color="warning"

@@ -19,7 +19,6 @@ const generateLevelStyles = (
 ) => {
   const color = theme.palette[levelColors[level]].main;
   const { mode } = theme.palette;
-  const content = level === 3 ? "⚠️" : level === 4 ? "❌" : undefined;
 
   return {
     [`& .level-${level} .score`]: {
@@ -33,13 +32,6 @@ const generateLevelStyles = (
           backgroundColor: getSelectedHoverBackgroundColor(color, mode),
         },
       },
-      ...(content && {
-        "&::before": {
-          content: `"${content}"`,
-          position: "absolute",
-          left: theme.spacing(0.5),
-        },
-      }),
     },
   };
 };

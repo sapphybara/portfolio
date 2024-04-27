@@ -1,22 +1,21 @@
 import { Circle } from "@mui/icons-material";
-import { Chip, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Stack, Typography } from "@mui/material";
 import { CCLevelConsumerProps } from "types/global";
 
 const ScoreKey = ({ levels, levelColors }: CCLevelConsumerProps) => (
-  <Paper className="mb-2 p-2">
-    <Typography component="h3" variant="h6" className="mb-4">
-      Score Key
+  <Stack className="p-2" direction="row" alignItems="center" spacing={1}>
+    <Typography align="right" variant="subtitle1">
+      Score Key:
     </Typography>
-    <Stack direction="row" spacing={1}>
-      {levels.map((level) => (
-        <Chip
-          icon={<Circle color={levelColors[level]} />}
-          label={levelColors[level]}
-          key={level}
-        />
-      ))}
-    </Stack>
-  </Paper>
+    {levels.map((level) => (
+      <Chip
+        icon={<Circle color={levelColors[level]} />}
+        label={levelColors[level]}
+        key={level}
+        size="small"
+      />
+    ))}
+  </Stack>
 );
 
 export default ScoreKey;

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Typography, Button, Stack } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -38,11 +39,15 @@ const levelColors: Record<
   4: "error",
 };
 
+interface CreditCardTableProps {
+  creditCards: CreditCard[] | CreateCreditCardInput[];
+  toggleAddCreditCardDialogOpen: () => void;
+}
+
 const CreditCardTable = ({
   creditCards,
-}: {
-  creditCards: CreditCard[] | CreateCreditCardInput[];
-}) => {
+  toggleAddCreditCardDialogOpen,
+}: CreditCardTableProps) => {
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
       field: key,
@@ -96,7 +101,17 @@ const CreditCardTable = ({
 
   return (
     <>
-      <ScoreKey levels={levels} levelColors={levelColors} />
+      <Stack direction="row" justifyContent="space-between">
+        <Typography component="h2" variant="h5">
+          Credit Cards
+        </Typography>
+        <Stack direction="column" alignItems="flex-end">
+          <Button onClick={toggleAddCreditCardDialogOpen} variant="contained">
+            Add Credit Card
+          </Button>
+          <ScoreKey levels={levels} levelColors={levelColors} />
+        </Stack>
+      </Stack>
       <StyledDataGrid
         autoHeight
         columns={columns}
