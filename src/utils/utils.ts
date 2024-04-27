@@ -2,11 +2,14 @@ import { CreateCreditCardInput } from "src/API";
 import portfolioCards from "@routes/portfolio/portfolio_cards.json";
 import { TechStack } from "types/global";
 
-export const camelToSentenceCase = (str: string) => {
+export const toSentenceCase = (str: string) => {
   if (!str) {
     return "";
   }
-  const result = str.replace(/([A-Z])/g, " $1");
+  const result = str
+    .replace(/([A-Z])/g, " $1") // convert camelCase
+    .replace(/-/g, " ") // convert kebab-case
+    .replace(/_/g, " "); // convert snake_case
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 

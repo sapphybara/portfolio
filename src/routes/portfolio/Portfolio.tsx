@@ -2,7 +2,7 @@ import { Box, Typography, Breadcrumbs, Link } from "@mui/material";
 import { useOutlet, useParams } from "react-router-dom";
 import PortfolioCard from "@components/PortfolioCard";
 import portfolioCards from "./portfolio_cards.json";
-import { camelToSentenceCase } from "@utils/utils";
+import { toSentenceCase } from "@utils/utils";
 
 const Portfolio = () => {
   const outlet = useOutlet();
@@ -26,7 +26,7 @@ const Portfolio = () => {
             href={`/portfolio/${projectId}`}
             underline="hover"
           >
-            {camelToSentenceCase(projectId)}
+            {toSentenceCase(projectId)}
           </Link>
         )}
       </Breadcrumbs>

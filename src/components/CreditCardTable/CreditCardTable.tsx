@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 import { CreateCreditCardInput, CreditCard } from "src/API";
 import {
-  camelToSentenceCase,
+  toSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
   formatFinancialNumber,
@@ -51,7 +51,7 @@ const CreditCardTable = ({
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
       field: key,
-      headerName: camelToSentenceCase(key),
+      headerName: toSentenceCase(key),
       type:
         creditCardTypeMapping[key] !== "text"
           ? creditCardTypeMapping[key]
@@ -66,7 +66,7 @@ const CreditCardTable = ({
         } else if (key === "lastInterestAmount") {
           return "Last Interest Amt.";
         } else {
-          return camelToSentenceCase(key);
+          return toSentenceCase(key);
         }
       },
       valueFormatter: (value?: boolean | number | string | Date) => {

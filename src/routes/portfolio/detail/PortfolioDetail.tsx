@@ -21,7 +21,7 @@ import {
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
 import TechnologyChips from "@components/TechnologyChips";
-import { camelToSentenceCase, isTechStack } from "@utils/utils";
+import { toSentenceCase, isTechStack } from "@utils/utils";
 import { PortfolioCard, TechStack } from "types/global";
 
 const icons: Record<string, React.ElementType> = {
@@ -94,9 +94,7 @@ const PortfolioDetail = () => {
                   gap={1}
                 >
                   <Icon />
-                  <Typography variant="h6">
-                    {camelToSentenceCase(key)}
-                  </Typography>
+                  <Typography variant="h6">{toSentenceCase(key)}</Typography>
                 </Stack>
                 {Array.isArray(data) ? (
                   data.every(isTechStack) ? (

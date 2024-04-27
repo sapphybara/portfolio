@@ -16,7 +16,7 @@ import { ChangeEvent, useState } from "react";
 import { CreateCreditCardInput } from "src/API";
 import { createCreditCard } from "src/graphql/mutations";
 import {
-  camelToSentenceCase,
+  toSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
   isCompleteCreditCard,
@@ -69,7 +69,7 @@ const AddCreditCardDialog = ({
 
   const renderFormControl = (key: keyof CreateCreditCardInput) => {
     const type = creditCardTypeMapping[key];
-    const label = camelToSentenceCase(key);
+    const label = toSentenceCase(key);
 
     if (key === "score") {
       return null;
