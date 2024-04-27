@@ -7,14 +7,16 @@ const ScoreKey = ({ levels, levelColors }: CCLevelConsumerProps) => (
     <Typography align="right" variant="subtitle1">
       Score Key:
     </Typography>
-    {levels.map((level) => (
-      <Chip
-        icon={<Circle color={levelColors[level]} />}
-        label={levelColors[level]}
-        key={level}
-        size="small"
-      />
-    ))}
+    {levels
+      .sort((a, b) => b - a)
+      .map((level) => (
+        <Chip
+          icon={<Circle color={levelColors[level].color} />}
+          label={levelColors[level].label}
+          key={level}
+          size="small"
+        />
+      ))}
   </Stack>
 );
 

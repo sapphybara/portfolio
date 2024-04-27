@@ -17,7 +17,7 @@ const generateLevelStyles = (
   theme: Theme,
   levelColors: CCLevelMapping
 ) => {
-  const color = theme.palette[levelColors[level]].main;
+  const color = theme.palette[levelColors[level].color].main;
   const { mode } = theme.palette;
 
   return {

@@ -72,7 +72,7 @@ export type CCScoreLevel = 1 | 2 | 3 | 4;
 
 export type CCLevelMapping = Record<
   CCScoreLevel,
-  "success" | "info" | "warning" | "error"
+  { color: "success" | "info" | "warning" | "error"; label: string }
 >;
 
 export interface CCLevelConsumerProps {

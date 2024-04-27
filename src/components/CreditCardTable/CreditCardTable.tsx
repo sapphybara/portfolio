@@ -31,12 +31,12 @@ const columnWidths: Record<
 const levels: CCScoreLevel[] = [1, 2, 3, 4];
 const levelColors: Record<
   CCScoreLevel,
-  "success" | "info" | "warning" | "error"
+  { color: "success" | "info" | "warning" | "error"; label: string }
 > = {
-  1: "success",
-  2: "info",
-  3: "warning",
-  4: "error",
+  1: { color: "success", label: "low priority" },
+  2: { color: "info", label: "mid priority" },
+  3: { color: "warning", label: "high priority" },
+  4: { color: "error", label: "max priority" },
 };
 
 interface CreditCardTableProps {
@@ -123,9 +123,7 @@ const CreditCardTable = ({
         }}
         getCellClassName={({ field }) => {
           if (field === "score") {
-            // make the component have relative positioning so
-            //  the ::before pseudo-element can be positioned absolutely
-            return "relative score";
+            return "score";
           }
           return "";
         }}
