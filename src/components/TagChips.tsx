@@ -14,7 +14,7 @@ import {
   PaletteOutlined,
 } from "@mui/icons-material";
 import { PortfolioIconName, Roles, TechStack } from "types/global";
-import { isTechStack } from "src/utils/utils";
+import { isTechStack } from "@utils/typeGuards";
 
 type ChipItem = TechStack | Roles;
 

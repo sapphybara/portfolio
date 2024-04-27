@@ -21,7 +21,8 @@ import {
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
 import TagChips from "@components/TagChips";
-import { toSentenceCase, isTechStack } from "@utils/utils";
+import { toSentenceCase } from "@utils/utils";
+import { isTechStack } from "@utils/typeGuards";
 import { PortfolioCard, Roles, TechStack } from "types/global";
 import { isRole } from "@utils/typeGuards";
 

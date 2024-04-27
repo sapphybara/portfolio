@@ -1,6 +1,5 @@
 import { CreateCreditCardInput } from "src/API";
 import portfolioCards from "src/assets/portfolio_cards.json";
-import { TechStack } from "types/global";
 
 export const toSentenceCase = (str: string) => {
   if (!str) {
@@ -29,38 +28,6 @@ export const creditCardKeys = Object.keys(
   creditCardTypeMapping
 ) as (keyof CreateCreditCardInput)[];
 
-export const isCompleteCreditCard = (
-  card?: Partial<CreateCreditCardInput>
-): card is CreateCreditCardInput => {
-  if (!card) {
-    return false;
-  }
-
-  return creditCardKeys.every((key) => {
-    if (key === "score") {
-      return true;
-    }
-
-    const value = card[key];
-    const type = creditCardTypeMapping[key];
-
-    if (value === undefined) {
-      return false;
-    }
-
-    switch (type) {
-      case "date":
-        return !isNaN(new Date(value as string).getTime());
-      case "number":
-        return !isNaN(Number(value));
-      case "text":
-        return typeof value === "string";
-      default:
-        return typeof value === type;
-    }
-  });
-};
-
 export const getPortfolioDetail = ({
   params,
 }: {
@@ -69,14 +36,6 @@ export const getPortfolioDetail = ({
   const { projectId } = params;
   return portfolioCards.find((card) => card.id === projectId) ?? null;
 };
-
-export const isTechStack = (obj: unknown): obj is TechStack =>
-  typeof obj === "object" &&
-  obj !== null &&
-  "name" in obj &&
-  typeof (obj as { name: unknown }).name === "string" &&
-  "cardType" in obj &&
-  typeof (obj as { cardType: unknown }).cardType === "string";
 
 export const formatFinancialNumber = (
   value: number,

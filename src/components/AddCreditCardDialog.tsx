@@ -19,8 +19,8 @@ import {
   toSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
-  isCompleteCreditCard,
-} from "src/utils/utils";
+} from "@utils/utils";
+import { isCreditCard } from "@utils/typeGuards";
 
 const client = generateClient();
 const initialFormState: Partial<CreateCreditCardInput> = {
@@ -41,7 +41,7 @@ const AddCreditCardDialog = ({
 
   async function addCreditCard() {
     try {
-      if (!isCompleteCreditCard(formState)) {
+      if (!isCreditCard(formState)) {
         return;
       }
 
@@ -132,10 +132,7 @@ const AddCreditCardDialog = ({
       <DialogContent>{creditCardKeys.map(renderFormControl)}</DialogContent>
       <DialogActions>
         <Button onClick={closeDialog}>Cancel</Button>
-        <Button
-          disabled={!isCompleteCreditCard(formState)}
-          onClick={addCreditCard}
-        >
+        <Button disabled={!isCreditCard(formState)} onClick={addCreditCard}>
           Add Card
         </Button>
       </DialogActions>
