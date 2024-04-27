@@ -77,8 +77,7 @@ export const isTechStack = (obj: unknown): obj is TechStack =>
 
 export const formatFinancialNumber = (
   value: number,
-  isDollars = true,
-  isPercent = false
+  formatType: "dollar" | "percent" | "plain"
 ) => {
   const formattedValue =
     Math.abs(value) >= 10000
@@ -88,11 +87,13 @@ export const formatFinancialNumber = (
         })
       : value.toFixed(2);
 
-  if (isPercent) {
-    return `${formattedValue}%`;
+  switch (formatType) {
+    case "dollar":
+      return `$${formattedValue}`;
+    case "percent":
+      return `${formattedValue}%`;
+    case "plain":
+    default:
+      return formattedValue;
   }
-  if (isDollars) {
-    return `$${formattedValue}`;
-  }
-  return formattedValue;
 };

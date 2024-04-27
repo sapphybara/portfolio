@@ -71,13 +71,13 @@ const CreditCardTable = ({
         }
 
         if (key === "apr") {
-          return formatFinancialNumber(value as number, false);
+          return formatFinancialNumber(value as number, "percent");
         } else if (key === "score") {
-          return formatFinancialNumber(value as number, false);
+          return formatFinancialNumber(value as number, "plain");
         }
 
         if (type === "number") {
-          return formatFinancialNumber(value as number);
+          return formatFinancialNumber(value as number, "dollar");
         } else if (type === "date") {
           return dayjs(value as Date).format("D");
         }
