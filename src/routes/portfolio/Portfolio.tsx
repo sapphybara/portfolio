@@ -1,4 +1,5 @@
 import { Box, Typography, Breadcrumbs, Link } from "@mui/material";
+import { NavigateNext } from "@mui/icons-material";
 import { useOutlet, useParams } from "react-router-dom";
 import PortfolioCard from "@components/PortfolioCard";
 import portfolioCards from "./portfolio_cards.json";
@@ -12,11 +13,19 @@ const Portfolio = () => {
     <Box className="w-full" component="section">
       <Typography variant="decoration">Check out my</Typography>
       <Typography variant="h1">Portfolio</Typography>
-      <Breadcrumbs aria-label="breadcrumb" className="mb-4">
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        className="mb-4"
+        separator={<NavigateNext fontSize="small" />}
+      >
         <Link color="inherit" href="/" underline="hover">
           Home
         </Link>
-        <Link color="inherit" href="/portfolio" underline="hover">
+        <Link
+          color={projectId ? "inherit" : "text.primary"}
+          href="/portfolio"
+          underline="hover"
+        >
           Portfolio
         </Link>
         {projectId && (
