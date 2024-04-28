@@ -67,6 +67,8 @@ interface LinkInfo {
   rel?: string;
 }
 
+export type Image = { src: string; alt: string };
+
 export interface PortfolioCard {
   id: string;
   title: string;
@@ -80,6 +82,7 @@ export interface PortfolioCard {
   contributions: string[];
   problemSolving: string[];
   shortDescription: string;
+  images?: Image[];
 }
 
 export type CCScoreLevel = 1 | 2 | 3 | 4;

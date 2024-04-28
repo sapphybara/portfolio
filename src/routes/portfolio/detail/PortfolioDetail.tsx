@@ -27,6 +27,7 @@ import { toSentenceCase } from "@utils/utils";
 import { isTechStack } from "@utils/typeGuards";
 import { PortfolioCard, Roles, TechStack } from "types/global";
 import { isRole } from "@utils/typeGuards";
+import ImageCarousel from "src/components/ImageCarousel";
 
 const icons: Record<string, React.ElementType> = {
   description: Description,
@@ -150,6 +151,9 @@ const PortfolioDetail = () => {
                 </Slide>
               );
             })}
+            {portfolioDetail.images && (
+              <ImageCarousel images={portfolioDetail.images} />
+            )}
             <Divider className="my-4" />
             <Button
               className="ml-auto"

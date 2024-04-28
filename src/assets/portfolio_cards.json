@@ -61,6 +61,36 @@
       "Designed a system to categorize and group questions based on the codes and standards they relate to.",
       "Implemented responsive design principles for optimal viewing across devices."
     ],
-    "shortDescription": "An application to support those who utilize hydrogen (H2) in identifying hydrogen-specific codes and standard documents that are relevant to their systems."
+    "shortDescription": "An application to support those who utilize hydrogen (H2) in identifying hydrogen-specific codes and standard documents that are relevant to their systems.",
+    "images": [
+      {
+        "src": "/images/hyscan/1.jpeg",
+        "alt": "HySCAN Home Page"
+      },
+      {
+        "src": "/images/hyscan/2.jpeg",
+        "alt": "HySCAN Disclaimer Page"
+      },
+      {
+        "src": "/images/hyscan/3.jpeg",
+        "alt": "HySCAN Component Selection List"
+      },
+      {
+        "src": "/images/hyscan/4.jpeg",
+        "alt": "HySCAN component card list"
+      },
+      {
+        "src": "/images/hyscan/5.jpeg",
+        "alt": "HySCAN Questionnaire"
+      },
+      {
+        "src": "/images/hyscan/6.jpeg",
+        "alt": "HySCAN Results Page: suggested codes and standards"
+      },
+      {
+        "src": "/images/hyscan/7.jpeg",
+        "alt": "HySCAN Results Page: related questions"
+      }
+    ]
   }
 ]
