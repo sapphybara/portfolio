@@ -1,15 +1,18 @@
 import { Fragment, ReactNode, useState } from "react";
 import {
   AppBar,
-  Box,
   Divider,
   Drawer,
   IconButton,
   Link,
   List,
   ListItem,
+  ListProps,
+  Stack,
+  StackProps,
   Toolbar,
   Typography,
+  TypographyProps,
 } from "@mui/material";
 import { Logout, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
@@ -41,13 +44,13 @@ const Navbar = (props: PropsWithRoutes) => {
           const name =
             path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
           return (
-            <ListItem key={path}>
+            <ListItem className="justify-center" key={path}>
               <Link href={path}>{name}</Link>
             </ListItem>
           );
         })}
         {user && shouldRenderChildren && (
-          <ListItem className="whitespace-nowrap gap-2">
+          <ListItem className="justify-center whitespace-nowrap gap-2">
             <Link component="button" onClick={signOut}>
               Sign Out
             </Link>
@@ -55,6 +58,21 @@ const Navbar = (props: PropsWithRoutes) => {
           </ListItem>
         )}
       </Fragment>
+    );
+  };
+
+  const renderHeaderAndLinks = (
+    stackProps: StackProps,
+    typographyProps: TypographyProps,
+    listProps?: ListProps,
+    isMobile: boolean = false
+  ) => {
+    return (
+      <Stack direction={isMobile ? "column" : "row"} {...stackProps}>
+        <Typography {...typographyProps}>Sapphyra Wiser</Typography>
+        {isMobile && <Divider />}
+        <List {...listProps}>{renderRouteLinks(props.routes)}</List>
+      </Stack>
     );
   };
 
@@ -69,13 +87,12 @@ const Navbar = (props: PropsWithRoutes) => {
       }}
       sx={{ display: { xs: "block", sm: "none" } }}
     >
-      <Box onClick={handleDrawerToggle} className="text-center">
-        <Typography className="my-2" variant="h6">
-          Sapphyra Wiser
-        </Typography>
-        <Divider />
-        <List>{renderRouteLinks(props.routes)}</List>
-      </Box>
+      {renderHeaderAndLinks(
+        { className: "text-center", onClick: handleDrawerToggle },
+        { className: "my-2", variant: "h6" },
+        undefined,
+        true
+      )}
     </Drawer>
   );
 
@@ -93,20 +110,21 @@ const Navbar = (props: PropsWithRoutes) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            className="grow"
-            variant="h6"
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Sapphyra Wiser
-          </Typography>
-          <List
-            className="flex-row justify-center items-end"
-            sx={{ display: { xs: "none", sm: "flex" } }}
-          >
-            {renderRouteLinks(props.routes)}
-          </List>
+          {renderHeaderAndLinks(
+            {
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            },
+            {
+              sx: { display: { xs: "none", sm: "block" } },
+              variant: "h6",
+            },
+            {
+              className: "flex-row justify-center items-end",
+              sx: { display: { xs: "none", sm: "flex" } },
+            }
+          )}
         </Toolbar>
       </AppBar>
       <nav>{drawer}</nav>
