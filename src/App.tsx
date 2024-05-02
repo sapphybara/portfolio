@@ -11,7 +11,7 @@ import Footer from "@components/Footer";
 function App(props: PropsWithRoutes) {
   useTitle();
   return (
-    <Box className="flex items-center flex-col h-screen">
+    <Box className="flex items-center flex-col min-h-screen">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Navbar routes={props.routes} />
         <Box className="pt-16 px-8 max-w-4xl w-full" component="main">
