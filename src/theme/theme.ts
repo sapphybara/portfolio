@@ -1,10 +1,14 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import {
+  LinkProps,
+  PaletteMode,
+  createTheme,
+  responsiveFontSizes,
+} from "@mui/material";
 import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
-import { LinkProps } from "@mui/material/Link";
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import LinkBehavior from "./LinkBehavior";
 
-const createCustomTheme = (rootElement: Element) => {
+const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
   const createThemeFn =
     process.env.NODE_ENV === "production"
       ? createTheme
@@ -65,7 +69,7 @@ const createCustomTheme = (rootElement: Element) => {
     },
     palette: {
       contrastThreshold: 4.5,
-      mode: "dark",
+      mode,
     },
     typography: {
       fontFamily: fontFamily.body,

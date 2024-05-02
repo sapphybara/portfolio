@@ -8,7 +8,7 @@ import {
 import {
   CssBaseline,
   StyledEngineProvider,
-  ThemeProvider,
+  ThemeProvider as MuiThemeProvider,
 } from "@mui/material";
 import App from "./App.tsx";
 import "@fontsource/lato/300.css";
@@ -25,6 +25,7 @@ import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import Admin from "@routes/Admin/Admin.tsx";
 import AuthProvider from "./context/AuthProvider.tsx";
+import ThemeProvider, { ThemeContext } from "./context/ThemeContext.tsx";
 import { getPortfolioDetail } from "./utils/utils.ts";
 import "./index.css";
 
@@ -72,11 +73,17 @@ const rootElement = document.getElementById("root")!;
 createRoot(rootElement).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createCustomTheme(rootElement)}>
-        <CssBaseline enableColorScheme />
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
+      <ThemeProvider>
+        <ThemeContext.Consumer>
+          {({ theme }) => (
+            <MuiThemeProvider theme={createCustomTheme(rootElement, theme)}>
+              <CssBaseline enableColorScheme />
+              <AuthProvider>
+                <RouterProvider router={router} />
+              </AuthProvider>
+            </MuiThemeProvider>
+          )}
+        </ThemeContext.Consumer>
       </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>
