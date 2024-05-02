@@ -14,7 +14,7 @@ function App(props: PropsWithRoutes) {
     <Box className="flex items-center flex-col min-h-screen">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Navbar routes={props.routes} />
-        <Box className="pt-16 px-8 max-w-4xl w-full" component="main">
+        <Box className="pt-16 px-8 max-w-5xl w-full" component="main">
           <Outlet />
         </Box>
         <Footer className="mt-auto" />
