@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { CardHeaderProps } from "@mui/material/CardHeader";
+import { CardHeaderProps } from "@mui/material";
 
 export interface PropsWithRoutes {
   routes: RouteObject[];

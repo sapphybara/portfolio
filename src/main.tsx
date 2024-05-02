@@ -25,7 +25,9 @@ import Resume from "@routes/resume/Resume.tsx";
 import Error from "@routes/error/Error.tsx";
 import Admin from "@routes/Admin/Admin.tsx";
 import AuthProvider from "./context/AuthProvider.tsx";
-import ThemeProvider, { ThemeContext } from "./context/ThemeContext.tsx";
+import ThemeProvider, {
+  ThemeModeContext,
+} from "./context/ThemeModeContext.tsx";
 import { getPortfolioDetail } from "./utils/utils.ts";
 import "./index.css";
 
@@ -74,16 +76,16 @@ createRoot(rootElement).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider>
-        <ThemeContext.Consumer>
-          {({ theme }) => (
-            <MuiThemeProvider theme={createCustomTheme(rootElement, theme)}>
+        <ThemeModeContext.Consumer>
+          {({ mode }) => (
+            <MuiThemeProvider theme={createCustomTheme(rootElement, mode)}>
               <CssBaseline enableColorScheme />
               <AuthProvider>
                 <RouterProvider router={router} />
               </AuthProvider>
             </MuiThemeProvider>
           )}
-        </ThemeContext.Consumer>
+        </ThemeModeContext.Consumer>
       </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>
