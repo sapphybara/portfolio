@@ -2,6 +2,7 @@ import {
   ArrowOutward,
   AssignmentInd,
   Build,
+  Collections,
   Description,
   EmojiObjects,
   Memory,
@@ -24,28 +25,37 @@ import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
 import TagChips from "@components/TagChips";
 import { toSentenceCase } from "@utils/utils";
-import { isTechStack } from "@utils/typeGuards";
-import { PortfolioItem, Roles, TechStack } from "types/global";
+import { isPortfolioImage, isTechStack } from "@utils/typeGuards";
+import {
+  PortfolioItem,
+  PortfolioItemImage,
+  Roles,
+  TechStack,
+} from "types/global";
 import { isRole } from "@utils/typeGuards";
 import ImageCarousel from "src/components/ImageCarousel";
 
-const icons: Record<string, React.ElementType> = {
-  description: Description,
-  roles: AssignmentInd,
-  contributions: Build,
-  shareholderDescription: People,
-  problemSolving: EmojiObjects,
-  techStack: Memory,
-};
-
-const headers: (keyof PortfolioItem)[] = [
+const headers = [
   "roles",
   "description",
   "contributions",
   "problemSolving",
   "shareholderDescription",
   "techStack",
-];
+  "images",
+] as const; // using const assertion to create a tuple of string literals
+
+type HeaderKeys = Extract<keyof PortfolioItem, (typeof headers)[number]>;
+
+const icons: Record<HeaderKeys, React.ElementType> = {
+  description: Description,
+  roles: AssignmentInd,
+  contributions: Build,
+  shareholderDescription: People,
+  problemSolving: EmojiObjects,
+  techStack: Memory,
+  images: Collections,
+};
 
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioItem;
@@ -101,6 +111,7 @@ const PortfolioDetail = () => {
                 | string[]
                 | TechStack[]
                 | Roles[]
+                | PortfolioItemImage[]
                 | undefined;
               if (!data) {
                 return null;
@@ -131,6 +142,8 @@ const PortfolioDetail = () => {
                     {Array.isArray(data) ? (
                       data.every(isTechStack) || data.every(isRole) ? (
                         <TagChips items={data as TechStack[] | Roles[]} />
+                      ) : data.every(isPortfolioImage) ? (
+                        <ImageCarousel images={data} />
                       ) : (
                         <List className="ml-8 list-disc">
                           {data.map((item, index) => (
@@ -151,9 +164,6 @@ const PortfolioDetail = () => {
                 </Slide>
               );
             })}
-            {portfolioDetail.images && (
-              <ImageCarousel images={portfolioDetail.images} />
-            )}
             <Divider className="my-4" />
             <Button
               className="ml-auto"

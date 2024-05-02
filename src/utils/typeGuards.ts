@@ -1,5 +1,5 @@
 import { CreateCreditCardInput } from "src/API";
-import { Roles, TechStack } from "types/global";
+import { PortfolioItemImage, Roles, TechStack } from "types/global";
 import { creditCardKeys, creditCardTypeMapping } from "./utils";
 
 export const isCreditCard = (
@@ -38,9 +38,9 @@ export const isTechStack = (obj: unknown): obj is TechStack =>
   typeof obj === "object" &&
   obj !== null &&
   "name" in obj &&
-  typeof (obj as { name: unknown }).name === "string" &&
+  typeof obj.name === "string" &&
   "cardType" in obj &&
-  typeof (obj as { cardType: unknown }).cardType === "string";
+  typeof obj.cardType === "string";
 
 export const isRole = (role: unknown): role is Roles => {
   return (
@@ -48,3 +48,11 @@ export const isRole = (role: unknown): role is Roles => {
     ["developer", "designer"].includes(role.toLowerCase())
   );
 };
+
+export const isPortfolioImage = (image: unknown): image is PortfolioItemImage =>
+  typeof image === "object" &&
+  image !== null &&
+  "src" in image &&
+  typeof image.src === "string" &&
+  "alt" in image &&
+  typeof image.alt === "string";
