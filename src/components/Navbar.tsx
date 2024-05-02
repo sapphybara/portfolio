@@ -19,6 +19,7 @@ import { PropsWithRoutes } from "types/global";
 import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
+import DarkModeSwitch from "./DarkModeSwitch";
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -76,7 +77,12 @@ const Navbar = (props: PropsWithRoutes) => {
       <Stack direction={isMobile ? "column" : "row"} {...stackProps}>
         <Typography {...typographyProps}>Sapphyra Wiser</Typography>
         {isMobile && <Divider />}
-        <List {...listProps}>{renderRouteLinks(props.routes)}</List>
+        <List {...listProps}>
+          <ListItem>
+            <DarkModeSwitch />
+          </ListItem>
+          {renderRouteLinks(props.routes)}
+        </List>
       </Stack>
     );
   };
@@ -126,7 +132,7 @@ const Navbar = (props: PropsWithRoutes) => {
               variant: "h6",
             },
             {
-              className: "flex-row justify-center items-end",
+              className: "flex-row justify-center items-center p-0",
               sx: { display: { xs: "none", sm: "flex" } },
             }
           )}
