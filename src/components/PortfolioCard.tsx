@@ -9,7 +9,7 @@ import {
   styled,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { PortfolioCard as PortfolioCardType } from "types/global";
+import { PortfolioItem } from "types/global";
 import MyLink from "./MyLink";
 import { ArrowOutward } from "@mui/icons-material";
 import TagChips from "./TagChips";
@@ -27,7 +27,7 @@ const PortfolioCard = ({
   techStack,
   linkInfo,
   shortDescription,
-}: PortfolioCardType) => {
+}: PortfolioItem) => {
   const navigate = useNavigate();
 
   return (

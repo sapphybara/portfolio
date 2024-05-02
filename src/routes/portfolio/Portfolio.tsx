@@ -4,7 +4,7 @@ import { useOutlet, useParams } from "react-router-dom";
 import PortfolioCard from "@components/PortfolioCard";
 import portfolioCards from "src/assets/portfolio_cards.json";
 import { toSentenceCase } from "@utils/utils";
-import { PortfolioCard as PortfolioCardType } from "types/global";
+import { PortfolioItem } from "types/global";
 
 const Portfolio = () => {
   const outlet = useOutlet();
@@ -46,7 +46,7 @@ const Portfolio = () => {
             Click on a project to learn more.
           </Typography>
           {portfolioCards.map((card) => (
-            <PortfolioCard key={card.id} {...(card as PortfolioCardType)} />
+            <PortfolioCard key={card.id} {...(card as PortfolioItem)} />
           ))}
         </>
       )}

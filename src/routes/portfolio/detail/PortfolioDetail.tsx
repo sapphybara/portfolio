@@ -25,7 +25,7 @@ import MyLink from "@components/MyLink";
 import TagChips from "@components/TagChips";
 import { toSentenceCase } from "@utils/utils";
 import { isTechStack } from "@utils/typeGuards";
-import { PortfolioCard, Roles, TechStack } from "types/global";
+import { PortfolioItem, Roles, TechStack } from "types/global";
 import { isRole } from "@utils/typeGuards";
 import ImageCarousel from "src/components/ImageCarousel";
 
@@ -38,7 +38,7 @@ const icons: Record<string, React.ElementType> = {
   techStack: Memory,
 };
 
-const headers: (keyof PortfolioCard)[] = [
+const headers: (keyof PortfolioItem)[] = [
   "roles",
   "description",
   "contributions",
@@ -48,7 +48,7 @@ const headers: (keyof PortfolioCard)[] = [
 ];
 
 const PortfolioDetail = () => {
-  const portfolioDetail = useLoaderData() as PortfolioCard;
+  const portfolioDetail = useLoaderData() as PortfolioItem;
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 

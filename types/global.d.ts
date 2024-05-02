@@ -61,6 +61,7 @@ interface TechStack {
   cardType: Exclude<PortfolioIconName, Roles>;
 }
 
+// todo should we use the type of muis link component instead of this?
 interface LinkInfo {
   to: string;
   target?: string;
@@ -69,7 +70,7 @@ interface LinkInfo {
 
 export type Image = { src: string; alt: string };
 
-export interface PortfolioCard {
+export interface PortfolioItem {
   id: string;
   title: string;
   subheader: string;
