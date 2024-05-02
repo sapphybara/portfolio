@@ -1,9 +1,9 @@
 import { Box, Card, CardMedia, Fab, Slide } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useState, useRef } from "react";
-import { type Image } from "types/global";
+import { type PortfolioItemImage } from "types/global";
 
-const ImageCarousel = ({ images }: { images: Image[] }) => {
+const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<
     "left" | "right" | "up" | "down"

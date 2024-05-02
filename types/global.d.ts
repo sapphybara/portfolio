@@ -68,7 +68,7 @@ interface LinkInfo {
   rel?: string;
 }
 
-export type Image = { src: string; alt: string };
+export type PortfolioItemImage = { src: string; alt: string };
 
 export interface PortfolioItem {
   id: string;
@@ -83,7 +83,7 @@ export interface PortfolioItem {
   contributions: string[];
   problemSolving: string[];
   shortDescription: string;
-  images?: Image[];
+  images?: PortfolioItemImage[];
 }
 
 export type CCScoreLevel = 1 | 2 | 3 | 4;
