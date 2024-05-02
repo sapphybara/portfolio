@@ -18,6 +18,7 @@ import { Logout, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
 import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
+import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,7 +46,11 @@ const Navbar = (props: PropsWithRoutes) => {
             path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
           return (
             <ListItem className="justify-center" key={path}>
-              <Link href={path}>{name}</Link>
+              {path === "resume" ? (
+                <ResumeLinkWithTooltip asLink />
+              ) : (
+                <Link href={path}>{name}</Link>
+              )}
             </ListItem>
           );
         })}
