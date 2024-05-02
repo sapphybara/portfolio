@@ -1,4 +1,4 @@
-import { PaletteMode } from "@mui/material";
+import { PaletteMode, useMediaQuery } from "@mui/material";
 import { PropsWithChildren, createContext, useState } from "react";
 
 type ThemeModeContextType = {
@@ -6,18 +6,26 @@ type ThemeModeContextType = {
   toggleMode: () => void;
 };
 
-const defaultMode: PaletteMode = "dark";
-
 export const ThemeModeContext = createContext<ThemeModeContextType>({
-  mode: defaultMode,
+  mode: "dark",
   toggleMode: () => {},
 });
 
+const localStorageKey = "sapphyra-wiser-portfolio_theme";
+
 const ThemeModeProvider = ({ children }: PropsWithChildren) => {
-  const [mode, setMode] = useState<PaletteMode>(defaultMode);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // Get mode from local storage or prefersDarkMode or default to 'light'
+  const initialMode =
+    (localStorage.getItem(localStorageKey) as PaletteMode) ||
+    (prefersDarkMode ? "dark" : "light");
+
+  const [mode, setMode] = useState<PaletteMode>(initialMode);
 
   const toggleMode = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    const newMode = mode === "light" ? "dark" : "light";
+    localStorage.setItem(localStorageKey, newMode);
+    setMode(newMode);
   };
 
   return (
