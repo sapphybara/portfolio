@@ -6,13 +6,15 @@ type ThemeModeContextType = {
   toggleMode: () => void;
 };
 
+const defaultMode: PaletteMode = "dark";
+
 export const ThemeModeContext = createContext<ThemeModeContextType>({
-  mode: "light",
+  mode: defaultMode,
   toggleMode: () => {},
 });
 
 const ThemeModeProvider = ({ children }: PropsWithChildren) => {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const [mode, setMode] = useState<PaletteMode>(defaultMode);
 
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
