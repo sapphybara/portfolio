@@ -1,3 +1,4 @@
+import { HTMLAttributes, useContext } from "react";
 import {
   EmailOutlined,
   GitHub,
@@ -7,7 +8,7 @@ import {
   PhoneOutlined,
 } from "@mui/icons-material";
 import { Button, Divider, Stack, useMediaQuery, useTheme } from "@mui/material";
-import { HTMLAttributes } from "react";
+import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const contactInfo = [
   {
@@ -46,12 +47,13 @@ const contactInfo = [
 function Footer(props: HTMLAttributes<HTMLDivElement>) {
   const theme = useTheme();
   const shouldRenderBtnTxt = useMediaQuery(theme.breakpoints.up("md"));
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <Stack
       className={`${props.className ?? ""} flex justify-center w-full`}
       component="footer"
-      bgcolor="#272727"
+      bgcolor={isDarkMode ? "#272727" : "primary.main"}
       direction="row"
       divider={<Divider orientation="vertical" flexItem />}
       spacing={
@@ -70,6 +72,7 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
         return (
           <Button
             className="normal-case"
+            color={isDarkMode ? "primary" : "inherit"}
             key={index}
             {...item}
             target="_blank"
