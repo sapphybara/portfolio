@@ -4,11 +4,13 @@ import { PropsWithChildren, createContext, useState } from "react";
 type ThemeModeContextType = {
   mode: PaletteMode;
   toggleMode: () => void;
+  isDarkMode: boolean;
 };
 
 export const ThemeModeContext = createContext<ThemeModeContextType>({
   mode: "dark",
   toggleMode: () => {},
+  isDarkMode: true,
 });
 
 const localStorageKey = "sapphyra-wiser-portfolio_theme";
@@ -29,7 +31,9 @@ const ThemeModeProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <ThemeModeContext.Provider value={{ mode, toggleMode }}>
+    <ThemeModeContext.Provider
+      value={{ mode, toggleMode, isDarkMode: mode === "dark" }}
+    >
       {children}
     </ThemeModeContext.Provider>
   );

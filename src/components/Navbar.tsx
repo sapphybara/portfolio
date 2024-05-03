@@ -62,8 +62,7 @@ const DarkModeSwitchListItem = styled(ListItem)(() => ({
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, signOut } = useAuth();
-  const { mode, toggleMode } = useContext(ThemeModeContext);
-  const isDarkMode = mode === "dark";
+  const { isDarkMode, toggleMode } = useContext(ThemeModeContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
