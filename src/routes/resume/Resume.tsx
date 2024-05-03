@@ -189,7 +189,6 @@ const Resume = () => {
       <CollapsibleCard
         key={title?.toString()}
         title={title}
-        variant="outlined"
         subheaderTypographyProps={subheaderTypographyProps}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}

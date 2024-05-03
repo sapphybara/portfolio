@@ -36,10 +36,7 @@ const CollapsibleCard: (props: CollapsibleCardProps) => ReactNode = ({
   const hasChildren = !!children;
 
   return (
-    <Card
-      className={`${className}${isOpen ? "" : " collapsed"}`}
-      variant="outlined"
-    >
+    <Card className={`${className}${isOpen ? "" : " collapsed"}`}>
       <CardActionArea
         className="flex justify-between"
         disabled={!hasChildren}

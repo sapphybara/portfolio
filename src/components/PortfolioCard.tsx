@@ -35,7 +35,6 @@ const PortfolioCard = ({
       className="mb-4 portfolio-card"
       key={title}
       id={title.replace(/\s/g, "-")}
-      variant="outlined"
     >
       <CardActionArea onClick={() => navigate(`/portfolio/${id}`)}>
         <CardContent className="pt-0">

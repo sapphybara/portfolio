@@ -17,6 +17,8 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
     header: "Merriweather Sans Variable, Georgia, serif",
     body: "Lato, Arial, sans-serif",
   };
+  const isDarkMode = mode === "dark";
+
   let theme = createThemeFn({
     components: {
       MuiLink: {
@@ -64,6 +66,12 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
       MuiStack: {
         defaultProps: {
           useFlexGap: true,
+        },
+      },
+      MuiCard: {
+        defaultProps: {
+          raised: !isDarkMode,
+          variant: isDarkMode ? "outlined" : "elevation",
         },
       },
     },
