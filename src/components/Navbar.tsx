@@ -13,6 +13,7 @@ import {
   Toolbar,
   Typography,
   TypographyProps,
+  styled,
 } from "@mui/material";
 import { Logout, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
@@ -20,6 +21,14 @@ import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 import DarkModeSwitch from "./DarkModeSwitch";
+
+const NavList = styled(List)(({ theme }) => ({
+  "& .MuiListItem-root": {
+    gap: theme.spacing(1),
+    justifyContent: "center",
+    whiteSpace: "nowrap",
+  },
+}));
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -46,7 +55,7 @@ const Navbar = (props: PropsWithRoutes) => {
           const name =
             path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
           return (
-            <ListItem className="justify-center" key={path}>
+            <ListItem key={path}>
               {path === "resume" ? (
                 <ResumeLinkWithTooltip asLink />
               ) : (
@@ -56,7 +65,7 @@ const Navbar = (props: PropsWithRoutes) => {
           );
         })}
         {user && shouldRenderChildren && (
-          <ListItem className="justify-center whitespace-nowrap gap-2">
+          <ListItem>
             <Link component="button" onClick={signOut}>
               Sign Out
             </Link>
@@ -77,12 +86,12 @@ const Navbar = (props: PropsWithRoutes) => {
       <Stack direction={isMobile ? "column" : "row"} {...stackProps}>
         <Typography {...typographyProps}>Sapphyra Wiser</Typography>
         {isMobile && <Divider />}
-        <List {...listProps}>
+        <NavList {...listProps}>
           <ListItem>
             <DarkModeSwitch />
           </ListItem>
           {renderRouteLinks(props.routes)}
-        </List>
+        </NavList>
       </Stack>
     );
   };
