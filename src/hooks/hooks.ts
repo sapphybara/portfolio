@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { listCreditCards } from "src/graphql/queries";
 import { Client } from "aws-amplify/api";
 import { CreateCreditCardInput, CreditCard } from "src/API";
-import { AuthContext } from "src/context/AuthProvider";
+import { AuthContext } from "@context/AuthProvider";
 
 export const useTitle = () => {
   const { pathname } = useLocation();

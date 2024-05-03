@@ -25,6 +25,7 @@
     "paths": {
       "src/*": ["src/*"],
       "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
       "@routes/*": ["src/routes/*"],
       "@theme/*": ["src/theme/*"],
       "@utils/*": ["src/utils/*"],
