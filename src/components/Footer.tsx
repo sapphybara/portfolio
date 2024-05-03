@@ -14,33 +14,33 @@ const contactInfo = [
   {
     children: "sapphyra.wiser@gmail.com",
     href: "mailto:sapphyra.wiser@gmail.com",
-    startIcon: <EmailOutlined />,
+    startIcon: EmailOutlined,
   },
   {
     children: "(830) 582-6020",
     href: "tel:+18305826020",
-    startIcon: <PhoneOutlined />,
+    startIcon: PhoneOutlined,
   },
   {
     children: "Denver, CO",
     href: "",
-    startIcon: <LocationCityOutlined />,
+    startIcon: LocationCityOutlined,
     isInvisibleOnMobile: true,
   },
   {
     children: "LinkedIn",
     href: "https://www.linkedin.com/in/sapphybara",
-    startIcon: <LinkedIn />,
+    startIcon: LinkedIn,
   },
   {
     children: "GitHub",
     href: "https://github.com/sapphyrabara",
-    startIcon: <GitHub />,
+    startIcon: GitHub,
   },
   {
     children: "Instagram",
     href: "https://instagram.com/sapphybara",
-    startIcon: <Instagram />,
+    startIcon: Instagram,
   },
 ];
 
@@ -64,25 +64,31 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
           : 0
       }
     >
-      {contactInfo.map(({ children, isInvisibleOnMobile, ...item }, index) => {
-        if (isInvisibleOnMobile && !shouldRenderBtnTxt) {
-          return null;
-        }
+      {contactInfo.map(
+        (
+          { children, isInvisibleOnMobile, startIcon: StartIcon, ...item },
+          index
+        ) => {
+          if (isInvisibleOnMobile && !shouldRenderBtnTxt) {
+            return null;
+          }
 
-        return (
-          <Button
-            className="normal-case"
-            color={isDarkMode ? "primary" : "inherit"}
-            key={index}
-            {...item}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="text"
-          >
-            {shouldRenderBtnTxt && children}
-          </Button>
-        );
-      })}
+          return (
+            <Button
+              className={`normal-case${!isDarkMode ? " text-white" : ""}`}
+              color={isDarkMode ? "primary" : undefined}
+              key={index}
+              startIcon={<StartIcon color="action" />}
+              {...item}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="text"
+            >
+              {shouldRenderBtnTxt && children}
+            </Button>
+          );
+        }
+      )}
     </Stack>
   );
 }
