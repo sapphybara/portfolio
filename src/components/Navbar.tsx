@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useState } from "react";
+import { Fragment, ReactNode, useContext, useState } from "react";
 import {
   AppBar,
   Divider,
@@ -7,32 +7,63 @@ import {
   Link,
   List,
   ListItem,
+  ListItemButton,
+  ListItemIcon,
   ListProps,
   Stack,
   StackProps,
   Toolbar,
+  Tooltip,
   Typography,
   TypographyProps,
   styled,
 } from "@mui/material";
-import { Logout, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  DarkModeOutlined,
+  LightModeOutlined,
+  Logout,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
 import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
-import DarkModeSwitch from "./DarkModeSwitch";
+import { ThemeModeContext } from "@context/ThemeModeContext";
 
-const NavList = styled(List)(({ theme }) => ({
-  "& .MuiListItem-root": {
-    gap: theme.spacing(1),
-    justifyContent: "center",
-    whiteSpace: "nowrap",
+const NavList = styled(List)(({ theme }) => {
+  const { palette } = theme;
+  const linkColor =
+    palette.mode === "dark" ? palette.primary.main : palette.text.primary;
+
+  return {
+    "& .MuiListItem-root": {
+      gap: theme.spacing(1),
+      justifyContent: "center",
+      whiteSpace: "nowrap",
+    },
+    "& .MuiLink-root": {
+      color: linkColor,
+    },
+    "& .MuiSvgIcon-root": {
+      color: linkColor,
+    },
+  };
+});
+
+const DarkModeSwitchListItem = styled(ListItem)(() => ({
+  "&.MuiListItem-root": {
+    padding: 0,
+    "& .MuiListItemIcon-root": {
+      minWidth: "auto",
+    },
   },
 }));
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { mode, toggleMode } = useContext(ThemeModeContext);
+  const isDarkMode = mode === "dark";
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -57,16 +88,21 @@ const Navbar = (props: PropsWithRoutes) => {
           return (
             <ListItem key={path}>
               {path === "resume" ? (
-                <ResumeLinkWithTooltip asLink />
+                <ResumeLinkWithTooltip
+                  asLink
+                  linkOrButtonProps={{ underline: "hover" }}
+                />
               ) : (
-                <Link href={path}>{name}</Link>
+                <Link href={path} underline="hover">
+                  {name}
+                </Link>
               )}
             </ListItem>
           );
         })}
         {user && shouldRenderChildren && (
           <ListItem>
-            <Link component="button" onClick={signOut}>
+            <Link onClick={signOut} underline="hover">
               Sign Out
             </Link>
             <Logout color="primary" fontSize="small" />
@@ -87,9 +123,26 @@ const Navbar = (props: PropsWithRoutes) => {
         <Typography {...typographyProps}>Sapphyra Wiser</Typography>
         {isMobile && <Divider />}
         <NavList {...listProps}>
-          <ListItem>
-            <DarkModeSwitch />
-          </ListItem>
+          <DarkModeSwitchListItem>
+            <Tooltip
+              arrow
+              title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
+            >
+              <ListItemButton
+                className="aspect-square rounded-full"
+                dense
+                onClick={toggleMode}
+              >
+                <ListItemIcon>
+                  {isDarkMode ? (
+                    <LightModeOutlined color="action" />
+                  ) : (
+                    <DarkModeOutlined color="action" />
+                  )}
+                </ListItemIcon>
+              </ListItemButton>
+            </Tooltip>
+          </DarkModeSwitchListItem>
           {renderRouteLinks(props.routes)}
         </NavList>
       </Stack>
