@@ -15,9 +15,11 @@ import { ArrowOutward } from "@mui/icons-material";
 import TagChips from "./TagChips";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
-  "&:hover": {
-    boxShadow: theme.shadows[8],
-  },
+  ...(theme.palette.mode === "dark" && {
+    "&:hover": {
+      boxShadow: theme.shadows[8],
+    },
+  }),
 }));
 
 const PortfolioCard = ({
@@ -37,7 +39,7 @@ const PortfolioCard = ({
       id={title.replace(/\s/g, "-")}
     >
       <CardActionArea
-        className="flex-1"
+        className="items-start flex flex-1"
         onClick={() => navigate(`/portfolio/${id}`)}
       >
         <CardContent className="pt-0">
@@ -52,7 +54,12 @@ const PortfolioCard = ({
         </CardContent>
       </CardActionArea>
       <CardContent className="pt-0">
-        <Stack alignItems="center" direction="row" component={CardActions}>
+        <Stack
+          alignItems="center"
+          direction="row"
+          gap={1}
+          component={CardActions}
+        >
           <Typography className="mb-0" color="text.secondary" paragraph>
             Project on behalf of: {affiliation}
           </Typography>

@@ -1,4 +1,4 @@
-import { Box, Typography, Breadcrumbs, Link, Stack } from "@mui/material";
+import { Box, Typography, Breadcrumbs, Link, Grid } from "@mui/material";
 import { NavigateNext } from "@mui/icons-material";
 import { useOutlet, useParams } from "react-router-dom";
 import PortfolioCard from "@components/PortfolioCard";
@@ -45,15 +45,13 @@ const Portfolio = () => {
           <Typography className="mb-2" component="h2" variant="h6">
             Click on a project to learn more.
           </Typography>
-          <Stack
-            className="mb-4"
-            direction={{ xs: "column", md: "row" }}
-            gap={1}
-          >
+          <Grid className="mb-4" container spacing={1}>
             {portfolioCards.map((card) => (
-              <PortfolioCard key={card.id} {...(card as PortfolioItem)} />
+              <Grid container item justifyContent="space-between" xs={6}>
+                <PortfolioCard key={card.id} {...(card as PortfolioItem)} />
+              </Grid>
             ))}
-          </Stack>
+          </Grid>
         </>
       )}
     </Box>
