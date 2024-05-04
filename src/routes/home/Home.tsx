@@ -1,5 +1,4 @@
-import { Box, Button, Typography, styled } from "@mui/material";
-import "./home.css";
+import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import ResumeLinkWithTooltip from "src/components/ResumeLinkWithTooltip";
 
 const Home = () => {
@@ -24,32 +23,32 @@ const Home = () => {
           />
         </Box>
       </Box>
-      <Box className="header grid">
+      <Box>
         <Typography className="decorator grow w-full" variant="decoration">
           I am a
         </Typography>
-        <Typography className="dev" variant="h2">
+        <Typography className="dev flex flex-wrap" variant="h2">
           Developer
-        </Typography>
-        <Typography className="amp" color="secondary.main">
-          &
-        </Typography>
-        <Typography className="design" variant="h2">
+          <Box className="mx-4" component="span" color="secondary.main">
+            &
+          </Box>
           Designer
         </Typography>
       </Box>
-      <Typography className="about mt-16 mb-8" paragraph>
+      <Typography className="leading-relaxed mt-8 mb-4" paragraph>
         I build diverse front end and mobile applications, and my passion lies
         in accessibility, in every domain.
       </Typography>
-      <Button className="mr-4" href="/portfolio" variant="contained">
-        Check out my work
-      </Button>
-      <ResumeLinkWithTooltip
-        asLink={false}
-        buttonText="View my resume"
-        linkOrButtonProps={{ variant: "outlined" }}
-      />
+      <Stack className="mb-4" direction="row" flexWrap="wrap">
+        <Button className="mr-4" href="/portfolio" variant="contained">
+          Check out my work
+        </Button>
+        <ResumeLinkWithTooltip
+          asLink={false}
+          buttonText="View my resume"
+          linkOrButtonProps={{ variant: "outlined" }}
+        />
+      </Stack>
     </Box>
   );
 };
