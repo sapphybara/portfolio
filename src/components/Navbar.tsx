@@ -8,6 +8,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemButtonProps,
   ListItemIcon,
   ListProps,
   Stack,
@@ -26,7 +27,6 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { PropsWithRoutes } from "types/global";
-import "./navbar.css";
 import { useAuth } from "@hooks/hooks";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 import { ThemeModeContext } from "@context/ThemeModeContext";
@@ -62,6 +62,7 @@ const DarkModeSwitchListItem = styled(ListItem)(() => ({
   "&.MuiListItem-root": {
     padding: 0,
     "& .MuiListItemIcon-root": {
+      alignItems: "center",
       minWidth: "auto",
     },
   },
@@ -76,11 +77,27 @@ const SpinAnimation = keyframes`
   }
 `;
 
-const SpinningListItemButton = styled(ListItemButton)`
-  &:hover {
-    animation: ${SpinAnimation} 400ms linear;
-  }
-`;
+interface SpinningListItemButtonProps extends ListItemButtonProps {
+  spin: boolean;
+}
+
+const SpinningListItemButton = styled((props: SpinningListItemButtonProps) => {
+  const { spin: _spin, ...rest } = props;
+  return <ListItemButton {...rest} />;
+})(({ spin }) => ({
+  aspectRatio: spin ? "1" : "inherit",
+  justifyContent: "center",
+  "&:hover": {
+    animation: spin ? `${SpinAnimation} 400ms linear` : "none",
+  },
+}));
+
+const MobileDrawer = styled(Drawer)(() => ({
+  "& .MuiDrawer-paper": {
+    boxSizing: "border-box",
+    width: 240,
+  },
+}));
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -151,9 +168,10 @@ const Navbar = (props: PropsWithRoutes) => {
               title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
             >
               <SpinningListItemButton
-                className="aspect-square rounded-full"
+                className="rounded-full"
                 dense
                 onClick={toggleMode}
+                spin={!mobileOpen}
               >
                 <ListItemIcon>
                   {isDarkMode ? (
@@ -172,8 +190,7 @@ const Navbar = (props: PropsWithRoutes) => {
   };
 
   const drawer = (
-    <Drawer
-      className="drawer"
+    <MobileDrawer
       variant="temporary"
       open={mobileOpen}
       onClose={handleDrawerToggle}
@@ -188,7 +205,7 @@ const Navbar = (props: PropsWithRoutes) => {
         undefined,
         true
       )}
-    </Drawer>
+    </MobileDrawer>
   );
 
   return (
