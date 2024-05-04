@@ -16,6 +16,7 @@ import {
   Tooltip,
   Typography,
   TypographyProps,
+  keyframes,
   styled,
 } from "@mui/material";
 import {
@@ -33,7 +34,7 @@ import { ThemeModeContext } from "@context/ThemeModeContext";
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
   const linkColor =
-    palette.mode === "dark" ? palette.primary.main : palette.text.primary;
+    palette.mode === "dark" ? palette.primary.main : palette.common.white;
 
   return {
     "& .MuiListItem-root": {
@@ -41,10 +42,17 @@ const NavList = styled(List)(({ theme }) => {
       justifyContent: "center",
       whiteSpace: "nowrap",
     },
-    "& .MuiLink-root": {
+    "& .MuiButtonBase-root": {
       color: linkColor,
+      "& .MuiSvgIcon-root": {
+        color: linkColor,
+      },
+      "&:hover .MuiSvgIcon-root": {
+        color:
+          palette.mode === "dark" ? palette.common.white : palette.common.black,
+      },
     },
-    "& .MuiSvgIcon-root": {
+    "& .MuiLink-root": {
       color: linkColor,
     },
   };
@@ -58,6 +66,21 @@ const DarkModeSwitchListItem = styled(ListItem)(() => ({
     },
   },
 }));
+
+const SpinAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const SpinningListItemButton = styled(ListItemButton)`
+  &:hover {
+    animation: ${SpinAnimation} 400ms linear;
+  }
+`;
 
 const Navbar = (props: PropsWithRoutes) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,7 +150,7 @@ const Navbar = (props: PropsWithRoutes) => {
               arrow
               title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
             >
-              <ListItemButton
+              <SpinningListItemButton
                 className="aspect-square rounded-full"
                 dense
                 onClick={toggleMode}
@@ -139,7 +162,7 @@ const Navbar = (props: PropsWithRoutes) => {
                     <DarkModeOutlined color="action" />
                   )}
                 </ListItemIcon>
-              </ListItemButton>
+              </SpinningListItemButton>
             </Tooltip>
           </DarkModeSwitchListItem>
           {renderRouteLinks(props.routes)}
