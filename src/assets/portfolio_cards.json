@@ -109,15 +109,12 @@
     "shareholderDescription": "This research was part of the PDyNAMICS venture, supported by the National Nuclear Security Administration, Office of Defense Nuclear Nonproliferation Research And Development.",
     "roles": ["Designer", "Researcher"],
     "contributions": [
-      "Explored different methods of Explainable AI.",
-      "Implemented SHAP for model validation and explanation generation.",
-      "Designed an interface to visualize the data output from the AI models."
+      "Designed an intuitive interface to visualize the data output from the AI models, aiding in the understanding of complex AI models."
     ],
     "problemSolving": [
-      "Developed a method to understand black box AI models using SHAP.",
-      "Designed a system to generate both local and global explanations.",
-      "Implemented a solution to handle NaN's in the data with SHAP."
+      "Developed a user-friendly interface to present the results of black box AI models using SHAP.",
+      "Designed a system to generate both local and global explanations, making the AI models more understandable for stakeholders."
     ],
-    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project."
+    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project. My primary role was designing the interface to visualize the AI model outputs."
   }
 ]
