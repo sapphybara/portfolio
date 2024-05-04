@@ -46,7 +46,6 @@ const Portfolio = () => {
             Click on a project to learn more.
           </Typography>
           <Stack
-            alignItems="flex-start"
             className="mb-4"
             direction={{ xs: "column", md: "row" }}
             gap={1}

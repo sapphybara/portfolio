@@ -32,11 +32,14 @@ const PortfolioCard = ({
 
   return (
     <PortfolioWrapper
-      className="mb-4 portfolio-card"
+      className="mb-4 portfolio-card flex flex-col justify-between"
       key={title}
       id={title.replace(/\s/g, "-")}
     >
-      <CardActionArea onClick={() => navigate(`/portfolio/${id}`)}>
+      <CardActionArea
+        className="flex-1"
+        onClick={() => navigate(`/portfolio/${id}`)}
+      >
         <CardContent className="pt-0">
           <CardHeader
             title={title}
