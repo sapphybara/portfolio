@@ -115,6 +115,32 @@
       "Developed a user-friendly interface to present the results of black box AI models using SHAP.",
       "Designed a system to generate both local and global explanations, making the AI models more understandable for stakeholders."
     ],
-    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project. My primary role was designing the interface to visualize the AI model outputs."
+    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project. My primary role was designing the interface to visualize the AI model outputs.",
+    "images": [
+      {
+        "src": "/images/explainable-ai/1.png",
+        "alt": "Explainable AI Interface"
+      },
+      {
+        "src": "/images/explainable-ai/2.png",
+        "alt": "Explainable AI Interface"
+      },
+      {
+        "src": "/images/explainable-ai/3.png",
+        "alt": "Explainable AI Interface"
+      },
+      {
+        "src": "/images/explainable-ai/4.png",
+        "alt": "Explainable AI Interface"
+      },
+      {
+        "src": "/images/explainable-ai/5.png",
+        "alt": "Explainable AI Interface"
+      },
+      {
+        "src": "/images/explainable-ai/6.png",
+        "alt": "Explainable AI Interface"
+      }
+    ]
   }
 ]
