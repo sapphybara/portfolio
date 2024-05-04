@@ -7,7 +7,7 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-06-22T17:58:28.939Z",
+              "apiKeyExpirationDate": "2024-06-22T18:13:18.585Z",
               "apiKeyExpirationDays": 49,
               "description": "used to allow fetching from the api as we're in test mode"
             },
