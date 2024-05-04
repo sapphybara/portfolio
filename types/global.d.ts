@@ -77,7 +77,7 @@ export interface PortfolioItem {
   affiliation: string;
   description: string;
   techStack: TechStack[];
-  linkInfo: LinkInfo;
+  linkInfo?: LinkInfo;
   shareholderDescription?: string;
   roles: Roles[];
   contributions: string[];

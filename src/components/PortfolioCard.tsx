@@ -63,12 +63,16 @@ const PortfolioCard = ({
           <Typography className="mb-0" color="text.secondary" paragraph>
             Project on behalf of: {affiliation}
           </Typography>
-          <MyLink {...linkInfo}>
-            <Typography className="mb-0" paragraph>
-              View Project
-            </Typography>
-            {linkInfo.target === "_blank" && <ArrowOutward fontSize="small" />}
-          </MyLink>
+          {linkInfo && (
+            <MyLink {...linkInfo}>
+              <Typography className="mb-0" paragraph>
+                View Project
+              </Typography>
+              {linkInfo.target === "_blank" && (
+                <ArrowOutward fontSize="small" />
+              )}
+            </MyLink>
+          )}
         </Stack>
       </CardContent>
     </PortfolioWrapper>

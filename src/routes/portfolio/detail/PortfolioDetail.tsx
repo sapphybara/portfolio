@@ -165,19 +165,21 @@ const PortfolioDetail = () => {
               );
             })}
             <Divider className="my-4" />
-            <Button
-              className="ml-auto"
-              endIcon={
-                portfolioDetail.linkInfo.target === "_blank" && (
-                  <ArrowOutward className="text-black" />
-                )
-              }
-              variant="contained"
-              {...portfolioDetail.linkInfo}
-              LinkComponent={MyLink}
-            >
-              View the project
-            </Button>
+            {portfolioDetail.linkInfo && (
+              <Button
+                className="ml-auto"
+                endIcon={
+                  portfolioDetail.linkInfo.target === "_blank" && (
+                    <ArrowOutward className="text-black" />
+                  )
+                }
+                variant="contained"
+                {...portfolioDetail.linkInfo}
+                LinkComponent={MyLink}
+              >
+                View the project
+              </Button>
+            )}
           </Paper>
         </Box>
       </Stack>
