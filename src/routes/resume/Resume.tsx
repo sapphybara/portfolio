@@ -7,7 +7,6 @@ import {
   Stack,
 } from "@mui/material";
 import CollapsibleCard from "@components/CollapsibleCard";
-import "./resume.css";
 import { SharedCardHeaderProps } from "types/global";
 import {
   BusinessCenterOutlined,
