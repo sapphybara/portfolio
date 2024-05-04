@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useContext, useState } from "react";
+import { Fragment, ReactNode, forwardRef, useContext, useState } from "react";
 import {
   AppBar,
   Divider,
@@ -81,10 +81,15 @@ interface SpinningListItemButtonProps extends ListItemButtonProps {
   spin: boolean;
 }
 
-const SpinningListItemButton = styled((props: SpinningListItemButtonProps) => {
-  const { spin: _spin, ...rest } = props;
-  return <ListItemButton {...rest} />;
-})(({ spin }) => ({
+const SpinningListItemButton = styled(
+  forwardRef(
+    (props: SpinningListItemButtonProps, ref: React.Ref<HTMLButtonElement>) => {
+      const { spin: _spin, ...rest } = props;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <ListItemButton ref={ref as any} {...rest} />;
+    }
+  )
+)(({ spin }) => ({
   aspectRatio: spin ? "1" : "inherit",
   justifyContent: "center",
   "&:hover": {
