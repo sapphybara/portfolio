@@ -77,7 +77,7 @@ const PortfolioDetail = () => {
     <>
       <Stack direction="row">
         {isMdUp && (
-          <Box className="sticky top-16 h-screen pr-2">
+          <Box className="sticky top-16 h-[calc(100vh-101px)] pr-2">
             <Typography variant="h5">Overview</Typography>
             <List>
               <ListItem className="text-right">
