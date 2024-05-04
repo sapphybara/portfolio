@@ -92,5 +92,32 @@
         "alt": "HySCAN Results Page: related questions"
       }
     ]
+  },
+  {
+    "id": "explainable-ai",
+    "title": "Explainable AI: Exposing the Black Box",
+    "subheader": "Understanding AI Models and Predictions",
+    "affiliation": "Pacific Northwest National Laboratory",
+    "description": "As part of the larger PDyNAMICS project, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. This work was instrumental in securing an additional $50k in funding.",
+    "techStack": [
+      { "name": "Python", "cardType": "backend" },
+      { "name": "SHAP", "cardType": "tooling" },
+      { "name": "AI", "cardType": "frontend" },
+      { "name": "Adobe XD", "cardType": "design" },
+      { "name": "Blueprint.js", "cardType": "design" }
+    ],
+    "shareholderDescription": "This research was part of the PDyNAMICS venture, supported by the National Nuclear Security Administration, Office of Defense Nuclear Nonproliferation Research And Development.",
+    "roles": ["Designer", "Researcher"],
+    "contributions": [
+      "Explored different methods of Explainable AI.",
+      "Implemented SHAP for model validation and explanation generation.",
+      "Designed an interface to visualize the data output from the AI models."
+    ],
+    "problemSolving": [
+      "Developed a method to understand black box AI models using SHAP.",
+      "Designed a system to generate both local and global explanations.",
+      "Implemented a solution to handle NaN's in the data with SHAP."
+    ],
+    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project."
   }
 ]

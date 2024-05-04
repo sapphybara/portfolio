@@ -12,6 +12,7 @@ import {
   WebAssetOutlined,
   DeveloperModeOutlined,
   PaletteOutlined,
+  ScienceOutlined,
 } from "@mui/icons-material";
 import { PortfolioIconName, Roles, TechStack } from "types/global";
 import { isTechStack } from "@utils/typeGuards";
@@ -29,6 +30,7 @@ const iconMap: Record<PortfolioIconName, ElementType> = {
   library: LibraryBooksOutlined,
   developer: DeveloperModeOutlined,
   designer: PaletteOutlined,
+  researcher: ScienceOutlined,
 };
 
 const TagChips = (props: { items: ChipItem[] }) => {

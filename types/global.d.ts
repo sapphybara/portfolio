@@ -52,9 +52,10 @@ type PortfolioIconName =
   | "language"
   | "library"
   | "developer"
-  | "designer";
+  | "designer"
+  | "researcher";
 
-type Roles = "designer" | "developer";
+type Roles = "designer" | "developer" | "researcher";
 
 interface TechStack {
   name: string;

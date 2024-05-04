@@ -45,7 +45,7 @@ export const isTechStack = (obj: unknown): obj is TechStack =>
 export const isRole = (role: unknown): role is Roles => {
   return (
     typeof role === "string" &&
-    ["developer", "designer"].includes(role.toLowerCase())
+    ["developer", "designer", "researcher"].includes(role.toLowerCase())
   );
 };
 
