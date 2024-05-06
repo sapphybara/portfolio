@@ -42,11 +42,11 @@ const NavList = styled(List)(({ theme }) => {
       justifyContent: "center",
       whiteSpace: "nowrap",
     },
+    "& .MuiSvgIcon-root": {
+      color: linkColor,
+    },
     "& .MuiButtonBase-root": {
       color: linkColor,
-      "& .MuiSvgIcon-root": {
-        color: linkColor,
-      },
       "&:hover .MuiSvgIcon-root": {
         color:
           palette.mode === "dark" ? palette.common.white : palette.common.black,
@@ -54,6 +54,9 @@ const NavList = styled(List)(({ theme }) => {
     },
     "& .MuiLink-root": {
       color: linkColor,
+      display: "flex",
+      gap: theme.spacing(0.5),
+      alignItems: "center",
     },
   };
 });
@@ -146,10 +149,10 @@ const Navbar = (props: PropsWithRoutes) => {
         })}
         {user && shouldRenderChildren && (
           <ListItem>
-            <Link onClick={signOut} underline="hover">
+            <Link component="button" onClick={signOut} underline="hover">
               Sign Out
+              <Logout color="primary" fontSize="small" />
             </Link>
-            <Logout color="primary" fontSize="small" />
           </ListItem>
         )}
       </Fragment>
