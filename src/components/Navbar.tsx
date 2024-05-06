@@ -80,16 +80,16 @@ const SpinAnimation = keyframes`
   }
 `;
 
-interface SpinningListItemButtonProps extends ListItemButtonProps {
-  spin: boolean;
-}
-
 const SpinningListItemButton = styled(
   forwardRef(
-    (props: SpinningListItemButtonProps, ref: React.Ref<HTMLButtonElement>) => {
+    (
+      props: ListItemButtonProps & {
+        spin: boolean;
+      },
+      ref: React.Ref<HTMLDivElement>
+    ) => {
       const { spin: _spin, ...rest } = props;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return <ListItemButton ref={ref as any} {...rest} />;
+      return <ListItemButton ref={ref} {...rest} />;
     }
   )
 )(({ spin }) => ({
