@@ -2,7 +2,7 @@ import { Box, Typography, Breadcrumbs, Link, Grid } from "@mui/material";
 import { NavigateNext } from "@mui/icons-material";
 import { useOutlet, useParams } from "react-router-dom";
 import PortfolioCard from "@components/PortfolioCard";
-import portfolioCards from "src/assets/portfolio_cards.json";
+import portfolioCards from "src/assets/json/portfolio_cards.json";
 import { toSentenceCase } from "@utils/utils";
 import { PortfolioItem } from "types/global";
 
