@@ -60,7 +60,7 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
       },
       MuiSvgIcon: {
         defaultProps: {
-          color: "secondary",
+          color: "primary",
         },
       },
       MuiStack: {
@@ -78,6 +78,18 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
     palette: {
       contrastThreshold: 4.5,
       mode,
+      primary: {
+        main: "#dda0dd",
+      },
+      secondary: {
+        main: "#60e1e0",
+      },
+      success: {
+        main: "#5fc461",
+      },
+      error: {
+        main: "#e45042",
+      },
     },
     typography: {
       fontFamily: fontFamily.body,

@@ -37,7 +37,7 @@ const TagChips = (props: { items: ChipItem[] }) => {
   const renderTagIcon = (iconName: PortfolioIconName) => {
     const Icon =
       iconMap[iconName.toLowerCase() as PortfolioIconName] || ExtensionOutlined;
-    return <Icon color="secondary" fontSize="small" />;
+    return <Icon color="primary" fontSize="small" />;
   };
 
   return (
