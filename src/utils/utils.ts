@@ -1,5 +1,4 @@
 import { CreateCreditCardInput } from "src/API";
-import portfolioCards from "src/assets/portfolio_cards.json";
 
 export const toSentenceCase = (str: string) => {
   if (!str) {
@@ -27,15 +26,6 @@ export const creditCardTypeMapping: {
 export const creditCardKeys = Object.keys(
   creditCardTypeMapping
 ) as (keyof CreateCreditCardInput)[];
-
-export const getPortfolioDetail = ({
-  params,
-}: {
-  params: { projectId: string };
-}) => {
-  const { projectId } = params;
-  return portfolioCards.find((card) => card.id === projectId) ?? null;
-};
 
 export const formatFinancialNumber = (
   value: number,
