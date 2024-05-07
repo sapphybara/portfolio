@@ -48,6 +48,7 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
   const theme = useTheme();
   const shouldRenderBtnTxt = useMediaQuery(theme.breakpoints.up("md"));
   const { isDarkMode } = useContext(ThemeModeContext);
+  const btnCls = isDarkMode ? "" : "text-white";
 
   return (
     <Stack
@@ -75,14 +76,14 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
 
           return (
             <Button
-              className={`normal-case${!isDarkMode ? " text-white" : ""}`}
+              className={`normal-case ${btnCls}`}
               color={isDarkMode ? "primary" : undefined}
               key={index}
-              startIcon={<StartIcon color="action" />}
+              startIcon={<StartIcon className={btnCls} />}
               {...item}
               target="_blank"
               rel="noopener noreferrer"
-              variant="text"
+              variant="contained"
             >
               {shouldRenderBtnTxt && children}
             </Button>

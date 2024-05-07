@@ -33,8 +33,8 @@ import { useFetcher, useRouteLoaderData } from "react-router-dom";
 
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
-  const linkColor =
-    palette.mode === "dark" ? palette.primary.main : palette.common.black;
+  const isDarkMode = palette.mode === "dark";
+  const linkColor = isDarkMode ? palette.primary.main : palette.common.white;
 
   return {
     "& .MuiListItem-root": {
@@ -48,7 +48,7 @@ const NavList = styled(List)(({ theme }) => {
     "& .MuiButtonBase-root": {
       color: linkColor,
       "&:hover .MuiSvgIcon-root": {
-        color: palette.common.white,
+        color: isDarkMode ? palette.common.white : palette.common.black,
       },
     },
     "& .MuiLink-root": {
