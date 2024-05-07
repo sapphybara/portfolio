@@ -1,5 +1,5 @@
 import { RouteObject, redirect } from "react-router-dom";
-import Admin from "@routes/Admin/Admin";
+import Admin from "@routes/admin/Admin";
 import App from "src/App";
 import Error from "@routes/error/Error";
 import Home from "@routes/home/Home";
@@ -7,7 +7,6 @@ import Portfolio from "@routes/portfolio/Portfolio";
 import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail";
 import Resume from "@routes/resume/Resume";
 import SignIn from "@components/SignIn";
-import { getPortfolioDetail } from "@utils/utils";
 import {
   isAuthenticated,
   signIn,
@@ -43,7 +42,7 @@ export const useRoutes = () => {
             {
               path: ":projectId",
               element: <PortfolioDetail />,
-              loader: getPortfolioDetail,
+              lazy: () => import("@routes/portfolio/detail/lazy"),
             },
           ],
         },
@@ -54,7 +53,7 @@ export const useRoutes = () => {
         {
           path: "admin",
           element: <Admin />,
-          lazy: () => import("@routes/Admin/lazy"),
+          lazy: () => import("src/routes/admin/lazy"),
         },
         {
           path: "login",
