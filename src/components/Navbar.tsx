@@ -26,10 +26,10 @@ import {
   Logout,
   Menu as MenuIcon,
 } from "@mui/icons-material";
-import { PropsWithRoutes } from "types/global";
-import { useAuth } from "@hooks/hooks";
+import { PropsWithRoutes, PropsWithUser } from "types/global";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 import { ThemeModeContext } from "@context/ThemeModeContext";
+import { useFetcher, useRouteLoaderData } from "react-router-dom";
 
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
@@ -108,8 +108,12 @@ const MobileDrawer = styled(Drawer)(() => ({
 }));
 
 const Navbar = (props: PropsWithRoutes) => {
+  const fetcher = useFetcher();
+  const { user } = (useRouteLoaderData("root") as PropsWithUser) || {
+    user: null,
+  };
+
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, signOut } = useAuth();
   const { isDarkMode, toggleMode } = useContext(ThemeModeContext);
 
   const handleDrawerToggle = () => {
@@ -127,7 +131,10 @@ const Navbar = (props: PropsWithRoutes) => {
             return renderRouteLinks(route.children, false);
           }
           const { path = "" } = route;
-          if (path === "admin" && !user) {
+          if (
+            (path === "admin" && !user) ||
+            ["login", "logout"].includes(path)
+          ) {
             return null;
           }
           const name =
@@ -148,12 +155,14 @@ const Navbar = (props: PropsWithRoutes) => {
           );
         })}
         {user && shouldRenderChildren && (
-          <ListItem>
-            <Link component="button" onClick={signOut} underline="hover">
-              Sign Out
-              <Logout color="primary" fontSize="small" />
-            </Link>
-          </ListItem>
+          <fetcher.Form action="/logout" method="post">
+            <ListItem>
+              <Link component="button" type="submit" underline="hover">
+                Sign Out
+                <Logout color="primary" fontSize="small" />
+              </Link>
+            </ListItem>
+          </fetcher.Form>
         )}
       </Fragment>
     );

@@ -98,3 +98,7 @@ export interface CCLevelConsumerProps {
   levelColors: CCLevelMapping;
   levels: CCScoreLevel[];
 }
+
+export interface PropsWithUser {
+  user: string | null;
+}
