@@ -54,14 +54,7 @@ export const useRoutes = () => {
         {
           path: "admin",
           element: <Admin />,
-          loader: async ({ request }) => {
-            if (!(await isAuthenticated())) {
-              const params = new URLSearchParams();
-              params.set("from", new URL(request.url).pathname);
-              return redirect(`/login?${params.toString()}`);
-            }
-            return null;
-          },
+          lazy: () => import("@routes/Admin/lazy"),
         },
         {
           path: "login",
