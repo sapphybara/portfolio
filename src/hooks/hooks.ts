@@ -1,9 +1,9 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useRouteLoaderData } from "react-router-dom";
 import { listCreditCards } from "src/graphql/queries";
 import { Client } from "aws-amplify/api";
 import { CreateCreditCardInput, CreditCard } from "src/API";
-import { AuthContext } from "@context/AuthProvider";
+import { PropsWithUser } from "types/global";
 
 export const useTitle = () => {
   const { pathname } = useLocation();
@@ -27,7 +27,7 @@ export const useFetchCreditCards = (client: Client) => {
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
-  const { user } = useAuth();
+  const { user } = useRouteLoaderData("root") as PropsWithUser;
 
   const fetchCreditCards = useCallback(async () => {
     if (!user) {
@@ -53,12 +53,4 @@ export const useFetchCreditCards = (client: Client) => {
   }, [client, fetchCreditCards]);
 
   return { creditCards, error, fetchCreditCards, loading };
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === null) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };
