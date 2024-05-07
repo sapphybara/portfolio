@@ -1,4 +1,4 @@
-import { RouteObject, redirect } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import Admin from "@routes/admin/Admin";
 import App from "src/App";
 import Error from "@routes/error/Error";
@@ -7,7 +7,7 @@ import Portfolio from "@routes/portfolio/Portfolio";
 import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail";
 import Resume from "@routes/resume/Resume";
 import SignIn from "@components/SignIn";
-import { signOut, username } from "@utils/AuthProvider";
+import { username } from "@utils/AuthProvider";
 
 export const useRoutes = () => {
   const routes = [
@@ -56,11 +56,7 @@ export const useRoutes = () => {
         },
         {
           path: "logout",
-          async action() {
-            await signOut();
-            // todo redirect to previous page
-            return redirect("/");
-          },
+          lazy: () => import("@routes/logout/lazy"),
         },
       ],
     },
