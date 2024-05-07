@@ -9,7 +9,6 @@ import "@fontsource/lato/900.css";
 import "@fontsource-variable/merriweather-sans";
 import ThemeProvider from "@context/ThemeModeContext.tsx";
 import AppProvider from "@context/AppProvider.tsx";
-import AuthProvider from "@context/AuthProvider";
 import "./index.css";
 
 // configure AWS Amplify
@@ -23,9 +22,7 @@ createRoot(rootElement).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider>
-        <AuthProvider>
-          <AppProvider rootElement={rootElement} />
-        </AuthProvider>
+        <AppProvider rootElement={rootElement} />
       </ThemeProvider>
     </StyledEngineProvider>
   </React.StrictMode>

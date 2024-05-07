@@ -9,14 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useAuth } from "@hooks/hooks";
+import { Form, useActionData, useLocation } from "react-router-dom";
 
 const SignIn = () => {
+  const actionData = useActionData() as { error: string } | undefined;
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const from = params.get("from") || "/";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
-  const { error, signIn, signUp } = useAuth();
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
@@ -30,19 +34,12 @@ const SignIn = () => {
   };
 
   return (
-    <Stack
-      alignItems="flex-start"
-      component="form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (tabIndex === 0) {
-          signIn(email, password);
-        } else {
-          signUp(email, password, confirmPassword);
-        }
-      }}
-    >
-      <Typography color="error">{error?.toString()}</Typography>
+    <Stack alignItems="flex-start" component={Form} method="post" replace>
+      <Typography variant="decoration">Please</Typography>
+      <Typography variant="h1">Sign In</Typography>
+      <Input name="tabIndex" type="hidden" value={tabIndex} />
+      <Input name="redirectTo" type="hidden" value={from} />
+      <Typography color="error">{actionData?.error}</Typography>
       <Tabs
         className="mb-4"
         onChange={(_e, value) => setTabIndex(value)}
@@ -56,6 +53,7 @@ const SignIn = () => {
         <Input
           className="w-[200px]"
           id="email"
+          name="email"
           type="text"
           onChange={handleFormChange}
           value={email}
@@ -66,6 +64,7 @@ const SignIn = () => {
         <Input
           className="w-[200px]"
           id="password"
+          name="password"
           type="password"
           onChange={handleFormChange}
           value={password}
@@ -77,6 +76,7 @@ const SignIn = () => {
           <Input
             className="w-[200px]"
             id="confirmPassword"
+            name="confirmPassword"
             type="password"
             onChange={handleFormChange}
             value={confirmPassword}
