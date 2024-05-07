@@ -47,8 +47,14 @@ const Portfolio = () => {
           </Typography>
           <Grid className="mb-4" container spacing={1}>
             {portfolioCards.map((card) => (
-              <Grid container item justifyContent="space-between" xs={6}>
-                <PortfolioCard key={card.id} {...(card as PortfolioItem)} />
+              <Grid
+                container
+                item
+                justifyContent="space-between"
+                key={card.id}
+                xs={6}
+              >
+                <PortfolioCard {...(card as PortfolioItem)} />
               </Grid>
             ))}
           </Grid>
