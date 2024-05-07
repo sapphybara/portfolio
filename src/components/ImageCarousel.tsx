@@ -1,14 +1,21 @@
-import { Box, Card, CardMedia, Fab, Slide } from "@mui/material";
+import { Box, Card, CardMedia, Fab, Slide, styled } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { type PortfolioItemImage } from "types/global";
+
+const AbsoluteFab = styled(Fab)({
+  position: "absolute",
+  top: "50%",
+  "& .MuiSvgIcon-root": {
+    color: "black",
+  },
+});
 
 const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<
     "left" | "right" | "up" | "down"
   >("left");
-  const slideContainerRef = useRef<HTMLDivElement | null>(null);
 
   const nextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -23,35 +30,28 @@ const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
   };
 
   return (
-    <Box className="relative" ref={slideContainerRef}>
-      <Fab
+    <Box className="relative">
+      <AbsoluteFab
         aria-label="previous slide"
-        className="absolute"
-        color="primary"
-        style={{ position: "absolute", top: "50%", left: "10px" }}
+        className="left-2.5"
+        color="secondary"
         onClick={prevSlide}
       >
-        <ArrowBack color="action" />
-      </Fab>
-      <Slide
-        container={slideContainerRef.current}
-        direction={slideDirection}
-        in={true}
-        key={activeIndex}
-      >
+        <ArrowBack />
+      </AbsoluteFab>
+      <Slide direction={slideDirection} in={true} key={activeIndex}>
         <Card>
           <CardMedia component="img" {...images[activeIndex]} />
         </Card>
       </Slide>
-      <Fab
+      <AbsoluteFab
         aria-label="next slide"
-        className="absolute"
-        color="primary"
-        style={{ position: "absolute", top: "50%", right: "10px" }}
+        className="right-2.5"
+        color="secondary"
         onClick={nextSlide}
       >
-        <ArrowForward color="action" />
-      </Fab>
+        <ArrowForward />
+      </AbsoluteFab>
     </Box>
   );
 };
