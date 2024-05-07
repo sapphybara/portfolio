@@ -19,6 +19,15 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
   };
   const isDarkMode = mode === "dark";
 
+  const paletteColors = {
+    primary: {
+      main: isDarkMode ? "#dda0dd" : "#8e0f9e",
+    },
+    secondary: {
+      main: isDarkMode ? "#60e1e0" : "#248232",
+    },
+  };
+
   let theme = createThemeFn({
     components: {
       MuiLink: {
@@ -78,18 +87,7 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
     palette: {
       contrastThreshold: 4.5,
       mode,
-      primary: {
-        main: "#dda0dd",
-      },
-      secondary: {
-        main: "#60e1e0",
-      },
-      success: {
-        main: "#5fc461",
-      },
-      error: {
-        main: "#e45042",
-      },
+      ...paletteColors,
     },
     typography: {
       fontFamily: fontFamily.body,
