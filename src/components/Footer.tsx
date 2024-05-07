@@ -83,7 +83,7 @@ function Footer(props: HTMLAttributes<HTMLDivElement>) {
               {...item}
               target="_blank"
               rel="noopener noreferrer"
-              variant="contained"
+              variant="text"
             >
               {shouldRenderBtnTxt && children}
             </Button>
