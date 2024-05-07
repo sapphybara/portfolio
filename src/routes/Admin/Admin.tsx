@@ -6,12 +6,12 @@ import { generateClient } from "aws-amplify/api";
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import AddCreditCardDialog from "@components/AddCreditCardDialog";
 import { useFetchCreditCards } from "@hooks/hooks";
-import { useAuth } from "@hooks/hooks";
-import SignIn from "src/components/SignIn";
+import { useFetcher } from "react-router-dom";
 
 const client = generateClient();
 
 const Admin = () => {
+  const fetcher = useFetcher();
   const [isAddCreditCardDialogOpen, setIsAddCreditCardDialogOpen] =
     useState(false);
   const {
@@ -20,7 +20,6 @@ const Admin = () => {
     error: ccError,
     loading: ccIsLoading,
   } = useFetchCreditCards(client);
-  const { isLoading: userIsLoading, user, signOut } = useAuth();
 
   const changeAddCreditCardDialogOpen = (prevState?: boolean) => {
     if (prevState === undefined) {
@@ -42,10 +41,8 @@ const Admin = () => {
     <Box>
       <Typography variant="decoration">Manage</Typography>
       <Typography variant="h1">Admin</Typography>
-      {userIsLoading || ccIsLoading ? (
+      {ccIsLoading ? (
         <Typography paragraph>Loading...</Typography>
-      ) : !user ? (
-        <SignIn />
       ) : (
         <>
           <AddCreditCardDialog
@@ -59,14 +56,16 @@ const Admin = () => {
               changeAddCreditCardDialogOpen()
             }
           />
-          <Button
-            className="my-2"
-            color="warning"
-            onClick={signOut}
-            variant="contained"
-          >
-            Sign Out
-          </Button>
+          <fetcher.Form method="post" action="/logout">
+            <Button
+              className="my-2"
+              color="warning"
+              type="submit"
+              variant="contained"
+            >
+              Sign Out
+            </Button>
+          </fetcher.Form>
         </>
       )}
     </Box>
