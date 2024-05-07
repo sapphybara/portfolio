@@ -16,11 +16,14 @@ import {
   ScienceOutlined,
   TerminalOutlined,
 } from "@mui/icons-material";
+import resumeData from "src/assets/json/resume_data.json";
 
 type DataType = "list" | "paragraph";
 
-interface BaseResumeDataItem extends SharedCardHeaderProps {
+interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
   defaultIsOpen?: boolean;
+  id: string;
+  title: string;
 }
 
 interface StringResumeDataItem extends BaseResumeDataItem {
@@ -46,126 +49,23 @@ const isResumeDataItem = (item: unknown): item is ResumeDataItem =>
       typeof dataItem === "string" || isResumeDataItem(dataItem)
   );
 
-const resumeData: ResumeDataItem[] = [
-  {
-    title: "Skills",
-    avatar: <TerminalOutlined fontSize="large" />,
-    data: [
-      "React",
-      "JavaScript/ES6+",
-      "TypeScript",
-      "CSS3/HTML5",
-      "SCSS/Bootstrap/Tailwind",
-      "React Native",
-      "Python",
-      "Django Web Framework",
-      "Plotly Dash Framework",
-      "Pytest",
-      "styled-components",
-      "Git",
-      "MySQL",
-      "PostgreSQL",
-      "GraphQL",
-      "Technical Documentation",
-      "Atlassian Suite",
-      "SCRUM",
-      "UI/UX Design",
-      "Figma",
-      "Adobe XD",
-      "Node.js",
-      "WCAG 2.x",
-      "AWS Amplify",
-      "Jest",
-      "Cypress",
-    ],
-    dataType: "list",
-    defaultIsOpen: true,
-  },
-  {
-    title: "Experience",
-    avatar: <BusinessCenterOutlined fontSize="large" />,
-    data: [
-      {
-        title: "Front End Developer",
-        avatar: <DeveloperBoardOutlined fontSize="large" />,
-        subheader:
-          "Pacific Northwest National Laboratory | Mar 2021 - Dec 2023",
-        data: [
-          "As a Front End Developer at Pacific Northwest National Lab, I collaborated closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilizing my expertise in React, TypeScript, and Python, I contributed to the creation of cutting-edge solutions tailored to meet project requirements.",
-          "I also took the lead in UI/UX design, implementing enhancements that proved instrumental in securing an additional $50k in funding. Under tight deadlines, I demonstrated my ability to thrive under pressure by implementing last-minute bug fixes and features, ensuring client satisfaction through reliable and informative demos.",
-          "Furthermore, I played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment.",
-        ],
-        dataType: "paragraph",
-      },
-      {
-        title: "Web Development Intern",
-        avatar: <LightbulbOutlined fontSize="large" />,
-        subheader:
-          "Pacific Northwest National Laboratory | May 2020 - Aug 2020",
-        data: [
-          "During my tenure as a Web Development Intern at Pacific Northwest National Lab in the summer of 2020, I gained valuable hands-on experience in frontend development. I was responsible for developing UI features in a React application and implementing efficient real-time charting using D3.js.",
-          "This internship provided me with the opportunity to enhance my skills in React, Node.js, JavaScript, CSS3, and HTML5 while contributing to real-world projects in a professional environment.",
-        ],
-        dataType: "paragraph",
-      },
-      {
-        title: "Undergrad Research Assistant",
-        avatar: <ScienceOutlined fontSize="large" />,
-        subheader:
-          "UT Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
-        data: [
-          "In my role as an Undergraduate Research Assistant at The University of Texas at Austin Nuclear Engineering Teaching Lab, I led software development projects focused on autonomous outdoor air samplers. Leveraging my knowledge of Python, Django, JavaScript, and HTML/CSS, I developed a local Django server for result processing.",
-          "This experience allowed me to apply my technical skills to address real-world challenges and further develop my expertise in software development and project management.",
-        ],
-        dataType: "paragraph",
-      },
-    ],
-    defaultIsOpen: true,
-  },
-  {
-    title: "Education",
-    subheader: "",
-    avatar: <SchoolOutlined fontSize="large" />,
-    data: [
-      {
-        title: "B.S. Mathematics, Certificate in Computer Science",
-        subheader: "University of Texas at Austin | 2019 - 2023",
-        data: [],
-        dataType: "paragraph",
-        subheaderTypographyProps: {
-          component: "h6",
-          variant: "subtitle1",
-        },
-        titleTypographyProps: {
-          component: "h3",
-          variant: "h5",
-        },
-      },
-      {
-        title: "A.S. Mathematics",
-        subheader: "Austin Community College | 2018 - 2019",
-        data: [],
-        dataType: "paragraph",
-        subheaderTypographyProps: {
-          component: "h6",
-          variant: "subtitle1",
-        },
-        titleTypographyProps: {
-          component: "h3",
-          variant: "h5",
-        },
-      },
-    ],
-    dataType: "list",
-    defaultIsOpen: true,
-  },
-];
+const avatarRecord = {
+  skills: TerminalOutlined,
+  experience: BusinessCenterOutlined,
+  experience1: DeveloperBoardOutlined,
+  experience2: LightbulbOutlined,
+  experience3: ScienceOutlined,
+  education: SchoolOutlined,
+  education1: null,
+  education2: null,
+};
 
 const Resume = () => {
   const renderResumeData = (
     {
       data,
       dataType,
+      id,
       subheaderTypographyProps = {
         component: "h4",
         variant: "h6",
@@ -183,17 +83,19 @@ const Resume = () => {
       };
     }
     const newNestLevel = Math.min(nestLevel + 1, 5) as 2 | 3 | 4 | 5;
+    const Avatar = avatarRecord[id as keyof typeof avatarRecord];
 
     return (
       <CollapsibleCard
-        key={title?.toString()}
+        key={title}
         title={title}
         subheaderTypographyProps={subheaderTypographyProps}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}
+        avatar={Avatar && <Avatar fontSize="large" />}
       >
         {data.length && (
-          <CardContent component={Stack} gap={2} id={title?.toString()}>
+          <CardContent component={Stack} gap={2} id={title}>
             {data.every(isResumeDataItem) ? (
               data.map((d) => renderResumeData(d, newNestLevel))
             ) : dataType === "list" ? (
@@ -227,7 +129,7 @@ const Resume = () => {
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <Box className="flex flex-col gap-8 my-4">
-        {resumeData.map((d) => renderResumeData(d))}
+        {(resumeData as ResumeDataItem[]).map((d) => renderResumeData(d))}
       </Box>
     </Box>
   );
