@@ -95,6 +95,16 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
   });
 
   theme = createThemeFn(theme, {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: `
+          ::selection {
+            background-color: ${theme.palette.secondary.main};
+            color: ${theme.palette.secondary.contrastText};
+          }
+        `,
+      },
+    },
     typography: {
       h1: {
         fontFamily: fontFamily.header,
