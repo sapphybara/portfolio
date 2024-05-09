@@ -8,6 +8,7 @@ import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail";
 import Resume from "@routes/resume/Resume";
 import SignIn from "@components/SignIn";
 import { username } from "@utils/AuthProvider";
+import AddCreditCardDialog from "src/components/AddCreditCardDialog";
 
 export const useRoutes = () => {
   const routes = [
@@ -47,7 +48,14 @@ export const useRoutes = () => {
         {
           path: "admin",
           element: <Admin />,
-          lazy: () => import("src/routes/admin/lazy"),
+          lazy: () => import("@routes/admin/lazy"),
+          children: [
+            {
+              path: "credit-cards/new",
+              element: <AddCreditCardDialog />,
+              lazy: () => import("@routes/admin/credit-cards/lazy"),
+            },
+          ],
         },
         {
           path: "login",

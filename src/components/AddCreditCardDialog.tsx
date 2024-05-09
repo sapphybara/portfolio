@@ -11,61 +11,17 @@ import {
   InputLabel,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { generateClient } from "aws-amplify/api";
-import { ChangeEvent, useState } from "react";
 import { CreateCreditCardInput } from "src/API";
-import { createCreditCard } from "src/graphql/mutations";
 import {
   toSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
 } from "@utils/utils";
-import { isCreditCard } from "@utils/typeGuards";
+import { Form, useLocation, useNavigate } from "react-router-dom";
 
-const client = generateClient();
-const initialFormState: Partial<CreateCreditCardInput> = {
-  isEarningInterest: false,
-};
-
-const AddCreditCardDialog = ({
-  closeDialog,
-  fetchCreditCards,
-  open,
-}: {
-  closeDialog: () => void;
-  fetchCreditCards: () => Promise<void>;
-  open: boolean;
-}) => {
-  const [formState, setFormState] =
-    useState<Partial<CreateCreditCardInput>>(initialFormState);
-
-  async function addCreditCard() {
-    try {
-      if (!isCreditCard(formState)) {
-        return;
-      }
-
-      const creditCard = { ...formState };
-      setFormState(initialFormState);
-      await client.graphql({
-        query: createCreditCard,
-        variables: {
-          input: creditCard,
-        },
-      });
-      closeDialog();
-      fetchCreditCards();
-    } catch (err) {
-      console.log("error creating new credit card:", err);
-    }
-  }
-
-  const handleFormChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target as HTMLInputElement | HTMLTextAreaElement;
-    setFormState({ ...formState, [id]: value });
-  };
+const AddCreditCardDialog = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const renderFormControl = (key: keyof CreateCreditCardInput) => {
     const type = creditCardTypeMapping[key];
@@ -78,17 +34,7 @@ const AddCreditCardDialog = ({
     if (type === "boolean") {
       return (
         <FormControl key={key}>
-          <FormControlLabel
-            control={<Checkbox />}
-            label={label}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                [key]: (e?.target as HTMLInputElement).checked,
-              })
-            }
-            required
-          />
+          <FormControlLabel control={<Checkbox name={key} />} label={label} />
         </FormControl>
       );
     }
@@ -96,12 +42,10 @@ const AddCreditCardDialog = ({
     if (type === "date") {
       return (
         <DatePicker
-          format="DD"
+          format="YYYY-MM-DD"
           key={key}
           label={label}
-          onChange={(value) =>
-            setFormState({ ...formState, [key]: value?.format("YYYY-MM-DD") })
-          }
+          name={key}
           views={["day"]}
         />
       );
@@ -115,7 +59,7 @@ const AddCreditCardDialog = ({
           inputProps={{
             step: 0.01,
           }}
-          onChange={handleFormChange}
+          name={key}
           type={type}
           aria-describedby={`input for ${label}`}
         />
@@ -123,18 +67,30 @@ const AddCreditCardDialog = ({
     );
   };
 
+  const closeDialog = () => {
+    // they key seems to be default if the user came from a separate site; don't send them back there
+    if (location.key !== "default") {
+      navigate(-1);
+    } else {
+      navigate("/admin");
+    }
+  };
+
   return (
     <Dialog
-      open={open}
-      PaperProps={{ className: "w-3/5 min-w-64", component: "form" }}
+      open={true}
+      PaperProps={{
+        className: "w-3/5 min-w-64",
+        component: Form,
+        method: "post",
+        replace: true,
+      }}
     >
       <DialogTitle>Add Credit Card</DialogTitle>
       <DialogContent>{creditCardKeys.map(renderFormControl)}</DialogContent>
       <DialogActions>
         <Button onClick={closeDialog}>Cancel</Button>
-        <Button disabled={!isCreditCard(formState)} onClick={addCreditCard}>
-          Add Card
-        </Button>
+        <Button type="submit">Add Card</Button>
       </DialogActions>
     </Dialog>
   );
