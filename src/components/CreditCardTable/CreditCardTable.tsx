@@ -41,13 +41,9 @@ const levelColors: Record<
 
 interface CreditCardTableProps {
   creditCards: CreditCard[] | CreateCreditCardInput[];
-  toggleAddCreditCardDialogOpen: () => void;
 }
 
-const CreditCardTable = ({
-  creditCards,
-  toggleAddCreditCardDialogOpen,
-}: CreditCardTableProps) => {
+const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
       field: key,
@@ -106,7 +102,7 @@ const CreditCardTable = ({
           Credit Cards
         </Typography>
         <Stack direction="column" alignItems="flex-end">
-          <Button onClick={toggleAddCreditCardDialogOpen} variant="contained">
+          <Button href="/admin/credit-cards/new" variant="contained">
             Add Credit Card
           </Button>
           <ScoreKey levels={levels} levelColors={levelColors} />
