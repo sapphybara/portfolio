@@ -1,25 +1,16 @@
 import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-import { generateClient } from "aws-amplify/api";
-
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import AddCreditCardDialog from "@components/AddCreditCardDialog";
-import { useFetchCreditCards } from "@hooks/hooks";
-import { useFetcher } from "react-router-dom";
-
-const client = generateClient();
+import { useFetcher, useLoaderData } from "react-router-dom";
+import { CreditCard } from "src/API";
 
 const Admin = () => {
   const fetcher = useFetcher();
   const [isAddCreditCardDialogOpen, setIsAddCreditCardDialogOpen] =
     useState(false);
-  const {
-    creditCards,
-    fetchCreditCards,
-    error: ccError,
-    loading: ccIsLoading,
-  } = useFetchCreditCards(client);
+  const creditCards = useLoaderData() as CreditCard[];
 
   const changeAddCreditCardDialogOpen = (prevState?: boolean) => {
     if (prevState === undefined) {
@@ -33,21 +24,14 @@ const Admin = () => {
     changeAddCreditCardDialogOpen(false);
   };
 
-  if (ccError) {
-    return <Typography>Error fetching credit cards</Typography>;
-  }
-
   return (
     <Box>
       <Typography variant="decoration">Manage</Typography>
       <Typography variant="h1">Admin</Typography>
-      {ccIsLoading ? (
-        <Typography paragraph>Loading...</Typography>
-      ) : (
+      {
         <>
           <AddCreditCardDialog
             closeDialog={closeCreditCardDialog}
-            fetchCreditCards={fetchCreditCards}
             open={isAddCreditCardDialogOpen}
           />
           <CreditCardTable
@@ -67,7 +51,7 @@ const Admin = () => {
             </Button>
           </fetcher.Form>
         </>
-      )}
+      }
     </Box>
   );
 };
