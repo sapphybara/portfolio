@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, redirect } from "react-router-dom";
+import { ActionFunction, LoaderFunction, redirect } from "react-router-dom";
 import { isAuthenticated, signIn, signUp } from "@utils/AuthProvider";
 
 /**
@@ -7,7 +7,7 @@ import { isAuthenticated, signIn, signUp } from "@utils/AuthProvider";
  * @param args the arguments for the loader function.
  * @returns A promise that resolves to an object with an optional error property or void.
  */
-export const action = async ({ request }: LoaderFunctionArgs) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const [email, password, confirmPassword, tabIndex, redirectTo] = [
     "email",
@@ -43,7 +43,7 @@ export const action = async ({ request }: LoaderFunctionArgs) => {
   return redirect(redirectTo || "/");
 };
 
-export const loader = async () => {
+export const loader: LoaderFunction = async () => {
   if (await isAuthenticated()) {
     return redirect("/");
   }

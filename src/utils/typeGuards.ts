@@ -2,19 +2,22 @@ import { CreateCreditCardInput } from "src/API";
 import { PortfolioItemImage, Roles, TechStack } from "types/global";
 import { creditCardKeys, creditCardTypeMapping } from "./utils";
 
-export const isCreditCard = (
-  card?: Partial<CreateCreditCardInput>
-): card is CreateCreditCardInput => {
-  if (!card) {
+export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
+  if (!card || typeof card !== "object" || card === null) {
     return false;
   }
+
+  const cardAsRecord = card as Record<
+    keyof CreateCreditCardInput,
+    CreateCreditCardInput[(typeof creditCardKeys)[number]]
+  >;
 
   return creditCardKeys.every((key) => {
     if (key === "score") {
       return true;
     }
 
-    const value = card[key];
+    const value = cardAsRecord[key];
     const type = creditCardTypeMapping[key];
 
     if (value === undefined) {
@@ -28,6 +31,7 @@ export const isCreditCard = (
         return !isNaN(Number(value));
       case "text":
         return typeof value === "string";
+      case "boolean":
       default:
         return typeof value === type;
     }
