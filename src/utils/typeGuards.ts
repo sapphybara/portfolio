@@ -7,10 +7,9 @@ export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
     return false;
   }
 
-  const cardAsRecord = card as Record<
-    keyof CreateCreditCardInput,
-    CreateCreditCardInput[(typeof creditCardKeys)[number]]
-  >;
+  const cardAsRecord = card as {
+    [K in keyof CreateCreditCardInput]: CreateCreditCardInput[(typeof creditCardKeys)[number]];
+  };
 
   return creditCardKeys.every((key) => {
     if (key === "score") {

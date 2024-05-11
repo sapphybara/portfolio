@@ -20,7 +20,7 @@ import { toSentenceCase } from "@/utils/utils";
 
 type ChipItem = TechStack | Roles;
 
-const iconMap: Record<PortfolioIconName, ElementType> = {
+const iconMap: { [K in PortfolioIconName]: ElementType } = {
   frontend: DesktopWindowsOutlined,
   backend: StorageOutlined,
   fullstack: WebAssetOutlined,

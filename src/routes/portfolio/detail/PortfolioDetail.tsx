@@ -47,7 +47,7 @@ const headers = [
 
 type HeaderKeys = Extract<keyof PortfolioItem, (typeof headers)[number]>;
 
-const icons: Record<HeaderKeys, React.ElementType> = {
+const icons: { [K in HeaderKeys]: React.ElementType } = {
   description: Description,
   roles: AssignmentInd,
   contributions: Build,

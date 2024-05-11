@@ -38,10 +38,9 @@ type GridRowId = Extract<GridRowIdType, string>;
 
 const client = generateClient();
 
-const columnWidths: Record<
-  Exclude<keyof CreateCreditCardInput, "id">,
-  number
-> = {
+const columnWidths: {
+  [K in Exclude<keyof CreateCreditCardInput, "id">]: number;
+} = {
   cardName: 132,
   score: 82,
   apr: 82,
@@ -53,10 +52,12 @@ const columnWidths: Record<
 };
 
 const levels: CCScoreLevel[] = [1, 2, 3, 4];
-const levelColors: Record<
-  CCScoreLevel,
-  { color: "success" | "info" | "warning" | "error"; label: string }
-> = {
+const levelColors: {
+  [K in CCScoreLevel]: {
+    color: "success" | "info" | "warning" | "error";
+    label: string;
+  };
+} = {
   1: { color: "success", label: "low priority" },
   2: { color: "info", label: "mid priority" },
   3: { color: "warning", label: "high priority" },
