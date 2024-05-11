@@ -135,7 +135,7 @@ const Navbar = (props: PropsWithRoutes) => {
           }
           const { path = "" } = route;
           if (
-            (path === "admin" && !user) ||
+            (path === "admin" && import.meta.env.PROD && !user) ||
             ["login", "logout"].includes(path)
           ) {
             return null;
