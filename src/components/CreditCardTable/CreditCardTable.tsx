@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Typography, Button, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 
@@ -12,6 +12,7 @@ import {
 } from "@utils/utils";
 import StyledDataGrid from "./StyledDataGrid";
 import ScoreKey from "./ScoreKey";
+import EditToolbar from "./EditToolbar";
 import { CCScoreLevel } from "types/global";
 
 const columnWidths: Record<
@@ -46,6 +47,7 @@ interface CreditCardTableProps {
 const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
   const columns = useMemo(() => {
     return creditCardKeys.map((key) => ({
+      editable: true,
       field: key,
       headerName: toSentenceCase(key),
       type:
@@ -101,12 +103,7 @@ const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
         <Typography component="h2" variant="h5">
           Credit Cards
         </Typography>
-        <Stack direction="column" alignItems="flex-end">
-          <Button href="/admin/credit-cards/new" variant="contained">
-            Add Credit Card
-          </Button>
-          <ScoreKey levels={levels} levelColors={levelColors} />
-        </Stack>
+        <ScoreKey levels={levels} levelColors={levelColors} />
       </Stack>
       <StyledDataGrid
         autoHeight
@@ -132,6 +129,9 @@ const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
             return "level-3";
           }
           return "level-4";
+        }}
+        slots={{
+          toolbar: EditToolbar,
         }}
       />
     </>
