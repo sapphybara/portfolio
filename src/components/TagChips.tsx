@@ -16,6 +16,7 @@ import {
 } from "@mui/icons-material";
 import { PortfolioIconName, Roles, TechStack } from "types/global";
 import { isTechStack } from "@utils/typeGuards";
+import { toSentenceCase } from "@/utils/utils";
 
 type ChipItem = TechStack | Roles;
 
@@ -35,8 +36,7 @@ const iconMap: Record<PortfolioIconName, ElementType> = {
 
 const TagChips = (props: { items: ChipItem[] }) => {
   const renderTagIcon = (iconName: PortfolioIconName) => {
-    const Icon =
-      iconMap[iconName.toLowerCase() as PortfolioIconName] || ExtensionOutlined;
+    const Icon = iconMap[iconName] || ExtensionOutlined;
     return <Icon color="primary" fontSize="small" />;
   };
 
@@ -60,7 +60,7 @@ const TagChips = (props: { items: ChipItem[] }) => {
           iconName = item.cardType;
         } else {
           chipKeyAndLabel.key = item;
-          chipKeyAndLabel.label = item;
+          chipKeyAndLabel.label = toSentenceCase(item);
           iconName = item;
         }
 
