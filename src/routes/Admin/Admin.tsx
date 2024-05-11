@@ -4,19 +4,28 @@ import { Await, Outlet, useFetcher, useLoaderData } from "react-router-dom";
 
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import { ListCreditCardsQuery } from "@/API";
+import { LoaderActionError } from "types/global";
 
 const Admin = () => {
   const fetcher = useFetcher();
-  const creditCardData = useLoaderData() as {
-    creditCards: Promise<{ data: ListCreditCardsQuery }>;
-  };
+  const creditCardData = useLoaderData() as
+    | {
+        creditCards: Promise<{ data: ListCreditCardsQuery }>;
+      }
+    | LoaderActionError;
 
   return (
     <Box>
       <Outlet />
       <Typography variant="decoration">Manage</Typography>
       <Typography variant="h1">Admin</Typography>
-      {
+      {"error" in creditCardData ? (
+        <Box>
+          <Typography color="error" paragraph>
+            {creditCardData.error}
+          </Typography>
+        </Box>
+      ) : (
         <>
           <Suspense fallback={<Typography>Loading...</Typography>}>
             <Await resolve={creditCardData.creditCards}>
@@ -34,7 +43,7 @@ const Admin = () => {
             </Button>
           </fetcher.Form>
         </>
-      }
+      )}
     </Box>
   );
 };

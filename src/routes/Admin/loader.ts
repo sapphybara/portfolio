@@ -21,7 +21,9 @@ const loader: LoaderFunction = async ({ request }) => {
     });
   } catch (err) {
     console.error("error fetching credit cards", err);
-    return null;
+    return {
+      error: (err as Error).message,
+    };
   }
 };
 

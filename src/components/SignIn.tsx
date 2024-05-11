@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Form, useActionData, useLocation } from "react-router-dom";
+import { LoaderActionError } from "types/global";
 
 const SignIn = () => {
-  const actionData = useActionData() as { error: string } | undefined;
+  const actionData = useActionData() as LoaderActionError | undefined;
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const from = params.get("from") || "/";

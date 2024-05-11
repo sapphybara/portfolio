@@ -99,3 +99,7 @@ export type CCLevelMapping = {
 export interface PropsWithUser {
   user: string | null;
 }
+
+export interface LoaderActionError {
+  error: string;
+}
