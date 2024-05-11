@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { Outlet, useFetcher, useLoaderData } from "react-router-dom";
 
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
-import { CreditCard } from "src/API";
+import { CreditCard } from "@/API";
 
 const Admin = () => {
   const fetcher = useFetcher();

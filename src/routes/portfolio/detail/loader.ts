@@ -1,5 +1,5 @@
 import { Params } from "react-router-dom";
-import portfolioCards from "src/assets/json/portfolio_cards.json";
+import portfolioCards from "@assets/json/portfolio_cards.json";
 
 const loader = ({ params }: { params: Params<string> }) => {
   const { projectId } = params;

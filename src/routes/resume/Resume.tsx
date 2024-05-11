@@ -16,7 +16,7 @@ import {
   ScienceOutlined,
   TerminalOutlined,
 } from "@mui/icons-material";
-import resumeData from "src/assets/json/resume_data.json";
+import resumeData from "@assets/json/resume_data.json";
 
 type DataType = "list" | "paragraph";
 

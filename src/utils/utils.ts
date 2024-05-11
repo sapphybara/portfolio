@@ -1,4 +1,4 @@
-import { CreateCreditCardInput } from "src/API";
+import { CreateCreditCardInput } from "@/API";
 
 export const toSentenceCase = (str: string) => {
   if (!str) {

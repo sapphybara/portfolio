@@ -11,7 +11,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { CreateCreditCardInput } from "src/API";
+import { CreateCreditCardInput } from "@/API";
 import {
   toSentenceCase,
   creditCardKeys,

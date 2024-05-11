@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom";
 import Admin from "@routes/admin/Admin";
-import App from "src/App";
+import App from "@/App";
 import Error from "@routes/error/Error";
 import Home from "@routes/home/Home";
 import Portfolio from "@routes/portfolio/Portfolio";

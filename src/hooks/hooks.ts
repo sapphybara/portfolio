@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useRouteLoaderData } from "react-router-dom";
-import { listCreditCards } from "src/graphql/queries";
+import { listCreditCards } from "@graphql/queries";
 import { Client } from "aws-amplify/api";
-import { CreateCreditCardInput, CreditCard } from "src/API";
+import { CreateCreditCardInput, CreditCard } from "@/API";
 import { PropsWithUser } from "types/global";
 
 export const useTitle = () => {

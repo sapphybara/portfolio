@@ -33,7 +33,7 @@ import {
   TechStack,
 } from "types/global";
 import { isRole } from "@utils/typeGuards";
-import ImageCarousel from "src/components/ImageCarousel";
+import ImageCarousel from "@components/ImageCarousel";
 
 const headers = [
   "roles",

@@ -1,8 +1,8 @@
 import { generateClient } from "aws-amplify/api";
 import { ActionFunction, json, redirect } from "react-router-dom";
 import { isCreditCard } from "@utils/typeGuards";
-import { CreateCreditCardInput } from "src/API";
-import { createCreditCard } from "src/graphql/mutations";
+import { CreateCreditCardInput } from "@/API";
+import { createCreditCard } from "@graphql/mutations";
 
 const client = generateClient();
 

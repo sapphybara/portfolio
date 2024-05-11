@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
-import ResumeLinkWithTooltip from "src/components/ResumeLinkWithTooltip";
+import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 
 const Home = () => {
   const ProfilePicture = styled("img")((props) => ({

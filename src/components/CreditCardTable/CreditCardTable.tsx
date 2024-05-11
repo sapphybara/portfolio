@@ -21,7 +21,7 @@ import { Save, Cancel, Edit, DeleteOutlineOutlined } from "@mui/icons-material";
 import dayjs from "dayjs";
 import { generateClient } from "aws-amplify/api";
 
-import { CreateCreditCardInput, CreditCard } from "src/API";
+import { CreateCreditCardInput, CreditCard } from "@/API";
 import {
   toSentenceCase,
   creditCardKeys,
@@ -32,7 +32,7 @@ import StyledDataGrid from "./StyledDataGrid";
 import ScoreKey from "./ScoreKey";
 import EditToolbar from "./EditToolbar";
 import { CCScoreLevel } from "types/global";
-import { deleteCreditCard, updateCreditCard } from "src/graphql/mutations";
+import { deleteCreditCard, updateCreditCard } from "@graphql/mutations";
 
 type GridRowId = Extract<GridRowIdType, string>;
 

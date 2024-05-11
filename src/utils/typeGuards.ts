@@ -1,4 +1,4 @@
-import { CreateCreditCardInput } from "src/API";
+import { CreateCreditCardInput } from "@/API";
 import { PortfolioItemImage, Roles, TechStack } from "types/global";
 import { creditCardKeys, creditCardTypeMapping } from "./utils";
 

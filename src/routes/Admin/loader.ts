@@ -1,7 +1,7 @@
 import { LoaderFunction, redirect } from "react-router-dom";
 import { isAuthenticated } from "@utils/AuthProvider";
 import { generateClient } from "aws-amplify/api";
-import { listCreditCards } from "src/graphql/queries";
+import { listCreditCards } from "@graphql/queries";
 
 const client = generateClient();
 

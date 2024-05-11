@@ -23,13 +23,15 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"],
+      "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@context/*": ["src/context/*"],
       "@routes/*": ["src/routes/*"],
       "@theme/*": ["src/theme/*"],
       "@utils/*": ["src/utils/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@graphql/*": ["src/graphql/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src"],
