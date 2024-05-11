@@ -1,8 +1,8 @@
 import { Circle } from "@mui/icons-material";
 import { Chip, Stack, Typography } from "@mui/material";
-import { CCLevelConsumerProps } from "types/global";
+import { levelColors, levels } from "./constants";
 
-const ScoreKey = ({ levels, levelColors }: CCLevelConsumerProps) => (
+const ScoreKey = () => (
   <Stack className="p-2" direction="row" alignItems="center" spacing={1}>
     <Typography align="right" variant="subtitle1">
       Score Key:

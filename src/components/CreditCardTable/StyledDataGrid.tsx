@@ -1,16 +1,13 @@
 import { styled, type Theme } from "@mui/material";
-import { DataGrid, DataGridProps } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import {
   getBackgroundColor,
   getHoverBackgroundColor,
   getSelectedBackgroundColor,
   getSelectedHoverBackgroundColor,
 } from "@utils/colors";
-import {
-  CCLevelConsumerProps,
-  type CCLevelMapping,
-  type CCScoreLevel,
-} from "types/global";
+import { type CCLevelMapping, type CCScoreLevel } from "types/global";
+import { levels, levelColors } from "./constants";
 
 const generateLevelStyles = (
   level: CCScoreLevel,
@@ -36,9 +33,7 @@ const generateLevelStyles = (
   };
 };
 
-const StyledDataGrid = styled((props: DataGridProps & CCLevelConsumerProps) => (
-  <DataGrid {...props} />
-))(({ theme, levelColors, levels }) => ({
+const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   ...levels.reduce(
     (acc, level) => ({
       ...acc,
