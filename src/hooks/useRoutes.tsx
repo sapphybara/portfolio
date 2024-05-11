@@ -7,18 +7,14 @@ import Portfolio from "@routes/portfolio/Portfolio";
 import PortfolioDetail from "@routes/portfolio/detail/PortfolioDetail";
 import Resume from "@routes/resume/Resume";
 import SignIn from "@components/SignIn";
-import { username } from "@utils/AuthProvider";
-import AddCreditCardDialog from "src/components/AddCreditCardDialog";
+import AddCreditCardDialog from "@components/AddCreditCardDialog";
 
 export const useRoutes = () => {
   const routes = [
     {
       id: "root",
       path: "/",
-      async loader() {
-        const user = await username();
-        return { user };
-      },
+      lazy: () => import("@routes/lazy"),
       get element() {
         return <App routes={routes} />;
       },
