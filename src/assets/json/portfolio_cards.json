@@ -15,7 +15,8 @@
       { "name": "Day.js", "cardType": "library" },
       { "name": "Vite", "cardType": "tooling" },
       { "name": "ESLint", "cardType": "tooling" },
-      { "name": "Tailwind CSS", "cardType": "design" }
+      { "name": "Tailwind CSS", "cardType": "design" },
+      { "name": "Code Splitting", "cardType": "tooling" }
     ],
     "linkInfo": { "to": "/portfolio/developer-portfolio#detail" },
     "roles": ["Developer", "Designer"],
