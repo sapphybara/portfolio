@@ -12,7 +12,7 @@ const AddCreditCardBtn = styled(Button)(({ theme }) => ({
 const EditToolbar = () => {
   return (
     <GridToolbarContainer>
-      <AddCreditCardBtn href="/admin/credit-cards/new" startIcon={<Add />}>
+      <AddCreditCardBtn href="credit-cards/new" startIcon={<Add />}>
         Add Credit Card
       </AddCreditCardBtn>
     </GridToolbarContainer>
