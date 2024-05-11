@@ -29,7 +29,7 @@ import {
 import { PropsWithRoutes, PropsWithUser } from "types/global";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 import { ThemeModeContext } from "@context/ThemeModeContext";
-import { useFetcher, useRouteLoaderData } from "react-router-dom";
+import { useFetcher, useLocation, useRouteLoaderData } from "react-router-dom";
 
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
@@ -111,6 +111,10 @@ const Navbar = (props: PropsWithRoutes) => {
   const { user } = (useRouteLoaderData("root") as PropsWithUser) || {
     user: null,
   };
+  const location = useLocation();
+  const fromUrl = location.pathname.startsWith("/admin")
+    ? "/"
+    : encodeURIComponent(location.pathname);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDarkMode, toggleMode } = useContext(ThemeModeContext);
@@ -154,7 +158,7 @@ const Navbar = (props: PropsWithRoutes) => {
           );
         })}
         {user && shouldRenderChildren && (
-          <fetcher.Form action="/logout" method="post">
+          <fetcher.Form action={`/logout?from=${fromUrl}`} method="post">
             <ListItem>
               <Link component="button" type="submit" underline="hover">
                 Sign Out
