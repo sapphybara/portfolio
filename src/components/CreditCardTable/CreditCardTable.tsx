@@ -1,12 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import {
-  Typography,
-  Stack,
-  AlertProps,
-  Snackbar,
-  Alert,
-  styled,
-} from "@mui/material";
+import { useAsyncValue } from "react-router-dom";
+import { AlertProps, Snackbar, Alert, styled } from "@mui/material";
 import {
   GridActionsCellItem,
   GridColDef,
@@ -16,6 +10,7 @@ import {
   GridRowModel,
   GridRowModes,
   GridRowModesModel,
+  GridValidRowModel,
 } from "@mui/x-data-grid";
 import { Save, Cancel, Edit, DeleteOutlineOutlined } from "@mui/icons-material";
 import dayjs from "dayjs";
@@ -29,11 +24,9 @@ import {
   formatFinancialNumber,
 } from "@utils/utils";
 import StyledDataGrid from "./StyledDataGrid";
-import ScoreKey from "./ScoreKey";
 import EditToolbar from "./EditToolbar";
-import { CCScoreLevel } from "types/global";
 import { deleteCreditCard, updateCreditCard } from "@graphql/mutations";
-import { useAsyncValue } from "react-router-dom";
+import TableHeader from "./TableHeader";
 
 type GridRowId = Extract<GridRowIdType, string>;
 
@@ -50,19 +43,6 @@ const columnWidths: {
   lastInterestAmount: 125,
   paymentDate: 100,
   minimumPayment: 121,
-};
-
-const levels: CCScoreLevel[] = [1, 2, 3, 4];
-const levelColors: {
-  [K in CCScoreLevel]: {
-    color: "success" | "info" | "warning" | "error";
-    label: string;
-  };
-} = {
-  1: { color: "success", label: "low priority" },
-  2: { color: "info", label: "mid priority" },
-  3: { color: "warning", label: "high priority" },
-  4: { color: "error", label: "max priority" },
 };
 
 const GridActionsCellItemPrimary = styled(GridActionsCellItem)(({ theme }) => ({
@@ -257,18 +237,13 @@ const CreditCardTable = () => {
 
   return (
     <>
-      <Stack direction="row" justifyContent="space-between">
-        <Typography component="h2" variant="h5">
-          Credit Cards
-        </Typography>
-        <ScoreKey levels={levels} levelColors={levelColors} />
-      </Stack>
+      <TableHeader />
       <StyledDataGrid
         autoHeight
         columns={columns}
-        levelColors={levelColors}
-        levels={levels}
-        rows={creditCards.data.listCreditCards?.items}
+        rows={(creditCards.data.listCreditCards?.items || []).map(
+          (item) => item as GridValidRowModel
+        )}
         initialState={{
           sorting: { sortModel: [{ field: "score", sort: "desc" }] },
         }}
