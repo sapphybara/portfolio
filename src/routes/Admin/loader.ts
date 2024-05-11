@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "react-router-dom";
+import { LoaderFunction, defer, redirect } from "react-router-dom";
 import { isAuthenticated } from "@utils/AuthProvider";
 import { generateClient } from "aws-amplify/api";
 import { listCreditCards } from "@graphql/queries";
@@ -13,10 +13,12 @@ const loader: LoaderFunction = async ({ request }) => {
   }
 
   try {
-    const ccData = await client.graphql({
+    const creditCardPromise = client.graphql({
       query: listCreditCards,
     });
-    return ccData.data.listCreditCards.items;
+    return defer({
+      creditCards: creditCardPromise,
+    });
   } catch (err) {
     console.error("error fetching credit cards", err);
     return null;

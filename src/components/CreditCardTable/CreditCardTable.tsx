@@ -21,7 +21,7 @@ import { Save, Cancel, Edit, DeleteOutlineOutlined } from "@mui/icons-material";
 import dayjs from "dayjs";
 import { generateClient } from "aws-amplify/api";
 
-import { CreateCreditCardInput, CreditCard } from "@/API";
+import { CreateCreditCardInput, ListCreditCardsQuery } from "@/API";
 import {
   toSentenceCase,
   creditCardKeys,
@@ -33,6 +33,7 @@ import ScoreKey from "./ScoreKey";
 import EditToolbar from "./EditToolbar";
 import { CCScoreLevel } from "types/global";
 import { deleteCreditCard, updateCreditCard } from "@graphql/mutations";
+import { useAsyncValue } from "react-router-dom";
 
 type GridRowId = Extract<GridRowIdType, string>;
 
@@ -71,11 +72,9 @@ const GridActionsCellItemPrimary = styled(GridActionsCellItem)(({ theme }) => ({
 }));
 GridActionsCellItemPrimary.displayName = "GridActionsCellItemPrimary";
 
-interface CreditCardTableProps {
-  creditCards: CreditCard[] | CreateCreditCardInput[];
-}
+const CreditCardTable = () => {
+  const creditCards = useAsyncValue() as { data: ListCreditCardsQuery };
 
-const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
   const [snackbar, setSnackbar] = useState<Pick<
     AlertProps,
@@ -269,7 +268,7 @@ const CreditCardTable = ({ creditCards }: CreditCardTableProps) => {
         columns={columns}
         levelColors={levelColors}
         levels={levels}
-        rows={creditCards}
+        rows={creditCards.data.listCreditCards?.items}
         initialState={{
           sorting: { sortModel: [{ field: "score", sort: "desc" }] },
         }}

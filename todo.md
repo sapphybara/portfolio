@@ -1,13 +1,13 @@
 # todo
 - make the navbar logout redirect to prev page if not admin ✅
 - stuff from keep notes ✅
-- add credit cards to a defer for the admin route, include an error if load breaks
+- add credit cards to a defer for the admin route ✅, include an error if load breaks
 - denote actions/loaders as `ActionFunction`s and `LoaderFunctions` rather than providing the argument declaration ✅
 - replace `src/*` with "@" where we can, possible remove `src` from the paths? ✅
 - make the score be calculated clientside rather than the lambda function
   - possibly make the function/weights editable?
 - fix the earning interest button being required to be true? ✅
-- replace `Record`s with more idiomatic `{ [k as string]: string}`
+- replace `Record`s with more idiomatic `{ [k as string]: string}` ✅
 - add loading to credit card dialog
 - make the value that is in the date picker be formatted correctly, and move back to just the day in the `format` (currently in the AWS date format)
 - make submit button in addccdialog be disabled somehow without state?

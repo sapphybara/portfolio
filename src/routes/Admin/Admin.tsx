@@ -1,12 +1,15 @@
+import { Suspense } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { Outlet, useFetcher, useLoaderData } from "react-router-dom";
+import { Await, Outlet, useFetcher, useLoaderData } from "react-router-dom";
 
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
-import { CreditCard } from "@/API";
+import { ListCreditCardsQuery } from "@/API";
 
 const Admin = () => {
   const fetcher = useFetcher();
-  const creditCards = useLoaderData() as CreditCard[];
+  const creditCardData = useLoaderData() as {
+    creditCards: Promise<{ data: ListCreditCardsQuery }>;
+  };
 
   return (
     <Box>
@@ -15,7 +18,11 @@ const Admin = () => {
       <Typography variant="h1">Admin</Typography>
       {
         <>
-          <CreditCardTable creditCards={creditCards} />
+          <Suspense fallback={<Typography>Loading...</Typography>}>
+            <Await resolve={creditCardData.creditCards}>
+              <CreditCardTable />
+            </Await>
+          </Suspense>
           <fetcher.Form method="post" action="/logout">
             <Button
               className="my-2"
