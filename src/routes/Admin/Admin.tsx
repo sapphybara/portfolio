@@ -4,6 +4,7 @@ import { Await, Outlet, useFetcher, useLoaderData } from "react-router-dom";
 
 import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import { ListCreditCardsQuery } from "@/API";
+import Fallback from "@components/CreditCardTable/Fallback";
 import { LoaderActionError } from "types/global";
 
 const Admin = () => {
@@ -27,7 +28,7 @@ const Admin = () => {
         </Box>
       ) : (
         <>
-          <Suspense fallback={<Typography>Loading...</Typography>}>
+          <Suspense fallback={<Fallback />}>
             <Await resolve={creditCardData.creditCards}>
               <CreditCardTable />
             </Await>
