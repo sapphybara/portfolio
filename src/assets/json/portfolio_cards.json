@@ -26,8 +26,7 @@
       "Implemented a responsive design to ensure the portfolio looks good on all devices."
     ],
     "problemSolving": [
-      "Implemented a dynamic project display system that allows me to easily add, remove, or update projects.",
-      "Designed the portfolio to be responsive, ensuring it looks good on all devices.",
+      "Created a dynamic project display system that allows me to easily add, remove, or update projects.",
       "Used Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface."
     ],
     "shortDescription": "A website to showcase my expertise as a developer and designer."
@@ -37,7 +36,7 @@
     "title": "HySCAN",
     "subheader": "Hydrogen Safety Codes & Standards Applicability Navigator",
     "affiliation": "Pacific Northwest National Laboratory",
-    "description": "As a developer, I supported users in navigating hydrogen (H2) codes and standards, ensuring compliance and safety in their systems. HySCAN facilitated this process with intuitive, accessible workflows. It is a part of the H2Tools Suite, which is a group of tools developed and maintained by Pacific Northwest National Laboratory. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
+    "description": "As one of the developers, I contributed to HySCAN, a web application with intuitive, accessible workflows, designed to support users in navigating hydrogen (H2) codes and standards. It is a part of the H2Tools Suite, which is a group of tools developed and maintained by Pacific Northwest National Laboratory. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
     "techStack": [
       { "name": "React", "cardType": "frontend" },
       { "name": "styled-components", "cardType": "frontend" },
@@ -55,12 +54,14 @@
     "contributions": [
       "Created and maintained React components for the application using styled-components.",
       "Key to the creation of algorithms to understand the user's system, identify applicable codes and standards, and group related questions.",
-      "Implemented bug fixes and design changes to improve the user experience after demos and sponsor feedback."
+      "Implemented bug fixes and design changes to improve the user experience after demos and sponsor feedback.",
+      "Developed a dynamic question system where each component has corresponding questions, with additional questions based on conditional responses."
     ],
     "problemSolving": [
       "Developed a solution to dynamically generate questions based on the user's system and the codes and standards applicable to it.",
       "Designed a system to categorize and group questions based on the codes and standards they relate to.",
-      "Implemented responsive design principles for optimal viewing across devices."
+      "Implemented responsive design principles for optimal viewing across devices.",
+      "Created a mechanism to relay optional references to related documents based on the user's answers."
     ],
     "shortDescription": "An application to support those who utilize hydrogen (H2) in identifying hydrogen-specific codes and standard documents that are relevant to their systems.",
     "images": [
@@ -99,15 +100,14 @@
     "title": "Explainable AI: Exposing the Black Box",
     "subheader": "Understanding AI Models and Predictions",
     "affiliation": "Pacific Northwest National Laboratory",
-    "description": "As part of the larger PDyNAMICS project, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. This work was instrumental in securing an additional $50k in funding.",
+    "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was instrumental in securing an additional $50k in funding for this and other parts of the project.",
     "techStack": [
-      { "name": "Python", "cardType": "backend" },
-      { "name": "SHAP", "cardType": "tooling" },
+      { "name": "Python", "cardType": "language" },
       { "name": "AI", "cardType": "frontend" },
       { "name": "Adobe XD", "cardType": "design" },
       { "name": "Blueprint.js", "cardType": "design" }
     ],
-    "shareholderDescription": "This research was part of the PDyNAMICS venture, supported by the National Nuclear Security Administration, Office of Defense Nuclear Nonproliferation Research And Development.",
+    "shareholderDescription": "This research was part of a larger, multi-lab venture, supported by the National Nuclear Security Administration, Office of Defense Nuclear Nonproliferation Research And Development.",
     "roles": ["designer", "researcher"],
     "contributions": [
       "Designed an intuitive interface to visualize the data output from the AI models, aiding in the understanding of complex AI models."
@@ -116,7 +116,7 @@
       "Developed a user-friendly interface to present the results of black box AI models using SHAP.",
       "Designed a system to generate both local and global explanations, making the AI models more understandable for stakeholders."
     ],
-    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, contributing to the larger PDyNAMICS project. My primary role was designing the interface to visualize the AI model outputs.",
+    "shortDescription": "A research project to understand and interpret black box AI models using Explainable AI methods, one part of a larger venture. My primary role was designing the interface to visualize the AI model outputs.",
     "images": [
       {
         "src": "/images/explainable-ai/1.png",
