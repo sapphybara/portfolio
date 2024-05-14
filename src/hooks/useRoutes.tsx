@@ -1,9 +1,7 @@
+import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import App from "@/App";
 import Error from "@routes/error/Error";
-import Home from "@routes/home/Home";
-import Resume from "@routes/resume/Resume";
-import Portfolio from "@routes/portfolio/Portfolio";
 
 export const useRoutes = () => {
   const routes = [
@@ -20,21 +18,21 @@ export const useRoutes = () => {
       children: [
         {
           path: "",
-          element: <Home />,
+          Component: lazy(() => import("@routes/home/Home")),
         },
         {
           path: "portfolio",
-          element: <Portfolio />,
           children: [
             {
               path: ":projectId",
               lazy: () => import("@routes/portfolio/detail/lazy"),
             },
           ],
+          Component: lazy(() => import("@routes/portfolio/Portfolio")),
         },
         {
           path: "resume",
-          element: <Resume />,
+          Component: lazy(() => import("@routes/resume/Resume")),
         },
         {
           path: "admin",
