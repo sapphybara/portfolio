@@ -16,4 +16,14 @@ export default defineConfig({
       "@assets": resolve(join(__dirname, "src/assets")),
     },
   },
+  build: {
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+          return;
+        }
+        warn(warning);
+      },
+    },
+  },
 });
