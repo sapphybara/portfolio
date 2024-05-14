@@ -1,17 +1,23 @@
 {
   "api": {
     "portfolio": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "portfolio9da5fd1f"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-06-22T18:13:18.585Z",
-              "apiKeyExpirationDays": 49,
-              "description": "used to allow fetching from the api as we're in test mode"
-            },
-            "authenticationType": "API_KEY"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authportfolio9da5fd1f"
+            }
           }
         }
       },
