@@ -52,7 +52,8 @@ const Portfolio = () => {
                 item
                 justifyContent="space-between"
                 key={card.id}
-                xs={6}
+                xs={12}
+                md={6}
               >
                 <PortfolioCard {...(card as PortfolioItem)} />
               </Grid>
