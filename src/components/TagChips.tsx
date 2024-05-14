@@ -14,11 +14,11 @@ import {
   PaletteOutlined,
   ScienceOutlined,
 } from "@mui/icons-material";
-import { PortfolioIconName, Roles, TechStack } from "types/global";
+import { PortfolioIconName, Role, TechStack } from "types/global";
 import { isTechStack } from "@utils/typeGuards";
 import { toSentenceCase } from "@/utils/utils";
 
-type ChipItem = TechStack | Roles;
+type ChipItem = TechStack | Role;
 
 const iconMap: { [K in PortfolioIconName]: ElementType } = {
   frontend: DesktopWindowsOutlined,

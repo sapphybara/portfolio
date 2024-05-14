@@ -55,11 +55,11 @@ type PortfolioIconName =
   | "designer"
   | "researcher";
 
-type Roles = "designer" | "developer" | "researcher";
+type Role = "designer" | "developer" | "researcher";
 
 interface TechStack {
   name: string;
-  cardType: Exclude<PortfolioIconName, Roles>;
+  cardType: Exclude<PortfolioIconName, Role>;
 }
 
 // todo should we use the type of muis link component instead of this?
@@ -80,7 +80,7 @@ export interface PortfolioItem {
   techStack: TechStack[];
   linkInfo?: LinkInfo;
   shareholderDescription?: string;
-  roles: Roles[];
+  roles: Role[];
   contributions: string[];
   problemSolving: string[];
   shortDescription: string;

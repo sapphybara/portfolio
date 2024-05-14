@@ -29,7 +29,7 @@ import { isPortfolioImage, isTechStack } from "@utils/typeGuards";
 import {
   PortfolioItem,
   PortfolioItemImage,
-  Roles,
+  Role,
   TechStack,
 } from "types/global";
 import { isRole } from "@utils/typeGuards";
@@ -110,7 +110,7 @@ const PortfolioDetail = () => {
                 | string
                 | string[]
                 | TechStack[]
-                | Roles[]
+                | Role[]
                 | PortfolioItemImage[]
                 | undefined;
               if (!data) {
@@ -141,7 +141,7 @@ const PortfolioDetail = () => {
                     </Stack>
                     {Array.isArray(data) ? (
                       data.every(isTechStack) || data.every(isRole) ? (
-                        <TagChips items={data as TechStack[] | Roles[]} />
+                        <TagChips items={data as TechStack[] | Role[]} />
                       ) : data.every(isPortfolioImage) ? (
                         <ImageCarousel images={data} />
                       ) : (
