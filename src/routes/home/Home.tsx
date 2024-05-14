@@ -20,13 +20,6 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
 }));
 
 const Home = () => {
-  const ProfilePicture = styled("img")((props) => ({
-    backgroundColor: props.theme.palette.text.secondary,
-    borderRadius: "50%",
-    width: "100px",
-    height: "100px",
-  }));
-
   return (
     <Box component="section">
       <Box className="header flex flex-wrap">
@@ -35,10 +28,6 @@ const Home = () => {
             <Typography variant="decoration">hi, my name is</Typography>
             <Typography variant="h1">Sapphyra</Typography>
           </Box>
-          <ProfilePicture
-            src="src/assets/img.png"
-            alt="Picture of Sapphyra Wiser"
-          />
         </Box>
       </Box>
       <Box>
