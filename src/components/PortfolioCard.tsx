@@ -4,14 +4,15 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  IconButton,
   Stack,
+  Tooltip,
   Typography,
   styled,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PortfolioItem } from "types/global";
-import MyLink from "./MyLink";
-import { ArrowOutward } from "@mui/icons-material";
+import { GitHub, LinkOutlined } from "@mui/icons-material";
 import TagChips from "./TagChips";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
@@ -27,7 +28,7 @@ const PortfolioCard = ({
   title,
   affiliation,
   techStack,
-  linkInfo,
+  links,
   shortDescription,
 }: PortfolioItem) => {
   const navigate = useNavigate();
@@ -58,21 +59,29 @@ const PortfolioCard = ({
           alignItems="center"
           direction="row"
           gap={1}
+          justifyContent="space-between"
           component={CardActions}
         >
           <Typography className="mb-0" color="text.secondary" paragraph>
             Project on behalf of: {affiliation}
           </Typography>
-          {linkInfo && (
-            <MyLink {...linkInfo}>
-              <Typography className="mb-0" paragraph>
-                View Project
-              </Typography>
-              {linkInfo.target === "_blank" && (
-                <ArrowOutward fontSize="small" />
-              )}
-            </MyLink>
-          )}
+          <Stack direction="row" gap={1}>
+            {links?.map(({ type, ...link }, index) => (
+              <Tooltip
+                title={type === "code" ? "View Code" : "View Project"}
+                key={index}
+              >
+                <IconButton
+                  aria-label={type === "code" ? "View Code" : "View Project"}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  {...link}
+                >
+                  {type === "code" ? <GitHub /> : <LinkOutlined />}
+                </IconButton>
+              </Tooltip>
+            ))}
+          </Stack>
         </Stack>
       </CardContent>
     </PortfolioWrapper>

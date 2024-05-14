@@ -20,6 +20,7 @@ import {
   Slide,
   useTheme,
   useMediaQuery,
+  ButtonGroup,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
@@ -165,21 +166,19 @@ const PortfolioDetail = () => {
               );
             })}
             <Divider className="my-4" />
-            {portfolioDetail.linkInfo && (
-              <Button
-                className="ml-auto"
-                endIcon={
-                  portfolioDetail.linkInfo.target === "_blank" && (
-                    <ArrowOutward className="text-black" />
-                  )
-                }
-                variant="contained"
-                {...portfolioDetail.linkInfo}
-                LinkComponent={MyLink}
-              >
-                View the project
-              </Button>
-            )}
+            <ButtonGroup className="ml-auto" variant="outlined">
+              {portfolioDetail.links?.map(({ type, href }) => (
+                <Button
+                  endIcon={<ArrowOutward />}
+                  href={href}
+                  key={href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {type === "code" ? "View Code" : "View Project"}
+                </Button>
+              ))}
+            </ButtonGroup>
           </Paper>
         </Box>
       </Stack>

@@ -18,7 +18,12 @@
       { "name": "Tailwind CSS", "cardType": "design" },
       { "name": "Code Splitting", "cardType": "tooling" }
     ],
-    "linkInfo": { "to": "/portfolio/developer-portfolio#detail" },
+    "links": [
+      {
+        "type": "code",
+        "href": "https://github.com/sapphybara/portfolio"
+      }
+    ],
     "roles": ["developer", "designer"],
     "contributions": [
       "Developed the entire frontend of the portfolio using React and TypeScript.",
@@ -44,11 +49,12 @@
       { "name": "Node", "cardType": "backend" },
       { "name": "Jest", "cardType": "testing" }
     ],
-    "linkInfo": {
-      "to": "https://h2tools.org/hyscan",
-      "target": "_blank",
-      "rel": "noopener noreferrer"
-    },
+    "links": [
+      {
+        "type": "live",
+        "href": "https://h2tools.org/hyscan"
+      }
+    ],
     "shareholderDescription": "HySCAN was jointly developed by Sandia National Laboratories (Sandia), National Renewable Energy Laboratory (NREL), and Pacific Northwest National Laboratory (PNNL) and operated and maintained by PNNL, with funding from the U.S. Department of Energy's Office of Energy Efficiency and Renewable Energy (EERE) under the Hydrogen and Fuel Cell Technologies Office (HFTO).",
     "roles": ["developer"],
     "contributions": [
