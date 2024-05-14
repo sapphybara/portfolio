@@ -63,10 +63,9 @@ interface TechStack {
 }
 
 // todo should we use the type of muis link component instead of this?
-interface LinkInfo {
-  to: string;
-  target?: string;
-  rel?: string;
+interface Link {
+  type: "code" | "live";
+  href: string;
 }
 
 export type PortfolioItemImage = { src: string; alt: string };
@@ -78,7 +77,7 @@ export interface PortfolioItem {
   affiliation: string;
   description: string;
   techStack: TechStack[];
-  linkInfo?: LinkInfo;
+  links?: Link[];
   shareholderDescription?: string;
   roles: Role[];
   contributions: string[];
