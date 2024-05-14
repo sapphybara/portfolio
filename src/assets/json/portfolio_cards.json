@@ -72,31 +72,31 @@
     "shortDescription": "An application to support those who utilize hydrogen (H2) in identifying hydrogen-specific codes and standard documents that are relevant to their systems.",
     "images": [
       {
-        "src": "/images/hyscan/1.jpeg",
+        "src": "/images/hyscan/1.jpg",
         "alt": "HySCAN Home Page"
       },
       {
-        "src": "/images/hyscan/2.jpeg",
+        "src": "/images/hyscan/2.jpg",
         "alt": "HySCAN Disclaimer Page"
       },
       {
-        "src": "/images/hyscan/3.jpeg",
+        "src": "/images/hyscan/3.jpg",
         "alt": "HySCAN Component Selection List"
       },
       {
-        "src": "/images/hyscan/4.jpeg",
+        "src": "/images/hyscan/4.jpg",
         "alt": "HySCAN component card list"
       },
       {
-        "src": "/images/hyscan/5.jpeg",
+        "src": "/images/hyscan/5.jpg",
         "alt": "HySCAN Questionnaire"
       },
       {
-        "src": "/images/hyscan/6.jpeg",
+        "src": "/images/hyscan/6.jpg",
         "alt": "HySCAN Results Page: suggested codes and standards"
       },
       {
-        "src": "/images/hyscan/7.jpeg",
+        "src": "/images/hyscan/7.jpg",
         "alt": "HySCAN Results Page: related questions"
       }
     ]
