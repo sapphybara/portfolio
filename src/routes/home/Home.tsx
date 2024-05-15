@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-  styled,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 
 const TypographyStack = styled(Stack)(({ theme }) => ({
