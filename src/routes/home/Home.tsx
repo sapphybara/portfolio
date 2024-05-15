@@ -27,39 +27,40 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const Logo = styled("img")(() => ({
-  height: 150,
+const LogoBackground = styled(Box)(({ theme }) => ({
+  backgroundImage: `url(logo-${theme.palette.mode}-mode.png)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "300px 300px",
 }));
 
 const Home = () => {
-  const theme = useTheme();
-
   return (
     <Box component="section">
-      <Stack
-        className="max-w-[52rem]"
-        direction="row"
-        flexWrap="wrap"
-        justifyContent="space-between"
-      >
-        <Box>
-          <Typography variant="decoration">hi, my name is</Typography>
-          <Typography variant="h1">Sapphyra</Typography>
-        </Box>
-        <Logo alt="logo" src={`logo-${theme.palette.mode}-mode.png`} />
-      </Stack>
-      <Box className="flex flex-wrap">
-        <Typography className="decorator grow w-full" variant="decoration">
-          I am a
-        </Typography>
-        <Typography className="dev flex flex-wrap" variant="h2">
-          Developer
-          <Box className="mx-4" component="span" color="secondary.main">
-            &
+      <LogoBackground>
+        <Stack
+          className="max-w-[52rem]"
+          direction="row"
+          flexWrap="wrap"
+          justifyContent="space-between"
+        >
+          <Box>
+            <Typography variant="decoration">hi, my name is</Typography>
+            <Typography variant="h1">Sapphyra</Typography>
           </Box>
-          Designer
-        </Typography>
-      </Box>
+        </Stack>
+        <Box className="flex flex-wrap">
+          <Typography className="decorator grow w-full" variant="decoration">
+            I am a
+          </Typography>
+          <Typography className="dev flex flex-wrap" variant="h2">
+            Developer
+            <Box className="mx-4" component="span" color="secondary.main">
+              &
+            </Box>
+            Designer
+          </Typography>
+        </Box>
+      </LogoBackground>
       <TypographyStack gap={2}>
         <Typography>
           Welcome to my corner of the digital world! I'm a dedicated Front End
