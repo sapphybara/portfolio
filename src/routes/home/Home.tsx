@@ -1,4 +1,11 @@
-import { Box, Button, Stack, Typography, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  styled,
+  useTheme,
+} from "@mui/material";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 
 const TypographyStack = styled(Stack)(({ theme }) => ({
@@ -10,27 +17,38 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
       display: "inline-block",
       fontWeight: "bold",
       color: theme.palette.secondary.main,
+      paddingRight: "0.2rem",
       transition: "transform 0.3s, padding 0.3s",
       "&:hover": {
         transform: "scale(1.08)",
-        padding: "0 0.2rem",
+        padding: "0 0.3rem 0 0.2rem",
       },
     },
   },
 }));
 
+const Logo = styled("img")(() => ({
+  height: 150,
+}));
+
 const Home = () => {
+  const theme = useTheme();
+
   return (
     <Box component="section">
-      <Box className="header flex flex-wrap">
-        <Box className="flex flex-wrap justify-between w-11/12">
-          <Box>
-            <Typography variant="decoration">hi, my name is</Typography>
-            <Typography variant="h1">Sapphyra</Typography>
-          </Box>
+      <Stack
+        className="max-w-[52rem]"
+        direction="row"
+        flexWrap="wrap"
+        justifyContent="space-between"
+      >
+        <Box>
+          <Typography variant="decoration">hi, my name is</Typography>
+          <Typography variant="h1">Sapphyra</Typography>
         </Box>
-      </Box>
-      <Box>
+        <Logo alt="logo" src={`logo-${theme.palette.mode}-mode.png`} />
+      </Stack>
+      <Box className="flex flex-wrap">
         <Typography className="decorator grow w-full" variant="decoration">
           I am a
         </Typography>
@@ -50,7 +68,7 @@ const Home = () => {
           <Box className="highlight" component="span">
             fluid
           </Box>
-          &nbsp;and intuitive digital experiences. My journey into the world of
+          and intuitive digital experiences. My journey into the world of
           technology started with a fascination for problem-solving, which led
           me to pursue a degree in Mathematics, with a Certificate in Computer
           Science, from the University of Texas at Austin.
