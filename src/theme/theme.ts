@@ -21,11 +21,10 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
 
   const paletteColors = {
     primary: {
-      main: isDarkMode ? "#dda0dd" : "#8e0f9e",
+      main: isDarkMode ? "#dda0dd" : "#008080 ",
     },
     secondary: {
-      // todo more pink purple & more teal green
-      main: isDarkMode ? "#60e1e0" : "#248232",
+      main: isDarkMode ? "#60e1e0" : "#AA00AA",
     },
   };
 
