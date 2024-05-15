@@ -20,16 +20,30 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const LogoBackground = styled(Box)(({ theme }) => ({
-  backgroundImage: `url(logo-${theme.palette.mode}-mode.png)`,
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "300px 300px",
+const LogoBackground = styled(Stack)(({ theme }) => ({
+  position: "relative",
+  height: "250px",
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    backgroundImage: `url(logo-${theme.palette.mode}-mode.png)`,
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right",
+    opacity: 0.35,
+    height: "100%",
+    width: "100%",
+    zIndex: -1,
+    [theme.breakpoints.down("sm")]: {
+      backgroundPosition: "center",
+    },
+  },
 }));
 
 const Home = () => {
   return (
     <Box component="section">
-      <LogoBackground>
+      <LogoBackground justifyContent="space-around">
         <Stack
           className="max-w-[52rem]"
           direction="row"
