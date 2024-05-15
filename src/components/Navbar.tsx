@@ -3,13 +3,12 @@ import {
   AppBar,
   Divider,
   Drawer,
+  Icon,
   IconButton,
+  IconButtonProps,
   Link,
   List,
   ListItem,
-  ListItemButton,
-  ListItemButtonProps,
-  ListItemIcon,
   ListProps,
   Stack,
   StackProps,
@@ -41,14 +40,8 @@ const NavList = styled(List)(({ theme }) => {
       gap: theme.spacing(1),
       justifyContent: "center",
       whiteSpace: "nowrap",
-    },
-    "& .MuiSvgIcon-root": {
-      color: linkColor,
-    },
-    "& .MuiButtonBase-root": {
-      color: linkColor,
-      "&:hover .MuiSvgIcon-root": {
-        color: isDarkMode ? palette.common.white : palette.common.black,
+      "&.mobile .MuiLink-root": {
+        color: palette.primary.main,
       },
     },
     "& .MuiLink-root": {
@@ -60,16 +53,6 @@ const NavList = styled(List)(({ theme }) => {
   };
 });
 
-const DarkModeSwitchListItem = styled(ListItem)(() => ({
-  "&.MuiListItem-root": {
-    padding: 0,
-    "& .MuiListItemIcon-root": {
-      alignItems: "center",
-      minWidth: "auto",
-    },
-  },
-}));
-
 const SpinAnimation = keyframes`
   from {
     transform: rotate(0deg);
@@ -79,25 +62,40 @@ const SpinAnimation = keyframes`
   }
 `;
 
-const SpinningListItemButton = styled(
+const SpinningIconButton = styled(
   forwardRef(
     (
-      props: ListItemButtonProps & {
+      props: IconButtonProps & {
         spin: boolean;
       },
-      ref: React.Ref<HTMLDivElement>
+      ref: React.Ref<HTMLButtonElement>
     ) => {
       const { spin: _spin, ...rest } = props;
-      return <ListItemButton ref={ref} {...rest} />;
+      return <IconButton ref={ref} {...rest} />;
     }
   )
-)(({ spin }) => ({
-  aspectRatio: spin ? "1" : "inherit",
-  justifyContent: "center",
-  "&:hover": {
-    animation: spin ? `${SpinAnimation} 400ms linear` : "none",
-  },
-}));
+)(({ spin, theme }) => {
+  const isDarkMode = theme.palette.mode === "dark";
+  const linkColor = isDarkMode
+    ? theme.palette.primary.main
+    : theme.palette.common.white;
+
+  return {
+    aspectRatio: spin ? "1" : "inherit",
+    justifyContent: "center",
+    "&:hover": {
+      animation: spin ? `${SpinAnimation} 400ms linear` : "none",
+    },
+    "& .MuiSvgIcon-root": {
+      color: linkColor,
+      "&:hover": {
+        color: isDarkMode
+          ? theme.palette.common.white
+          : theme.palette.common.black,
+      },
+    },
+  };
+});
 
 const MobileDrawer = styled(Drawer)(() => ({
   "& .MuiDrawer-paper": {
@@ -125,13 +123,14 @@ const Navbar = (props: PropsWithRoutes) => {
 
   const renderRouteLinks = (
     routes: typeof props.routes,
-    shouldRenderChildren: boolean = true
+    shouldRenderChildren: boolean,
+    isMobile: boolean
   ): ReactNode => {
     return (
       <Fragment key={routes[0].path}>
         {routes.map((route) => {
           if (route.children && shouldRenderChildren) {
-            return renderRouteLinks(route.children, false);
+            return renderRouteLinks(route.children, false, isMobile);
           }
           const { path = "" } = route;
           if (
@@ -143,7 +142,7 @@ const Navbar = (props: PropsWithRoutes) => {
           const name =
             path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
           return (
-            <ListItem key={path}>
+            <ListItem className={isMobile ? "mobile" : undefined} key={path}>
               {path === "resume" ? (
                 <ResumeLinkWithTooltip
                   asLink
@@ -177,34 +176,43 @@ const Navbar = (props: PropsWithRoutes) => {
     listProps?: ListProps,
     isMobile: boolean = false
   ) => {
+    const stackDirection = isMobile ? "column" : "row";
+
     return (
-      <Stack direction={isMobile ? "column" : "row"} {...stackProps}>
+      <Stack direction={stackDirection} {...stackProps}>
         <Typography {...typographyProps}>Sapphyra Wiser</Typography>
         {isMobile && <Divider />}
-        <NavList {...listProps}>
-          <DarkModeSwitchListItem>
+        <Stack
+          direction={stackDirection}
+          flexWrap="wrap"
+          flexGrow={1}
+          justifyContent="flex-end"
+        >
+          {!isMobile && (
             <Tooltip
               arrow
               title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
             >
-              <SpinningListItemButton
+              <SpinningIconButton
+                aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
                 className="rounded-full"
-                dense
                 onClick={toggleMode}
                 spin={!mobileOpen}
               >
-                <ListItemIcon>
+                <Icon>
                   {isDarkMode ? (
                     <LightModeOutlined color="action" />
                   ) : (
                     <DarkModeOutlined color="action" />
                   )}
-                </ListItemIcon>
-              </SpinningListItemButton>
+                </Icon>
+              </SpinningIconButton>
             </Tooltip>
-          </DarkModeSwitchListItem>
-          {renderRouteLinks(props.routes)}
-        </NavList>
+          )}
+          <NavList {...listProps}>
+            {renderRouteLinks(props.routes, true, isMobile)}
+          </NavList>
+        </Stack>
       </Stack>
     );
   };
@@ -240,7 +248,7 @@ const Navbar = (props: PropsWithRoutes) => {
             onClick={handleDrawerToggle}
             sx={{ display: { sm: "none" } }}
           >
-            <MenuIcon />
+            <MenuIcon className="text-white" />
           </IconButton>
           {renderHeaderAndLinks(
             {

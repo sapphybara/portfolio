@@ -21,6 +21,7 @@ import {
   useTheme,
   useMediaQuery,
   ButtonGroup,
+  styled,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
@@ -58,6 +59,11 @@ const icons: { [K in HeaderKeys]: React.ElementType } = {
   images: Collections,
 };
 
+const AnchorLink = styled(MyLink)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textAlign: "right",
+}));
+
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioItem;
   const theme = useTheme();
@@ -81,13 +87,15 @@ const PortfolioDetail = () => {
           <Box className="sticky top-16 h-[calc(100vh-101px)] pr-2">
             <Typography variant="h5">Overview</Typography>
             <List>
-              <ListItem className="text-right">
-                <MyLink to="#detail">Portfolio Detail</MyLink>
+              <ListItem className="justify-end">
+                <AnchorLink to="#detail">Portfolio Detail</AnchorLink>
               </ListItem>
               {headers.map((header) =>
                 portfolioDetail[header] ? (
-                  <ListItem className="text-right" key={header}>
-                    <MyLink to={`#${header}`}>{toSentenceCase(header)}</MyLink>
+                  <ListItem className="justify-end" key={header}>
+                    <AnchorLink to={`#${header}`}>
+                      {toSentenceCase(header)}
+                    </AnchorLink>
                   </ListItem>
                 ) : null
               )}
