@@ -2,7 +2,6 @@ import { HTMLAttributes, useContext } from "react";
 import {
   EmailOutlined,
   GitHub,
-  Instagram,
   LinkedIn,
   LocationCityOutlined,
   PhoneOutlined,
@@ -36,11 +35,6 @@ const contactInfo = [
     children: "GitHub",
     href: "https://github.com/sapphyrabara",
     startIcon: GitHub,
-  },
-  {
-    children: "Instagram",
-    href: "https://instagram.com/sapphybara",
-    startIcon: Instagram,
   },
 ];
 

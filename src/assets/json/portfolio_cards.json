@@ -106,7 +106,7 @@
     "title": "Explainable AI: Exposing the Black Box",
     "subheader": "Understanding AI Models and Predictions",
     "affiliation": "Pacific Northwest National Laboratory",
-    "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was instrumental in securing an additional $50k in funding for this and other parts of the project.",
+    "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was instrumental in securing an additional $50k in funding for this and other parts of the project.",
     "techStack": [
       { "name": "Python", "cardType": "language" },
       { "name": "AI", "cardType": "frontend" },
