@@ -1,9 +1,9 @@
 import {
   Box,
   Card,
+  CardContent,
   CardMedia,
   Fab,
-  Slide,
   Typography,
   styled,
 } from "@mui/material";
@@ -31,30 +31,25 @@ const TextOverlay = styled(Typography)(({ theme }) => ({
   textAlign: "center",
 }));
 
+const CardImageContent = styled(CardContent)(() => ({
+  padding: 0,
+  "& .MuiCardMedia-root": {
+    objectFit: "unset",
+  },
+}));
+
 const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<
-    "left" | "right" | "up" | "down"
-  >("left");
-  const [loadedImages, setLoadedImages] = useState<number[]>([0]);
 
   const nextSlide = () => {
-    const newIndex = (activeIndex + 1) % images.length;
-    setActiveIndex(newIndex);
-    setSlideDirection("right");
-    if (!loadedImages.includes(newIndex)) {
-      setLoadedImages((prevLoadedImages) => [...prevLoadedImages, newIndex]);
-    }
+    setActiveIndex((activeIndex + 1) % images.length);
   };
 
   const prevSlide = () => {
-    const newIndex = (activeIndex - 1 + images.length) % images.length;
-    setActiveIndex(newIndex);
-    setSlideDirection("left");
-    if (!loadedImages.includes(newIndex)) {
-      setLoadedImages((prevLoadedImages) => [...prevLoadedImages, newIndex]);
-    }
+    setActiveIndex((activeIndex - 1 + images.length) % images.length);
   };
+
+  const { description, ...image } = images[activeIndex];
 
   return (
     <Box className="relative">
@@ -66,23 +61,12 @@ const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
       >
         <ArrowBack />
       </AbsoluteFab>
-      {images.map((image, index) => (
-        <Slide
-          direction={slideDirection}
-          in={activeIndex === index}
-          key={index}
-          unmountOnExit
-        >
-          <Card>
-            {loadedImages.includes(index) ? (
-              <>
-                <CardMedia component="img" {...image} />
-                <TextOverlay>{image.description}</TextOverlay>
-              </>
-            ) : null}
-          </Card>
-        </Slide>
-      ))}
+      <Card>
+        <CardImageContent>
+          <CardMedia component="img" {...image} />
+          <TextOverlay>{description}</TextOverlay>
+        </CardImageContent>
+      </Card>
       <AbsoluteFab
         aria-label="next slide"
         className="right-2.5"
