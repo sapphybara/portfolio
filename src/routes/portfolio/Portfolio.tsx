@@ -19,6 +19,9 @@ const Portfolio = () => {
         className="mb-4"
         separator={<NavigateNext fontSize="small" />}
       >
+        <Link color="inherit" href="/" underline="hover">
+          Home
+        </Link>
         <Link
           color={projectId ? "inherit" : "text.primary"}
           href="/portfolio"

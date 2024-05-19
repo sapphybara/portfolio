@@ -68,7 +68,11 @@ interface Link {
   href: string;
 }
 
-export type PortfolioItemImage = { src: string; alt: string };
+export type PortfolioItemImage = {
+  src: string;
+  alt: string;
+  description: string;
+};
 
 export interface PortfolioItem {
   id: string;

@@ -73,31 +73,38 @@
     "images": [
       {
         "src": "/images/hyscan/1.jpg",
-        "alt": "HySCAN Home Page"
+        "alt": "HySCAN Home Page",
+        "description": "The home page for the HySCAN application"
       },
       {
         "src": "/images/hyscan/2.jpg",
-        "alt": "HySCAN Disclaimer Page"
+        "alt": "HySCAN Disclaimer Page",
+        "description": "The disclaimer developed for HySCAN; I created this design."
       },
       {
         "src": "/images/hyscan/3.jpg",
-        "alt": "HySCAN Component Selection List"
+        "alt": "HySCAN Component Selection List",
+        "description": "HySCAN Component Selection List: the first step in the workflow of the application, where users select the components of their hydrogen system."
       },
       {
         "src": "/images/hyscan/4.jpg",
-        "alt": "HySCAN component card list"
+        "alt": "HySCAN component card list",
+        "description": "A list of the components that the user previously selected."
       },
       {
         "src": "/images/hyscan/5.jpg",
-        "alt": "HySCAN Questionnaire"
+        "alt": "HySCAN Questionnaire",
+        "description": "HySCAN Component Card List: the second step in the workflow of the application, where answer questions about their system, including specifics about the components selected in the previous step."
       },
       {
         "src": "/images/hyscan/6.jpg",
-        "alt": "HySCAN Results Page: suggested codes and standards"
+        "alt": "HySCAN Results Page: suggested codes and standards",
+        "description": "HySCAN Results Page: the final step in the workflow of the application, where users are presented with the codes and standards that are applicable to their system based on their responses."
       },
       {
         "src": "/images/hyscan/7.jpg",
-        "alt": "HySCAN Results Page: related questions"
+        "alt": "HySCAN Results Page: related questions",
+        "description": "An example of how related questions were grouped together, where multiple elements of the components in the system can all relate to the same code or standard."
       }
     ]
   },
@@ -126,27 +133,33 @@
     "images": [
       {
         "src": "/images/explainable-ai/1.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: home page",
+        "description": "The home page for the designs I created, which contains a plot indicating the impact of the over 200 features in the dataset."
       },
       {
         "src": "/images/explainable-ai/2.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: feature detail page",
+        "description": "A detailed view of the SHAP values for a specific feature in the dataset."
       },
       {
         "src": "/images/explainable-ai/3.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: sample detail page",
+        "description": "This page delves into more detail on one sample (data) in the dataset, showing the SHAP values for each feature in the dataset for that sample."
       },
       {
         "src": "/images/explainable-ai/4.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: feature impact bar graph",
+        "description": "Moving on to a new kind of plot, here we have a bar graph showing the impact of each feature on the model's prediction for a specific sample."
       },
       {
         "src": "/images/explainable-ai/5.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: raw SHAP values",
+        "description": "The raw SHAP values for all samples and all features in the dataset."
       },
       {
         "src": "/images/explainable-ai/6.png",
-        "alt": "Explainable AI Interface"
+        "alt": "Explainable AI Interface: partial relationship",
+        "description": "This advanced plot is used by model developers to compare features and see how they impacted each other."
       }
     ]
   }
