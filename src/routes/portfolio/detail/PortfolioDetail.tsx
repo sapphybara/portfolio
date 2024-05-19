@@ -61,13 +61,30 @@ const icons: { [K in HeaderKeys]: React.ElementType } = {
 
 const AnchorLink = styled(MyLink)(({ theme }) => ({
   color: theme.palette.primary.main,
-  textAlign: "right",
+}));
+
+const AnchorWrapper = styled(Box)(({ theme }) => ({
+  "& .MuiTypography-root": {
+    textAlign: "right",
+  },
+  "& .MuiList-root .MuiListItem-root": {
+    justifyContent: "flex-end",
+    textAlign: "right",
+  },
+  ...(useMediaQuery(theme.breakpoints.up("sm"))
+    ? {
+        position: "sticky",
+        top: theme.spacing(16),
+        height: "calc(100vh - 101px)",
+        paddingRight: theme.spacing(2),
+      }
+    : {}),
 }));
 
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioItem;
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
   if (!portfolioDetail) {
     return (
@@ -82,26 +99,24 @@ const PortfolioDetail = () => {
 
   return (
     <>
-      <Stack direction="row">
-        {isMdUp && (
-          <Box className="sticky top-16 h-[calc(100vh-101px)] pr-2">
-            <Typography variant="h5">Overview</Typography>
-            <List>
-              <ListItem className="justify-end">
-                <AnchorLink to="#detail">Portfolio Detail</AnchorLink>
-              </ListItem>
-              {headers.map((header) =>
-                portfolioDetail[header] ? (
-                  <ListItem className="justify-end" key={header}>
-                    <AnchorLink to={`#${header}`}>
-                      {toSentenceCase(header)}
-                    </AnchorLink>
-                  </ListItem>
-                ) : null
-              )}
-            </List>
-          </Box>
-        )}
+      <Stack direction={isSmUp ? "row" : "column"}>
+        <AnchorWrapper>
+          <Typography variant="h5">Overview</Typography>
+          <List>
+            <ListItem>
+              <AnchorLink to="#detail">Portfolio Detail</AnchorLink>
+            </ListItem>
+            {headers.map((header) =>
+              portfolioDetail[header] ? (
+                <ListItem key={header}>
+                  <AnchorLink to={`#${header}`}>
+                    {toSentenceCase(header)}
+                  </AnchorLink>
+                </ListItem>
+              ) : null
+            )}
+          </List>
+        </AnchorWrapper>
         <Box>
           <Paper className="p-4 mb-4 flex flex-col" id="detail">
             <Typography variant="decoration">Portfolio detail</Typography>
