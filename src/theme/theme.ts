@@ -128,6 +128,8 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
         textTransform: "uppercase",
         color: theme.palette.secondary.main,
         fontFamily: fontFamily.header,
+        position: "relative",
+        zIndex: 1,
         '& + [class^="MuiTypography"]': {
           marginTop: theme.spacing(-0.5),
         },
