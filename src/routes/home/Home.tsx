@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
+import AboutHeader from "@components/AboutHeader";
 
 const TypographyStack = styled(Stack)(({ theme }) => ({
   margin: theme.spacing(2, 0),
@@ -35,18 +36,7 @@ const Home = () => {
             <Typography variant="h1">Sapphyra</Typography>
           </Box>
         </Stack>
-        <Box className="flex flex-wrap">
-          <Typography className="decorator grow w-full" variant="decoration">
-            I am a
-          </Typography>
-          <Typography className="dev flex flex-wrap" variant="h2">
-            Developer
-            <Box className="mx-4" component="span" color="secondary.main">
-              &
-            </Box>
-            Designer
-          </Typography>
-        </Box>
+        <AboutHeader />
       </Stack>
       <TypographyStack gap={2}>
         <Typography>
