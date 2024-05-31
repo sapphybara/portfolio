@@ -187,8 +187,8 @@ const Navbar = (props: PropsWithRoutes) => {
 
     return (
       <Stack direction={stackDirection} {...stackProps}>
-        <ResumeLink href="/" underline="none">
-          <ResponsiveLogo />
+        <ResumeLink justifyContent="center" href="/" underline="none">
+          {!isMobile && <ResponsiveLogo />}
           <Typography color="common.white" {...typographyProps}>
             Sapphyra Wiser
           </Typography>
@@ -241,7 +241,7 @@ const Navbar = (props: PropsWithRoutes) => {
     >
       {renderHeaderAndLinks(
         { className: "text-center", onClick: handleDrawerToggle },
-        { className: "my-2", variant: "h6" },
+        { className: "my-2", color: "text.primary", variant: "h6" },
         undefined,
         true
       )}
