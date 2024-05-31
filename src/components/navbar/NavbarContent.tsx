@@ -15,6 +15,7 @@ import {
   List,
   keyframes,
   ListProps,
+  Badge,
 } from "@mui/material";
 import ResponsiveLogo from "@components/ResponsiveLogo";
 import { ThemeModeContext } from "@context/ThemeModeContext";
@@ -100,7 +101,7 @@ const SpinningIconButton = styled(
 
 const ResumeLink = styled(Link)(({ theme }) => ({
   display: "flex",
-  gap: theme.spacing(1),
+  gap: theme.spacing(2),
   alignItems: "center",
 }));
 
@@ -150,11 +151,15 @@ const NavbarContent: (
         underline="none"
       >
         {!isMobile && (
-          <ResponsiveLogo
-            flip={flip}
-            logoInitial={logoInitial}
-            rotation={rotation}
-          />
+          <IconButton aria-label="this website is in beta" className="p-0">
+            <Badge badgeContent="Beta" color="warning" overlap="rectangular">
+              <ResponsiveLogo
+                flip={flip}
+                logoInitial={logoInitial}
+                rotation={rotation}
+              />
+            </Badge>
+          </IconButton>
         )}
         <Typography color="common.white" {...typographyProps}>
           Sapphyra Wiser
