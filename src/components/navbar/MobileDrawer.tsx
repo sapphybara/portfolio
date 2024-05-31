@@ -1,11 +1,8 @@
-import {
-  Drawer,
-  ListProps,
-  StackProps,
-  TypographyProps,
-  styled,
-} from "@mui/material";
+import { Drawer, styled } from "@mui/material";
 import { ReactNode } from "react";
+import NavbarContent from "./NavbarContent";
+import { PropsWithRoutes } from "types/global";
+import { RouteObject } from "react-router-dom";
 
 const MobileNavigationDrawer = styled(Drawer)(() => ({
   "& .MuiDrawer-paper": {
@@ -14,21 +11,21 @@ const MobileNavigationDrawer = styled(Drawer)(() => ({
   },
 }));
 
-interface MobileDrawerProps {
+interface MobileDrawerProps extends PropsWithRoutes {
   mobileOpen: boolean;
   handleDrawerToggle: () => void;
-  renderHeaderAndLinks: (
-    stackProps: StackProps,
-    typographyProps: TypographyProps,
-    listProps?: ListProps,
-    isMobile?: boolean
-  ) => JSX.Element;
+  renderRouteLinks: (
+    routes: RouteObject[],
+    shouldRenderChildren: boolean,
+    isMobile: boolean
+  ) => ReactNode;
 }
 
 const MobileDrawer: (props: MobileDrawerProps) => ReactNode = ({
   mobileOpen,
   handleDrawerToggle,
-  renderHeaderAndLinks,
+  routes,
+  renderRouteLinks,
 }) => (
   <nav>
     <MobileNavigationDrawer
@@ -40,12 +37,18 @@ const MobileDrawer: (props: MobileDrawerProps) => ReactNode = ({
       }}
       sx={{ display: { xs: "block", sm: "none" } }}
     >
-      {renderHeaderAndLinks(
-        { className: "text-center", onClick: handleDrawerToggle },
-        { className: "my-2", color: "text.primary", variant: "h6" },
-        undefined,
-        true
-      )}
+      <NavbarContent
+        isMobile
+        mobileOpen={mobileOpen}
+        renderRouteLinks={renderRouteLinks}
+        routes={routes}
+        stackProps={{ className: "text-center", onClick: handleDrawerToggle }}
+        typographyProps={{
+          className: "my-2",
+          color: "text.primary",
+          variant: "h6",
+        }}
+      />
     </MobileNavigationDrawer>
   </nav>
 );

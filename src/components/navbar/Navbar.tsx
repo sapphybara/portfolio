@@ -1,112 +1,11 @@
-import { Fragment, ReactNode, forwardRef, useContext, useState } from "react";
-import {
-  AppBar,
-  Divider,
-  Icon,
-  IconButton,
-  IconButtonProps,
-  Link,
-  List,
-  ListItem,
-  ListProps,
-  Stack,
-  StackProps,
-  Toolbar,
-  Tooltip,
-  Typography,
-  TypographyProps,
-  keyframes,
-  styled,
-} from "@mui/material";
-import {
-  DarkModeOutlined,
-  LightModeOutlined,
-  Logout,
-  Menu as MenuIcon,
-} from "@mui/icons-material";
+import { Fragment, ReactNode, useState } from "react";
+import { AppBar, IconButton, Link, ListItem, Toolbar } from "@mui/material";
+import { Logout, Menu as MenuIcon } from "@mui/icons-material";
 import { PropsWithRoutes, PropsWithUser } from "types/global";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
-import { ThemeModeContext } from "@context/ThemeModeContext";
 import { useFetcher, useLocation, useRouteLoaderData } from "react-router-dom";
-import ResponsiveLogo from "@components/ResponsiveLogo";
 import MobileDrawer from "./MobileDrawer";
-
-const NavList = styled(List)(({ theme }) => {
-  const { palette } = theme;
-  const isDarkMode = palette.mode === "dark";
-  const linkColor = isDarkMode ? palette.primary.main : palette.common.white;
-
-  return {
-    "& .MuiListItem-root": {
-      gap: theme.spacing(1),
-      justifyContent: "center",
-      whiteSpace: "nowrap",
-      "&.mobile .MuiLink-root": {
-        color: palette.primary.main,
-      },
-      "&:last-child": {
-        paddingRight: 0,
-      },
-    },
-    "& .MuiLink-root": {
-      color: linkColor,
-      display: "flex",
-      gap: theme.spacing(0.5),
-      alignItems: "center",
-    },
-  };
-});
-NavList.displayName = "NavList";
-
-const SpinAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const SpinningIconButton = styled(
-  forwardRef(
-    (
-      props: IconButtonProps & {
-        spin: boolean;
-      },
-      ref: React.Ref<HTMLButtonElement>
-    ) => {
-      const { spin: _spin, ...rest } = props;
-      return <IconButton ref={ref} {...rest} />;
-    }
-  )
-)(({ spin, theme }) => {
-  const isDarkMode = theme.palette.mode === "dark";
-  const linkColor = isDarkMode
-    ? theme.palette.primary.main
-    : theme.palette.common.white;
-
-  return {
-    aspectRatio: spin ? "1" : "inherit",
-    justifyContent: "center",
-    "&:hover": {
-      animation: spin ? `${SpinAnimation} 400ms linear` : "none",
-    },
-    "& .MuiSvgIcon-root": {
-      color: linkColor,
-      "&:hover": {
-        color: isDarkMode
-          ? theme.palette.common.white
-          : theme.palette.common.black,
-      },
-    },
-  };
-});
-
-const ResumeLink = styled(Link)(({ theme }) => ({
-  display: "flex",
-  gap: theme.spacing(1),
-  alignItems: "center",
-}));
+import NavbarContent from "./NavbarContent";
 
 const Navbar = (props: PropsWithRoutes) => {
   const fetcher = useFetcher();
@@ -119,7 +18,6 @@ const Navbar = (props: PropsWithRoutes) => {
     : encodeURIComponent(location.pathname);
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isDarkMode, toggleMode } = useContext(ThemeModeContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -174,58 +72,6 @@ const Navbar = (props: PropsWithRoutes) => {
     );
   };
 
-  const renderHeaderAndLinks = (
-    stackProps: StackProps,
-    typographyProps: TypographyProps,
-    listProps?: ListProps,
-    isMobile: boolean = false
-  ) => {
-    const stackDirection = isMobile ? "column" : "row";
-
-    return (
-      <Stack direction={stackDirection} {...stackProps}>
-        <ResumeLink justifyContent="center" href="/" underline="none">
-          {!isMobile && <ResponsiveLogo />}
-          <Typography color="common.white" {...typographyProps}>
-            Sapphyra Wiser
-          </Typography>
-        </ResumeLink>
-        {isMobile && <Divider />}
-        <Stack
-          direction={stackDirection}
-          flexWrap="wrap"
-          flexGrow={1}
-          justifyContent="flex-end"
-        >
-          {!isMobile && (
-            <Tooltip
-              arrow
-              title={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
-            >
-              <SpinningIconButton
-                aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
-                className="rounded-full"
-                onClick={toggleMode}
-                spin={!mobileOpen}
-              >
-                <Icon>
-                  {isDarkMode ? (
-                    <LightModeOutlined color="action" />
-                  ) : (
-                    <DarkModeOutlined color="action" />
-                  )}
-                </Icon>
-              </SpinningIconButton>
-            </Tooltip>
-          )}
-          <NavList {...listProps}>
-            {renderRouteLinks(props.routes, true, isMobile)}
-          </NavList>
-        </Stack>
-      </Stack>
-    );
-  };
-
   return (
     <>
       <AppBar component="nav" position="sticky">
@@ -240,27 +86,32 @@ const Navbar = (props: PropsWithRoutes) => {
           >
             <MenuIcon className="text-white" />
           </IconButton>
-          {renderHeaderAndLinks(
-            {
+          <NavbarContent
+            isMobile={false}
+            listProps={{
+              className: "flex-row justify-center items-center p-0",
+              sx: { display: { xs: "none", sm: "flex" } },
+            }}
+            mobileOpen={mobileOpen}
+            renderRouteLinks={renderRouteLinks}
+            routes={props.routes}
+            stackProps={{
               alignItems: "center",
               justifyContent: "space-between",
               width: "100%",
-            },
-            {
+            }}
+            typographyProps={{
               sx: { display: { xs: "none", sm: "block" } },
               variant: "h6",
-            },
-            {
-              className: "flex-row justify-center items-center p-0",
-              sx: { display: { xs: "none", sm: "flex" } },
-            }
-          )}
+            }}
+          />
         </Toolbar>
       </AppBar>
       <MobileDrawer
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
-        renderHeaderAndLinks={renderHeaderAndLinks}
+        renderRouteLinks={renderRouteLinks}
+        routes={props.routes}
       />
     </>
   );
