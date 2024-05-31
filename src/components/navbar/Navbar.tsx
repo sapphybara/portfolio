@@ -2,7 +2,6 @@ import { Fragment, ReactNode, forwardRef, useContext, useState } from "react";
 import {
   AppBar,
   Divider,
-  Drawer,
   Icon,
   IconButton,
   IconButtonProps,
@@ -26,10 +25,11 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { PropsWithRoutes, PropsWithUser } from "types/global";
-import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
+import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 import { ThemeModeContext } from "@context/ThemeModeContext";
 import { useFetcher, useLocation, useRouteLoaderData } from "react-router-dom";
-import ResponsiveLogo from "./ResponsiveLogo";
+import ResponsiveLogo from "@components/ResponsiveLogo";
+import MobileDrawer from "./MobileDrawer";
 
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
@@ -101,13 +101,6 @@ const SpinningIconButton = styled(
     },
   };
 });
-
-const MobileDrawer = styled(Drawer)(() => ({
-  "& .MuiDrawer-paper": {
-    boxSizing: "border-box",
-    width: 240,
-  },
-}));
 
 const ResumeLink = styled(Link)(({ theme }) => ({
   display: "flex",
@@ -233,25 +226,6 @@ const Navbar = (props: PropsWithRoutes) => {
     );
   };
 
-  const drawer = (
-    <MobileDrawer
-      variant="temporary"
-      open={mobileOpen}
-      onClose={handleDrawerToggle}
-      ModalProps={{
-        keepMounted: true, // Better open performance on mobile.
-      }}
-      sx={{ display: { xs: "block", sm: "none" } }}
-    >
-      {renderHeaderAndLinks(
-        { className: "text-center", onClick: handleDrawerToggle },
-        { className: "my-2", color: "text.primary", variant: "h6" },
-        undefined,
-        true
-      )}
-    </MobileDrawer>
-  );
-
   return (
     <>
       <AppBar component="nav" position="sticky">
@@ -283,7 +257,11 @@ const Navbar = (props: PropsWithRoutes) => {
           )}
         </Toolbar>
       </AppBar>
-      <nav>{drawer}</nav>
+      <MobileDrawer
+        mobileOpen={mobileOpen}
+        handleDrawerToggle={handleDrawerToggle}
+        renderHeaderAndLinks={renderHeaderAndLinks}
+      />
     </>
   );
 };
