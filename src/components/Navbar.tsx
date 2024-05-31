@@ -29,6 +29,7 @@ import { PropsWithRoutes, PropsWithUser } from "types/global";
 import ResumeLinkWithTooltip from "./ResumeLinkWithTooltip";
 import { ThemeModeContext } from "@context/ThemeModeContext";
 import { useFetcher, useLocation, useRouteLoaderData } from "react-router-dom";
+import ResponsiveLogo from "./ResponsiveLogo";
 
 const NavList = styled(List)(({ theme }) => {
   const { palette } = theme;
@@ -180,6 +181,7 @@ const Navbar = (props: PropsWithRoutes) => {
 
     return (
       <Stack direction={stackDirection} {...stackProps}>
+        <ResponsiveLogo />
         <Typography {...typographyProps}>Sapphyra Wiser</Typography>
         {isMobile && <Divider />}
         <Stack
