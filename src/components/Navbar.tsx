@@ -44,6 +44,9 @@ const NavList = styled(List)(({ theme }) => {
       "&.mobile .MuiLink-root": {
         color: palette.primary.main,
       },
+      "&:last-child": {
+        paddingRight: 0,
+      },
     },
     "& .MuiLink-root": {
       color: linkColor,
@@ -53,6 +56,7 @@ const NavList = styled(List)(({ theme }) => {
     },
   };
 });
+NavList.displayName = "NavList";
 
 const SpinAnimation = keyframes`
   from {
