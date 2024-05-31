@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useContext } from "react";
+import { ReactNode, forwardRef, useContext, useState } from "react";
 import { LightModeOutlined, DarkModeOutlined } from "@mui/icons-material";
 import {
   Stack,
@@ -131,10 +131,31 @@ const NavbarContent: (
   const stackDirection = isMobile ? "column" : "row";
   const { isDarkMode, toggleMode } = useContext(ThemeModeContext);
 
+  const [logoInitial, setLogoInitial] = useState<"s" | "w">("s");
+  const [rotation, setRotation] = useState(0);
+  const [flip, setFlip] = useState<1 | -1>(1);
+
+  const handleLogoClick = () => {
+    setLogoInitial((prevState) => (prevState === "s" ? "w" : "s"));
+    setRotation((prevRotation) => prevRotation + 180);
+    setFlip((prevFlip) => (prevFlip * -1) as 1 | -1);
+  };
+
   return (
     <Stack direction={stackDirection} {...stackProps}>
-      <ResumeLink justifyContent="center" href="/" underline="none">
-        {!isMobile && <ResponsiveLogo />}
+      <ResumeLink
+        justifyContent="center"
+        href="/"
+        onClick={handleLogoClick}
+        underline="none"
+      >
+        {!isMobile && (
+          <ResponsiveLogo
+            flip={flip}
+            logoInitial={logoInitial}
+            rotation={rotation}
+          />
+        )}
         <Typography color="common.white" {...typographyProps}>
           Sapphyra Wiser
         </Typography>

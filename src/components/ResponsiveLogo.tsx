@@ -1,5 +1,5 @@
-import { IconButton, styled } from "@mui/material";
-import { useContext, useState } from "react";
+import { styled } from "@mui/material";
+import { FC, useContext } from "react";
 import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const Logo = styled("img")(() => ({
@@ -8,29 +8,27 @@ const Logo = styled("img")(() => ({
   transition: "transform 400ms ease-out",
 }));
 
-const ResponsiveLogo = () => {
-  const [logoInitial, setLogoInitial] = useState<"s" | "w">("s");
-  const [rotation, setRotation] = useState(0);
-  const [flip, setFlip] = useState<1 | -1>(1);
+interface ResponsiveLogoProps {
+  flip: 1 | -1;
+  logoInitial: "s" | "w";
+  rotation: number;
+}
 
+const ResponsiveLogo: FC<ResponsiveLogoProps> = ({
+  flip,
+  logoInitial,
+  rotation,
+}) => {
   const { isDarkMode } = useContext(ThemeModeContext);
 
-  const handleLogoClick = () => {
-    setLogoInitial((prevState) => (prevState === "s" ? "w" : "s"));
-    setRotation((prevRotation) => prevRotation + 180);
-    setFlip((prevFlip) => (prevFlip * -1) as 1 | -1);
-  };
-
   return (
-    <IconButton className="p-0" onClick={handleLogoClick}>
-      <Logo
-        alt="logo"
-        src={`/logo-${logoInitial}-${isDarkMode ? "dark" : "light"}-mode.png`}
-        sx={{
-          transform: `rotate(${rotation}deg) scaleY(${flip})`,
-        }}
-      />
-    </IconButton>
+    <Logo
+      alt="logo"
+      src={`/logo-${logoInitial}-${isDarkMode ? "dark" : "light"}-mode.png`}
+      sx={{
+        transform: `rotate(${rotation}deg) scaleY(${flip})`,
+      }}
+    />
   );
 };
 
