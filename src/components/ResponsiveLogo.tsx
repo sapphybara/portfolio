@@ -1,5 +1,6 @@
 import { IconButton, keyframes, styled } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const RotateS = keyframes`
   from {
@@ -27,6 +28,7 @@ const Logo = styled("img")<{ initial: "s" | "w" }>(({ initial }) => ({
 
 const ResponsiveLogo = () => {
   const [logoInitial, setLogoInitial] = useState<"s" | "w">("s");
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   const handleLogoClick = () => {
     setLogoInitial((prevState) => {
@@ -42,7 +44,11 @@ const ResponsiveLogo = () => {
 
   return (
     <IconButton className="mr-2" onClick={handleLogoClick}>
-      <Logo alt="logo" initial={logoInitial} src={`/logo-${logoInitial}.png`} />
+      <Logo
+        alt="logo"
+        initial={logoInitial}
+        src={`/logo-${logoInitial}-${isDarkMode ? "dark" : "light"}-mode.png`}
+      />
     </IconButton>
   );
 };
