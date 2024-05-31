@@ -20,30 +20,10 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const LogoBackground = styled(Stack)(({ theme }) => ({
-  position: "relative",
-  height: "250px",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    backgroundImage: `url(logo-${theme.palette.mode}-mode.png)`,
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "right",
-    opacity: 0.35,
-    height: "100%",
-    width: "100%",
-    zIndex: -1,
-    [theme.breakpoints.down("sm")]: {
-      backgroundPosition: "center",
-    },
-  },
-}));
-
 const Home = () => {
   return (
     <Box component="section">
-      <LogoBackground justifyContent="space-around">
+      <Stack justifyContent="space-around">
         <Stack
           className="max-w-[52rem]"
           direction="row"
@@ -67,7 +47,7 @@ const Home = () => {
             Designer
           </Typography>
         </Box>
-      </LogoBackground>
+      </Stack>
       <TypographyStack gap={2}>
         <Typography>
           Welcome to my corner of the digital world! I'm a dedicated Front End
