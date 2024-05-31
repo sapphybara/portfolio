@@ -105,6 +105,12 @@ const MobileDrawer = styled(Drawer)(() => ({
   },
 }));
 
+const ResumeLink = styled(Link)(({ theme }) => ({
+  display: "flex",
+  gap: theme.spacing(1),
+  alignItems: "center",
+}));
+
 const Navbar = (props: PropsWithRoutes) => {
   const fetcher = useFetcher();
   const { user } = (useRouteLoaderData("root") as PropsWithUser) || {
@@ -181,8 +187,12 @@ const Navbar = (props: PropsWithRoutes) => {
 
     return (
       <Stack direction={stackDirection} {...stackProps}>
-        <ResponsiveLogo />
-        <Typography {...typographyProps}>Sapphyra Wiser</Typography>
+        <ResumeLink href="/" underline="none">
+          <ResponsiveLogo />
+          <Typography color="common.white" {...typographyProps}>
+            Sapphyra Wiser
+          </Typography>
+        </ResumeLink>
         {isMobile && <Divider />}
         <Stack
           direction={stackDirection}

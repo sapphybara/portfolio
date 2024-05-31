@@ -43,7 +43,7 @@ const ResponsiveLogo = () => {
   };
 
   return (
-    <IconButton className="mr-2" onClick={handleLogoClick}>
+    <IconButton className="p-0" onClick={handleLogoClick}>
       <Logo
         alt="logo"
         initial={logoInitial}
