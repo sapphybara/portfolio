@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import { useRouteError } from "react-router-dom";
 import { PropsWithRoutes } from "types/global";
 import { ReactNode } from "react";
-import Navbar from "@components/Navbar";
+import Navbar from "@components/navbar/Navbar";
 
 const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   const error = useRouteError();

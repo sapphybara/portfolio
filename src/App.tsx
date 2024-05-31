@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import { PropsWithRoutes } from "types/global";
 import { useTitle } from "@hooks/hooks";
-import Navbar from "@components/Navbar";
+import Navbar from "@components/navbar/Navbar";
 import Footer from "@components/Footer";
 
 function App(props: PropsWithRoutes) {
