@@ -10,8 +10,8 @@
     "config": {
       "SourceDir": "src",
       "DistributionDir": "build",
-      "BuildCommand": "npm i -g pnpm && pnpm build",
-      "StartCommand": "pnpm dev"
+      "BuildCommand": "corepack enable && pnpm build",
+      "StartCommand": "pnpm preview"
     }
   }
 }

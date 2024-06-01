@@ -26,8 +26,6 @@ export type ModelCreditCardConditionInput = {
   and?: Array< ModelCreditCardConditionInput | null > | null,
   or?: Array< ModelCreditCardConditionInput | null > | null,
   not?: ModelCreditCardConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelStringInput = {
@@ -130,8 +128,6 @@ export type ModelCreditCardFilterInput = {
   isEarningInterest?: ModelBooleanInput | null,
   lastInterestAmount?: ModelFloatInput | null,
   score?: ModelFloatInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
   and?: Array< ModelCreditCardFilterInput | null > | null,
   or?: Array< ModelCreditCardFilterInput | null > | null,
   not?: ModelCreditCardFilterInput | null,
@@ -157,69 +153,6 @@ export type ModelCreditCardConnection = {
   __typename: "ModelCreditCardConnection",
   items:  Array<CreditCard | null >,
   nextToken?: string | null,
-};
-
-export type ModelSubscriptionCreditCardFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  cardName?: ModelSubscriptionStringInput | null,
-  paymentDate?: ModelSubscriptionStringInput | null,
-  minimumPayment?: ModelSubscriptionFloatInput | null,
-  balance?: ModelSubscriptionFloatInput | null,
-  apr?: ModelSubscriptionFloatInput | null,
-  isEarningInterest?: ModelSubscriptionBooleanInput | null,
-  lastInterestAmount?: ModelSubscriptionFloatInput | null,
-  score?: ModelSubscriptionFloatInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
-  or?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
 };
 
 export type CreateCreditCardMutationVariables = {
@@ -337,7 +270,6 @@ export type ListCreditCardsQuery = {
 };
 
 export type OnCreateCreditCardSubscriptionVariables = {
-  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnCreateCreditCardSubscription = {
@@ -358,7 +290,6 @@ export type OnCreateCreditCardSubscription = {
 };
 
 export type OnUpdateCreditCardSubscriptionVariables = {
-  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnUpdateCreditCardSubscription = {
@@ -379,7 +310,6 @@ export type OnUpdateCreditCardSubscription = {
 };
 
 export type OnDeleteCreditCardSubscriptionVariables = {
-  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnDeleteCreditCardSubscription = {

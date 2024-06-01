@@ -8,10 +8,8 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard(
-  $filter: ModelSubscriptionCreditCardFilterInput
-) {
-  onCreateCreditCard(filter: $filter) {
+export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard {
+  onCreateCreditCard {
     id
     cardName
     paymentDate
@@ -30,10 +28,8 @@ export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard
   APITypes.OnCreateCreditCardSubscriptionVariables,
   APITypes.OnCreateCreditCardSubscription
 >;
-export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard(
-  $filter: ModelSubscriptionCreditCardFilterInput
-) {
-  onUpdateCreditCard(filter: $filter) {
+export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard {
+  onUpdateCreditCard {
     id
     cardName
     paymentDate
@@ -52,10 +48,8 @@ export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard
   APITypes.OnUpdateCreditCardSubscriptionVariables,
   APITypes.OnUpdateCreditCardSubscription
 >;
-export const onDeleteCreditCard = /* GraphQL */ `subscription OnDeleteCreditCard(
-  $filter: ModelSubscriptionCreditCardFilterInput
-) {
-  onDeleteCreditCard(filter: $filter) {
+export const onDeleteCreditCard = /* GraphQL */ `subscription OnDeleteCreditCard {
+  onDeleteCreditCard {
     id
     cardName
     paymentDate
