@@ -152,7 +152,7 @@ const NavbarContent: (
       >
         {!isMobile && (
           <IconButton aria-label="this website is in beta" className="p-0">
-            <Badge badgeContent="Beta" color="warning" overlap="rectangular">
+            <Badge badgeContent="Alpha" color="warning" overlap="rectangular">
               <ResponsiveLogo
                 flip={flip}
                 logoInitial={logoInitial}
