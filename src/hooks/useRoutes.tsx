@@ -5,13 +5,15 @@ import Portfolio from "@routes/portfolio/Portfolio";
 import Admin from "@routes/admin/Admin";
 import Resume from "@routes/resume/Resume";
 import Home from "@routes/home/Home";
+import rootLoader from "@routes/loader";
+import adminLoader from "@routes/admin/loader";
 
 export const useRoutes = () => {
   const routes = [
     {
       id: "root",
       path: "/",
-      lazy: () => import("@routes/lazy"),
+      loader: rootLoader,
       get element() {
         return <App routes={routes} />;
       },
@@ -40,7 +42,7 @@ export const useRoutes = () => {
         {
           path: "admin",
           element: <Admin />,
-          lazy: () => import("@routes/admin/lazy"),
+          loader: adminLoader,
           children: [
             {
               path: "credit-cards/new",
