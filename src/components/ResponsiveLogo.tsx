@@ -9,16 +9,11 @@ const Logo = styled("img")(() => ({
 }));
 
 interface ResponsiveLogoProps {
-  flip: 1 | -1;
   logoInitial: "s" | "w";
   rotation: number;
 }
 
-const ResponsiveLogo: FC<ResponsiveLogoProps> = ({
-  flip,
-  logoInitial,
-  rotation,
-}) => {
+const ResponsiveLogo: FC<ResponsiveLogoProps> = ({ logoInitial, rotation }) => {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
@@ -26,7 +21,7 @@ const ResponsiveLogo: FC<ResponsiveLogoProps> = ({
       alt="logo"
       src={`/logo-${logoInitial}-${isDarkMode ? "dark" : "light"}-mode.png`}
       sx={{
-        transform: `rotate(${rotation}deg) scaleY(${flip})`,
+        transform: `rotate(${rotation}deg)`,
       }}
     />
   );
