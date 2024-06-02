@@ -134,12 +134,13 @@ const NavbarContent: (
 
   const [logoInitial, setLogoInitial] = useState<"s" | "w">("s");
   const [rotation, setRotation] = useState(0);
-  const [flip, setFlip] = useState<1 | -1>(1);
 
   const handleLogoClick = () => {
-    setLogoInitial((prevState) => (prevState === "s" ? "w" : "s"));
-    setRotation((prevRotation) => prevRotation + 180);
-    setFlip((prevFlip) => (prevFlip * -1) as 1 | -1);
+    const newInitial = logoInitial === "s" ? "w" : "s";
+    setLogoInitial(newInitial);
+    setRotation(
+      (prevRotation) => prevRotation + (newInitial === "w" ? 90 : 270)
+    );
   };
 
   return (
@@ -153,11 +154,7 @@ const NavbarContent: (
         {!isMobile && (
           <IconButton aria-label="this website is in beta" className="p-0">
             <Badge badgeContent="Beta" color="warning" overlap="rectangular">
-              <ResponsiveLogo
-                flip={flip}
-                logoInitial={logoInitial}
-                rotation={rotation}
-              />
+              <ResponsiveLogo logoInitial={logoInitial} rotation={rotation} />
             </Badge>
           </IconButton>
         )}
