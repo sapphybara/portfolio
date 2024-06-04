@@ -6,6 +6,7 @@ import {
   Description,
   EmojiObjects,
   Memory,
+  NavigateNext,
   People,
 } from "@mui/icons-material";
 import {
@@ -22,6 +23,8 @@ import {
   useMediaQuery,
   ButtonGroup,
   styled,
+  Breadcrumbs,
+  Link,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import MyLink from "@components/MyLink";
@@ -74,12 +77,22 @@ const AnchorWrapper = styled(Box)(({ theme }) => ({
   ...(useMediaQuery(theme.breakpoints.up("sm"))
     ? {
         position: "sticky",
-        top: theme.spacing(16),
+        top: theme.spacing(8),
         height: "calc(100vh - 101px)",
         paddingRight: theme.spacing(2),
       }
     : {}),
 }));
+
+const BreadcrumbsWidthCustomSeparator = styled(Breadcrumbs)(({ theme }) => ({
+  "& .MuiBreadcrumbs-separator": {
+    margin: theme.spacing(0, 0.5),
+  },
+}));
+
+const DetailedTitle = styled(Typography)(({ theme }) => ({
+  marginTop: theme.spacing(-0.96),
+})) as typeof Typography;
 
 const PortfolioDetail = () => {
   const portfolioDetail = useLoaderData() as PortfolioItem;
@@ -99,9 +112,30 @@ const PortfolioDetail = () => {
 
   return (
     <>
-      <Stack direction={isSmUp ? "row" : "column"}>
+      <BreadcrumbsWidthCustomSeparator
+        aria-label="breadcrumb"
+        separator={<NavigateNext color="secondary" fontSize="small" />}
+      >
+        <Typography
+          component={Link}
+          href="/#portfolio"
+          underline="hover"
+          variant="decoration"
+        >
+          Portfolio
+        </Typography>
+        <Typography variant="decoration">
+          {toSentenceCase(portfolioDetail.id)}
+        </Typography>
+      </BreadcrumbsWidthCustomSeparator>
+      <DetailedTitle component="h1" variant="h2">
+        {portfolioDetail.title}
+      </DetailedTitle>
+      <Stack className="mt-4" direction={isSmUp ? "row" : "column"}>
         <AnchorWrapper>
-          <Typography variant="h5">Overview</Typography>
+          <Typography component="h3" variant="h5">
+            Overview
+          </Typography>
           <List>
             <ListItem>
               <AnchorLink to="#detail">Portfolio Detail</AnchorLink>
@@ -119,12 +153,11 @@ const PortfolioDetail = () => {
         </AnchorWrapper>
         <Box>
           <Paper className="p-4 mb-4 flex flex-col" id="detail">
-            <Typography variant="decoration">Portfolio detail</Typography>
-            <Typography variant="h3">{portfolioDetail.title}</Typography>
-            <Divider className="my-4" />
-            <Typography component="h4" variant="h5">
+            <Typography variant="decoration">Portfolio Detail</Typography>
+            <Typography component="h2" variant="h4">
               {portfolioDetail.subheader}
             </Typography>
+            <Divider className="my-2" />
             <Typography color="text.secondary" variant="subtitle1">
               I built this project while working for:&nbsp;
               {portfolioDetail.affiliation}

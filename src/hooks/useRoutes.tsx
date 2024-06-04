@@ -1,7 +1,6 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject, redirect } from "react-router-dom";
 import App from "@/App";
 import Error from "@routes/error/Error";
-import Portfolio from "@routes/portfolio/Portfolio";
 import Admin from "@routes/admin/Admin";
 import Resume from "@routes/resume/Resume";
 import Home from "@routes/home/Home";
@@ -27,7 +26,12 @@ export const useRoutes = () => {
         },
         {
           path: "portfolio",
-          element: <Portfolio />,
+          loader: ({ params }) => {
+            if (params.projectId) {
+              return null;
+            }
+            return redirect("/#portfolio");
+          },
           children: [
             {
               path: ":projectId",
