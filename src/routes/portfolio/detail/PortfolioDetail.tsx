@@ -27,7 +27,6 @@ import {
   Link,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import MyLink from "@components/MyLink";
 import TagChips from "@components/TagChips";
 import { toSentenceCase } from "@utils/utils";
 import { isPortfolioImage, isTechStack } from "@utils/typeGuards";
@@ -62,7 +61,7 @@ const icons: { [K in HeaderKeys]: React.ElementType } = {
   images: Collections,
 };
 
-const AnchorLink = styled(MyLink)(({ theme }) => ({
+const AnchorLink = styled(Link)(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
@@ -138,12 +137,12 @@ const PortfolioDetail = () => {
           </Typography>
           <List>
             <ListItem>
-              <AnchorLink to="#detail">Portfolio Detail</AnchorLink>
+              <AnchorLink href="#detail">Portfolio Detail</AnchorLink>
             </ListItem>
             {headers.map((header) =>
               portfolioDetail[header] ? (
                 <ListItem key={header}>
-                  <AnchorLink to={`#${header}`}>
+                  <AnchorLink href={`#${header}`}>
                     {toSentenceCase(header)}
                   </AnchorLink>
                 </ListItem>
