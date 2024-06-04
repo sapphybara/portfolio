@@ -138,7 +138,9 @@ const NavbarContent: (
   const handleLogoClick = () => {
     const newInitial = logoInitial === "s" ? "w" : "s";
     setLogoInitial(newInitial);
-    setRotation((prevRotation) => prevRotation + 180);
+    setRotation(
+      (prevRotation) => prevRotation + (newInitial === "w" ? 90 : 270)
+    );
   };
 
   return (
