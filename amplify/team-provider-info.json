@@ -18,8 +18,11 @@
       "function": {
         "getcardscore": {
           "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/getcardscore-41757150315633616466-build.zip"
+          "s3Key": "amplify-builds/getcardscore-382f3772786d6755756f-build.zip"
         }
+      },
+      "api": {
+        "portfolio": {}
       }
     }
   }
