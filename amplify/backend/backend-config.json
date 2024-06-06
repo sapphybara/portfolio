@@ -58,6 +58,21 @@
     }
   },
   "function": {
+    "contactemailtrigger": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "portfolio"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getcardscore": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -65,6 +80,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_contactemailtrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "contactemailtrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_contactemailtrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "contactemailtrigger"
+        }
+      ]
+    },
     "AMPLIFY_function_getcardscore_deploymentBucketName": {
       "usedBy": [
         {
