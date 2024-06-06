@@ -44,6 +44,10 @@ export const useRoutes = () => {
           element: <Resume />,
         },
         {
+          path: "contact",
+          lazy: () => import("@routes/contact/lazy"),
+        },
+        {
           path: "admin",
           element: <Admin />,
           loader: adminLoader,

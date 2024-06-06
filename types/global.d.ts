@@ -106,3 +106,9 @@ export interface PropsWithUser {
 export interface LoaderActionError {
   error: string;
 }
+
+export interface ContactFormField {
+  key: "name" | "email" | "subject" | "message";
+  label: string;
+  type: "text" | "email";
+}
