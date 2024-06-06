@@ -77,3 +77,60 @@ export const deleteCreditCard = /* GraphQL */ `mutation DeleteCreditCard(
   APITypes.DeleteCreditCardMutationVariables,
   APITypes.DeleteCreditCardMutation
 >;
+export const updateContactForm = /* GraphQL */ `mutation UpdateContactForm(
+  $input: UpdateContactFormInput!
+  $condition: ModelContactFormConditionInput
+) {
+  updateContactForm(input: $input, condition: $condition) {
+    id
+    name
+    email
+    subject
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateContactFormMutationVariables,
+  APITypes.UpdateContactFormMutation
+>;
+export const deleteContactForm = /* GraphQL */ `mutation DeleteContactForm(
+  $input: DeleteContactFormInput!
+  $condition: ModelContactFormConditionInput
+) {
+  deleteContactForm(input: $input, condition: $condition) {
+    id
+    name
+    email
+    subject
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteContactFormMutationVariables,
+  APITypes.DeleteContactFormMutation
+>;
+export const createContactForm = /* GraphQL */ `mutation CreateContactForm(
+  $input: CreateContactFormInput!
+  $condition: ModelContactFormConditionInput
+) {
+  createContactForm(input: $input, condition: $condition) {
+    id
+    name
+    email
+    subject
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateContactFormMutationVariables,
+  APITypes.CreateContactFormMutation
+>;

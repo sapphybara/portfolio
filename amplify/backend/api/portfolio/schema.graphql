@@ -11,3 +11,18 @@ type CreditCard @model @auth(rules: [{ allow: private }]) {
   lastInterestAmount: Float!
   score: Float @function(name: "getcardscore-${env}")
 }
+
+type ContactForm
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [create], provider: identityPool }
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  email: String!
+  subject: String!
+  message: String
+}
