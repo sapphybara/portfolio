@@ -8,6 +8,10 @@
       "cognitoUserPoolId": "authportfolio9da5fd1f"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }
