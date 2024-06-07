@@ -112,3 +112,10 @@ export interface ContactFormField {
   label: string;
   type: "text" | "email";
 }
+
+export interface TabState {
+  maxTabHeight: number;
+  setMaxTabHeight: (value: number) => void;
+  setTabIdx: (value: number) => void;
+  tabIdx: number;
+}

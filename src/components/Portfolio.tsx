@@ -1,14 +1,16 @@
 import { Stack, Tab, Tabs, Theme, useMediaQuery } from "@mui/material";
-import { useState } from "react";
+import { FC } from "react";
 import PortfolioCard from "@components/PortfolioCard";
 import portfolioCards from "@assets/json/portfolio_cards.json";
-import { PortfolioItem } from "types/global";
+import { PortfolioItem, TabState } from "types/global";
 import CustomTabPanel from "./CustomTabPanel";
 
-const Portfolio = () => {
-  const [tabIdx, setTabIdx] = useState(0);
-  const [maxTabHeight, setMaxTabHeight] = useState<number>(0);
-
+const Portfolio: FC<TabState> = ({
+  maxTabHeight,
+  setMaxTabHeight,
+  setTabIdx,
+  tabIdx,
+}) => {
   const isMdUp = useMediaQuery("(min-width: 730px)");
   const isSmDown = useMediaQuery((theme) =>
     (theme as Theme).breakpoints.down("sm")
