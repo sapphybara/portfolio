@@ -1,18 +1,16 @@
-// Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: Apache-2.0
+/**
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+ */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
 const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 const ses = new SESClient({ region: "us-west-1" });
 
 // eslint-disable-next-line no-undef
-exports.handler = async (event) => {
-  const { toAddress } = event;
-  console.log(event, toAddress);
-
+exports.handler = async (_event, context) => {
   const command = new SendEmailCommand({
     Destination: {
-      ToAddresses: [toAddress],
+      ToAddresses: ["sapphyra.wiser@gmail.com"],
     },
     Message: {
       Body: {
@@ -21,20 +19,18 @@ exports.handler = async (event) => {
 
       Subject: { Data: "Test Email" },
     },
-    Source: "sapphyra.wiser@gmail.com",
+    Source: "admin@sapphyrawiser.com",
   });
 
   try {
     let response = await ses.send(command);
-    // process data.
-    console.log(response);
     return response;
   }
   catch (error) {
     // todo error handling.
-    console.log("error!", error)
+    console.error("error!", error)
   }
   finally {
-    // todo finally.
+    context.done(null, 'Successfully processed DynamoDB record');
   }
 };
