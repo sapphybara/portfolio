@@ -22,7 +22,7 @@
         },
         "contactemailtrigger": {
           "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/contactemailtrigger-4a6c3339654f72597663-build.zip"
+          "s3Key": "amplify-builds/contactemailtrigger-54696770314c75456276-build.zip"
         }
       },
       "api": {
