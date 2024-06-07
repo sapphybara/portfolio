@@ -7,19 +7,37 @@ const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 const ses = new SESClient({ region: "us-west-1" });
 
 // eslint-disable-next-line no-undef
-exports.handler = async (_event, context) => {
+exports.handler = async (event, _context, callback) => {
+  const contactData = event.Records[0].dynamodb.NewImage;
+  const {
+    email: { S: email },
+    name: { S: name },
+    message: { S: message },
+    subject: { S: subject },
+  } = contactData;
+
   const command = new SendEmailCommand({
     Destination: {
       ToAddresses: ["sapphyra.wiser@gmail.com"],
     },
     Message: {
       Body: {
-        Text: { Data: "This is a testing email from the lambda function" },
+        Html: {
+          Data: `
+            <html>
+              <head></head>
+              <body>
+                <h2>Message from ${name}: &lt;${email}&gt;</h2>
+                <p>${message}</p>
+              </body>
+            </html>
+          `
+        },
       },
-
-      Subject: { Data: "Test Email" },
+      Subject: { Data: subject },
     },
     Source: "admin@sapphyrawiser.com",
+    ReplyToAddresses: [email],
   });
 
   try {
@@ -31,6 +49,6 @@ exports.handler = async (_event, context) => {
     console.error("error!", error)
   }
   finally {
-    context.done(null, 'Successfully processed DynamoDB record');
+    callback(null, 'Successfully processed DynamoDB record');
   }
 };
