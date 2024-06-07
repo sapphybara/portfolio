@@ -12,6 +12,19 @@ const formFields: ContactFormField[] = [
 const Contact = () => {
   const actionData = useActionData() as LoaderActionError | null;
 
+  if (actionData?.status === "success") {
+    return (
+      <>
+        <Typography variant="decoration">Thanks for</Typography>
+        <Typography variant="h1">Reaching out</Typography>
+        <Typography className="mt-4" paragraph>
+          Your message has been sent successfully. I'll get back to you as soon
+          as possible.
+        </Typography>
+      </>
+    );
+  }
+
   return (
     <>
       <Typography variant="decoration">Get in</Typography>

@@ -22,7 +22,7 @@ const action: ActionFunction = async ({ request }) => {
     console.error("error creating new contact form:", err);
     return { status: (err as Error).message };
   }
-  return { status: "Form submitted successfully!" };
+  return { status: "success" };
 };
 
 export default action;
