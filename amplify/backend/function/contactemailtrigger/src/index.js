@@ -8,6 +8,7 @@ const ses = new SESClient({ region: "us-west-1" });
 // eslint-disable-next-line no-undef
 exports.handler = async (event) => {
   const { toAddress } = event;
+  console.log(event, toAddress);
 
   const command = new SendEmailCommand({
     Destination: {
@@ -34,6 +35,6 @@ exports.handler = async (event) => {
     console.log("error!", error)
   }
   finally {
-// todo finally.
+    // todo finally.
   }
 };
