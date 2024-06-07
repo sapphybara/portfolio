@@ -104,7 +104,7 @@ export interface PropsWithUser {
 }
 
 export interface LoaderActionError {
-  error: string;
+  status?: string;
 }
 
 export interface ContactFormField {

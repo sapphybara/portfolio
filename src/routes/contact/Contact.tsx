@@ -1,6 +1,6 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { Form } from "react-router-dom";
-import { ContactFormField } from "types/global";
+import { Form, useActionData } from "react-router-dom";
+import { ContactFormField, LoaderActionError } from "types/global";
 
 const formFields: ContactFormField[] = [
   { key: "name", label: "Name", type: "text" },
@@ -10,6 +10,8 @@ const formFields: ContactFormField[] = [
 ];
 
 const Contact = () => {
+  const actionData = useActionData() as LoaderActionError | null;
+
   return (
     <>
       <Typography variant="decoration">Get in</Typography>
@@ -26,6 +28,11 @@ const Contact = () => {
         gap={2}
         method="post"
       >
+        {actionData?.status && (
+          <Typography className="w-full" color="error">
+            {actionData.status}
+          </Typography>
+        )}
         {formFields.map(({ key, label, type }) => {
           const isMessage = key === "message";
 
