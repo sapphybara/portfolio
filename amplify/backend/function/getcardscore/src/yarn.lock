@@ -3,6 +3,6 @@
 
 
 "@types/aws-lambda@^8.10.92":
-  "integrity" "sha512-YNFwzVarXAOXkjuFxONyDw1vgRNzyH8AuyN19s0bM+ChSu/bzxb5XPxYFLXoqoM+tvgzwR3k7fXcEOW125yJxg=="
-  "resolved" "https://registry.npmjs.org/@types/aws-lambda/-/aws-lambda-8.10.137.tgz"
-  "version" "8.10.137"
+  version "8.10.137"
+  resolved "https://registry.npmjs.org/@types/aws-lambda/-/aws-lambda-8.10.137.tgz"
+  integrity sha512-YNFwzVarXAOXkjuFxONyDw1vgRNzyH8AuyN19s0bM+ChSu/bzxb5XPxYFLXoqoM+tvgzwR3k7fXcEOW125yJxg==

@@ -1,0 +1,48 @@
+{
+  "Records": [
+    {
+      "dynamodb": {
+        "timestamp": "2024-06-07T18:14:25.489Z",
+        "level": "INFO",
+        "requestId": "d0ca9d01-585f-47a0-b650-3d7eaf5af148",
+        "message": {
+          "ApproximateCreationDateTime": 1717784064,
+          "Keys": {
+            "id": {
+              "S": "5a7b32d0-6d0f-46f1-ae32-3e111bbd1446"
+            }
+          },
+          "NewImage": {
+            "createdAt": {
+              "S": "2024-06-07T18:14:24.640Z"
+            },
+            "subject": {
+              "S": "will you work for me pls"
+            },
+            "__typename": {
+              "S": "ContactForm"
+            },
+            "name": {
+              "S": "Sapphyra Willow Wiser"
+            },
+            "id": {
+              "S": "5a7b32d0-6d0f-46f1-ae32-3e111bbd1446"
+            },
+            "message": {
+              "S": "Hey boo here's a message!\n\n🏳️\u200d⚧️💎"
+            },
+            "email": {
+              "S": "silly.goose@sapphyrawiser.com"
+            },
+            "updatedAt": {
+              "S": "2024-06-07T18:14:24.640Z"
+            }
+          },
+          "SequenceNumber": "3996100000000026861791058",
+          "SizeBytes": 307,
+          "StreamViewType": "NEW_AND_OLD_IMAGES"
+        }
+      }
+    }
+  ]
+}

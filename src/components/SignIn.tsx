@@ -40,7 +40,7 @@ const SignIn = () => {
       <Typography variant="h1">Sign In</Typography>
       <Input name="tabIndex" type="hidden" value={tabIndex} />
       <Input name="redirectTo" type="hidden" value={from} />
-      <Typography color="error">{actionData?.error}</Typography>
+      <Typography color="error">{actionData?.status}</Typography>
       <Tabs
         className="mb-4"
         onChange={(_e, value) => setTabIndex(value)}

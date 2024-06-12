@@ -1,6 +1,5 @@
 import { HTMLAttributes, useContext } from "react";
 import {
-  EmailOutlined,
   GitHub,
   LinkedIn,
   LocationCityOutlined,
@@ -10,11 +9,6 @@ import { Button, Divider, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const contactInfo = [
-  {
-    children: "sapphyra.wiser@gmail.com",
-    href: "mailto:sapphyra.wiser@gmail.com",
-    startIcon: EmailOutlined,
-  },
   {
     children: "(830) 582-6020",
     href: "tel:+18305826020",

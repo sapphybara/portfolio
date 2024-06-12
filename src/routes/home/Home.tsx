@@ -1,12 +1,14 @@
-import { Box, Button, Stack, Typography, styled } from "@mui/material";
+import { Box, Divider, Link, Stack, Typography, styled } from "@mui/material";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 import AboutHeader from "@components/AboutHeader";
+import Portfolio from "@components/Portfolio";
+import { FC } from "react";
+import { TabState } from "types/global";
 
 const TypographyStack = styled(Stack)(({ theme }) => ({
-  margin: theme.spacing(2, 0),
+  margin: theme.spacing(1, 0),
   "& .MuiTypography-root": {
     lineHeight: "1.625",
-    maxWidth: "48rem",
     "& .highlight": {
       display: "inline-block",
       fontWeight: "bold",
@@ -21,9 +23,9 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const Home = () => {
+const Home: FC<TabState> = (props) => {
   return (
-    <Box component="section">
+    <Stack component="section">
       <Stack justifyContent="space-around">
         <Stack
           className="max-w-[52rem]"
@@ -64,17 +66,30 @@ const Home = () => {
           </Box>
         </Typography>
       </TypographyStack>
-      <Stack className="mb-4" direction="row" flexWrap="wrap">
-        <Button className="mr-4" href="/portfolio" variant="contained">
-          Check out my work
-        </Button>
-        <ResumeLinkWithTooltip
-          asLink={false}
-          buttonText="View my resume"
-          linkOrButtonProps={{ variant: "outlined" }}
-        />
-      </Stack>
-    </Box>
+      <Divider />
+      <ResumeLinkWithTooltip
+        asLink={false}
+        buttonText="Check out my resume"
+        linkOrButtonProps={{
+          className: "self-end",
+          variant: "contained",
+        }}
+      />
+      <Typography id="portfolio" variant="decoration">
+        View
+      </Typography>
+      <Typography
+        color="text.primary"
+        className="mb-4"
+        component={Link}
+        href="#portfolio"
+        underline="none"
+        variant="h3"
+      >
+        My Projects
+      </Typography>
+      <Portfolio {...props} />
+    </Stack>
   );
 };
 

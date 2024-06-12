@@ -104,5 +104,18 @@ export interface PropsWithUser {
 }
 
 export interface LoaderActionError {
-  error: string;
+  status?: string;
+}
+
+export interface ContactFormField {
+  key: "name" | "email" | "subject" | "message";
+  label: string;
+  type: "text" | "email";
+}
+
+export interface TabState {
+  maxTabHeight: number;
+  setMaxTabHeight: (value: number) => void;
+  setTabIdx: (value: number) => void;
+  tabIdx: number;
 }

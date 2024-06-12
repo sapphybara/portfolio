@@ -34,11 +34,7 @@ const PortfolioCard = ({
   const navigate = useNavigate();
 
   return (
-    <PortfolioWrapper
-      className="mb-4 portfolio-card flex flex-col justify-between"
-      key={title}
-      id={title.replace(/\s/g, "-")}
-    >
+    <PortfolioWrapper key={title} id={title.replace(/\s/g, "-")}>
       <CardActionArea
         className="items-start flex flex-1"
         onClick={() => navigate(`/portfolio/${id}`)}

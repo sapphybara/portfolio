@@ -26,6 +26,8 @@ export type ModelCreditCardConditionInput = {
   and?: Array< ModelCreditCardConditionInput | null > | null,
   or?: Array< ModelCreditCardConditionInput | null > | null,
   not?: ModelCreditCardConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelStringInput = {
@@ -118,6 +120,49 @@ export type DeleteCreditCardInput = {
   id: string,
 };
 
+export type UpdateContactFormInput = {
+  id: string,
+  name?: string | null,
+  email?: string | null,
+  subject?: string | null,
+  message?: string | null,
+};
+
+export type ModelContactFormConditionInput = {
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  subject?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  and?: Array< ModelContactFormConditionInput | null > | null,
+  or?: Array< ModelContactFormConditionInput | null > | null,
+  not?: ModelContactFormConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ContactForm = {
+  __typename: "ContactForm",
+  id: string,
+  name: string,
+  email: string,
+  subject: string,
+  message?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type DeleteContactFormInput = {
+  id: string,
+};
+
+export type CreateContactFormInput = {
+  id?: string | null,
+  name: string,
+  email: string,
+  subject: string,
+  message?: string | null,
+};
+
 export type ModelCreditCardFilterInput = {
   id?: ModelIDInput | null,
   cardName?: ModelStringInput | null,
@@ -128,6 +173,8 @@ export type ModelCreditCardFilterInput = {
   isEarningInterest?: ModelBooleanInput | null,
   lastInterestAmount?: ModelFloatInput | null,
   score?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelCreditCardFilterInput | null > | null,
   or?: Array< ModelCreditCardFilterInput | null > | null,
   not?: ModelCreditCardFilterInput | null,
@@ -153,6 +200,100 @@ export type ModelCreditCardConnection = {
   __typename: "ModelCreditCardConnection",
   items:  Array<CreditCard | null >,
   nextToken?: string | null,
+};
+
+export type ModelContactFormFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  subject?: ModelStringInput | null,
+  message?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelContactFormFilterInput | null > | null,
+  or?: Array< ModelContactFormFilterInput | null > | null,
+  not?: ModelContactFormFilterInput | null,
+};
+
+export type ModelContactFormConnection = {
+  __typename: "ModelContactFormConnection",
+  items:  Array<ContactForm | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionCreditCardFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  cardName?: ModelSubscriptionStringInput | null,
+  paymentDate?: ModelSubscriptionStringInput | null,
+  minimumPayment?: ModelSubscriptionFloatInput | null,
+  balance?: ModelSubscriptionFloatInput | null,
+  apr?: ModelSubscriptionFloatInput | null,
+  isEarningInterest?: ModelSubscriptionBooleanInput | null,
+  lastInterestAmount?: ModelSubscriptionFloatInput | null,
+  score?: ModelSubscriptionFloatInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
+export type ModelSubscriptionContactFormFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  subject?: ModelSubscriptionStringInput | null,
+  message?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionContactFormFilterInput | null > | null,
+  or?: Array< ModelSubscriptionContactFormFilterInput | null > | null,
 };
 
 export type CreateCreditCardMutationVariables = {
@@ -221,6 +362,60 @@ export type DeleteCreditCardMutation = {
   } | null,
 };
 
+export type UpdateContactFormMutationVariables = {
+  input: UpdateContactFormInput,
+  condition?: ModelContactFormConditionInput | null,
+};
+
+export type UpdateContactFormMutation = {
+  updateContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteContactFormMutationVariables = {
+  input: DeleteContactFormInput,
+  condition?: ModelContactFormConditionInput | null,
+};
+
+export type DeleteContactFormMutation = {
+  deleteContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateContactFormMutationVariables = {
+  input: CreateContactFormInput,
+  condition?: ModelContactFormConditionInput | null,
+};
+
+export type CreateContactFormMutation = {
+  createContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetCreditCardQueryVariables = {
   id: string,
 };
@@ -269,7 +464,48 @@ export type ListCreditCardsQuery = {
   } | null,
 };
 
+export type GetContactFormQueryVariables = {
+  id: string,
+};
+
+export type GetContactFormQuery = {
+  getContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListContactFormsQueryVariables = {
+  filter?: ModelContactFormFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListContactFormsQuery = {
+  listContactForms?:  {
+    __typename: "ModelContactFormConnection",
+    items:  Array< {
+      __typename: "ContactForm",
+      id: string,
+      name: string,
+      email: string,
+      subject: string,
+      message?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnCreateCreditCardSubscription = {
@@ -290,6 +526,7 @@ export type OnCreateCreditCardSubscription = {
 };
 
 export type OnUpdateCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnUpdateCreditCardSubscription = {
@@ -310,6 +547,7 @@ export type OnUpdateCreditCardSubscription = {
 };
 
 export type OnDeleteCreditCardSubscriptionVariables = {
+  filter?: ModelSubscriptionCreditCardFilterInput | null,
 };
 
 export type OnDeleteCreditCardSubscription = {
@@ -324,6 +562,57 @@ export type OnDeleteCreditCardSubscription = {
     isEarningInterest: boolean,
     lastInterestAmount: number,
     score?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateContactFormSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFormFilterInput | null,
+};
+
+export type OnCreateContactFormSubscription = {
+  onCreateContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateContactFormSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFormFilterInput | null,
+};
+
+export type OnUpdateContactFormSubscription = {
+  onUpdateContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteContactFormSubscriptionVariables = {
+  filter?: ModelSubscriptionContactFormFilterInput | null,
+};
+
+export type OnDeleteContactFormSubscription = {
+  onDeleteContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

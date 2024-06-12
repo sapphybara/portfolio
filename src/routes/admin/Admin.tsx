@@ -20,13 +20,7 @@ const Admin = () => {
       <Outlet />
       <Typography variant="decoration">Manage</Typography>
       <Typography variant="h1">Admin</Typography>
-      {"error" in creditCardData ? (
-        <Box>
-          <Typography color="error" paragraph>
-            {creditCardData.error}
-          </Typography>
-        </Box>
-      ) : (
+      {"creditCards" in creditCardData ? (
         <>
           <Suspense fallback={<Fallback />}>
             <Await resolve={creditCardData.creditCards}>
@@ -44,7 +38,13 @@ const Admin = () => {
             </Button>
           </fetcher.Form>
         </>
-      )}
+      ) : "status" in creditCardData ? (
+        <Box>
+          <Typography color="error" paragraph>
+            {creditCardData.status}
+          </Typography>
+        </Box>
+      ) : null}
     </Box>
   );
 };
