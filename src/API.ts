@@ -120,11 +120,11 @@ export type DeleteCreditCardInput = {
   id: string,
 };
 
-export type UpdateContactFormInput = {
-  id: string,
-  name?: string | null,
-  email?: string | null,
-  subject?: string | null,
+export type CreateContactFormInput = {
+  id?: string | null,
+  name: string,
+  email: string,
+  subject: string,
   message?: string | null,
 };
 
@@ -151,16 +151,16 @@ export type ContactForm = {
   updatedAt: string,
 };
 
-export type DeleteContactFormInput = {
+export type UpdateContactFormInput = {
   id: string,
+  name?: string | null,
+  email?: string | null,
+  subject?: string | null,
+  message?: string | null,
 };
 
-export type CreateContactFormInput = {
-  id?: string | null,
-  name: string,
-  email: string,
-  subject: string,
-  message?: string | null,
+export type DeleteContactFormInput = {
+  id: string,
 };
 
 export type ModelCreditCardFilterInput = {
@@ -362,6 +362,24 @@ export type DeleteCreditCardMutation = {
   } | null,
 };
 
+export type CreateContactFormMutationVariables = {
+  input: CreateContactFormInput,
+  condition?: ModelContactFormConditionInput | null,
+};
+
+export type CreateContactFormMutation = {
+  createContactForm?:  {
+    __typename: "ContactForm",
+    id: string,
+    name: string,
+    email: string,
+    subject: string,
+    message?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type UpdateContactFormMutationVariables = {
   input: UpdateContactFormInput,
   condition?: ModelContactFormConditionInput | null,
@@ -387,24 +405,6 @@ export type DeleteContactFormMutationVariables = {
 
 export type DeleteContactFormMutation = {
   deleteContactForm?:  {
-    __typename: "ContactForm",
-    id: string,
-    name: string,
-    email: string,
-    subject: string,
-    message?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateContactFormMutationVariables = {
-  input: CreateContactFormInput,
-  condition?: ModelContactFormConditionInput | null,
-};
-
-export type CreateContactFormMutation = {
-  createContactForm?:  {
     __typename: "ContactForm",
     id: string,
     name: string,
