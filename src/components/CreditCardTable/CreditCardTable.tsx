@@ -163,7 +163,8 @@ const CreditCardTable = () => {
         },
         valueFormatter: (value?: boolean | number | string | Date) => {
           const type = creditCardTypeMapping[key];
-          if (!value) {
+          if (value == null) {
+            // loose equality checks for undefined too
             return "";
           }
 

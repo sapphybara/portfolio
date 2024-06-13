@@ -32,7 +32,9 @@ export const formatFinancialNumber = (
   formatType: "dollar" | "percent" | "plain"
 ) => {
   const formattedValue =
-    Math.abs(value) >= 10000
+    value - 0 < 1e-6
+      ? 0
+      : Math.abs(value) >= 10000
       ? value.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
