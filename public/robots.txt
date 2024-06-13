@@ -3,3 +3,5 @@ Disallow: /admin/
 Disallow: /login/
 Disallow: /logout/
 Allow: /
+
+Sitemap: https://www.sapphyrawiser.com/sitemap.xml

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.sapphyrawiser.com/</loc>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/logo.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.sapphyrawiser.com/resume</loc>
+  </url>
+  <url>
+    <loc>https://www.sapphyrawiser.com/contact</loc>
+  </url>
+  <url>
+    <loc>https://www.sapphyrawiser.com/portfolio/developer-portfolio</loc>
+  </url>
+  <url>
+    <loc>https://www.sapphyrawiser.com/portfolio/hyscan</loc>
+  </url>
+  <url>
+    <loc>https://www.sapphyrawiser.com/portfolio/explainable-ai</loc>
+  </url>
+</urlset>
