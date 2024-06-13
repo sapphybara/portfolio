@@ -1,12 +1,16 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, styled } from "@mui/material";
 import ScoreKey from "./ScoreKey";
+
+const TableTitle = styled(Typography)(() => ({
+  flex: "1 0 auto",
+})) as typeof Typography;
 
 const TableHeader = () => {
   return (
     <Stack direction="row" justifyContent="space-between">
-      <Typography component="h2" variant="h5">
+      <TableTitle component="h2" variant="h5">
         Credit Cards
-      </Typography>
+      </TableTitle>
       <ScoreKey />
     </Stack>
   );

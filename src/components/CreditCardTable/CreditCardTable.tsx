@@ -1,6 +1,13 @@
 import { useCallback, useMemo, useState } from "react";
 import { useAsyncValue } from "react-router-dom";
-import { AlertProps, Snackbar, Alert, styled } from "@mui/material";
+import {
+  AlertProps,
+  Snackbar,
+  Alert,
+  styled,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import {
   GridActionsCellItem,
   GridColDef,
@@ -32,19 +39,6 @@ type GridRowId = Extract<GridRowIdType, string>;
 
 const client = generateClient();
 
-const columnWidths: {
-  [K in Exclude<keyof CreateCreditCardInput, "id">]: number;
-} = {
-  cardName: 132,
-  score: 82,
-  apr: 82,
-  balance: 107,
-  isEarningInterest: 82,
-  lastInterestAmount: 125,
-  paymentDate: 100,
-  minimumPayment: 121,
-};
-
 const GridActionsCellItemPrimary = styled(GridActionsCellItem)(({ theme }) => ({
   "& .MuiSvgIcon-root": {
     color: theme.palette.text.primary,
@@ -54,6 +48,8 @@ GridActionsCellItemPrimary.displayName = "GridActionsCellItemPrimary";
 
 const CreditCardTable = () => {
   const creditCards = useAsyncValue() as { data: ListCreditCardsQuery };
+  const theme = useTheme();
+  const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
   const [snackbar, setSnackbar] = useState<Pick<
@@ -139,108 +135,129 @@ const CreditCardTable = () => {
   };
 
   const columns = useMemo(() => {
+    const columnsToHideOnMobile = [
+      "apr",
+      "paymentDate",
+      "minimumPayment",
+      "isEarningInterest",
+      "lastInterestAmount",
+    ];
+
     return [
-      ...creditCardKeys.map((key) => ({
-        editable: key !== "score",
-        field: key,
-        headerName: toSentenceCase(key),
-        type:
-          creditCardTypeMapping[key] !== "text"
-            ? creditCardTypeMapping[key]
-            : "string",
-        renderHeader: () => {
-          if (key === "isEarningInterest") {
-            return "Interest?";
-          } else if (key === "score") {
-            return <strong>Score</strong>;
-          } else if (key === "minimumPayment") {
-            return "Min. Payment";
-          } else if (key === "lastInterestAmount") {
-            return "Last Interest Amt.";
-          } else {
-            return toSentenceCase(key);
-          }
-        },
-        valueFormatter: (value?: boolean | number | string | Date) => {
-          const type = creditCardTypeMapping[key];
-          if (value == null) {
-            // loose equality checks for undefined too
-            return "";
-          }
+      ...creditCardKeys
+        .filter((key) => !(isSmDown && columnsToHideOnMobile.includes(key)))
+        .map((key) => ({
+          editable: key !== "score",
+          field: key,
+          headerName: toSentenceCase(key),
+          hideable: key !== "cardName",
+          type:
+            creditCardTypeMapping[key] !== "text"
+              ? creditCardTypeMapping[key]
+              : "string",
+          renderHeader: () => {
+            if (key === "isEarningInterest") {
+              return "Interest?";
+            } else if (key === "score") {
+              return <strong>Score</strong>;
+            } else if (key === "minimumPayment") {
+              return "Min. Payment";
+            } else if (key === "lastInterestAmount") {
+              return "Last Interest Amt.";
+            } else {
+              return toSentenceCase(key);
+            }
+          },
+          valueFormatter: (value?: boolean | number | string | Date) => {
+            const type = creditCardTypeMapping[key];
+            if (value == null) {
+              // loose equality checks for undefined too
+              return "";
+            }
 
-          if (key === "apr") {
-            return formatFinancialNumber(value as number, "percent");
-          } else if (key === "score") {
-            return formatFinancialNumber(value as number, "plain");
-          }
+            if (key === "apr") {
+              return formatFinancialNumber(value as number, "percent");
+            } else if (key === "score") {
+              return formatFinancialNumber(value as number, "plain");
+            }
 
-          if (type === "number") {
-            return formatFinancialNumber(value as number, "dollar");
-          } else if (type === "date") {
-            return dayjs(value as Date).format("D");
-          }
+            if (type === "number") {
+              return formatFinancialNumber(value as number, "dollar");
+            } else if (type === "date") {
+              return dayjs(value as Date).format("D");
+            }
 
-          return value;
-        },
-        valueGetter: (
-          value: CreateCreditCardInput[keyof CreateCreditCardInput]
-        ) => {
-          if (!value) {
             return value;
-          }
-          if (key === "paymentDate") {
-            return new Date(value as string);
-          }
-          return value;
-        },
-        width: key === "id" ? 150 : columnWidths[key],
-      })),
-      {
-        field: "actions",
-        type: "actions",
-        headerName: "Actions",
-        width: 100,
-        getActions: ({ id }: { id: GridRowId }) => {
-          const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+          },
+          valueGetter: (
+            value: CreateCreditCardInput[keyof CreateCreditCardInput]
+          ) => {
+            if (!value) {
+              return value;
+            }
+            if (key === "paymentDate") {
+              return new Date(value as string);
+            }
+            return value;
+          },
+        })),
+      ...(isSmDown
+        ? []
+        : [
+            {
+              field: "actions",
+              type: "actions",
+              headerName: "Actions",
+              getActions: ({ id }: { id: GridRowId }) => {
+                const isInEditMode =
+                  rowModesModel[id]?.mode === GridRowModes.Edit;
 
-          if (isInEditMode) {
-            return [
-              <GridActionsCellItem
-                color="primary"
-                icon={<Save />}
-                label="Save"
-                onClick={handleSaveClick(id)}
-              />,
-              <GridActionsCellItemPrimary
-                icon={<Cancel />}
-                label="Cancel"
-                onClick={handleCancelClick(id)}
-              />,
-            ];
-          }
+                if (isInEditMode) {
+                  return [
+                    <GridActionsCellItem
+                      color="primary"
+                      icon={<Save />}
+                      label="Save"
+                      onClick={handleSaveClick(id)}
+                    />,
+                    <GridActionsCellItemPrimary
+                      icon={<Cancel />}
+                      label="Cancel"
+                      onClick={handleCancelClick(id)}
+                    />,
+                  ];
+                }
 
-          return [
-            <GridActionsCellItemPrimary
-              icon={<Edit />}
-              label="Edit"
-              onClick={handleEditClick(id)}
-            />,
-            <GridActionsCellItemPrimary
-              icon={<DeleteOutlineOutlined />}
-              label="Delete"
-              onClick={handleDeleteClick(id)}
-            />,
-          ];
-        },
-      },
+                return [
+                  <GridActionsCellItemPrimary
+                    icon={<Edit />}
+                    label="Edit"
+                    onClick={handleEditClick(id)}
+                  />,
+                  <GridActionsCellItemPrimary
+                    icon={<DeleteOutlineOutlined />}
+                    label="Delete"
+                    onClick={handleDeleteClick(id)}
+                  />,
+                ];
+              },
+            },
+          ]),
     ] as GridColDef[];
-  }, [handleCancelClick, handleEditClick, handleSaveClick, rowModesModel]);
+  }, [
+    handleCancelClick,
+    handleEditClick,
+    handleSaveClick,
+    isSmDown,
+    rowModesModel,
+  ]);
 
   return (
     <>
       <TableHeader />
       <StyledDataGrid
         autoHeight
+        autosizeOnMount
         columns={columns}
         rows={(creditCards.data.listCreditCards?.items || []).map(
           (item) => item as GridValidRowModel
