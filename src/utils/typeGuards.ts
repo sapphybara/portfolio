@@ -8,7 +8,7 @@ export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
   }
 
   const cardAsRecord = card as {
-    [K in keyof CreateCreditCardInput]: CreateCreditCardInput[(typeof creditCardKeys)[number]];
+    [K in keyof CreateCreditCardInput]: string | boolean;
   };
 
   return creditCardKeys.every((key) => {
@@ -19,7 +19,10 @@ export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
     const value = cardAsRecord[key];
     const type = creditCardTypeMapping[key];
 
-    if (value === undefined) {
+    if (
+      value === undefined ||
+      (typeof value === "string" && value.length === 0)
+    ) {
       return false;
     }
 
