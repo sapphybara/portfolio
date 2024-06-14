@@ -1,5 +1,5 @@
 import { generateClient } from "aws-amplify/api";
-import { ActionFunction, json, redirect } from "react-router-dom";
+import { ActionFunction, redirect } from "react-router-dom";
 import { isCreditCard } from "@utils/typeGuards";
 import { CreateCreditCardInput } from "@/API";
 import { createCreditCard } from "@graphql/mutations";
@@ -18,7 +18,10 @@ const action: ActionFunction = async ({ request }) => {
 
   try {
     if (!isCreditCard(ccData)) {
-      return json({ error: "invalid credit card" }, { status: 400 });
+      return {
+        status: "error",
+        message: "Invalid credit card data, please fill in all required fields",
+      };
     }
 
     const creditCard = { ...ccData };
@@ -31,7 +34,11 @@ const action: ActionFunction = async ({ request }) => {
     return redirect("/admin");
   } catch (err) {
     console.log("error creating new credit card:", err);
-    return json({ error: "error creating new credit card" }, { status: 500 });
+    return {
+      status: "error",
+      message:
+        "Credit card could not be created right now, please try again later.",
+    };
   }
 };
 

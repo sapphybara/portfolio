@@ -74,7 +74,7 @@ export const useRoutes = () => {
           children: [
             {
               path: "credit-cards/new",
-              lazy: () => import("@routes/admin/credit-cards/lazy"),
+              lazy: () => import("@routes/admin/credit-cards/new/lazy"),
             },
           ],
         },

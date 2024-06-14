@@ -104,6 +104,7 @@ export interface PropsWithUser {
 }
 
 export interface LoaderActionError {
+  message?: string;
   status?: string;
 }
 
