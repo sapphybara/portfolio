@@ -33,7 +33,14 @@ const action: ActionFunction = async ({ request }) => {
     });
     return redirect("/admin");
   } catch (err) {
-    console.log("error creating new credit card:", err);
+    if (typeof err === "object" && err !== null && "errors" in err) {
+      const errors = (err as { errors: Error[] }).errors;
+      return {
+        status: "error",
+        message: errors.map((e) => e.message).join(",\n"),
+      };
+    }
+
     return {
       status: "error",
       message:

@@ -1,14 +1,21 @@
 import {
+  Form,
+  useActionData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import {
   Button,
   Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   FormControl,
   FormControlLabel,
-  Input,
-  InputLabel,
+  TextField,
+  styled,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CreateCreditCardInput } from "@/API";
@@ -17,9 +24,31 @@ import {
   creditCardKeys,
   creditCardTypeMapping,
 } from "@utils/utils";
-import { Form, useLocation, useNavigate } from "react-router-dom";
+import { LoaderActionError } from "types/global";
+
+const NoPaddingDialogTitle = styled(DialogTitle)(({ theme }) => ({
+  "&+.MuiDialogContent-root.form-inputs": {
+    paddingTop: theme.spacing(1),
+  },
+}));
+
+const DialogContentStack = styled(DialogContent)(({ theme }) => ({
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  gap: theme.spacing(1.25),
+  justifyContent: "center",
+  "& > .MuiFormControl-root": {
+    width: `calc(50% - ${theme.spacing(0.625)})`,
+  },
+  "& > .MuiTypography-root": {
+    width: "100%",
+  },
+}));
 
 const AddCreditCardDialog = () => {
+  const actionData = useActionData() as LoaderActionError | undefined;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,7 +63,10 @@ const AddCreditCardDialog = () => {
     if (type === "boolean") {
       return (
         <FormControl key={key}>
-          <FormControlLabel control={<Checkbox name={key} />} label={label} />
+          <FormControlLabel
+            control={<Checkbox name={key} />}
+            label="Earning Interest?"
+          />
         </FormControl>
       );
     }
@@ -46,24 +78,30 @@ const AddCreditCardDialog = () => {
           key={key}
           label={label}
           name={key}
+          slotProps={{
+            textField: {
+              required: true,
+            },
+          }}
           views={["day"]}
         />
       );
     }
 
+    const isRequired = !["apr", "lastInterestAmount"].includes(key);
+
     return (
-      <FormControl key={key}>
-        <InputLabel htmlFor={key}>{label}</InputLabel>
-        <Input
-          id={key}
-          inputProps={{
-            step: 0.01,
-          }}
-          name={key}
-          type={type}
-          aria-describedby={`input for ${label}`}
-        />
-      </FormControl>
+      <TextField
+        autoFocus={key === "cardName"}
+        defaultValue={!isRequired ? "0" : undefined}
+        id={key}
+        InputProps={{ "aria-describedby": `input for ${label}` }}
+        key={key}
+        label={label}
+        name={key}
+        required={isRequired}
+        type={type}
+      />
     );
   };
 
@@ -80,14 +118,20 @@ const AddCreditCardDialog = () => {
     <Dialog
       open={true}
       PaperProps={{
-        className: "w-3/5 min-w-64",
+        className: "min-w-64",
         component: Form,
         method: "post",
-        replace: true,
       }}
     >
-      <DialogTitle>Add Credit Card</DialogTitle>
-      <DialogContent>{creditCardKeys.map(renderFormControl)}</DialogContent>
+      <NoPaddingDialogTitle>Add Credit Card</NoPaddingDialogTitle>
+      <DialogContentStack className="form-inputs">
+        {actionData && actionData.status === "error" && (
+          <DialogContentText color="error" paragraph>
+            {actionData.message}
+          </DialogContentText>
+        )}
+        {creditCardKeys.map(renderFormControl)}
+      </DialogContentStack>
       <DialogActions>
         <Button onClick={closeDialog}>Cancel</Button>
         <Button type="submit">Add Card</Button>
