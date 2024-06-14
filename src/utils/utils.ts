@@ -15,6 +15,7 @@ export const creditCardTypeMapping: {
   [K in keyof CreateCreditCardInput]: "boolean" | "date" | "number" | "text";
 } = {
   cardName: "text",
+  creditLimit: "number",
   score: "number",
   apr: "number",
   balance: "number",

@@ -10,6 +10,7 @@ type CreditCard @model @auth(rules: [{ allow: private }]) {
   isEarningInterest: Boolean!
   lastInterestAmount: Float!
   score: Float @function(name: "getcardscore-${env}")
+  creditLimit: Float!
 }
 
 type ContactForm

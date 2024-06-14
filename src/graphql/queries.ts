@@ -19,6 +19,7 @@ export const getCreditCard = /* GraphQL */ `query GetCreditCard($id: ID!) {
     isEarningInterest
     lastInterestAmount
     score
+    creditLimit
     createdAt
     updatedAt
     __typename
@@ -44,6 +45,7 @@ export const listCreditCards = /* GraphQL */ `query ListCreditCards(
       isEarningInterest
       lastInterestAmount
       score
+      creditLimit
       createdAt
       updatedAt
       __typename
