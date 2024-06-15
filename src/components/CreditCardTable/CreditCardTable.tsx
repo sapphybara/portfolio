@@ -1,4 +1,10 @@
-import { useCallback, useMemo, useState } from "react";
+import {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useAsyncValue } from "react-router-dom";
 import {
   AlertProps,
@@ -60,6 +66,32 @@ const CreditCardTable = () => {
     AlertProps,
     "children" | "severity"
   > | null>(null);
+
+  const createColumnVisibilityModel = useCallback(
+    () =>
+      Object.fromEntries(
+        [
+          "actions",
+          "apr",
+          "creditLimit",
+          "paymentDate",
+          "minimumPayment",
+          "isEarningInterest",
+          "owner",
+          "lastInterestAmount",
+        ].map((field) => [field, !(field === "lastInterestAmount" || isSmDown)])
+      ),
+    [isSmDown]
+  );
+
+  const [columnVisibilityModel, setColumnVisibilityModel] = useState(
+    createColumnVisibilityModel()
+  );
+
+  useEffect(() => {
+    setColumnVisibilityModel(createColumnVisibilityModel());
+    apiRef.current.autosizeColumns();
+  }, [apiRef, createColumnVisibilityModel, isSmDown]);
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
@@ -157,7 +189,6 @@ const CreditCardTable = () => {
         ...creditCardKeys.map((key) => ({
           editable: key !== "score",
           field: key,
-          headerName: toSentenceCase(key),
           hideable: key !== "cardName",
           type:
             creditCardTypeMapping[key] !== "text"
@@ -219,56 +250,52 @@ const CreditCardTable = () => {
             return value;
           },
         })),
-      ...(isSmDown
-        ? []
-        : [
-            {
-              field: "actions",
-              type: "actions",
-              headerName: "Actions",
-              getActions: ({ id }: { id: GridRowId }) => {
-                const isInEditMode =
-                  rowModesModel[id]?.mode === GridRowModes.Edit;
+        {
+          field: "actions",
+          type: "actions",
+          headerName: "Actions",
+          getActions: ({ id }: { id: GridRowId }) => {
+            const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
-                if (isInEditMode) {
-                  return [
-                    <GridActionsCellItem
-                      color="primary"
-                      icon={<Save />}
-                      label="Save"
-                      onClick={handleSaveClick(id)}
-                    />,
-                    <GridActionsCellItemPrimary
-                      icon={<Cancel />}
-                      label="Cancel"
-                      onClick={handleCancelClick(id)}
-                    />,
-                  ];
-                }
+            if (isInEditMode) {
+              return [
+                <GridActionsCellItem
+                  color="primary"
+                  icon={<Save />}
+                  label="Save"
+                  onClick={handleSaveClick(id)}
+                />,
+                <GridActionsCellItemPrimary
+                  icon={<Cancel />}
+                  label="Cancel"
+                  onClick={handleCancelClick(id)}
+                />,
+              ];
+            }
 
-                return [
-                  <GridActionsCellItemPrimary
-                    icon={<Edit />}
-                    label="Edit"
-                    onClick={handleEditClick(id)}
-                  />,
-                  <GridActionsCellItemPrimary
-                    icon={<DeleteOutlineOutlined />}
-                    label="Delete"
-                    onClick={handleDeleteClick(id)}
-                  />,
-                ];
-              },
-            },
-          ]),
-    ] as GridColDef[];
-  }, [
-    handleCancelClick,
-    handleEditClick,
-    handleSaveClick,
-    isSmDown,
-    rowModesModel,
-  ]);
+            return [
+              <GridActionsCellItemPrimary
+                icon={<Edit />}
+                label="Edit"
+                onClick={handleEditClick(id)}
+              />,
+              <GridActionsCellItemPrimary
+                icon={<DeleteOutlineOutlined />}
+                label="Delete"
+                onClick={handleDeleteClick(id)}
+              />,
+            ];
+          },
+        },
+      ] as GridColDef[],
+    [
+      handleCancelClick,
+      handleChange,
+      handleEditClick,
+      handleSaveClick,
+      rowModesModel,
+    ]
+  );
 
   return (
     <>
@@ -278,6 +305,8 @@ const CreditCardTable = () => {
         autosizeOnMount
         apiRef={apiRef}
         columns={columns}
+        columnVisibilityModel={columnVisibilityModel}
+        onColumnVisibilityModelChange={setColumnVisibilityModel}
         rows={(creditCards.data.listCreditCards?.items || []).map(
           (item) => item as GridValidRowModel
         )}
