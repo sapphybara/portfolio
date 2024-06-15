@@ -13,7 +13,14 @@ export type CreateCreditCardInput = {
   lastInterestAmount: number,
   score?: number | null,
   creditLimit: number,
+  owner: Owner,
 };
+
+export enum Owner {
+  SAPPHY = "SAPPHY",
+  HEIDI = "HEIDI",
+}
+
 
 export type ModelCreditCardConditionInput = {
   cardName?: ModelStringInput | null,
@@ -25,6 +32,7 @@ export type ModelCreditCardConditionInput = {
   lastInterestAmount?: ModelFloatInput | null,
   score?: ModelFloatInput | null,
   creditLimit?: ModelFloatInput | null,
+  owner?: ModelOwnerInput | null,
   and?: Array< ModelCreditCardConditionInput | null > | null,
   or?: Array< ModelCreditCardConditionInput | null > | null,
   not?: ModelCreditCardConditionInput | null,
@@ -91,6 +99,11 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelOwnerInput = {
+  eq?: Owner | null,
+  ne?: Owner | null,
+};
+
 export type CreditCard = {
   __typename: "CreditCard",
   id: string,
@@ -103,6 +116,7 @@ export type CreditCard = {
   lastInterestAmount: number,
   score?: number | null,
   creditLimit: number,
+  owner: Owner,
   createdAt: string,
   updatedAt: string,
 };
@@ -118,6 +132,7 @@ export type UpdateCreditCardInput = {
   lastInterestAmount?: number | null,
   score?: number | null,
   creditLimit?: number | null,
+  owner?: Owner | null,
 };
 
 export type DeleteCreditCardInput = {
@@ -178,6 +193,7 @@ export type ModelCreditCardFilterInput = {
   lastInterestAmount?: ModelFloatInput | null,
   score?: ModelFloatInput | null,
   creditLimit?: ModelFloatInput | null,
+  owner?: ModelOwnerInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelCreditCardFilterInput | null > | null,
@@ -237,6 +253,7 @@ export type ModelSubscriptionCreditCardFilterInput = {
   lastInterestAmount?: ModelSubscriptionFloatInput | null,
   score?: ModelSubscriptionFloatInput | null,
   creditLimit?: ModelSubscriptionFloatInput | null,
+  owner?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionCreditCardFilterInput | null > | null,
@@ -320,6 +337,7 @@ export type CreateCreditCardMutation = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -343,6 +361,7 @@ export type UpdateCreditCardMutation = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -366,6 +385,7 @@ export type DeleteCreditCardMutation = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -442,6 +462,7 @@ export type GetCreditCardQuery = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -468,6 +489,7 @@ export type ListCreditCardsQuery = {
       lastInterestAmount: number,
       score?: number | null,
       creditLimit: number,
+      owner: Owner,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -532,6 +554,7 @@ export type OnCreateCreditCardSubscription = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -554,6 +577,7 @@ export type OnUpdateCreditCardSubscription = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -576,6 +600,7 @@ export type OnDeleteCreditCardSubscription = {
     lastInterestAmount: number,
     score?: number | null,
     creditLimit: number,
+    owner: Owner,
     createdAt: string,
     updatedAt: string,
   } | null,

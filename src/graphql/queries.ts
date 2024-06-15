@@ -20,6 +20,7 @@ export const getCreditCard = /* GraphQL */ `query GetCreditCard($id: ID!) {
     lastInterestAmount
     score
     creditLimit
+    owner
     createdAt
     updatedAt
     __typename
@@ -46,6 +47,7 @@ export const listCreditCards = /* GraphQL */ `query ListCreditCards(
       lastInterestAmount
       score
       creditLimit
+      owner
       createdAt
       updatedAt
       __typename

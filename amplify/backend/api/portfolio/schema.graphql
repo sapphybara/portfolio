@@ -1,3 +1,8 @@
+enum Owner {
+  SAPPHY
+  HEIDI
+}
+
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 type CreditCard @model @auth(rules: [{ allow: private }]) {
@@ -11,6 +16,7 @@ type CreditCard @model @auth(rules: [{ allow: private }]) {
   lastInterestAmount: Float!
   score: Float @function(name: "getcardscore-${env}")
   creditLimit: Float!
+  owner: Owner!
 }
 
 type ContactForm
