@@ -321,11 +321,11 @@ const CreditCardTable = () => {
           return "";
         }}
         getRowClassName={({ row: { score } }) => {
-          if (score < 0.3) {
+          if (score < 0.2) {
             return "level-1";
-          } else if (score < 0.6) {
+          } else if (score < 0.45) {
             return "level-2";
-          } else if (score < 0.8) {
+          } else if (score < 0.6) {
             return "level-3";
           }
           return "level-4";
