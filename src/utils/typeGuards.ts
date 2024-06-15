@@ -12,12 +12,14 @@ export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
   };
 
   return creditCardKeys.every((key) => {
-    if (key === "score") {
-      return true;
-    }
-
     const value = cardAsRecord[key];
     const type = creditCardTypeMapping[key];
+
+    if (key === "score") {
+      return true;
+    } else if (key === "owner") {
+      return ["SAPPHY", "HEIDI"].includes(value as string);
+    }
 
     if (
       value === undefined ||

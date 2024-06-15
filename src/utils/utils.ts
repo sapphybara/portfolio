@@ -23,6 +23,7 @@ export const creditCardTypeMapping: {
   lastInterestAmount: "number",
   paymentDate: "date",
   minimumPayment: "number",
+  owner: "text",
 };
 export const creditCardKeys = Object.keys(
   creditCardTypeMapping

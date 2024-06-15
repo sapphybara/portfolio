@@ -12,12 +12,14 @@ import {
   GridActionsCellItem,
   GridColDef,
   GridEventListener,
+  GridRenderEditCellParams,
   GridRowEditStopReasons,
   GridRowId as GridRowIdType,
   GridRowModel,
   GridRowModes,
   GridRowModesModel,
   GridValidRowModel,
+  useGridApiRef,
 } from "@mui/x-data-grid";
 import { Save, Cancel, Edit, DeleteOutlineOutlined } from "@mui/icons-material";
 import dayjs from "dayjs";
@@ -34,6 +36,7 @@ import StyledDataGrid from "./StyledDataGrid";
 import EditToolbar from "./EditToolbar";
 import { deleteCreditCard, updateCreditCard } from "@graphql/mutations";
 import TableHeader from "./TableHeader";
+import CreditCardOwnerAutocomplete from "@components/CreditCardOwnerAutocomplete";
 
 type GridRowId = Extract<GridRowIdType, string>;
 
@@ -50,6 +53,7 @@ const CreditCardTable = () => {
   const creditCards = useAsyncValue() as { data: ListCreditCardsQuery };
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
+  const apiRef = useGridApiRef();
 
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
   const [snackbar, setSnackbar] = useState<Pick<
@@ -109,6 +113,7 @@ const CreditCardTable = () => {
     delete newRow.updatedAt;
     delete newRow.__typename;
     newRow.paymentDate = dayjs(newRow.paymentDate).format("YYYY-MM-DD");
+    newRow.owner = newRow.owner === "Sapphy" ? "SAPPHY" : "HEIDI";
 
     const updatedRow = await client.graphql({
       query: updateCreditCard,
@@ -134,19 +139,22 @@ const CreditCardTable = () => {
     setRowModesModel(newRowModesModel);
   };
 
-  const columns = useMemo(() => {
-    const columnsToHideOnMobile = [
-      "apr",
-      "paymentDate",
-      "minimumPayment",
-      "isEarningInterest",
-      "lastInterestAmount",
-    ];
+  const handleChange = useCallback(
+    (id: string, field: string) =>
+      async (_e: SyntheticEvent, value: string | null) => {
+        await apiRef.current.setEditCellValue({
+          id,
+          field,
+          value,
+        });
+      },
+    [apiRef]
+  );
 
-    return [
-      ...creditCardKeys
-        .filter((key) => !(isSmDown && columnsToHideOnMobile.includes(key)))
-        .map((key) => ({
+  const columns = useMemo(
+    () =>
+      [
+        ...creditCardKeys.map((key) => ({
           editable: key !== "score",
           field: key,
           headerName: toSentenceCase(key),
@@ -155,6 +163,14 @@ const CreditCardTable = () => {
             creditCardTypeMapping[key] !== "text"
               ? creditCardTypeMapping[key]
               : "string",
+          ...(key === "owner" && {
+            renderEditCell: (params: GridRenderEditCellParams) => (
+              <CreditCardOwnerAutocomplete
+                id={key}
+                onChange={handleChange(params.id as string, params.field)}
+              />
+            ),
+          }),
           renderHeader: () => {
             if (key === "isEarningInterest") {
               return "Interest?";
@@ -197,6 +213,8 @@ const CreditCardTable = () => {
             }
             if (key === "paymentDate") {
               return new Date(value as string);
+            } else if (key === "owner") {
+              return (value as string)[0];
             }
             return value;
           },
@@ -258,6 +276,7 @@ const CreditCardTable = () => {
       <StyledDataGrid
         autoHeight
         autosizeOnMount
+        apiRef={apiRef}
         columns={columns}
         rows={(creditCards.data.listCreditCards?.items || []).map(
           (item) => item as GridValidRowModel

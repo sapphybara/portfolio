@@ -25,6 +25,7 @@ import {
   creditCardTypeMapping,
 } from "@utils/utils";
 import { LoaderActionError } from "types/global";
+import CreditCardOwnerAutocomplete from "./CreditCardOwnerAutocomplete";
 
 const NoPaddingDialogTitle = styled(DialogTitle)(({ theme }) => ({
   "&+.MuiDialogContent-root.form-inputs": {
@@ -39,7 +40,7 @@ const DialogContentStack = styled(DialogContent)(({ theme }) => ({
   flexWrap: "wrap",
   gap: theme.spacing(1.25),
   justifyContent: "center",
-  "& > .MuiFormControl-root": {
+  "& > .MuiFormControl-root, & > .MuiAutocomplete-root": {
     width: `calc(50% - ${theme.spacing(0.625)})`,
   },
   "& > .MuiTypography-root": {
@@ -58,6 +59,10 @@ const AddCreditCardDialog = () => {
 
     if (key === "score") {
       return null;
+    }
+
+    if (key === "owner") {
+      return <CreditCardOwnerAutocomplete id={key} key={key} />;
     }
 
     if (type === "boolean") {

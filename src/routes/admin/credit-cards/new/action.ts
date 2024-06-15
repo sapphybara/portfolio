@@ -14,6 +14,7 @@ const action: ActionFunction = async ({ request }) => {
   const ccData = {
     ...formState,
     isEarningInterest: formState.isEarningInterest === "on",
+    owner: formState.owner.toUpperCase(),
   };
 
   try {
