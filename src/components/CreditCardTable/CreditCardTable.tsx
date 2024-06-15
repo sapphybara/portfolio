@@ -5,7 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useAsyncValue } from "react-router-dom";
+import { useAsyncValue, useRevalidator } from "react-router-dom";
 import {
   AlertProps,
   Snackbar,
@@ -13,11 +13,13 @@ import {
   styled,
   useTheme,
   useMediaQuery,
+  Tooltip,
 } from "@mui/material";
 import {
   GridActionsCellItem,
   GridColDef,
   GridEventListener,
+  GridRenderCellParams,
   GridRenderEditCellParams,
   GridRowEditStopReasons,
   GridRowId as GridRowIdType,
@@ -60,6 +62,7 @@ const CreditCardTable = () => {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
   const apiRef = useGridApiRef();
+  const revalidator = useRevalidator();
 
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
   const [snackbar, setSnackbar] = useState<Pick<
@@ -145,13 +148,21 @@ const CreditCardTable = () => {
     delete newRow.updatedAt;
     delete newRow.__typename;
     newRow.paymentDate = dayjs(newRow.paymentDate).format("YYYY-MM-DD");
-    newRow.owner = newRow.owner === "Sapphy" ? "SAPPHY" : "HEIDI";
+    newRow.owner = newRow.owner.toUpperCase();
 
-    const updatedRow = await client.graphql({
-      query: updateCreditCard,
-      variables: { input: { ...newRow, id: newRow.id } },
-    });
-    return updatedRow.data.updateCreditCard;
+    try {
+      const updatedRow = await client.graphql({
+        query: updateCreditCard,
+        variables: { input: { ...newRow, id: newRow.id } },
+      });
+      revalidator.revalidate();
+
+      const { updateCreditCard: modifiedCreditCard } = updatedRow.data;
+      return modifiedCreditCard;
+    } catch (err) {
+      setSnackbar({ children: (err as Error).message, severity: "error" });
+      return null;
+    }
   };
 
   const handleProcessRowUpdateError = useCallback(
@@ -195,11 +206,26 @@ const CreditCardTable = () => {
               ? creditCardTypeMapping[key]
               : "string",
           ...(key === "owner" && {
-            renderEditCell: (params: GridRenderEditCellParams) => (
+            renderEditCell: (
+              params: GridRenderEditCellParams<CreateCreditCardInput>
+            ) => (
               <CreditCardOwnerAutocomplete
                 id={key}
                 onChange={handleChange(params.id as string, params.field)}
+                value={
+                  params.row.owner.slice(0, 1).toUpperCase() +
+                  params.row.owner.slice(1).toLowerCase()
+                }
               />
+            ),
+            renderCell: ({
+              row: { owner },
+            }: GridRenderCellParams<CreateCreditCardInput>) => (
+              <Tooltip
+                title={owner.toString() === "SAPPHY" ? "Sapphy" : "Heidi"}
+              >
+                <div>{owner[0]}</div>
+              </Tooltip>
             ),
           }),
           renderHeader: () => {
@@ -244,8 +270,6 @@ const CreditCardTable = () => {
             }
             if (key === "paymentDate") {
               return new Date(value as string);
-            } else if (key === "owner") {
-              return (value as string)[0];
             }
             return value;
           },
@@ -344,7 +368,7 @@ const CreditCardTable = () => {
           open
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           onClose={handleCloseSnackbar}
-          autoHideDuration={6000}
+          autoHideDuration={10000}
         >
           <Alert {...snackbar} onClose={handleCloseSnackbar} />
         </Snackbar>
