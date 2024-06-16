@@ -142,12 +142,19 @@ const CreditCardTable = () => {
     [rowModesModel]
   );
 
-  const processRowUpdate = async (newRow: GridRowModel) => {
+  const processRowUpdate = async (
+    newRow: GridRowModel,
+    oldRow: GridRowModel
+  ) => {
     delete newRow.score;
     delete newRow.createdAt;
     delete newRow.updatedAt;
     delete newRow.__typename;
     newRow.paymentDate = dayjs(newRow.paymentDate).format("YYYY-MM-DD");
+    if (!newRow.owner) {
+      setSnackbar({ children: "Owner is required", severity: "error" });
+      return oldRow;
+    }
     newRow.owner = newRow.owner.toUpperCase();
 
     try {
@@ -161,7 +168,7 @@ const CreditCardTable = () => {
       return modifiedCreditCard;
     } catch (err) {
       setSnackbar({ children: (err as Error).message, severity: "error" });
-      return null;
+      return oldRow;
     }
   };
 
@@ -213,8 +220,10 @@ const CreditCardTable = () => {
                 id={key}
                 onChange={handleChange(params.id as string, params.field)}
                 value={
-                  params.row.owner.slice(0, 1).toUpperCase() +
-                  params.row.owner.slice(1).toLowerCase()
+                  !params.row.owner
+                    ? "Sapphy"
+                    : params.row.owner.slice(0, 1).toUpperCase() +
+                      params.row.owner.slice(1).toLowerCase()
                 }
               />
             ),
