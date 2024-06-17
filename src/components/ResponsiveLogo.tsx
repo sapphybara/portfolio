@@ -19,7 +19,9 @@ const ResponsiveLogo: FC<ResponsiveLogoProps> = ({ logoInitial, rotation }) => {
   return (
     <Logo
       alt="logo"
-      src={`/logo-${logoInitial}-${isDarkMode ? "dark" : "light"}-mode.png`}
+      src={`/images/logo-${logoInitial}-${
+        isDarkMode ? "dark" : "light"
+      }-mode.png`}
       sx={{
         transform: `rotate(${rotation}deg)`,
       }}

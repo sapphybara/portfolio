@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.sapphyrawiser.com/</loc>
     <image:image>
-      <image:loc>https://www.sapphyrawiser.com/logo.png</image:loc>
+      <image:loc>https://www.sapphyrawiser.com/images/logo.png</image:loc>
     </image:image>
   </url>
   <url>
@@ -17,9 +17,51 @@
     <loc>https://www.sapphyrawiser.com/portfolio/developer-portfolio</loc>
   </url>
   <url>
+    <loc>https://www.sapphyrawiser.com/Sapphyra_Wiser_Resume.pdf</loc>
+  </url>
+  <url>
     <loc>https://www.sapphyrawiser.com/portfolio/hyscan</loc>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/home-page.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/disclaimer.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/component-selection.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/component-cards.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/questionnaire.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/results.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/hyscan/related-questions.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://www.sapphyrawiser.com/portfolio/explainable-ai</loc>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/home-page.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/feature-detail.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/sample-detail.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/feature-impact.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/shap-values.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sapphyrawiser.com/images/explainable-ai/partial-relationship.png</image:loc>
+    </image:image>
   </url>
 </urlset>
