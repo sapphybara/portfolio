@@ -248,11 +248,14 @@ const CreditCardTable = () => {
             } else if (key === "lastInterestAmount") {
               return "Last Interest Amt.";
             } else {
-              console.log(`rendering header for ${key}`, toSentenceCase(key));
               return toSentenceCase(key);
             }
           },
-          valueFormatter: (value?: boolean | number | string | Date) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          valueFormatter: (
+            value?: boolean | number | string | Date,
+            params?: CreateCreditCardInput
+          ) => {
             const type = creditCardTypeMapping[key];
             if (value == null) {
               // loose equality checks for undefined too
@@ -263,6 +266,16 @@ const CreditCardTable = () => {
               return formatFinancialNumber(value as number, "percent");
             } else if (key === "score") {
               return formatFinancialNumber(value as number, "plain");
+            } else if (key === "balance") {
+              const balance = params!.balance;
+              const creditLimit = params!.creditLimit;
+              return `${formatFinancialNumber(
+                balance,
+                "dollar"
+              )} (${formatFinancialNumber(
+                (balance / creditLimit) * 100,
+                "percent"
+              )})`;
             }
 
             if (type === "number") {
