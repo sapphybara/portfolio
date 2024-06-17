@@ -1,9 +1,4 @@
-import {
-  Form,
-  useActionData,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 import {
   Button,
   Checkbox,
@@ -50,8 +45,6 @@ const DialogContentStack = styled(DialogContent)(({ theme }) => ({
 
 const AddCreditCardDialog = () => {
   const actionData = useActionData() as LoaderActionError | undefined;
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const renderFormControl = (key: keyof CreateCreditCardInput) => {
     const type = creditCardTypeMapping[key];
@@ -110,15 +103,6 @@ const AddCreditCardDialog = () => {
     );
   };
 
-  const closeDialog = () => {
-    // they key seems to be default if the user came from a separate site; don't send them back there
-    if (location.key !== "default") {
-      navigate(-1);
-    } else {
-      navigate("/admin");
-    }
-  };
-
   return (
     <Dialog
       open={true}
@@ -138,7 +122,7 @@ const AddCreditCardDialog = () => {
         {creditCardKeys.map(renderFormControl)}
       </DialogContentStack>
       <DialogActions>
-        <Button onClick={closeDialog}>Cancel</Button>
+        <Button href="/admin">Cancel</Button>
         <Button type="submit">Add Card</Button>
       </DialogActions>
     </Dialog>
