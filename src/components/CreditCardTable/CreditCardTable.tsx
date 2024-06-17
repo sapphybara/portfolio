@@ -207,6 +207,7 @@ const CreditCardTable = () => {
         ...creditCardKeys.map((key) => ({
           editable: key !== "score",
           field: key,
+          headerName: toSentenceCase(key),
           hideable: key !== "cardName",
           type:
             creditCardTypeMapping[key] !== "text"
@@ -247,6 +248,7 @@ const CreditCardTable = () => {
             } else if (key === "lastInterestAmount") {
               return "Last Interest Amt.";
             } else {
+              console.log(`rendering header for ${key}`, toSentenceCase(key));
               return toSentenceCase(key);
             }
           },
