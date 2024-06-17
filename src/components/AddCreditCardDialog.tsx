@@ -100,7 +100,7 @@ const AddCreditCardDialog = () => {
         autoFocus={key === "cardName"}
         defaultValue={!isRequired ? "0" : undefined}
         id={key}
-        InputProps={{ "aria-describedby": `input for ${label}` }}
+        inputProps={{ "aria-describedby": `input for ${label}`, step: "0.01" }}
         key={key}
         label={label}
         name={key}
