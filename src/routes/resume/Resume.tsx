@@ -5,12 +5,14 @@ import {
   List,
   ListItem,
   Stack,
+  Button,
 } from "@mui/material";
 import CollapsibleCard from "@components/CollapsibleCard";
 import { SharedCardHeaderProps } from "types/global";
 import {
   BusinessCenterOutlined,
   DeveloperBoardOutlined,
+  Download,
   LightbulbOutlined,
   SchoolOutlined,
   ScienceOutlined,
@@ -129,15 +131,15 @@ const Resume = () => {
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <Stack alignItems="flex-end">
-        {/* <Button
+        <Button
           download
-          href="/resume.pdf"
+          href="/Sapphyra_Wiser_Resume.pdf"
           LinkComponent="a"
           startIcon={<Download />}
           variant="outlined"
         >
           Download Resume
-        </Button> */}
+        </Button>
         <Box className="flex flex-col gap-8 my-4">
           {(resumeData as ResumeDataItem[]).map((d) => renderResumeData(d))}
         </Box>
