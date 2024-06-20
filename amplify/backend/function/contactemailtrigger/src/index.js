@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+// eslint-disable-next-line no-undef
 const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 const ses = new SESClient({ region: "us-west-1" });
+// eslint-disable-next-line no-undef
+const dayjs = require("dayjs");
 
 // eslint-disable-next-line no-undef
 exports.handler = async (event, _context, callback) => {
   const contactData = event.Records[0].dynamodb.NewImage;
   const {
+    createdAt: { S: createdAt },
     email: { S: email },
     name: { S: name },
     message: { S: message },
@@ -27,7 +31,8 @@ exports.handler = async (event, _context, callback) => {
             <html>
               <head></head>
               <body>
-                <h2>Message from ${name}: &lt;${email}&gt;</h2>
+                <h3>Message from ${name}: &lt;${email}&gt;</h3>
+                <p>Received on ${dayjs(createdAt).format('dddd, MMMM D, [at] h:mma')}.</p>
                 <p>${message.replace(/\n/g, "<br>")}</p>
               </body>
             </html>
@@ -36,8 +41,8 @@ exports.handler = async (event, _context, callback) => {
       },
       Subject: { Data: subject },
     },
-    Source: "admin@sapphyrawiser.com",
-    ReplyToAddresses: [email],
+    Source: "Website Contact <admin@sapphyrawiser.com>",
+    ReplyToAddresses: [`${name} <${email}>`],
   });
 
   try {
