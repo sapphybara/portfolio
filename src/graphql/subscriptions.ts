@@ -12,17 +12,17 @@ export const onCreateCreditCard = /* GraphQL */ `subscription OnCreateCreditCard
   $filter: ModelSubscriptionCreditCardFilterInput
 ) {
   onCreateCreditCard(filter: $filter) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -36,17 +36,17 @@ export const onUpdateCreditCard = /* GraphQL */ `subscription OnUpdateCreditCard
   $filter: ModelSubscriptionCreditCardFilterInput
 ) {
   onUpdateCreditCard(filter: $filter) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -60,17 +60,17 @@ export const onDeleteCreditCard = /* GraphQL */ `subscription OnDeleteCreditCard
   $filter: ModelSubscriptionCreditCardFilterInput
 ) {
   onDeleteCreditCard(filter: $filter) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -84,11 +84,11 @@ export const onCreateContactForm = /* GraphQL */ `subscription OnCreateContactFo
   $filter: ModelSubscriptionContactFormFilterInput
 ) {
   onCreateContactForm(filter: $filter) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename
@@ -102,11 +102,11 @@ export const onUpdateContactForm = /* GraphQL */ `subscription OnUpdateContactFo
   $filter: ModelSubscriptionContactFormFilterInput
 ) {
   onUpdateContactForm(filter: $filter) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename
@@ -120,11 +120,11 @@ export const onDeleteContactForm = /* GraphQL */ `subscription OnDeleteContactFo
   $filter: ModelSubscriptionContactFormFilterInput
 ) {
   onDeleteContactForm(filter: $filter) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename

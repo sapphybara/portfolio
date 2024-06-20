@@ -13,17 +13,17 @@ export const createCreditCard = /* GraphQL */ `mutation CreateCreditCard(
   $condition: ModelCreditCardConditionInput
 ) {
   createCreditCard(input: $input, condition: $condition) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -38,17 +38,17 @@ export const updateCreditCard = /* GraphQL */ `mutation UpdateCreditCard(
   $condition: ModelCreditCardConditionInput
 ) {
   updateCreditCard(input: $input, condition: $condition) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -63,17 +63,17 @@ export const deleteCreditCard = /* GraphQL */ `mutation DeleteCreditCard(
   $condition: ModelCreditCardConditionInput
 ) {
   deleteCreditCard(input: $input, condition: $condition) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -88,11 +88,11 @@ export const createContactForm = /* GraphQL */ `mutation CreateContactForm(
   $condition: ModelContactFormConditionInput
 ) {
   createContactForm(input: $input, condition: $condition) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename
@@ -107,11 +107,11 @@ export const updateContactForm = /* GraphQL */ `mutation UpdateContactForm(
   $condition: ModelContactFormConditionInput
 ) {
   updateContactForm(input: $input, condition: $condition) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename
@@ -126,11 +126,11 @@ export const deleteContactForm = /* GraphQL */ `mutation DeleteContactForm(
   $condition: ModelContactFormConditionInput
 ) {
   deleteContactForm(input: $input, condition: $condition) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename

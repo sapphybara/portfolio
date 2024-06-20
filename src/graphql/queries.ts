@@ -10,17 +10,17 @@ type GeneratedQuery<InputType, OutputType> = string & {
 
 export const getCreditCard = /* GraphQL */ `query GetCreditCard($id: ID!) {
   getCreditCard(id: $id) {
-    id
-    cardName
-    paymentDate
-    minimumPayment
-    balance
     apr
+    balance
+    cardName
+    creditLimit
+    id
     isEarningInterest
     lastInterestAmount
-    score
-    creditLimit
+    minimumPayment
     owner
+    paymentDate
+    score
     createdAt
     updatedAt
     __typename
@@ -37,17 +37,17 @@ export const listCreditCards = /* GraphQL */ `query ListCreditCards(
 ) {
   listCreditCards(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      cardName
-      paymentDate
-      minimumPayment
-      balance
       apr
+      balance
+      cardName
+      creditLimit
+      id
       isEarningInterest
       lastInterestAmount
-      score
-      creditLimit
+      minimumPayment
       owner
+      paymentDate
+      score
       createdAt
       updatedAt
       __typename
@@ -62,11 +62,11 @@ export const listCreditCards = /* GraphQL */ `query ListCreditCards(
 >;
 export const getContactForm = /* GraphQL */ `query GetContactForm($id: ID!) {
   getContactForm(id: $id) {
-    id
-    name
     email
-    subject
+    id
     message
+    name
+    subject
     createdAt
     updatedAt
     __typename
@@ -83,11 +83,11 @@ export const listContactForms = /* GraphQL */ `query ListContactForms(
 ) {
   listContactForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      id
-      name
       email
-      subject
+      id
       message
+      name
+      subject
       createdAt
       updatedAt
       __typename
