@@ -28,10 +28,10 @@ exports.handler = async (event, _context, callback) => {
               <head></head>
               <body>
                 <h2>Message from ${name}: &lt;${email}&gt;</h2>
-                <p>${message}</p>
+                <p>${message.replace(/\n/g, "<br>")}</p>
               </body>
             </html>
-          `
+          `,
         },
       },
       Subject: { Data: subject },
@@ -43,12 +43,10 @@ exports.handler = async (event, _context, callback) => {
   try {
     let response = await ses.send(command);
     return response;
-  }
-  catch (error) {
+  } catch (error) {
     // todo error handling.
-    console.error("error!", error)
-  }
-  finally {
-    callback(null, 'Successfully processed DynamoDB record');
+    console.error("error!", error);
+  } finally {
+    callback(null, "Successfully processed DynamoDB record");
   }
 };
