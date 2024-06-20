@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Form, useActionData } from "react-router-dom";
 import { ContactFormField, LoaderActionError } from "types/global";
@@ -11,6 +12,7 @@ const formFields: ContactFormField[] = [
 
 const Contact = () => {
   const actionData = useActionData() as LoaderActionError | null;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (actionData?.status === "success") {
     return (
@@ -40,6 +42,7 @@ const Contact = () => {
         flexWrap="wrap"
         gap={2}
         method="post"
+        onSubmit={() => setIsSubmitting(true)}
       >
         {actionData?.status && (
           <Typography className="w-full" color="error">
@@ -63,7 +66,7 @@ const Contact = () => {
             />
           );
         })}
-        <Button type="submit" variant="contained">
+        <Button disabled={isSubmitting} type="submit" variant="contained">
           Send
         </Button>
       </Stack>
