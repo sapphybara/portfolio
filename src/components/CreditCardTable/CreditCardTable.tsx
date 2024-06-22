@@ -6,56 +6,35 @@ import {
   useState,
 } from "react";
 import { useAsyncValue, useRevalidator } from "react-router-dom";
-import {
-  AlertProps,
-  Snackbar,
-  Alert,
-  styled,
-  useTheme,
-  useMediaQuery,
-  Tooltip,
-} from "@mui/material";
+import { AlertProps, useTheme, useMediaQuery, Tooltip } from "@mui/material";
 import {
   GridActionsCellItem,
   GridColDef,
-  GridEventListener,
   GridRenderCellParams,
   GridRenderEditCellParams,
-  GridRowEditStopReasons,
   GridRowId as GridRowIdType,
-  GridRowModel,
   GridRowModes,
   GridRowModesModel,
   GridValidRowModel,
   useGridApiRef,
 } from "@mui/x-data-grid";
 import { Save, Cancel, Edit, DeleteOutlineOutlined } from "@mui/icons-material";
-import dayjs from "dayjs";
-import { generateClient } from "aws-amplify/api";
 
 import { CreateCreditCardInput, ListCreditCardsQuery } from "@/API";
 import {
   toSentenceCase,
   creditCardKeys,
   creditCardTypeMapping,
-  formatFinancialNumber,
 } from "@utils/utils";
-import StyledDataGrid from "./StyledDataGrid";
+import { GridActionsCellItemPrimary, StyledDataGrid } from "./styled";
 import EditToolbar from "./EditToolbar";
-import { deleteCreditCard, updateCreditCard } from "@graphql/mutations";
 import TableHeader from "./TableHeader";
 import CreditCardOwnerAutocomplete from "@components/CreditCardOwnerAutocomplete";
+import SnackbarAlert from "@components/SnackbarAlert";
+import { formatValue, processRowUpdate } from "./utils";
+import { useHandlers } from "./handlers";
 
 type GridRowId = Extract<GridRowIdType, string>;
-
-const client = generateClient();
-
-const GridActionsCellItemPrimary = styled(GridActionsCellItem)(({ theme }) => ({
-  "& .MuiSvgIcon-root": {
-    color: theme.palette.text.primary,
-  },
-}));
-GridActionsCellItemPrimary.displayName = "GridActionsCellItemPrimary";
 
 const CreditCardTable = () => {
   const creditCards = useAsyncValue() as { data: ListCreditCardsQuery };
@@ -98,97 +77,6 @@ const CreditCardTable = () => {
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  const handleRowEditStop: GridEventListener<"rowEditStop"> = (
-    params,
-    event
-  ) => {
-    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
-    }
-  };
-
-  const handleEditClick = useCallback(
-    (id: GridRowId) => () => {
-      setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-    },
-    [rowModesModel]
-  );
-
-  const handleSaveClick = useCallback(
-    (id: GridRowId) => () => {
-      setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-    },
-    [rowModesModel]
-  );
-
-  const handleDeleteClick = (id: GridRowId) => () => {
-    try {
-      client.graphql({
-        query: deleteCreditCard,
-        variables: { input: { id } },
-      });
-    } catch (error) {
-      console.error("Error deleting credit card", error);
-    }
-  };
-
-  const handleCancelClick = useCallback(
-    (id: GridRowId) => () => {
-      setRowModesModel({
-        ...rowModesModel,
-        [id]: { mode: GridRowModes.View, ignoreModifications: true },
-      });
-    },
-    [rowModesModel]
-  );
-
-  const processRowUpdate = async (
-    newRow: GridRowModel,
-    oldRow: GridRowModel
-  ) => {
-    delete newRow.score;
-    delete newRow.createdAt;
-    delete newRow.updatedAt;
-    delete newRow.__typename;
-    newRow.paymentDate = dayjs(newRow.paymentDate).format("YYYY-MM-DD");
-    if (!newRow.owner) {
-      setSnackbar({ children: "Owner is required", severity: "error" });
-      return oldRow;
-    }
-    newRow.owner = newRow.owner.toUpperCase();
-
-    try {
-      const updatedRow = await client.graphql({
-        query: updateCreditCard,
-        variables: { input: { ...newRow, id: newRow.id } },
-      });
-      revalidator.revalidate();
-
-      const { updateCreditCard: modifiedCreditCard } = updatedRow.data;
-      return modifiedCreditCard;
-    } catch (err) {
-      setSnackbar({ children: (err as Error).message, severity: "error" });
-      return oldRow;
-    }
-  };
-
-  const handleProcessRowUpdateError = useCallback(
-    (error: Error | { errors: Error[] }) => {
-      let message;
-      if ("errors" in error) {
-        message = error.errors.map((e) => e.message).join(",\n");
-      } else {
-        message = error.message;
-      }
-      setSnackbar({ children: message, severity: "error" });
-    },
-    []
-  );
-
-  const handleRowModesModelChange = (newRowModesModel: GridRowModesModel) => {
-    setRowModesModel(newRowModesModel);
-  };
-
   const handleChange = useCallback(
     (id: string, field: string) =>
       async (_e: SyntheticEvent, value: string | null) => {
@@ -200,6 +88,15 @@ const CreditCardTable = () => {
       },
     [apiRef]
   );
+
+  const {
+    handleEditClick,
+    handleSaveClick,
+    handleCancelClick,
+    handleDeleteClick,
+    handleRowEditStop,
+    handleProcessRowUpdateError,
+  } = useHandlers(rowModesModel, setRowModesModel, setSnackbar);
 
   const columns = useMemo(
     () =>
@@ -251,41 +148,10 @@ const CreditCardTable = () => {
               return toSentenceCase(key);
             }
           },
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           valueFormatter: (
             value?: boolean | number | string | Date,
             params?: CreateCreditCardInput
-          ) => {
-            const type = creditCardTypeMapping[key];
-            if (value == null) {
-              // loose equality checks for undefined too
-              return "";
-            }
-
-            if (key === "apr") {
-              return formatFinancialNumber(value as number, "percent");
-            } else if (key === "score") {
-              return formatFinancialNumber(value as number, "plain");
-            } else if (key === "balance") {
-              const balance = params!.balance;
-              const creditLimit = params!.creditLimit;
-              return `${formatFinancialNumber(
-                balance,
-                "dollar"
-              )} (${formatFinancialNumber(
-                (balance / creditLimit) * 100,
-                "percent"
-              )})`;
-            }
-
-            if (type === "number") {
-              return formatFinancialNumber(value as number, "dollar");
-            } else if (type === "date") {
-              return dayjs(value as Date).format("D");
-            }
-
-            return value;
-          },
+          ) => formatValue(key, value, params),
           valueGetter: (
             value: CreateCreditCardInput[keyof CreateCreditCardInput]
           ) => {
@@ -330,15 +196,17 @@ const CreditCardTable = () => {
               <GridActionsCellItemPrimary
                 icon={<DeleteOutlineOutlined />}
                 label="Delete"
-                onClick={handleDeleteClick(id)}
+                onClick={handleDeleteClick(id, apiRef)}
               />,
             ];
           },
         },
       ] as GridColDef[],
     [
+      apiRef,
       handleCancelClick,
       handleChange,
+      handleDeleteClick,
       handleEditClick,
       handleSaveClick,
       rowModesModel,
@@ -378,25 +246,21 @@ const CreditCardTable = () => {
           }
           return "level-4";
         }}
-        onRowModesModelChange={handleRowModesModelChange}
+        onRowModesModelChange={setRowModesModel}
         onRowEditStop={handleRowEditStop}
         onProcessRowUpdateError={handleProcessRowUpdateError}
-        processRowUpdate={processRowUpdate}
+        processRowUpdate={(newRow, oldRow) =>
+          processRowUpdate(newRow, oldRow, setSnackbar, revalidator.revalidate)
+        }
         rowModesModel={rowModesModel}
         slots={{
           toolbar: EditToolbar,
         }}
       />
-      {!!snackbar && (
-        <Snackbar
-          open
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          onClose={handleCloseSnackbar}
-          autoHideDuration={10000}
-        >
-          <Alert {...snackbar} onClose={handleCloseSnackbar} />
-        </Snackbar>
-      )}
+      <SnackbarAlert
+        handleCloseSnackbar={handleCloseSnackbar}
+        snackbar={snackbar}
+      />
     </>
   );
 };

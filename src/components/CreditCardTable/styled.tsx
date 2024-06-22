@@ -1,5 +1,5 @@
 import { styled, type Theme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import {
   getBackgroundColor,
   getHoverBackgroundColor,
@@ -33,7 +33,7 @@ const generateLevelStyles = (
   };
 };
 
-const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
+export const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   ...levels.reduce(
     (acc, level) => ({
       ...acc,
@@ -43,4 +43,11 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   ),
 }));
 
-export default StyledDataGrid;
+export const GridActionsCellItemPrimary = styled(GridActionsCellItem)(
+  ({ theme }) => ({
+    "& .MuiSvgIcon-root": {
+      color: theme.palette.text.primary,
+    },
+  })
+);
+GridActionsCellItemPrimary.displayName = "GridActionsCellItemPrimary";
