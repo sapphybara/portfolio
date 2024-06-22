@@ -1,11 +1,11 @@
 import { Form, useActionData } from "react-router-dom";
 import {
+  Alert,
   Button,
   Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   FormControlLabel,
@@ -115,9 +115,7 @@ const AddCreditCardDialog = () => {
       <NoPaddingDialogTitle>Add Credit Card</NoPaddingDialogTitle>
       <DialogContentStack className="form-inputs">
         {actionData && actionData.status === "error" && (
-          <DialogContentText color="error" paragraph>
-            {actionData.message}
-          </DialogContentText>
+          <Alert severity="warning">{actionData.message}</Alert>
         )}
         {creditCardKeys.map(renderFormControl)}
       </DialogContentStack>
