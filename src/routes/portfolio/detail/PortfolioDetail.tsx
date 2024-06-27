@@ -1,4 +1,5 @@
 import {
+  ArrowBack,
   ArrowOutward,
   AssignmentInd,
   Build,
@@ -76,8 +77,8 @@ const AnchorWrapper = styled(Box)(({ theme }) => ({
   ...(useMediaQuery(theme.breakpoints.up("sm"))
     ? {
         position: "sticky",
-        top: theme.spacing(8),
-        height: "calc(100vh - 101px)",
+        top: theme.spacing(8.25),
+        height: "calc(100vh - 103px)",
         paddingRight: theme.spacing(2),
       }
     : {}),
@@ -123,19 +124,26 @@ const PortfolioDetail = () => {
         >
           Portfolio
         </Typography>
-        <Typography variant="decoration">
-          {toSentenceCase(portfolioDetail.id)}
-        </Typography>
+        <Typography variant="decoration">Portfolio Detail</Typography>
       </BreadcrumbsWidthCustomSeparator>
       <DetailedTitle component="h1" variant="h2">
         {portfolioDetail.title}
       </DetailedTitle>
       <Stack className="mt-4" direction={isSmUp ? "row" : "column"}>
         <AnchorWrapper>
-          <Typography component="h3" variant="h5">
+          <Button
+            className="justify-around"
+            fullWidth
+            href="/#portfolio"
+            startIcon={<ArrowBack />}
+            variant="outlined"
+          >
+            Back
+          </Button>
+          <Typography className="mt-2" component="h3" variant="h5">
             Overview
           </Typography>
-          <List>
+          <List className="pt-0">
             <ListItem>
               <AnchorLink href="#detail">Portfolio Detail</AnchorLink>
             </ListItem>
@@ -152,7 +160,7 @@ const PortfolioDetail = () => {
         </AnchorWrapper>
         <Box>
           <Paper className="p-4 mb-4 flex flex-col" id="detail">
-            <Typography variant="decoration">Portfolio Detail</Typography>
+            <Typography variant="decoration">Project:</Typography>
             <Typography component="h2" variant="h4">
               {portfolioDetail.subheader}
             </Typography>
