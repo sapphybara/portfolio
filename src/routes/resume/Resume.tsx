@@ -6,6 +6,7 @@ import {
   ListItem,
   Stack,
   Button,
+  styled,
 } from "@mui/material";
 import CollapsibleCard from "@components/CollapsibleCard";
 import { SharedCardHeaderProps } from "types/global";
@@ -29,12 +30,12 @@ interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
 }
 
 interface StringResumeDataItem extends BaseResumeDataItem {
-  data: string[];
+  data?: string[];
   dataType: DataType;
 }
 
 interface NestedResumeDataItem extends BaseResumeDataItem {
-  data: ResumeDataItem[];
+  data?: ResumeDataItem[];
   dataType?: DataType;
 }
 
@@ -44,12 +45,13 @@ type ResumeDataItem = StringResumeDataItem | NestedResumeDataItem;
 const isResumeDataItem = (item: unknown): item is ResumeDataItem =>
   typeof item === "object" &&
   item !== null &&
-  "data" in item &&
-  Array.isArray(item.data) &&
-  item.data.every(
-    (dataItem: unknown) =>
-      typeof dataItem === "string" || isResumeDataItem(dataItem)
-  );
+  "title" in item &&
+  (!("data" in item) ||
+    (Array.isArray(item.data) &&
+      item.data.every(
+        (dataItem: unknown) =>
+          typeof dataItem === "string" || isResumeDataItem(dataItem)
+      )));
 
 const avatarRecord = {
   skills: TerminalOutlined,
@@ -62,10 +64,18 @@ const avatarRecord = {
   education2: null,
 };
 
+const StyledList = styled(List)(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  listStyleType: "disc",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+  gap: theme.spacing(1),
+}));
+
 const Resume = () => {
   const renderResumeData = (
     {
-      data,
+      data = [],
       dataType,
       id,
       subheaderTypographyProps = {
@@ -101,18 +111,13 @@ const Resume = () => {
             {data.every(isResumeDataItem) ? (
               data.map((d) => renderResumeData(d, newNestLevel))
             ) : dataType === "list" ? (
-              <List
-                className="p-0 list-disc grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
-                component={Stack}
-                flexWrap="wrap"
-                gap={1}
-              >
+              <StyledList>
                 {data.map((text) => (
                   <ListItem className="list-item" key={text} disableGutters>
                     {text}
                   </ListItem>
                 ))}
-              </List>
+              </StyledList>
             ) : dataType === "paragraph" ? (
               data.map((text) => (
                 <Typography key={text} paragraph>

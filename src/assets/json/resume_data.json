@@ -77,14 +77,11 @@
   {
     "id": "education",
     "title": "Education",
-    "subheader": "",
     "data": [
       {
         "id": "education1",
-        "title": "B.S. Mathematics, Certificate in Computer Science",
+        "title": "B.S. Mathematics",
         "subheader": "University of Texas at Austin | 2019 - 2023",
-        "data": [],
-        "dataType": "paragraph",
         "subheaderTypographyProps": {
           "component": "h6",
           "variant": "subtitle1"
@@ -96,10 +93,21 @@
       },
       {
         "id": "education2",
+        "title": "Certificate in Computer Science",
+        "subheader": "University of Texas at Austin | 2020 - 2023",
+        "subheaderTypographyProps": {
+          "component": "h6",
+          "variant": "subtitle1"
+        },
+        "titleTypographyProps": {
+          "component": "h3",
+          "variant": "h5"
+        }
+      },
+      {
+        "id": "education3",
         "title": "A.S. Mathematics",
         "subheader": "Austin Community College | 2018 - 2019",
-        "data": [],
-        "dataType": "paragraph",
         "subheaderTypographyProps": {
           "component": "h6",
           "variant": "subtitle1"
