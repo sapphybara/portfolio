@@ -120,3 +120,23 @@ export interface TabState {
   setTabIdx: (value: number) => void;
   tabIdx: number;
 }
+
+type ResumeDataType = "list" | "paragraph";
+
+interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
+  defaultIsOpen?: boolean;
+  id: string;
+  title: string;
+}
+
+interface StringResumeDataItem extends BaseResumeDataItem {
+  data?: string[];
+  dataType: ResumeDataType;
+}
+
+interface NestedResumeDataItem extends BaseResumeDataItem {
+  data?: ResumeDataItem[];
+  dataType?: ResumeDataType;
+}
+
+export type ResumeDataItem = StringResumeDataItem | NestedResumeDataItem;

@@ -1,5 +1,10 @@
 import { CreateCreditCardInput } from "@/API";
-import { PortfolioItemImage, Role, TechStack } from "types/global";
+import {
+  PortfolioItemImage,
+  ResumeDataItem,
+  Role,
+  TechStack,
+} from "types/global";
 import { creditCardKeys, creditCardTypeMapping } from "./utils";
 
 export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
@@ -64,3 +69,14 @@ export const isPortfolioImage = (image: unknown): image is PortfolioItemImage =>
   typeof image.src === "string" &&
   "alt" in image &&
   typeof image.alt === "string";
+
+export const isResumeDataItem = (item: unknown): item is ResumeDataItem =>
+  typeof item === "object" &&
+  item !== null &&
+  "title" in item &&
+  (!("data" in item) ||
+    (Array.isArray(item.data) &&
+      item.data.every(
+        (dataItem: unknown) =>
+          typeof dataItem === "string" || isResumeDataItem(dataItem)
+      )));

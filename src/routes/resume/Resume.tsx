@@ -9,7 +9,7 @@ import {
   styled,
 } from "@mui/material";
 import CollapsibleCard from "@components/CollapsibleCard";
-import { SharedCardHeaderProps } from "types/global";
+import { ResumeDataItem } from "types/global";
 import {
   BusinessCenterOutlined,
   DeveloperBoardOutlined,
@@ -20,38 +20,7 @@ import {
   TerminalOutlined,
 } from "@mui/icons-material";
 import resumeData from "@assets/json/resume_data.json";
-
-type DataType = "list" | "paragraph";
-
-interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
-  defaultIsOpen?: boolean;
-  id: string;
-  title: string;
-}
-
-interface StringResumeDataItem extends BaseResumeDataItem {
-  data?: string[];
-  dataType: DataType;
-}
-
-interface NestedResumeDataItem extends BaseResumeDataItem {
-  data?: ResumeDataItem[];
-  dataType?: DataType;
-}
-
-type ResumeDataItem = StringResumeDataItem | NestedResumeDataItem;
-
-// Type guard function to check if an element is a ResumeDataItem
-const isResumeDataItem = (item: unknown): item is ResumeDataItem =>
-  typeof item === "object" &&
-  item !== null &&
-  "title" in item &&
-  (!("data" in item) ||
-    (Array.isArray(item.data) &&
-      item.data.every(
-        (dataItem: unknown) =>
-          typeof dataItem === "string" || isResumeDataItem(dataItem)
-      )));
+import { isResumeDataItem } from "@utils/typeGuards";
 
 const avatarRecord = {
   skills: TerminalOutlined,
