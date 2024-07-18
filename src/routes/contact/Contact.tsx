@@ -28,7 +28,7 @@ const Contact = () => {
   }
 
   return (
-    <>
+    <section>
       <Typography variant="decoration">Get in</Typography>
       <Typography variant="h1">Contact</Typography>
       <Typography paragraph>
@@ -70,7 +70,7 @@ const Contact = () => {
           Send
         </Button>
       </Stack>
-    </>
+    </section>
   );
 };
 
