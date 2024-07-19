@@ -10,7 +10,6 @@ const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   const isError = error instanceof Error;
 
   const message = isError ? error.message : error.statusText;
-  console.log(isError ? error.name : "no name");
 
   if (
     isError &&
@@ -19,8 +18,6 @@ const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
       message ===
         "Minified React error #321; visit https://reactjs.org/docs/error-decoder.html?invariant=321 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.")
   ) {
-    console.log("matched null condition");
-    console.log(error.name);
     return null;
   }
 

@@ -1,6 +1,6 @@
 import { RouteObject, redirect } from "react-router-dom";
 import App from "@/App";
-import Error from "@routes/error/Error";
+import Error from "@routes/error/ErrorPage";
 import Admin from "@routes/admin/Admin";
 import Resume from "@routes/resume/Resume";
 import Home from "@routes/home/Home";
