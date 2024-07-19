@@ -8,12 +8,19 @@ const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   const error = useRouteError() as { statusText?: string } | Error;
   console.error(error);
   const isError = error instanceof Error;
+
+  const message = isError ? error.message : error.statusText;
+  console.log(isError ? error.name : "no name");
+
   if (
     isError &&
-    error.message ===
-      "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node."
+    (message ===
+      "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node." ||
+      message ===
+        "Minified React error #321; visit https://reactjs.org/docs/error-decoder.html?invariant=321 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.")
   ) {
     console.log("matched null condition");
+    console.log(error.name);
     return null;
   }
 
@@ -27,7 +34,7 @@ const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
           Sorry, an unexpected error has occurred.
         </Typography>
         <Typography className="text-center" paragraph>
-          <i>{isError ? error.message : error.statusText}</i>
+          <i>{message}</i>
         </Typography>
         <Typography className="text-center" paragraph>
           Please click <Link href="/">here</Link> to return to the home page.
