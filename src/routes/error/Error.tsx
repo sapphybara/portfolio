@@ -4,9 +4,18 @@ import { PropsWithRoutes } from "types/global";
 import { ReactNode } from "react";
 import Navbar from "@components/navbar/Navbar";
 
-const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
-  const error = useRouteError();
+const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
+  const error = useRouteError() as { statusText?: string } | Error;
   console.error(error);
+  const isError = error instanceof Error;
+  if (
+    isError &&
+    error.message ===
+      "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node."
+  ) {
+    console.log("matched null condition");
+    return null;
+  }
 
   return (
     <>
@@ -18,10 +27,7 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
           Sorry, an unexpected error has occurred.
         </Typography>
         <Typography className="text-center" paragraph>
-          <i>
-            {(error as { statusText?: string }).statusText ||
-              (error as Error).message}
-          </i>
+          <i>{isError ? error.message : error.statusText}</i>
         </Typography>
         <Typography className="text-center" paragraph>
           Please click <Link href="/">here</Link> to return to the home page.
@@ -31,4 +37,4 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   );
 };
 
-export default Error;
+export default ErrorPage;
