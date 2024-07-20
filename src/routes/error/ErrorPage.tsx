@@ -4,9 +4,22 @@ import { PropsWithRoutes } from "types/global";
 import { ReactNode } from "react";
 import Navbar from "@components/navbar/Navbar";
 
-const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
-  const error = useRouteError();
+const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
+  const error = useRouteError() as { statusText?: string } | Error;
   console.error(error);
+  const isError = error instanceof Error;
+
+  const message = isError ? error.message : error.statusText;
+
+  if (
+    isError &&
+    (message ===
+      "Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node." ||
+      message ===
+        "Minified React error #321; visit https://reactjs.org/docs/error-decoder.html?invariant=321 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.")
+  ) {
+    return null;
+  }
 
   return (
     <>
@@ -18,10 +31,7 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
           Sorry, an unexpected error has occurred.
         </Typography>
         <Typography className="text-center" paragraph>
-          <i>
-            {(error as { statusText?: string }).statusText ||
-              (error as Error).message}
-          </i>
+          <i>{message}</i>
         </Typography>
         <Typography className="text-center" paragraph>
           Please click <Link href="/">here</Link> to return to the home page.
@@ -31,4 +41,4 @@ const Error: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   );
 };
 
-export default Error;
+export default ErrorPage;
