@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -12,6 +12,9 @@ import { useCallback, useEffect } from "react";
 function App(props: PropsWithRoutes) {
   useTitle();
   const location = useLocation();
+  const noMotionPreference = useMediaQuery(
+    "(prefers-reduced-motion: no-preference)"
+  );
 
   const scrollToHash = useCallback(() => {
     if (location.hash) {
@@ -19,10 +22,13 @@ function App(props: PropsWithRoutes) {
       const element = document.getElementById(hash);
       if (element) {
         const top = element.getBoundingClientRect().top + window.scrollY - 66;
-        window.scrollTo({ top, behavior: "smooth" });
+        window.scrollTo({
+          top,
+          behavior: noMotionPreference ? "smooth" : "auto",
+        });
       }
     }
-  }, [location]);
+  }, [location.hash, noMotionPreference]);
 
   useEffect(() => {
     scrollToHash();
