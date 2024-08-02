@@ -51,6 +51,7 @@ exports.handler = async (event, _context, callback) => {
   } catch (error) {
     // todo error handling.
     console.error("error!", error);
+    console.log(command);
   } finally {
     callback(null, "Successfully processed DynamoDB record");
   }
