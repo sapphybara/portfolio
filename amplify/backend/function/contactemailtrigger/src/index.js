@@ -6,8 +6,13 @@
 // eslint-disable-next-line no-undef
 const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 const ses = new SESClient({ region: "us-west-1" });
-// eslint-disable-next-line no-undef
-const dayjs = require("dayjs");
+
+// Custom date formatting function
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+  return date.toLocaleDateString('en-US', options);
+}
 
 // eslint-disable-next-line no-undef
 exports.handler = async (event, _context, callback) => {
@@ -32,7 +37,7 @@ exports.handler = async (event, _context, callback) => {
               <head></head>
               <body>
                 <h3>Message from ${name}: &lt;${email}&gt;</h3>
-                <p>Received on ${dayjs(createdAt).format('dddd, MMMM D, [at] h:mma')}.</p>
+                <p>Received on ${formatDate(createdAt)}.</p>
                 <p>${message.replace(/\n/g, "<br>")}</p>
               </body>
             </html>

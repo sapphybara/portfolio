@@ -38,9 +38,6 @@ importers:
       aws-amplify:
         specifier: ^6.0.28
         version: 6.0.28(aws-cdk-lib@2.137.0(constructs@10.3.0))(constructs@10.3.0)
-      dayjs:
-        specifier: ^1.11.10
-        version: 1.11.10
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -4970,7 +4967,8 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  dayjs@1.11.10: {}
+  dayjs@1.11.10:
+    optional: true
 
   debug@4.3.4:
     dependencies:
