@@ -23,6 +23,7 @@
     "@mui/x-data-grid": "^7.2.0",
     "@mui/x-date-pickers": "^7.2.0",
     "aws-amplify": "^6.0.28",
+    "dayjs": "^1.11.13",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "react": "^18.2.0",
