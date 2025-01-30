@@ -10,8 +10,8 @@ import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const contactInfo = [
   {
-    children: "(830) 582-6020",
-    href: "tel:+18305826020",
+    children: "(720) 839-7618",
+    href: "tel:+17208397618",
     startIcon: PhoneOutlined,
   },
   {
@@ -22,12 +22,12 @@ const contactInfo = [
   },
   {
     children: "LinkedIn",
-    href: "https://www.linkedin.com/in/sapphybara",
+    href: "https://www.linkedin.com/in/sapphyra-wiser",
     startIcon: LinkedIn,
   },
   {
     children: "GitHub",
-    href: "https://github.com/sapphyrabara",
+    href: "https://github.com/sapphybara",
     startIcon: GitHub,
   },
 ];
