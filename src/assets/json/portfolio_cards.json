@@ -1,5 +1,52 @@
 [
   {
+    "id": "mitokhon",
+    "title": "MitoKhon",
+    "subheader": "Equity-Driven Healthcare Consulting & Web Development",
+    "affiliation": "Freelance",
+    "description": "I led the design and development of MitoKhon’s website, a healthcare consulting firm focused on equity-driven organizational transformation and social impact. With only the branding established at handoff, I took full responsibility for the site's design direction and complete development using Breakdance. This role extended beyond technical work, as I managed stakeholders across multiple levels, coordinated feedback loops, and ensured all project milestones were met ahead of schedule. The result was a cohesive, accessible, and secure user experience that exceeded client expectations.",
+    "techStack": [
+      { "name": "WordPress", "cardType": "frontend" },
+      { "name": "Breakdance", "cardType": "frontend" },
+      { "name": "Figma", "cardType": "design" },
+      { "name": "Custom CSS", "cardType": "design" },
+      { "name": "SEO Optimization", "cardType": "seo" },
+      { "name": "Google Analytics", "cardType": "tooling" },
+      { "name": "Google Search Console", "cardType": "seo" }
+    ],
+    "links": [
+      {
+        "type": "live",
+        "href": "https://mitokhon.com"
+      }
+    ],
+    "roles": [
+      "developer",
+      "designer",
+      "seoSpecialist",
+      "complianceManager",
+      "securityManager"
+    ],
+    "contributions": [
+      "Took over the full design and development process after initial branding was established, creating a cohesive website using WordPress and Breakdance.",
+      "Managed communication and coordination with stakeholders at multiple levels, ensuring smooth project progress and alignment with client goals.",
+      "Handled legal and compliance tasks, including cookie management and privacy regulations.",
+      "Focused on accessibility in both design and implementation to ensure an inclusive user experience.",
+      "Managed website security and ensured compliance with data protection standards.",
+      "Installed and actively monitored Google Analytics and Search Console to track website performance and SEO metrics.",
+      "**Consistently beat deadlines and exceeded expectations**, going above and beyond in both development and management responsibilities."
+    ],
+    "problemSolving": [
+      "Ensured **responsive design across all devices and browsers** while maintaining consistent branding and visual appeal.",
+      "Balanced creative freedom with existing brand guidelines to deliver a cohesive and polished website.",
+      "Overcame layout challenges by integrating custom CSS with Breakdance’s design tools.",
+      "Addressed legal and compliance challenges to meet data protection and privacy standards.",
+      "Enhanced website accessibility to meet WCAG guidelines and improve usability for all visitors.",
+      "Facilitated cross-functional communication to manage feedback efficiently and keep projects ahead of schedule."
+    ],
+    "shortDescription": "A healthcare consulting website focused on equity-driven organizational transformation, accessibility, and secure, compliant web practices, with strong project and stakeholder management."
+  },
+  {
     "id": "developer-portfolio",
     "title": "Developer Portfolio",
     "subheader": "Personal Showcase of Projects and Skills",

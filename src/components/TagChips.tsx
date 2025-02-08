@@ -13,6 +13,9 @@ import {
   DeveloperModeOutlined,
   PaletteOutlined,
   ScienceOutlined,
+  GavelOutlined,
+  SecurityOutlined,
+  TrendingUpOutlined,
 } from "@mui/icons-material";
 import { PortfolioIconName, Role, TechStack } from "types/global";
 import { isTechStack } from "@utils/typeGuards";
@@ -32,6 +35,10 @@ const iconMap: { [K in PortfolioIconName]: ElementType } = {
   developer: DeveloperModeOutlined,
   designer: PaletteOutlined,
   researcher: ScienceOutlined,
+  seo: TrendingUpOutlined,
+  seoSpecialist: TrendingUpOutlined,
+  complianceManager: GavelOutlined,
+  securityManager: SecurityOutlined,
 };
 
 const TagChips = (props: { items: ChipItem[] }) => {
