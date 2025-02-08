@@ -5,7 +5,7 @@ import {
   Role,
   TechStack,
 } from "types/global";
-import { creditCardKeys, creditCardTypeMapping } from "./utils";
+import { creditCardKeys, creditCardTypeMapping, roles } from "./utils";
 
 export const isCreditCard = (card?: unknown): card is CreateCreditCardInput => {
   if (!card || typeof card !== "object" || card === null) {
@@ -56,10 +56,7 @@ export const isTechStack = (obj: unknown): obj is TechStack =>
   typeof obj.cardType === "string";
 
 export const isRole = (role: unknown): role is Role => {
-  return (
-    typeof role === "string" &&
-    ["developer", "designer", "researcher"].includes(role.toLowerCase())
-  );
+  return typeof role === "string" && roles.includes(role as Role);
 };
 
 export const isPortfolioImage = (image: unknown): image is PortfolioItemImage =>

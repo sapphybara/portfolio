@@ -1,5 +1,6 @@
 import { RouteObject } from "react-router-dom";
 import { CardHeaderProps } from "@mui/material";
+import { roles } from "@utils/utils";
 
 export interface PropsWithRoutes {
   routes: RouteObject[];
@@ -42,7 +43,7 @@ export type SharedCardHeaderProps = Pick<
   >;
 };
 
-type PortfolioIconName =
+type TechStackIcon =
   | "frontend"
   | "backend"
   | "fullstack"
@@ -51,15 +52,15 @@ type PortfolioIconName =
   | "tooling"
   | "language"
   | "library"
-  | "developer"
-  | "designer"
-  | "researcher";
+  | "seo";
 
-type Role = "designer" | "developer" | "researcher";
+type Role = (typeof roles)[number];
+
+type PortfolioIconName = TechStackIcon | Role;
 
 interface TechStack {
   name: string;
-  cardType: Exclude<PortfolioIconName, Role>;
+  cardType: TechStackIcon;
 }
 
 // todo should we use the type of muis link component instead of this?
