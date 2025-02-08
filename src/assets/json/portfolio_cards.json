@@ -59,14 +59,14 @@
     "roles": ["developer"],
     "contributions": [
       "Created and maintained React components for the application using styled-components.",
-      "Key to the creation of algorithms to understand the user's system, identify applicable codes and standards, and group related questions.",
+      "**Key to the creation of algorithms** to understand the user's system, identify applicable codes and standards, and group related questions.",
       "Implemented bug fixes and design changes to improve the user experience after demos and sponsor feedback.",
       "Developed a dynamic question system where each component has corresponding questions, with additional questions based on conditional responses."
     ],
     "problemSolving": [
       "Developed a solution to dynamically generate questions based on the user's system and the codes and standards applicable to it.",
       "Designed a system to categorize and group questions based on the codes and standards they relate to.",
-      "Implemented responsive design principles for optimal viewing across devices.",
+      "**Implemented responsive design principles** for optimal viewing across devices.",
       "Created a mechanism to relay optional references to related documents based on the user's answers."
     ],
     "shortDescription": "An application to support those who utilize hydrogen (H2) in identifying hydrogen-specific codes and standard documents that are relevant to their systems.",
@@ -113,7 +113,7 @@
     "title": "Explainable AI: Exposing the Black Box",
     "subheader": "Understanding AI Models and Predictions",
     "affiliation": "Pacific Northwest National Laboratory",
-    "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was instrumental in securing an additional $50k in funding for this and other parts of the project.",
+    "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was **instrumental in securing an additional $50k in funding** for this and other parts of the project.",
     "techStack": [
       { "name": "Python", "cardType": "language" },
       { "name": "AI", "cardType": "frontend" },

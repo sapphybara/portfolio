@@ -39,6 +39,8 @@ import {
 } from "types/global";
 import { isRole } from "@utils/typeGuards";
 import ImageCarousel from "@components/ImageCarousel";
+import ReactMarkdown from "react-markdown";
+import { Fragment } from "react";
 
 const headers = [
   "roles",
@@ -216,13 +218,21 @@ const PortfolioDetail = () => {
                               key={index}
                               disableGutters
                             >
-                              {item}
+                              <ReactMarkdown
+                                children={item}
+                                components={{ p: Fragment }}
+                              />
                             </ListItem>
                           ))}
                         </List>
                       )
                     ) : (
-                      <Typography variant="body1">{data}</Typography>
+                      <Typography variant="body1">
+                        <ReactMarkdown
+                          children={data}
+                          components={{ p: Fragment }}
+                        />
+                      </Typography>
                     )}
                   </Box>
                 </Slide>
