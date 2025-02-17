@@ -7,6 +7,7 @@ const loader: LoaderFunction = async ({ request }) => {
     params.set("from", new URL(request.url).pathname);
     return redirect(`/login?${params.toString()}`);
   }
+  return null;
 };
 
 export default loader;
