@@ -7,7 +7,7 @@ import { ListCreditCardsQuery } from "@/API";
 import Fallback from "@components/CreditCardTable/Fallback";
 import { LoaderActionError } from "types/global";
 
-const Admin = () => {
+const CreditCardLoader = () => {
   const fetcher = useFetcher();
   const creditCardData = useLoaderData() as
     | {
@@ -49,4 +49,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default CreditCardLoader;

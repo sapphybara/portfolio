@@ -1,13 +1,14 @@
-import { RouteObject, redirect } from "react-router-dom";
+import { Outlet, RouteObject, redirect } from "react-router-dom";
 import App from "@/App";
 import Error from "@routes/error/ErrorPage";
 import Admin from "@routes/admin/Admin";
 import Resume from "@routes/resume/Resume";
 import Home from "@routes/home/Home";
 import rootLoader from "@routes/loader";
-import adminLoader from "@routes/admin/loader";
+import adminLoader from "@routes/admin/credit-cards/loader";
 import { useState } from "react";
 import { TabState } from "types/global";
+import CreditCardLoader from "@routes/admin/credit-cards/CreditCardLoader";
 
 interface TabData extends Pick<TabState, "maxTabHeight" | "tabIdx"> {}
 
@@ -69,12 +70,23 @@ export const useRoutes = () => {
         },
         {
           path: "admin",
-          element: <Admin />,
-          loader: adminLoader,
+          element: <Outlet />,
           children: [
+            { path: "", element: <Admin /> },
             {
-              path: "credit-cards/new",
-              lazy: () => import("@routes/admin/credit-cards/new/lazy"),
+              path: "credit-cards",
+              element: <CreditCardLoader />,
+              loader: adminLoader,
+              children: [
+                {
+                  path: "new",
+                  lazy: () => import("@routes/admin/credit-cards/new/lazy"),
+                },
+              ],
+            },
+            {
+              path: "resume-builder",
+              lazy: () => import("@routes/admin/resume-builder/lazy"),
             },
           ],
         },
