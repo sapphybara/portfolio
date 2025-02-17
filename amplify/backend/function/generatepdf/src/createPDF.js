@@ -163,7 +163,7 @@ module.exports = {
       },
       body: JSON.stringify({
         source: html,
-        sandbox: process.env.NODE_ENV !== "production",
+        sandbox: process.env.ENV !== "main",
         margin: { top: "40px" },
       }),
     });
