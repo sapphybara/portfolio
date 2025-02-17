@@ -2,6 +2,29 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type ResumeDataInput = {
+  jobTitle: string,
+  selectedSkills: Array< string >,
+  experience: Array< ExperienceInput >,
+  education: Array< EducationInput >,
+};
+
+export type ExperienceInput = {
+  title: string,
+  subheader: string,
+  data: Array< string >,
+};
+
+export type EducationInput = {
+  title: string,
+  subheader: string,
+};
+
+export type GeneratePDFResponse = {
+  __typename: "GeneratePDFResponse",
+  url: string,
+};
+
 export type CreateCreditCardInput = {
   apr: number,
   balance: number,
@@ -317,6 +340,17 @@ export type ModelSubscriptionContactFormFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionContactFormFilterInput | null > | null,
   or?: Array< ModelSubscriptionContactFormFilterInput | null > | null,
+};
+
+export type GeneratePDFMutationVariables = {
+  data: ResumeDataInput,
+};
+
+export type GeneratePDFMutation = {
+  generatePDF?:  {
+    __typename: "GeneratePDFResponse",
+    url: string,
+  } | null,
 };
 
 export type CreateCreditCardMutationVariables = {

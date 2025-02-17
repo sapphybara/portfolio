@@ -73,6 +73,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "generatepdf": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "getcardscore": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -93,6 +99,30 @@
         {
           "category": "function",
           "resourceName": "contactemailtrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_generatepdf_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generatepdf"
+        }
+      ]
+    },
+    "AMPLIFY_function_generatepdf_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generatepdf"
+        }
+      ]
+    },
+    "AMPLIFY_function_generatepdf_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "generatepdf"
         }
       ]
     },

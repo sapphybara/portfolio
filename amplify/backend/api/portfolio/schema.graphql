@@ -33,3 +33,30 @@ type ContactForm
   name: String!
   subject: String!
 }
+
+type GeneratePDFResponse {
+  url: String!
+}
+
+input ExperienceInput {
+  title: String!
+  subheader: String!
+  data: [String!]!
+}
+
+input EducationInput {
+  title: String!
+  subheader: String!
+}
+
+input ResumeDataInput {
+  jobTitle: String!
+  selectedSkills: [String!]!
+  experience: [ExperienceInput!]!
+  education: [EducationInput!]!
+}
+
+type Mutation {
+  generatePDF(data: ResumeDataInput!): GeneratePDFResponse
+    @function(name: "generatepdf-${env}")
+}

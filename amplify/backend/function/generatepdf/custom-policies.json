@@ -1,0 +1,6 @@
+[
+  {
+    "Action": ["ssm:GetParameter", "ssm:GetParameters"],
+    "Resource": ["arn:aws:ssm:*:*:parameter/pdfshiftApiKey"]
+  }
+]

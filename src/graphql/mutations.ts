@@ -8,6 +8,16 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const generatePDF = /* GraphQL */ `mutation GeneratePDF($data: ResumeDataInput!) {
+  generatePDF(data: $data) {
+    url
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.GeneratePDFMutationVariables,
+  APITypes.GeneratePDFMutation
+>;
 export const createCreditCard = /* GraphQL */ `mutation CreateCreditCard(
   $input: CreateCreditCardInput!
   $condition: ModelCreditCardConditionInput

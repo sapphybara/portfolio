@@ -1,0 +1,31 @@
+{
+  "arguments": {
+    "data": {
+      "jobTitle": "Software Engineer",
+      "selectedSkills": ["TypeScript", "React", "Node.js", "AWS"],
+      "experience": [
+        {
+          "title": "Senior Software Engineer",
+          "subheader": "Amazing Company • 2020 - Present",
+          "data": [
+            "Led development of **cool feature**",
+            "Improved performance by 50%",
+            "Mentored junior developers"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "title": "Bachelor of Science in Computer Science",
+          "subheader": "Great University • 2016 - 2020"
+        }
+      ]
+    }
+  },
+  "identity": {
+    "claims": {
+      "sub": "test-user-id",
+      "email": "test@example.com"
+    }
+  }
+}
