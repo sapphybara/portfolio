@@ -104,7 +104,9 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
+        "Layers": [
+          "arn:aws:lambda:us-west-1:905418013816:layer:generatePDFDeps:3"
+        ],
         "Timeout": 25
       }
     },

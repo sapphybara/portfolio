@@ -1,14 +1,14 @@
 {
-  "testenv": {
+  "test": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-portfolio-testenv-3bb42-authRole",
-      "UnauthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-testenv-3bb42-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-testenv-3bb42-authRole",
+      "AuthRoleName": "amplify-portfolio-test-ad7f1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-test-ad7f1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-test-ad7f1-authRole",
       "Region": "us-west-1",
-      "DeploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-      "UnauthRoleName": "amplify-portfolio-testenv-3bb42-unauthRole",
-      "StackName": "amplify-portfolio-testenv-3bb42",
-      "StackId": "arn:aws:cloudformation:us-west-1:905418013816:stack/amplify-portfolio-testenv-3bb42/52926c00-2043-11ef-be62-06ab1d178c97",
+      "DeploymentBucketName": "amplify-portfolio-test-ad7f1-deployment",
+      "UnauthRoleName": "amplify-portfolio-test-ad7f1-unauthRole",
+      "StackName": "amplify-portfolio-test-ad7f1",
+      "StackId": "arn:aws:cloudformation:us-west-1:905418013816:stack/amplify-portfolio-test-ad7f1/95def900-ed71-11ef-9665-025826e7f24b",
       "AmplifyAppId": "dvomf8qiulkgc"
     },
     "categories": {
@@ -16,18 +16,18 @@
         "portfolio9da5fd1f": {}
       },
       "function": {
-        "getcardscore": {
-          "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/getcardscore-536d4730526b6a377954-build.zip"
-        },
         "contactemailtrigger": {
-          "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
+          "deploymentBucketName": "amplify-portfolio-test-ad7f1-deployment",
           "s3Key": "amplify-builds/contactemailtrigger-50646239623877794465-build.zip"
         },
         "generatepdf": {
           "secretsPathAmplifyAppId": "dvomf8qiulkgc",
-          "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/generatepdf-764a36626e434a4f584f-build.zip"
+          "deploymentBucketName": "amplify-portfolio-test-ad7f1-deployment",
+          "s3Key": "amplify-builds/generatepdf-6e443873567157636c6e-build.zip"
+        },
+        "getcardscore": {
+          "deploymentBucketName": "amplify-portfolio-test-ad7f1-deployment",
+          "s3Key": "amplify-builds/getcardscore-536d4730526b6a377954-build.zip"
         },
         "portfolio": {},
         "portfolio9da5fd1f": {}
