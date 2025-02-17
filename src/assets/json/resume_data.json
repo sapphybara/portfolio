@@ -3,40 +3,82 @@
     "id": "skills",
     "title": "Skills",
     "data": [
-      "React",
-      "JavaScript/ES6+",
-      "TypeScript",
-      "CSS3/HTML5",
-      "SCSS/Bootstrap/Tailwind",
-      "React Native",
-      "Python",
-      "Django Web Framework",
-      "Plotly Dash Framework",
-      "Pytest",
-      "styled-components",
-      "Git",
-      "MySQL",
-      "PostgreSQL",
-      "GraphQL",
-      "Technical Documentation",
-      "Atlassian Suite",
-      "SCRUM",
-      "UI/UX Design",
-      "Figma",
-      "Adobe XD",
-      "Node.js",
-      "WCAG 2.x",
-      "AWS Amplify",
-      "Jest",
-      "Cypress"
+      {
+        "id": "frontend",
+        "title": "Frontend Development",
+        "data": [
+          "React",
+          "JavaScript/ES6+",
+          "TypeScript",
+          "CSS3/HTML5",
+          "SCSS/Bootstrap/Tailwind",
+          "React Native",
+          "styled-components"
+        ],
+        "dataType": "list"
+      },
+      {
+        "id": "backend",
+        "title": "Backend Development",
+        "data": [
+          "Node.js",
+          "Python",
+          "Django Web Framework",
+          "GraphQL",
+          "MySQL",
+          "PostgreSQL"
+        ],
+        "dataType": "list"
+      },
+      {
+        "id": "testing",
+        "title": "Testing",
+        "data": ["Pytest", "Jest", "Cypress"],
+        "dataType": "list"
+      },
+      {
+        "id": "cloud",
+        "title": "Cloud & DevOps",
+        "data": ["AWS Amplify", "Git"],
+        "dataType": "list"
+      },
+      {
+        "id": "design",
+        "title": "Design & Documentation",
+        "data": [
+          "Technical Documentation",
+          "UI/UX Design",
+          "Figma",
+          "Adobe XD"
+        ],
+        "dataType": "list"
+      },
+      {
+        "id": "other",
+        "title": "Other Skills",
+        "data": ["Atlassian Suite", "SCRUM", "WCAG 2.x"],
+        "dataType": "list"
+      }
     ],
-    "dataType": "list",
+    "dataType": "flat",
     "defaultIsOpen": true
   },
   {
     "id": "experience",
     "title": "Experience",
     "data": [
+      {
+        "id": "experience0",
+        "title": "Freelance Web Developer",
+        "subheader": "Self-Employed | May 2024 - Present",
+        "data": [
+          "As a Freelance Web Developer, I collaborated with diverse clients across industries, including healthcare consulting and real estate advisory. My projects involved designing and developing custom websites with a focus on responsive design, accessibility, and SEO optimization.",
+          "For my primary client, [MitoKhon](https://mitokhon.com), I developed the website independently from start to finish, building on initial branding and design work. I exceeded deadlines and expectations for both design and functionality, earning commendations from the client, designer, and project manager for its exceptional visual appeal and seamless user experience.",
+          "In addition to MitoKhon, I worked with Enoch & Co, a real estate advisory firm, to develop and manage their website. I optimized site performance across projects by minifying images, streamlining code, and implementing SEO strategies to support long-term growth.",
+          "Utilizing tools like Elementor, Breakdance, and custom CSS, I delivered advanced customizations tailored to each client's needs, while ensuring alignment with their brand identity and mission."
+        ],
+        "dataType": "paragraph"
+      },
       {
         "id": "experience1",
         "title": "Front End Developer",

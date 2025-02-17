@@ -122,7 +122,7 @@ export interface TabState {
   tabIdx: number;
 }
 
-type ResumeDataType = "list" | "paragraph";
+type ResumeDataType = "list" | "paragraph" | "flat";
 
 interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
   defaultIsOpen?: boolean;

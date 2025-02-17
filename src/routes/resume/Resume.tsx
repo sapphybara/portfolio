@@ -21,6 +21,8 @@ import {
 } from "@mui/icons-material";
 import resumeData from "@assets/json/resume_data.json";
 import { isResumeDataItem } from "@utils/typeGuards";
+import ReactMarkdown from "react-markdown";
+import { Fragment } from "react";
 
 const avatarRecord = {
   skills: TerminalOutlined,
@@ -78,19 +80,49 @@ const Resume = () => {
         {data.length && (
           <CardContent component={Stack} gap={2} id={title}>
             {data.every(isResumeDataItem) ? (
-              data.map((d) => renderResumeData(d, newNestLevel))
+              dataType === "flat" ? (
+                <StyledList>
+                  {data
+                    .flatMap((category) => category.data as string[])
+                    .map((text) => (
+                      <ListItem className="list-item" key={text} disableGutters>
+                        {
+                          <ReactMarkdown
+                            children={text}
+                            components={{ p: Fragment }}
+                          />
+                        }
+                      </ListItem>
+                    ))}
+                </StyledList>
+              ) : (
+                data.map((d) => renderResumeData(d, newNestLevel))
+              )
             ) : dataType === "list" ? (
               <StyledList>
                 {data.map((text) => (
                   <ListItem className="list-item" key={text} disableGutters>
-                    {text}
+                    {
+                      <ReactMarkdown
+                        children={text}
+                        components={{ p: Fragment }}
+                      />
+                    }
                   </ListItem>
                 ))}
               </StyledList>
             ) : dataType === "paragraph" ? (
               data.map((text) => (
                 <Typography key={text} paragraph>
-                  {text}
+                  {
+                    <ReactMarkdown
+                      children={text}
+                      components={{
+                        p: Fragment,
+                        a: (props) => <a {...props} target="_blank" />,
+                      }}
+                    />
+                  }
                 </Typography>
               ))
             ) : null}
