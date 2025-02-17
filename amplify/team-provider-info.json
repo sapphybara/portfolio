@@ -74,5 +74,43 @@
         "portfolio": {}
       }
     }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portfolio-main-8ea2d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-main-8ea2d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::905418013816:role/amplify-portfolio-main-8ea2d-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-portfolio-main-8ea2d-deployment",
+      "UnauthRoleName": "amplify-portfolio-main-8ea2d-unauthRole",
+      "StackName": "amplify-portfolio-main-8ea2d",
+      "StackId": "arn:aws:cloudformation:us-west-1:905418013816:stack/amplify-portfolio-main-8ea2d/c6c35a70-ed76-11ef-bd6c-06f7f40c24ff",
+      "AmplifyAppId": "dvomf8qiulkgc"
+    },
+    "categories": {
+      "auth": {
+        "portfolio9da5fd1f": {}
+      },
+      "function": {
+        "contactemailtrigger": {
+          "deploymentBucketName": "amplify-portfolio-main-8ea2d-deployment",
+          "s3Key": "amplify-builds/contactemailtrigger-50646239623877794465-build.zip"
+        },
+        "generatepdf": {
+          "secretsPathAmplifyAppId": "dvomf8qiulkgc",
+          "deploymentBucketName": "amplify-portfolio-main-8ea2d-deployment",
+          "s3Key": "amplify-builds/generatepdf-6e443873567157636c6e-build.zip"
+        },
+        "getcardscore": {
+          "deploymentBucketName": "amplify-portfolio-main-8ea2d-deployment",
+          "s3Key": "amplify-builds/getcardscore-536d4730526b6a377954-build.zip"
+        },
+        "portfolio": {},
+        "portfolio9da5fd1f": {}
+      },
+      "api": {
+        "portfolio": {}
+      }
+    }
   }
 }
