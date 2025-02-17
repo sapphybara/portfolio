@@ -114,14 +114,14 @@ const generateResumeHTML = ({
       </p>
 
       ${selectedSkills.length
-    ? `<>
-            <h2>Skills</h2>
-            <ul class="skills">
-              ${selectedSkills.map((skill) => `<li>${skill}</li>`).join("")}
-            </ul>
-          </>`
+    ? `
+          <h2>Skills</h2>
+          <ul class="skills">
+            ${selectedSkills.map((skill) => `<li>${skill}</li>`).join("")}
+          </ul>
+        `
     : null
-  }
+      }
 
       <h2>Experience</h2>
       ${experience

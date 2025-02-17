@@ -27,7 +27,7 @@
         "generatepdf": {
           "secretsPathAmplifyAppId": "dvomf8qiulkgc",
           "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/generatepdf-693339416d432f797653-build.zip"
+          "s3Key": "amplify-builds/generatepdf-764a36626e434a4f584f-build.zip"
         }
       },
       "api": {
