@@ -18,11 +18,11 @@
       "function": {
         "getcardscore": {
           "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/getcardscore-2f586e79766c78656a48-build.zip"
+          "s3Key": "amplify-builds/getcardscore-536d4730526b6a377954-build.zip"
         },
         "contactemailtrigger": {
           "deploymentBucketName": "amplify-portfolio-testenv-3bb42-deployment",
-          "s3Key": "amplify-builds/contactemailtrigger-7349437a4d4350514b38-build.zip"
+          "s3Key": "amplify-builds/contactemailtrigger-50646239623877794465-build.zip"
         },
         "generatepdf": {
           "secretsPathAmplifyAppId": "dvomf8qiulkgc",
