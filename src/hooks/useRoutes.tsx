@@ -5,7 +5,8 @@ import Admin from "@routes/admin/Admin";
 import Resume from "@routes/resume/Resume";
 import Home from "@routes/home/Home";
 import rootLoader from "@routes/loader";
-import adminLoader from "@routes/admin/credit-cards/loader";
+import ccLoader from "@routes/admin/credit-cards/loader";
+import adminLoader from "@routes/admin/loader";
 import { useState } from "react";
 import { TabState } from "types/global";
 import CreditCardLoader from "@routes/admin/credit-cards/CreditCardLoader";
@@ -72,11 +73,11 @@ export const useRoutes = () => {
           path: "admin",
           element: <Outlet />,
           children: [
-            { path: "", element: <Admin /> },
+            { path: "", element: <Admin />, loader: adminLoader },
             {
               path: "credit-cards",
               element: <CreditCardLoader />,
-              loader: adminLoader,
+              loader: ccLoader,
               children: [
                 {
                   path: "new",
