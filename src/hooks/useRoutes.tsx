@@ -72,8 +72,9 @@ export const useRoutes = () => {
         {
           path: "admin",
           element: <Outlet />,
+          loader: adminLoader,
           children: [
-            { path: "", element: <Admin />, loader: adminLoader },
+            { path: "", element: <Admin /> },
             {
               path: "credit-cards",
               element: <CreditCardLoader />,
