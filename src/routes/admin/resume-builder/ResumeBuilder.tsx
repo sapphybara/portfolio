@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { ResumeDataItem, StringResumeDataItem } from "types/global";
 import data from "@assets/json/resume_data.json";
+import SkillSelector from "@components/resume/SkillSelector";
 import { useFetcher } from "react-router-dom";
 import useSkillsManager from "@hooks/useSkillsManager";
 
@@ -113,6 +114,10 @@ const ResumeBuilder: React.FC = () => {
           variant="standard"
         />
         <Typography variant="h6">Select Skills</Typography>
+        <SkillSelector
+          handleSkillChange={handleSkillSelection}
+          autoCompleteOptions={autoCompleteOptions}
+        />
         <div>
           {Object.entries(sectionContent).map(
             ([section, { allSelected, someSelected, skills }], i) => (
