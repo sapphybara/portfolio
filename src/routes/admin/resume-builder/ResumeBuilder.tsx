@@ -10,30 +10,36 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ResumeDataItem } from "types/global";
+import { ResumeDataItem, StringResumeDataItem } from "types/global";
 import data from "@assets/json/resume_data.json";
 import { useFetcher } from "react-router-dom";
+import useSkillsManager from "@hooks/useSkillsManager";
 
 const resumeData = data as ResumeDataItem[];
 
 const skillsData =
   (resumeData.find((item: ResumeDataItem) => item.id === "skills")
-    ?.data as ResumeDataItem[]) || [];
+    ?.data as StringResumeDataItem[]) || [];
 const experienceData =
   (resumeData.find((item: ResumeDataItem) => item.id === "experience")
     ?.data as ResumeDataItem[]) || [];
 const educationData =
   (resumeData.find((item: ResumeDataItem) => item.id === "education")
     ?.data as ResumeDataItem[]) || [];
-const allSkills = skillsData.flatMap((skill) => (skill.data as string[]) || []);
 
 const ResumeBuilder: React.FC = () => {
   const [err, setErr] = useState<string>("");
-  const [selectedSkills, setSelectedSkills] = useState<string[]>(allSkills);
   const [loading, setLoading] = useState<boolean>(false);
   const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");
 
   const fetcher = useFetcher();
+
+  const {
+    autoCompleteOptions,
+    handleSectionSelection,
+    handleSkillSelection,
+    sectionContent,
+  } = useSkillsManager(skillsData);
 
   useEffect(() => {
     if (fetcher.state === "idle" && fetcher.data) {
@@ -51,17 +57,14 @@ const ResumeBuilder: React.FC = () => {
     }
   }, [fetcher.state, fetcher.data]);
 
-  const handleSkillChange = (skill: string) => {
-    setSelectedSkills((prevSkills) =>
-      prevSkills.includes(skill)
-        ? prevSkills.filter((s) => s !== skill)
-        : [...prevSkills, skill]
-    );
-  };
-
   const handleGenerateResume = () => {
     setLoading(true);
     const formData = new FormData();
+    const selectedSkills = Object.values(sectionContent).flatMap((section) =>
+      section.skills
+        .filter((skill) => skill.selected)
+        .map((skill) => skill.label)
+    );
     formData.append("jobTitle", jobTitle);
     formData.append("selectedSkills", JSON.stringify(selectedSkills));
     formData.append(
@@ -88,7 +91,13 @@ const ResumeBuilder: React.FC = () => {
   };
 
   return (
-    <Stack component={fetcher.Form} method="post" spacing={2}>
+    <Stack
+      component={fetcher.Form}
+      method="post"
+      spacing={2}
+      // Prevent form submission on Enter key in autocomplete
+      onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+    >
       <Typography variant="h4">Resume Builder</Typography>
       {err && (
         <Stack direction="row">
@@ -105,56 +114,39 @@ const ResumeBuilder: React.FC = () => {
         />
         <Typography variant="h6">Select Skills</Typography>
         <div>
-          {skillsData.map((skillGroup, i) => {
-            const allSelected = (skillGroup.data as string[]).every((skill) =>
-              selectedSkills.includes(skill)
-            );
-            const someSelected = (skillGroup.data as string[]).some((skill) =>
-              selectedSkills.includes(skill)
-            );
-            return (
-              <Paper elevation={i % 2} key={skillGroup.id} className="px-2">
+          {Object.entries(sectionContent).map(
+            ([section, { allSelected, someSelected, skills }], i) => (
+              <Paper elevation={i % 2} key={section} className="px-2">
                 <FormControlLabel
                   control={
                     <Checkbox
                       checked={allSelected}
                       indeterminate={!allSelected && someSelected}
-                      onChange={() =>
-                        setSelectedSkills((prevSkills) =>
-                          allSelected
-                            ? prevSkills.filter(
-                                (skill) =>
-                                  !(skillGroup.data as string[]).includes(skill)
-                              )
-                            : [
-                                ...prevSkills,
-                                ...(skillGroup.data as string[]).filter(
-                                  (skill) => !prevSkills.includes(skill)
-                                ),
-                              ]
-                        )
-                      }
+                      onChange={() => handleSectionSelection(section)}
                     />
                   }
-                  label={skillGroup.title}
+                  label={section}
                 />
                 <div className="pl-6">
-                  {((skillGroup.data as string[]) || []).map((skill) => (
-                    <FormControlLabel
-                      key={skill}
-                      control={
-                        <Checkbox
-                          checked={selectedSkills.includes(skill)}
-                          onChange={() => handleSkillChange(skill)}
-                        />
-                      }
-                      label={skill}
-                    />
-                  ))}
+                  {skills.map((skill) => {
+                    const { label, selected } = skill;
+                    return (
+                      <FormControlLabel
+                        key={label}
+                        control={
+                          <Checkbox
+                            checked={selected}
+                            onChange={() => handleSkillSelection(skill)}
+                          />
+                        }
+                        label={label}
+                      />
+                    );
+                  })}
                 </div>
               </Paper>
-            );
-          })}
+            )
+          )}
         </div>
       </Box>
       <Button

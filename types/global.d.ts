@@ -141,3 +141,10 @@ interface NestedResumeDataItem extends BaseResumeDataItem {
 }
 
 export type ResumeDataItem = StringResumeDataItem | NestedResumeDataItem;
+
+export interface AutoCompleteOption {
+  label: string;
+  section: string;
+  selected: boolean;
+  inputValue?: string;
+}
