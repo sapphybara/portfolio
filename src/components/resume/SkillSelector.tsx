@@ -1,4 +1,11 @@
-import { FC, FormEvent, Fragment, useState, useRef } from "react";
+import {
+  FC,
+  FormEvent,
+  useState,
+  useRef,
+  SyntheticEvent,
+  ReactNode,
+} from "react";
 import {
   Autocomplete,
   createFilterOptions,
@@ -6,6 +13,8 @@ import {
   Typography,
   Box,
   Chip,
+  FilterOptionsState,
+  AutocompleteRenderGroupParams,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { AutoCompleteOption } from "types/global";
@@ -154,6 +163,76 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     }
   };
 
+  const renderAutocompleteGroup: (
+    params: AutocompleteRenderGroupParams
+  ) => ReactNode = (params) => (
+    <li key={params.key}>
+      <SectionHeader onClick={() => setInputValue(`${params.group}/`)}>
+        <SectionTitle>Section: {params.group}</SectionTitle>
+        <Chip
+          label={`${
+            getSectionSelectionStatus(params.group) ? "De-" : ""
+          }Select All`}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSectionSelection(params.group);
+          }}
+        />
+      </SectionHeader>
+      <SkillsList>{params.children}</SkillsList>
+    </li>
+  );
+
+  const handleAutocompleteFilter: (
+    options: AutoCompleteOption[],
+    params: FilterOptionsState<AutoCompleteOption>
+  ) => AutoCompleteOption[] = (options, params) => {
+    const filtered = filter(options, params);
+    const { inputValue } = params;
+
+    // Check if input matches a section name
+    const matchingSections = uniqueSections.filter((section) =>
+      section.toLowerCase().includes(inputValue.toLowerCase().replace("/", ""))
+    );
+
+    // If input matches a section name, include all skills from that section
+    if (inputValue && matchingSections.length > 0) {
+      matchingSections.forEach((section) => {
+        // Find all skills in this section that aren't already in the filtered list
+        const sectionSkills = options.filter(
+          (option) =>
+            option.section === section &&
+            !filtered.some((item) => item.label === option.label)
+        );
+
+        filtered.push(...sectionSkills);
+      });
+    }
+
+    // Add option to create a new skill
+    if (inputValue !== "") {
+      filtered.push({
+        inputValue: inputValue,
+        label: `Add "${inputValue}"`,
+        section: "Other Skills",
+        selected: true,
+      });
+    }
+
+    // Sort the filtered options by section to prevent duplicate headers
+    return filtered.sort((a, b) => {
+      if (a.section === b.section) {
+        return a.label.localeCompare(b.label);
+      }
+
+      // Special handling for "Other Skills" to always appear last
+      if (a.section === "Other Skills") return 1;
+      if (b.section === "Other Skills") return -1;
+
+      return a.section.localeCompare(b.section);
+    });
+  };
+
   return (
     <>
       {/* final `true` indicates we're in freeSolo mode, allowing `newValue?.inputValue?` */}
@@ -164,54 +243,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
         onChange={handleAutocompleteChange}
         groupBy={(option) => option.section}
-        filterOptions={(options, params) => {
-          const filtered = filter(options, params);
-          const { inputValue } = params;
-
-          // Check if input matches a section name
-          const matchingSections = uniqueSections.filter((section) =>
-            section
-              .toLowerCase()
-              .includes(inputValue.toLowerCase().replace("/", ""))
-          );
-
-          // If input matches a section name, include all skills from that section
-          if (inputValue && matchingSections.length > 0) {
-            matchingSections.forEach((section) => {
-              // Find all skills in this section that aren't already in the filtered list
-              const sectionSkills = options.filter(
-                (option) =>
-                  option.section === section &&
-                  !filtered.some((item) => item.label === option.label)
-              );
-
-              filtered.push(...sectionSkills);
-            });
-          }
-
-          // Add option to create a new skill
-          if (inputValue !== "") {
-            filtered.push({
-              inputValue: inputValue,
-              label: `Add "${inputValue}"`,
-              section: "Other Skills",
-              selected: true,
-            });
-          }
-
-          // Sort the filtered options by section to prevent duplicate headers
-          return filtered.sort((a, b) => {
-            if (a.section === b.section) {
-              return a.label.localeCompare(b.label);
-            }
-
-            // Special handling for "Other Skills" to always appear last
-            if (a.section === "Other Skills") return 1;
-            if (b.section === "Other Skills") return -1;
-
-            return a.section.localeCompare(b.section);
-          });
-        }}
+        filterOptions={handleAutocompleteFilter}
         options={autoCompleteOptions}
         selectOnFocus
         clearOnBlur
@@ -220,23 +252,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         renderInput={(params) => (
           <TextField {...params} label="Search Skills or Sections" />
         )}
-        renderGroup={(params) => (
-          <li key={params.key}>
-            <SectionHeader onClick={() => setInputValue(`${params.group}/`)}>
-              <SectionTitle>Section: {params.group}</SectionTitle>
-              <Chip
-                label={`${
-                  getSectionSelectionStatus(params.group) ? "De-" : ""
-                }Select All`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSectionSelection(params.group);
-                }}
-              />
-            </SectionHeader>
-            <SkillsList>{params.children}</SkillsList>
-          </li>
-        )}
+        renderGroup={renderAutocompleteGroup}
       />
       <AddSkillDialog
         {...{ dialogValue, setDialogValue, handleClose, handleSubmit, open }}
