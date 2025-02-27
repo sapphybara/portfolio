@@ -1,12 +1,7 @@
 import { FC, FormEvent, Fragment, useState, useRef } from "react";
 import {
   Autocomplete,
-  Button,
   createFilterOptions,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   TextField,
   Typography,
   Box,
@@ -14,6 +9,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { AutoCompleteOption } from "types/global";
+import AddSkillDialog from "./AddSkillDialog";
 
 // Styled components
 const SectionHeader = styled(Box)(({ theme }) => ({
@@ -76,6 +72,11 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
   // Add a ref to the Autocomplete component
   const autocompleteRef = useRef<HTMLDivElement>(null);
 
+  // Get unique sections from options
+  const uniqueSections = Array.from(
+    new Set(autoCompleteOptions.map((option) => option.section))
+  );
+
   const handleClose = () => {
     setDialogValue(emptyValue);
     setValue(null);
@@ -100,7 +101,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     setDialogValue({ ...dialogValue });
   };
 
-  const prepareValue = (skillString: string, shouldTimeout?: boolean) => {
+  const prepareOpenDialog = (skillString: string, shouldTimeout?: boolean) => {
     // Match either "section/skill" or just "skill"
     const match = skillString.match(/^(?:([^/]+)\/)?(.+)$/);
     if (!match) return;
@@ -127,13 +128,8 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     }
   };
 
-  // Get unique sections from options
-  const uniqueSections = Array.from(
-    new Set(autoCompleteOptions.map((option) => option.section))
-  );
-
   return (
-    <Fragment>
+    <>
       {/* final `true` indicates we're in freeSolo mode, allowing `newValue?.inputValue?` */}
       <Autocomplete<AutoCompleteOption, false, false, true>
         ref={autocompleteRef}
@@ -143,10 +139,10 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         onChange={(_event, newValue) => {
           if (typeof newValue === "string") {
             // user pressed enter in the text field
-            prepareValue(newValue, true);
+            prepareOpenDialog(newValue, true);
           } else if (newValue?.inputValue) {
             // user clicked the "add skill" button
-            prepareValue(newValue.inputValue);
+            prepareOpenDialog(newValue.inputValue);
           } else {
             // user selected an existing option or null
             if (newValue) {
@@ -159,7 +155,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
           // Ensure the autocomplete dropdown is dismissed
           const input = autocompleteRef.current?.querySelector("input");
           if (input) {
-            setTimeout(() => input.blur(), 0);
+            setTimeout(() => input.blur());
           }
         }}
         groupBy={(option) => option.section}
@@ -200,17 +196,15 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
 
           // Sort the filtered options by section to prevent duplicate headers
           return filtered.sort((a, b) => {
-            if (a.section === "Other Skills") {
-              if (b.section === "Other Skills") {
-                return a.label.localeCompare(b.label);
-              }
-              return 1;
+            if (a.section === b.section) {
+              return a.label.localeCompare(b.label);
             }
 
-            return (
-              a.section.localeCompare(b.section) ||
-              a.label.localeCompare(b.label)
-            );
+            // Special handling for "Other Skills" to always appear last
+            if (a.section === "Other Skills") return 1;
+            if (b.section === "Other Skills") return -1;
+
+            return a.section.localeCompare(b.section);
           });
         }}
         options={autoCompleteOptions}
@@ -239,48 +233,10 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
           </li>
         )}
       />
-      <Dialog open={open} onClose={handleClose}>
-        <form onSubmit={handleSubmit}>
-          <DialogTitle>Add a new skill</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              value={dialogValue.section}
-              onChange={(event) => {
-                const { value: section } = event.target;
-                setDialogValue({
-                  ...dialogValue,
-                  section,
-                });
-              }}
-              label="section"
-              type="text"
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              id="name"
-              value={dialogValue.label}
-              onChange={(event) =>
-                setDialogValue({
-                  ...dialogValue,
-                  label: event.target.value,
-                })
-              }
-              label="skill"
-              type="text"
-              variant="standard"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Add</Button>
-          </DialogActions>
-        </form>
-      </Dialog>
-    </Fragment>
+      <AddSkillDialog
+        {...{ dialogValue, setDialogValue, handleClose, handleSubmit, open }}
+      />
+    </>
   );
 };
 
