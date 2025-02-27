@@ -116,6 +116,7 @@ const ResumeBuilder: React.FC = () => {
         <Typography variant="h6">Select Skills</Typography>
         <SkillSelector
           handleSkillChange={handleSkillSelection}
+          handleSectionSelection={handleSectionSelection}
           autoCompleteOptions={autoCompleteOptions}
         />
         <div>
