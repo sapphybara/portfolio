@@ -1,4 +1,4 @@
-import { FC, FormEvent, Fragment, useState } from "react";
+import { FC, FormEvent, Fragment, useState, useRef } from "react";
 import {
   Autocomplete,
   Button,
@@ -69,6 +69,8 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] =
     useState<AutoCompleteOption>(emptyValue);
+  // Add a ref to the Autocomplete component
+  const autocompleteRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     setDialogValue(emptyValue);
@@ -129,6 +131,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     <Fragment>
       {/* final `true` indicates we're in freeSolo mode, allowing `newValue?.inputValue?` */}
       <Autocomplete<AutoCompleteOption, false, false, true>
+        ref={autocompleteRef}
         value={value}
         onChange={(_event, newValue) => {
           if (typeof newValue === "string") {
@@ -143,6 +146,12 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
               handleSkillChange(newValue);
             }
             setValue(null);
+          }
+
+          // Ensure the autocomplete dropdown is dismissed
+          const input = autocompleteRef.current?.querySelector("input");
+          if (input) {
+            setTimeout(() => input.blur(), 0);
           }
         }}
         groupBy={(option) => option.section}
@@ -200,7 +209,24 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         handleHomeEndKeys
         freeSolo
         renderInput={(params) => (
-          <TextField {...params} label="Search Skills" />
+          <TextField {...params} label="Search Skills or Sections" />
+        )}
+        renderGroup={(params) => (
+          <li key={params.key}>
+            <SectionHeader
+              onClick={() => {
+                handleSectionSelection(params.group);
+                // Close the autocomplete dropdown by blurring the input
+                const input = autocompleteRef.current?.querySelector("input");
+                if (input) {
+                  input.blur();
+                }
+              }}
+            >
+              <SectionTitle>{params.group}</SectionTitle>
+            </SectionHeader>
+            <SkillsList>{params.children}</SkillsList>
+          </li>
         )}
       />
       <Dialog open={open} onClose={handleClose}>
