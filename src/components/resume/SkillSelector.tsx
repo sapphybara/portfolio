@@ -128,6 +128,32 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     }
   };
 
+  const handleAutocompleteChange: (
+    event: SyntheticEvent<Element, Event>,
+    newValue: AutoCompleteOption | string | null
+  ) => void = (_event, newValue) => {
+    if (typeof newValue === "string") {
+      // user pressed enter in the text field
+      prepareOpenDialog(newValue, true);
+    } else if (newValue?.inputValue) {
+      // user clicked the "add skill" button
+      prepareOpenDialog(newValue.inputValue);
+    } else {
+      // user selected an existing option or null
+      if (newValue) {
+        handleSkillChange(newValue);
+      }
+      setValue(null);
+      setInputValue("");
+    }
+
+    // Ensure the autocomplete dropdown is dismissed
+    const input = autocompleteRef.current?.querySelector("input");
+    if (input) {
+      setTimeout(() => input.blur());
+    }
+  };
+
   return (
     <>
       {/* final `true` indicates we're in freeSolo mode, allowing `newValue?.inputValue?` */}
@@ -136,28 +162,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         value={value}
         inputValue={inputValue}
         onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
-        onChange={(_event, newValue) => {
-          if (typeof newValue === "string") {
-            // user pressed enter in the text field
-            prepareOpenDialog(newValue, true);
-          } else if (newValue?.inputValue) {
-            // user clicked the "add skill" button
-            prepareOpenDialog(newValue.inputValue);
-          } else {
-            // user selected an existing option or null
-            if (newValue) {
-              handleSkillChange(newValue);
-            }
-            setValue(null);
-            setInputValue("");
-          }
-
-          // Ensure the autocomplete dropdown is dismissed
-          const input = autocompleteRef.current?.querySelector("input");
-          if (input) {
-            setTimeout(() => input.blur());
-          }
-        }}
+        onChange={handleAutocompleteChange}
         groupBy={(option) => option.section}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
