@@ -1,6 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+/* eslint-disable @typescript-eslint/no-var-requires, no-undef */
 const marked = require("marked").marked;
-// eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
 const { Buffer } = require('buffer');
 
 const renderer = new marked.Renderer();
@@ -120,8 +119,8 @@ const generateResumeHTML = ({
             ${selectedSkills.map((skill) => `<li>${skill}</li>`).join("")}
           </ul>
         `
-    : null
-      }
+    : ""
+  }
 
       <h2>Experience</h2>
       ${experience
@@ -152,18 +151,19 @@ const generateResumeHTML = ({
 `;
 
 module.exports = {
-  generatePDF: async (data, apiKey) => {
+  generatePDF: async ({ isSandboxMode: sandboxMode, ...data }, apiKey) => {
+    const isSandboxMode = sandboxMode === "true" || sandboxMode === true;
     const html = generateResumeHTML(data);
 
     const response = await fetch("https://api.pdfshift.io/v3/convert/pdf", {
       method: "POST",
       headers: {
-        Authorization: `Basic ${Buffer.from(`api:${apiKey}`).toString("base64")}`,
+        Authorization: `Basic ${btoa(`api:${apiKey}`)}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         source: html,
-        sandbox: process.env.ENV !== "main",
+        sandbox: process.env.ENV === "main" ? isSandboxMode : true,
         margin: { top: "40px" },
       }),
     });

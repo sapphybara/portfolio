@@ -1,6 +1,7 @@
 {
   "arguments": {
     "data": {
+      "isSandboxMode": true,
       "jobTitle": "Software Engineer",
       "selectedSkills": ["TypeScript", "React", "Node.js", "AWS"],
       "experience": [

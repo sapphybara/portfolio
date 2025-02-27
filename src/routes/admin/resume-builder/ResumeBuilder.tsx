@@ -32,6 +32,7 @@ const ResumeBuilder: React.FC = () => {
   const [err, setErr] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");
+  const [isSandboxMode, setIsSandboxMode] = useState<boolean>(false);
 
   const fetcher = useFetcher();
 
@@ -87,6 +88,7 @@ const ResumeBuilder: React.FC = () => {
         }))
       )
     );
+    formData.append("isSandboxMode", isSandboxMode.toString());
 
     fetcher.submit(formData, { method: "post" });
   };
@@ -155,6 +157,16 @@ const ResumeBuilder: React.FC = () => {
           )}
         </div>
       </Box>
+      <FormControlLabel
+        control={
+          <Checkbox
+            onChange={() => setIsSandboxMode((prev) => !prev)}
+            value={isSandboxMode}
+          />
+        }
+        label="Sandbox Mode"
+        labelPlacement="end"
+      />
       <Button
         variant="contained"
         color="primary"
