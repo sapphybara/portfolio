@@ -9,13 +9,13 @@ type SectionContent = {
   };
 };
 
-const useSkillsManager: (skillData: StringResumeDataItem[]) => {
-  autoCompleteOptions: AutoCompleteOption[];
-  handleSectionSelection: (section: string) => void;
-  handleSkillSelection: (skill: AutoCompleteOption) => void;
-  sectionContent: SectionContent;
-} = (skillData: StringResumeDataItem[]) => {
+const useSkillsManager = (skillData: StringResumeDataItem[]) => {
   const [sectionContent, setSectionContent] = useState<SectionContent>({});
+
+  const getSectionSelectionStatus = (section: string) => {
+    const currentSection = sectionContent[section];
+    return currentSection ? currentSection.allSelected : false;
+  };
 
   const handleSectionSelection = (section: string) => {
     setSectionContent((prev) => {
@@ -102,13 +102,14 @@ const useSkillsManager: (skillData: StringResumeDataItem[]) => {
   }, [sectionContent, skillData]);
 
   return {
-    sectionContent,
     autoCompleteOptions: Object.values(sectionContent).reduce(
       (acc, { skills }) => [...acc, ...skills],
       [] as AutoCompleteOption[]
     ),
+    getSectionSelectionStatus,
     handleSectionSelection,
     handleSkillSelection,
+    sectionContent,
   };
 };
 

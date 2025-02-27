@@ -38,6 +38,7 @@ const ResumeBuilder: React.FC = () => {
 
   const {
     autoCompleteOptions,
+    getSectionSelectionStatus,
     handleSectionSelection,
     handleSkillSelection,
     sectionContent,
@@ -117,9 +118,10 @@ const ResumeBuilder: React.FC = () => {
         />
         <Typography variant="h6">Select Skills</Typography>
         <SkillSelector
+          autoCompleteOptions={autoCompleteOptions}
+          getSectionSelectionStatus={getSectionSelectionStatus}
           handleSkillChange={handleSkillSelection}
           handleSectionSelection={handleSectionSelection}
-          autoCompleteOptions={autoCompleteOptions}
         />
         <div>
           {Object.entries(sectionContent).map(

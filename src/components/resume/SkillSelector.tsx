@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
   Box,
+  Chip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { AutoCompleteOption } from "types/global";
@@ -45,6 +46,7 @@ const SkillsList = styled("ul")({
 
 interface ResumeBuilderOption {
   autoCompleteOptions: AutoCompleteOption[];
+  getSectionSelectionStatus: (section: string) => boolean;
   handleSkillChange: (skill: AutoCompleteOption) => void;
   handleSectionSelection: (section: string) => void;
 }
@@ -62,10 +64,12 @@ const capitalizeWords = (str: string): string => {
 
 const SkillSelector: FC<ResumeBuilderOption> = ({
   autoCompleteOptions,
+  getSectionSelectionStatus,
   handleSkillChange,
   handleSectionSelection,
 }) => {
   const [value, setValue] = useState<AutoCompleteOption | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] =
     useState<AutoCompleteOption>(emptyValue);
@@ -102,6 +106,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     if (!match) return;
 
     setValue(emptyValue);
+    setInputValue("");
 
     const section = capitalizeWords(match[1]?.trim() || "Other Skills");
     const skill = capitalizeWords(match[2].trim());
@@ -133,6 +138,8 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
       <Autocomplete<AutoCompleteOption, false, false, true>
         ref={autocompleteRef}
         value={value}
+        inputValue={inputValue}
+        onInputChange={(_event, newInputValue) => setInputValue(newInputValue)}
         onChange={(_event, newValue) => {
           if (typeof newValue === "string") {
             // user pressed enter in the text field
@@ -146,6 +153,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
               handleSkillChange(newValue);
             }
             setValue(null);
+            setInputValue("");
           }
 
           // Ensure the autocomplete dropdown is dismissed
@@ -161,7 +169,9 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
 
           // Check if input matches a section name
           const matchingSections = uniqueSections.filter((section) =>
-            section.toLowerCase().includes(inputValue.toLowerCase())
+            section
+              .toLowerCase()
+              .includes(inputValue.toLowerCase().replace("/", ""))
           );
 
           // If input matches a section name, include all skills from that section
@@ -213,17 +223,17 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         )}
         renderGroup={(params) => (
           <li key={params.key}>
-            <SectionHeader
-              onClick={() => {
-                handleSectionSelection(params.group);
-                // Close the autocomplete dropdown by blurring the input
-                const input = autocompleteRef.current?.querySelector("input");
-                if (input) {
-                  input.blur();
-                }
-              }}
-            >
-              <SectionTitle>{params.group}</SectionTitle>
+            <SectionHeader onClick={() => setInputValue(`${params.group}/`)}>
+              <SectionTitle>Section: {params.group}</SectionTitle>
+              <Chip
+                label={`${
+                  getSectionSelectionStatus(params.group) ? "De-" : ""
+                }Select All`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSectionSelection(params.group);
+                }}
+              />
             </SectionHeader>
             <SkillsList>{params.children}</SkillsList>
           </li>
