@@ -1,11 +1,4 @@
-import {
-  FC,
-  FormEvent,
-  useState,
-  useRef,
-  SyntheticEvent,
-  ReactNode,
-} from "react";
+import { FC, FormEvent, useState, useRef } from "react";
 import {
   Autocomplete,
   createFilterOptions,
@@ -13,8 +6,8 @@ import {
   Typography,
   Box,
   Chip,
-  FilterOptionsState,
-  AutocompleteRenderGroupParams,
+  UseAutocompleteProps,
+  AutocompleteProps,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { AutoCompleteOption, SectionContent } from "types/global";
@@ -139,10 +132,12 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     }
   };
 
-  const handleAutocompleteChange: (
-    event: SyntheticEvent<Element, Event>,
-    newValue: AutoCompleteOption | string | null
-  ) => void = (_event, newValue) => {
+  const handleAutocompleteChange: UseAutocompleteProps<
+    AutoCompleteOption,
+    false,
+    false,
+    true
+  >["onChange"] = (_event, newValue) => {
     if (typeof newValue === "string") {
       // user pressed enter in the text field
       prepareOpenDialog(newValue, true);
@@ -165,9 +160,13 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     }
   };
 
-  const renderAutocompleteGroup: (
-    params: AutocompleteRenderGroupParams
-  ) => ReactNode = (params) => (
+  const renderAutocompleteGroup: AutocompleteProps<
+    AutoCompleteOption,
+    false,
+    false,
+    true,
+    "div"
+  >["renderGroup"] = (params) => (
     <li key={params.key}>
       <SectionHeader onClick={() => setInputValue(`${params.group}/`)}>
         <SectionTitle>Section: {params.group}</SectionTitle>
@@ -185,10 +184,12 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     </li>
   );
 
-  const handleAutocompleteFilter: (
-    options: AutoCompleteOption[],
-    params: FilterOptionsState<AutoCompleteOption>
-  ) => AutoCompleteOption[] = (options, params) => {
+  const handleAutocompleteFilter: UseAutocompleteProps<
+    AutoCompleteOption,
+    false,
+    false,
+    true
+  >["filterOptions"] = (options, params) => {
     const filtered = filter(options, params);
     const { inputValue } = params;
 
@@ -237,7 +238,6 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
 
   return (
     <>
-      {/* final `true` indicates we're in freeSolo mode, allowing `newValue?.inputValue?` */}
       <Autocomplete<AutoCompleteOption, false, false, true>
         ref={autocompleteRef}
         value={value}
