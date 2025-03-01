@@ -113,7 +113,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     setValue(emptyValue);
     setInputValue("");
 
-    const section = capitalizeWords(match[1]?.trim() || "Other Skills");
+    let section = match[1]?.trim() || "Other Skills";
     const skill = capitalizeWords(match[2].trim());
 
     let newDialogValue = autoCompleteOptions.find(
@@ -124,7 +124,38 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
       // ignore the user's section if the skill already exists
       return handleSkillChange(newDialogValue);
     }
-    newDialogValue = { label: skill, section, selected: true };
+
+    // Look for best matching section if the user provided a section
+    if (match[1]) {
+      const sectionLower = section.toLowerCase();
+
+      // Try to find exact match first
+      let bestMatchSection = uniqueSections.find(
+        (section) => section.toLowerCase() === sectionLower
+      );
+
+      // If no exact match, look for partial matches
+      if (!bestMatchSection) {
+        const matchingSections = uniqueSections.filter((section) =>
+          section.toLowerCase().includes(sectionLower)
+        );
+
+        if (matchingSections.length > 0) {
+          bestMatchSection = matchingSections[0];
+        }
+      }
+
+      // Use the best match if found
+      if (bestMatchSection) {
+        section = bestMatchSection;
+      }
+    }
+
+    newDialogValue = {
+      label: skill,
+      section: capitalizeWords(section),
+      selected: true,
+    };
     if (shouldTimeout) {
       setTimeout(() => handleDialogOpen(newDialogValue));
     } else {
@@ -193,38 +224,93 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     const filtered = filter(options, params);
     const { inputValue } = params;
 
-    // Check if input matches a section name
-    const matchingSections = uniqueSections.filter((section) =>
-      section.toLowerCase().includes(inputValue.toLowerCase().replace("/", ""))
-    );
+    // Check if input contains section/skill syntax
+    const hasSlash = inputValue.includes("/");
 
-    // If input matches a section name, include all skills from that section
-    if (inputValue && matchingSections.length > 0) {
-      matchingSections.forEach((section) => {
-        // Find all skills in this section that aren't already in the filtered list
-        const sectionSkills = options.filter(
-          (option) =>
-            option.section === section &&
-            !filtered.some((item) => item.label === option.label)
-        );
+    if (hasSlash) {
+      // Parse section/skill format
+      const [sectionPart, skillPart] = inputValue
+        .split("/")
+        .map((part) => part.trim().toLowerCase());
 
-        filtered.push(...sectionSkills);
-      });
-    }
+      // Clear previous results as we'll handle filtering manually
+      filtered.length = 0;
 
-    // Add option to create a new skill
-    if (inputValue !== "") {
-      filtered.push({
-        inputValue: inputValue,
-        label: `Add "${inputValue}"`,
-        section: "Other Skills",
-        selected: true,
-      });
+      // Find matching sections
+      const matchingSections = uniqueSections.filter((section) =>
+        section.toLowerCase().includes(sectionPart)
+      );
+
+      if (matchingSections.length > 0) {
+        // Add all skills from matching sections that match the skill part (if provided)
+        matchingSections.forEach((section) => {
+          const sectionSkills = options.filter(
+            (option) =>
+              option.section === section &&
+              (!skillPart || option.label.toLowerCase().includes(skillPart))
+          );
+
+          filtered.push(...sectionSkills);
+        });
+
+        // If we have a skill part and it's not empty, add option to create new skill
+        if (skillPart) {
+          const bestMatchSection = matchingSections[0];
+          filtered.push({
+            inputValue: inputValue,
+            label: `Add "${skillPart}" to ${bestMatchSection}`,
+            section: bestMatchSection,
+            selected: true,
+          });
+        }
+      } else if (sectionPart) {
+        // No matching section but user entered something - suggest creating it
+        filtered.push({
+          inputValue: inputValue,
+          label: `Create section "${sectionPart}" and add skill "${skillPart}"`,
+          section: "Other Skills",
+          selected: true,
+        });
+      }
+    } else {
+      // Standard filtering behavior (for non-section/skill syntax)
+
+      // Check if input matches a section name
+      const matchingSections = uniqueSections.filter((section) =>
+        section.toLowerCase().includes(inputValue.toLowerCase())
+      );
+
+      // If input matches a section name, include all skills from that section
+      if (inputValue && matchingSections.length > 0) {
+        matchingSections.forEach((section) => {
+          // Find all skills in this section that aren't already in the filtered list
+          const sectionSkills = options.filter(
+            (option) =>
+              option.section === section &&
+              !filtered.some((item) => item.label === option.label)
+          );
+
+          filtered.push(...sectionSkills);
+        });
+      }
+
+      // Add option to create a new skill
+      if (inputValue !== "") {
+        filtered.push({
+          inputValue: inputValue,
+          label: `Add "${inputValue}"`,
+          section: "Other Skills",
+          selected: true,
+        });
+      }
     }
 
     // Sort the filtered options by section to prevent duplicate headers
     return filtered.sort((a, b) => {
       if (a.section === b.section) {
+        // special handling for the "Add" option to always appear last
+        if (a.label.startsWith("Add")) return 1;
+        if (b.label.startsWith("Add")) return -1;
         return a.label.localeCompare(b.label);
       }
 
