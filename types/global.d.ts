@@ -148,3 +148,11 @@ export interface AutoCompleteOption {
   selected: boolean;
   inputValue?: string;
 }
+
+export type SectionContent = {
+  [key: string]: {
+    allSelected: boolean;
+    someSelected: boolean;
+    skills: AutoCompleteOption[];
+  };
+};

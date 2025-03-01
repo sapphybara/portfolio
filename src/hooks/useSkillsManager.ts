@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { AutoCompleteOption, StringResumeDataItem } from "types/global";
-
-type SectionContent = {
-  [key: string]: {
-    allSelected: boolean;
-    someSelected: boolean;
-    skills: AutoCompleteOption[];
-  };
-};
+import {
+  AutoCompleteOption,
+  SectionContent,
+  StringResumeDataItem,
+} from "types/global";
 
 const useSkillsManager = (skillData: StringResumeDataItem[]) => {
   const [sectionContent, setSectionContent] = useState<SectionContent>({});

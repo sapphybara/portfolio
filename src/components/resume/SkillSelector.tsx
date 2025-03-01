@@ -17,7 +17,7 @@ import {
   AutocompleteRenderGroupParams,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { AutoCompleteOption } from "types/global";
+import { AutoCompleteOption, SectionContent } from "types/global";
 import AddSkillDialog from "./AddSkillDialog";
 
 // Styled components
@@ -54,6 +54,7 @@ interface ResumeBuilderOption {
   getSectionSelectionStatus: (section: string) => boolean;
   handleSkillChange: (skill: AutoCompleteOption) => void;
   handleSectionSelection: (section: string) => void;
+  sectionContent: SectionContent;
 }
 
 const filter = createFilterOptions<AutoCompleteOption>();
@@ -72,6 +73,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
   getSectionSelectionStatus,
   handleSkillChange,
   handleSectionSelection,
+  sectionContent,
 }) => {
   const [value, setValue] = useState<AutoCompleteOption | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
@@ -255,7 +257,15 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
         renderGroup={renderAutocompleteGroup}
       />
       <AddSkillDialog
-        {...{ dialogValue, setDialogValue, handleClose, handleSubmit, open }}
+        {...{
+          dialogValue,
+          setDialogValue,
+          handleClose,
+          handleSubmit,
+          open,
+          sectionContent,
+        }}
+        availableSections={uniqueSections}
       />
     </>
   );

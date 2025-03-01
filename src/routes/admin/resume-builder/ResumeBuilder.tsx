@@ -122,6 +122,7 @@ const ResumeBuilder: React.FC = () => {
           getSectionSelectionStatus={getSectionSelectionStatus}
           handleSkillChange={handleSkillSelection}
           handleSectionSelection={handleSectionSelection}
+          sectionContent={sectionContent}
         />
         <div>
           {Object.entries(sectionContent).map(
