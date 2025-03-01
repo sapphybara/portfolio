@@ -94,6 +94,9 @@ const generateResumeHTML = ({
           padding-left: 20px;
           margin-block: 10px;
         }
+        ul:not(.skills) li {
+          margin-top: -16px;
+        }
         h2 {
           margin-block: 0.5em;
         }
