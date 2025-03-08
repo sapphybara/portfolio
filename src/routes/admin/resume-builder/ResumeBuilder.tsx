@@ -52,7 +52,7 @@ const ResumeBuilder: React.FC = () => {
         // Data URL can be used directly
         const link = document.createElement("a");
         link.href = fetcher.data.url;
-        link.download = "resume.pdf";
+        link.download = "Sapphyra_Wiser_Resume.pdf";
         link.click();
         setErr("");
       }
