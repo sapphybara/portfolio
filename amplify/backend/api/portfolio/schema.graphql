@@ -50,6 +50,7 @@ input EducationInput {
 }
 
 input ResumeDataInput {
+  isSandboxMode: Boolean!
   jobTitle: String!
   selectedSkills: [String!]!
   experience: [ExperienceInput!]!

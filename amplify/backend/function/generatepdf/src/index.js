@@ -17,22 +17,20 @@ Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
-// eslint-disable-next-line no-undef
+/* eslint-disable no-undef */
+
 const { SSMClient, GetParametersCommand } = require("@aws-sdk/client-ssm");
-// eslint-disable-next-line no-undef
 const { generatePDF } = require("./createPDF");
 
 const client = new SSMClient();
 
 const command = new GetParametersCommand({
   Names: ["pdfshiftApiKey"].map(
-    // eslint-disable-next-line no-undef
     (secretName) => process.env[secretName]
   ),
   WithDecryption: true,
 });
 
-// eslint-disable-next-line no-undef
 exports.handler = async (event) => {
   try {
     // Get PDFShift API key from Parameter Store

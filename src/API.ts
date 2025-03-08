@@ -3,6 +3,7 @@
 //  This file was automatically generated and should not be edited.
 
 export type ResumeDataInput = {
+  isSandboxMode: boolean,
   jobTitle: string,
   selectedSkills: Array< string >,
   experience: Array< ExperienceInput >,
