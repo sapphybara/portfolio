@@ -164,7 +164,7 @@ const ResumeBuilder: React.FC = () => {
         control={
           <Checkbox
             onChange={() => setIsSandboxMode((prev) => !prev)}
-            value={isSandboxMode}
+            checked={isSandboxMode}
           />
         }
         label="Sandbox Mode"

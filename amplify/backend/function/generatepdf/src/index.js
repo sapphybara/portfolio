@@ -43,7 +43,6 @@ exports.handler = async (event) => {
 
     // Get data from GraphQL mutation
     const data = event.arguments.data;
-    console.log("Received data:", JSON.stringify(data));
 
     // Generate PDF with API key
     const pdfBuffer = await generatePDF(data, apiKey);

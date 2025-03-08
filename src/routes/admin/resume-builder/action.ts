@@ -6,6 +6,7 @@ const client = generateClient();
 
 const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  const isSandboxMode = formData.get("isSandboxMode") === "true";
   const jobTitle = formData.get("jobTitle") as string;
   const selectedSkills = JSON.parse(formData.get("selectedSkills") as string);
   const experience = JSON.parse(formData.get("experience") as string);
@@ -16,6 +17,7 @@ const action: ActionFunction = async ({ request }) => {
       query: generatePDF,
       variables: {
         data: {
+          isSandboxMode,
           jobTitle,
           selectedSkills,
           experience,
