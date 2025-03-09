@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.744.0",
+    "canvas": "^3.1.0",
     "marked": "^15.0.7"
   }
 }

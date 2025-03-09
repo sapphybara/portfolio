@@ -3,22 +3,120 @@
     "data": {
       "isSandboxMode": true,
       "jobTitle": "Software Engineer",
-      "selectedSkills": ["TypeScript", "React", "Node.js", "AWS"],
+      "selectedSkills": [
+        "React",
+        "JavaScript/ES6+",
+        "TypeScript",
+        "CSS3/HTML5",
+        "SCSS/Bootstrap/Tailwind",
+        "React Native",
+        "styled-components",
+        "Node.js",
+        "Python",
+        "Django Web Framework",
+        "GraphQL",
+        "MySQL",
+        "PostgreSQL",
+        "Pytest",
+        "Jest",
+        "Cypress",
+        "AWS Amplify",
+        "Git",
+        "Technical Documentation",
+        "UI/UX Design",
+        "Figma",
+        "Adobe XD",
+        "Atlassian Suite",
+        "SCRUM",
+        "WCAG 2.x"
+      ],
       "experience": [
         {
-          "title": "Senior Software Engineer",
-          "subheader": "Amazing Company • 2020 - Present",
+          "id": "experience0",
+          "title": "Freelance Web Developer",
+          "subheader": "Self-Employed | May 2024 - Present",
           "data": [
-            "Led development of **cool feature**",
-            "Improved performance by 50%",
-            "Mentored junior developers"
-          ]
+            "As a Freelance Web Developer, I collaborated with diverse clients across industries, including healthcare consulting and real estate advisory. My projects involved designing and developing custom websites with a focus on responsive design, accessibility, and SEO optimization.",
+            "For my primary client, [MitoKhon](https://mitokhon.com), I developed the website independently from start to finish, building on initial branding and design work. I exceeded deadlines and expectations for both design and functionality, earning commendations from the client, designer, and project manager for its exceptional visual appeal and seamless user experience.",
+            "In addition to MitoKhon, I worked with Enoch & Co, a real estate advisory firm, to develop and manage their website. I optimized site performance across projects by minifying images, streamlining code, and implementing SEO strategies to support long-term growth.",
+            "Utilizing tools like Elementor, Breakdance, and custom CSS, I delivered advanced customizations tailored to each client's needs, while ensuring alignment with their brand identity and mission."
+          ],
+          "dataType": "paragraph"
+        },
+        {
+          "id": "experience1",
+          "title": "Front End Developer",
+
+          "subheader": "Pacific Northwest National Laboratory | Mar 2021 - Dec 2023",
+          "data": [
+            "As a Front End Developer at Pacific Northwest National Lab, I collaborated closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilizing my expertise in React, TypeScript, and Python, I contributed to the creation of cutting-edge solutions tailored to meet project requirements.",
+            "I also took the lead in UI/UX design, implementing enhancements that proved instrumental in securing an additional $50k in funding. Under tight deadlines, I demonstrated my ability to thrive under pressure by implementing last-minute bug fixes and features, ensuring client satisfaction through reliable and informative demos.",
+            "Furthermore, I played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment."
+          ],
+          "dataType": "paragraph"
+        },
+        {
+          "id": "experience2",
+          "title": "Web Development Intern",
+
+          "subheader": "Pacific Northwest National Laboratory | May 2020 - Aug 2020",
+          "data": [
+            "During my tenure as a Web Development Intern at Pacific Northwest National Lab in the summer of 2020, I gained valuable hands-on experience in frontend development. I was responsible for developing UI features in a React application and implementing efficient real-time charting using D3.js.",
+            "This internship provided me with the opportunity to enhance my skills in React, Node.js, JavaScript, CSS3, and HTML5 while contributing to real-world projects in a professional environment."
+          ],
+          "dataType": "paragraph"
+        },
+        {
+          "id": "experience3",
+          "title": "Undergrad Research Assistant",
+
+          "subheader": "UT Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
+          "data": [
+            "In my role as an Undergraduate Research Assistant at The University of Texas at Austin Nuclear Engineering Teaching Lab, I led software development projects focused on autonomous outdoor air samplers. Leveraging my knowledge of Python, Django, JavaScript, and HTML/CSS, I developed a local Django server for result processing.",
+            "This experience allowed me to apply my technical skills to address real-world challenges and further develop my expertise in software development and project management."
+          ],
+          "dataType": "paragraph"
         }
       ],
       "education": [
         {
-          "title": "Bachelor of Science in Computer Science",
-          "subheader": "Great University • 2016 - 2020"
+          "id": "education1",
+          "title": "B.S. Mathematics",
+          "subheader": "University of Texas at Austin | 2019 - 2023",
+          "subheaderTypographyProps": {
+            "component": "h6",
+            "variant": "subtitle1"
+          },
+          "titleTypographyProps": {
+            "component": "h3",
+            "variant": "h5"
+          }
+        },
+        {
+          "id": "education2",
+          "title": "Certificate in Computer Science",
+          "subheader": "University of Texas at Austin | 2020 - 2023",
+          "subheaderTypographyProps": {
+            "component": "h6",
+            "variant": "subtitle1"
+          },
+          "titleTypographyProps": {
+            "component": "h3",
+            "variant": "h5"
+          }
+        },
+        {
+          "id": "education3",
+          "title": "A.S. Mathematics",
+          "subheader": "Austin Community College | 2018 - 2019",
+          "subheaderTypographyProps": {
+            "component": "h6",
+            "variant": "subtitle1"
+          },
+          "titleTypographyProps": {
+            "component": "h3",
+            "variant": "h5"
+          }
         }
       ]
     }

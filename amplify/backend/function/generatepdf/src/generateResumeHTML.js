@@ -24,9 +24,7 @@ module.exports = ({ jobTitle, selectedSkills, experience, education }) =>
         }
         body {
           font-family: "Lato", sans-serif;
-          max-width: 800px;
-          margin: auto;
-          padding: 20px;
+          margin: -40px auto auto;
           line-height: 1.6;
           color: #333;
           background-color: #fff;
@@ -97,7 +95,6 @@ module.exports = ({ jobTitle, selectedSkills, experience, education }) =>
       </style>
     </head>
     <body>
-
       <h1 style="text-align: center; margin-top: 0">Sapphyra Wiser</h1>
       <h3 style="text-align: center">${jobTitle}</h3>
       <hr />
