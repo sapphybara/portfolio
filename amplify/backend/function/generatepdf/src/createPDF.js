@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, no-undef */
 const { Buffer } = require('buffer');
 const generateResumeHTML = require("./generateResumeHTML");
-const { createCanvas } = require("canvas");
+const stringPixelWidth = require("string-pixel-width");
 
 /**
  * Computes how many lines the skills list will occupy
@@ -12,14 +12,6 @@ const { createCanvas } = require("canvas");
  * @returns {number} - Number of lines the skills list will take.
  */
 function computeSkillLines(skills, containerWidth) {
-  // Create a canvas element to measure text width accurately.
-  const canvas = createCanvas(200, 200);
-  const context = canvas.getContext("2d");
-
-  // Set the font to match your CSS:
-  // CSS: font-size: 14px; font-weight: bold; font-family: Lato
-  context.font = "bold 14px Lato";
-
   // Calculate horizontal additions from CSS:
   // padding: 6px top/bottom, 12px left/right. We care about left/right => 12*2 = 24px.
   const horizontalPadding = 24;
@@ -35,7 +27,7 @@ function computeSkillLines(skills, containerWidth) {
 
   skills.forEach((skill) => {
     // Measure the width of the text.
-    const textWidth = context.measureText(skill).width;
+    const textWidth = stringPixelWidth(skill, { font: "lato", size: 14, bold: true });
 
     // Compute the total width of the item.
     const itemWidth = textWidth + horizontalPadding + borderTotal;
@@ -59,7 +51,7 @@ function computeSkillLines(skills, containerWidth) {
 module.exports = {
   generatePDF: async ({ isSandboxMode, ...resumeData }, apiKey) => {
     const html = generateResumeHTML(resumeData);
-    const { selectedSkills } = resumeData;
+    const { jobTitle, selectedSkills, experience, education } = resumeData;
     const skillLines = computeSkillLines(selectedSkills, 659);
     console.log(`Skills will take ${skillLines} lines`);
 
