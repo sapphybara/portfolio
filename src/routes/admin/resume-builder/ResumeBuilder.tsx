@@ -60,6 +60,48 @@ const ResumeBuilder: React.FC = () => {
     }
   }, [fetcher.state, fetcher.data]);
 
+  const computeSkillLines = (skills: string[], containerWidth: number) => {
+    // Calculate horizontal additions from CSS:
+    // padding: 6px top/bottom, 8px left/right. We care about left/right => 8*2 = 16px.
+    const horizontalPadding = 16;
+
+    // Border: 1px on each side => total of 2px.
+    const borderTotal = 2;
+
+    // The gap between items in your flex container.
+    const gap = 10;
+
+    let lines = 1; // Start with one line.
+    let currentLineWidth = 0; // Running total of the current line width.
+
+    skills.forEach((skill) => {
+      // Measure the width of the text using the document with 14px bold Lato
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (!context) {
+        return setErr("Could not get canvas context");
+      }
+      context.font = "bold 14px Lato";
+      const textWidth = context.measureText(skill).width;
+
+      // Compute the total width of the item.
+      const itemWidth = textWidth + horizontalPadding + borderTotal;
+
+      // If the current line cannot accommodate the new item,
+      // wrap to the next line.
+      if (currentLineWidth + itemWidth > containerWidth) {
+        lines++;
+        // Reset current line width. Start with this item,
+        // plus a gap after it (if additional items are added).
+        currentLineWidth = itemWidth + gap;
+      } else {
+        // Otherwise, add the item width and a gap.
+        currentLineWidth += itemWidth + gap;
+      }
+    });
+    return lines;
+  };
+
   const handleGenerateResume = () => {
     setLoading(true);
     const formData = new FormData();
@@ -90,6 +132,10 @@ const ResumeBuilder: React.FC = () => {
       )
     );
     formData.append("isSandboxMode", isSandboxMode.toString());
+    formData.append(
+      "skillLines",
+      computeSkillLines(selectedSkills, 696).toString()
+    );
 
     fetcher.submit(formData, { method: "post" });
   };

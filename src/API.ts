@@ -6,6 +6,7 @@ export type ResumeDataInput = {
   isSandboxMode: boolean,
   jobTitle: string,
   selectedSkills: Array< string >,
+  skillLines: number,
   experience: Array< ExperienceInput >,
   education: Array< EducationInput >,
 };

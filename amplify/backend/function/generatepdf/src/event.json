@@ -2,6 +2,7 @@
   "arguments": {
     "data": {
       "isSandboxMode": true,
+      "skillLines": 4,
       "jobTitle": "Software Engineer",
       "selectedSkills": [
         "React",
@@ -28,7 +29,8 @@
         "Adobe XD",
         "Atlassian Suite",
         "SCRUM",
-        "WCAG 2.x"
+        "WCAG 2.x",
+        "Abcdefghijklmnop"
       ],
       "experience": [
         {

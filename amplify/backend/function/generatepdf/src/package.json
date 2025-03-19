@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.744.0",
-    "marked": "^15.0.7",
-    "string-pixel-width": "github:sapphybara/string-pixel-width"
+    "marked": "^15.0.7"
   }
 }

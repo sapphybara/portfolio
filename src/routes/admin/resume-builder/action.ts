@@ -11,6 +11,7 @@ const action: ActionFunction = async ({ request }) => {
   const selectedSkills = JSON.parse(formData.get("selectedSkills") as string);
   const experience = JSON.parse(formData.get("experience") as string);
   const education = JSON.parse(formData.get("education") as string);
+  const skillLines = JSON.parse(formData.get("skillLines") as string);
 
   try {
     const response = await client.graphql({
@@ -20,6 +21,7 @@ const action: ActionFunction = async ({ request }) => {
           isSandboxMode,
           jobTitle,
           selectedSkills,
+          skillLines,
           experience,
           education,
         },

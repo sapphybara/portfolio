@@ -14,9 +14,6 @@ importers:
       marked:
         specifier: ^15.0.7
         version: 15.0.7
-      string-pixel-width:
-        specifier: github:sapphybara/string-pixel-width
-        version: https://codeload.github.com/sapphybara/string-pixel-width/tar.gz/6b77a25353e37659156ad1d12d6c2b4e27dd9d29
     devDependencies:
       '@types/aws-lambda':
         specifier: ^8.10.92
@@ -314,17 +311,10 @@ packages:
     resolution: {integrity: sha512-xkjOecfnKGkSsOwtZ5Pz7Us/T6mrbPQrq0nh+aCO5V9nk5NLWmasAHumTKjiPJPWANe+kAZ84Jc8ooJkzZ88Sw==}
     hasBin: true
 
-  lodash.deburr@4.1.0:
-    resolution: {integrity: sha512-m/M1U1f3ddMCs6Hq2tAsYThTBDaAKFDX3dwDo97GEYzamXi9SqUpjWi/Rrj/gf3X2n8ktwgZrlP1z6E3v/IExQ==}
-
   marked@15.0.7:
     resolution: {integrity: sha512-dgLIeKGLx5FwziAnsk4ONoGwHwGPJzselimvlVskE9XLN4Orv9u2VA3GWw/lYUqjfA0rUT/6fqKwfZJapP9BEg==}
     engines: {node: '>= 18'}
     hasBin: true
-
-  string-pixel-width@https://codeload.github.com/sapphybara/string-pixel-width/tar.gz/6b77a25353e37659156ad1d12d6c2b4e27dd9d29:
-    resolution: {tarball: https://codeload.github.com/sapphybara/string-pixel-width/tar.gz/6b77a25353e37659156ad1d12d6c2b4e27dd9d29}
-    version: 1.11.0
 
   strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
@@ -964,13 +954,7 @@ snapshots:
     dependencies:
       strnum: 1.0.5
 
-  lodash.deburr@4.1.0: {}
-
   marked@15.0.7: {}
-
-  string-pixel-width@https://codeload.github.com/sapphybara/string-pixel-width/tar.gz/6b77a25353e37659156ad1d12d6c2b4e27dd9d29:
-    dependencies:
-      lodash.deburr: 4.1.0
 
   strnum@1.0.5: {}
 
