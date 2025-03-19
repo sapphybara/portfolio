@@ -23,6 +23,10 @@ const getCommonCSS = () => `
     font-family: "Merriweather Sans", sans-serif;
     color: var(--primary-color);
   }
+  .job-title {
+    text-align: center;
+    font-style: italic;
+  }
   .contact, .contact a {
     text-align: center;
     font-size: 14px;
@@ -58,7 +62,7 @@ const getCommonCSS = () => `
   .job {
     margin-bottom: 15px;
   }
-  .job-title, .title {
+  .job-header, .header {
     font-weight: bold;
     font-size: 16px;
     color: var(--primary-color);
@@ -83,21 +87,25 @@ const getCommonCSS = () => `
 
 const getDynamicCSS = (skillLines) => {
   switch (skillLines) {
-    case 1:
-      return `/* CSS variant for 1 skill line */`;
     case 2:
-      return `/* CSS variant for 2 skill lines */ 
-      .page { page-break-inside: avoid; }`;
-    case 3:
-      return `/* CSS variant for 3 skill lines */ 
-      .page { page-break-before: auto; }`;
-    case 4:
       return `
         h1 {
-          margin-block: 16px;
+          margin-block: 4px;
+        }
+        .job-title {
+          margin-block: 0;
+        }
+        hr {
+          margin-bottom: 10px;
         }
         h2:not(.education) {
-          padding: 12px 0;
+          margin-block: 0.25em;
+        }
+      `;
+    case 3:
+      return `
+        h2:not(.education) {
+          padding: 8px 0;
         }
         ul.skills {
           padding: 10px 0;
@@ -109,13 +117,58 @@ const getDynamicCSS = (skillLines) => {
           margin-block: 40px;
         }
         .contact {
+          line-height: 2.5;
+        }
+        li {
+          margin-top: 0px;
+        }
+        .skills li {
+          padding: 10px 8px;
+          margin-bottom: 16px;
+        }
+      `;
+    case 4:
+      return `
+        h2:not(.education) {
+          padding: 6px 0;
+        }
+        ul.skills {
+          padding: 10px 0;
+        }
+        .job-details {
+          padding: 6px 0 10px;
+        }
+        hr {
+          margin-block: 38px;
+        }
+        .contact {
           line-height: 2;
         }
         .skills li {
           padding: 8px;
+          margin-bottom: 6px;
         }
       `;
     case 5:
+      return `
+        h2:not(.education) {
+          padding: 6px 0;
+        }
+        ul.skills {
+          padding: 10px 0;
+        }
+        .job-details {
+          padding: 6px;
+        }
+        hr {
+          margin-block: 20px;
+        }
+        .skills li {
+          padding: 8px;
+          margin-bottom: 6px;
+        }
+      `;
+    case 1:
     default:
       return "";
   }
@@ -135,7 +188,7 @@ const generateHTMLHead = (jobTitle, css) => `
 
 const generateContactInfo = (jobTitle) => `
   <h1 style="text-align: center; margin-top: 0">Sapphyra Wiser</h1>
-  <h3 style="text-align: center">${jobTitle}</h3>
+  <h3 class="job-title">${jobTitle}</h3>
   <hr />
   <p class="contact">🏠 Denver, CO | 📧
   <a href="mailto:sapphyra.wiser@gmail.com" target="_blank">sapphyra.wiser@gmail.com</a>
@@ -161,7 +214,7 @@ const generateExperience = (experience) => `
   ${experience
     .map(
       (exp) => `
-        <h3 class="job-title">${exp.title}</h3>
+        <h3 class="job-header">${exp.title}</h3>
         <p class="job-details">${exp.subheader}</p>
         <ul>
           ${exp.data
@@ -179,7 +232,7 @@ const generateEducation = (education) => `
   ${education
     .map(
       (edu) => `
-        <h3 class="title">${edu.title}</h3>
+        <h3 class="header">${edu.title}</h3>
         <p class="details">${edu.subheader}</p>
       `
     )
