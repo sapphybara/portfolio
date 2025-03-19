@@ -2,7 +2,7 @@
   "lambdaLayers": [
     {
       "type": "ExternalLayer",
-      "arn": "arn:aws:lambda:us-west-1:905418013816:layer:generatePDFDeps:3"
+      "arn": "arn:aws:lambda:us-west-1:905418013816:layer:generatePDFDeps:12"
     }
   ],
   "secretNames": [
