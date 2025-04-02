@@ -87,6 +87,25 @@ const getCommonCSS = () => `
 
 const getDynamicCSS = (skillLines) => {
   switch (skillLines) {
+    case 1:
+      return `
+        h2:not(.education) {
+          padding: 6px 0;
+        }
+        ul.skills {
+          padding: 10px 0;
+        }
+        .job-details {
+          padding: 6px;
+        }
+        hr {
+          margin-block: 20px;
+        }
+        .skills li {
+          padding: 8px;
+          margin-bottom: 6px;
+        }
+      `;
     case 2:
       return `
         h2:not(.education) {
@@ -131,7 +150,6 @@ const getDynamicCSS = (skillLines) => {
           margin-bottom: 6px;
         }
       `;
-    case 1:
     case 3:
     default:
       return "";
