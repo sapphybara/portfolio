@@ -89,17 +89,14 @@ const getDynamicCSS = (skillLines) => {
   switch (skillLines) {
     case 2:
       return `
-        h1 {
-          margin-block: 4px;
+        h2:not(.education) {
+          padding: 6px 0;
         }
-        .job-title {
-          margin-block: 0;
+        .job-details {
+          padding: 6px 0;
         }
         hr {
-          margin-bottom: 10px;
-        }
-        h2:not(.education) {
-          margin-block: 0.25em;
+          margin-block: 20px;
         }
       `;
     case 4:
