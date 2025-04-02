@@ -118,13 +118,16 @@ const getDynamicCSS = (skillLines) => {
           padding: 10px 0;
         }
         .job-details {
-          padding: 6px;
+          padding: 6px 0 10px;
         }
         hr {
-          margin-block: 20px;
+          margin-block: 38px;
+        }
+        .contact {
+          line-height: 2.25;
         }
         .skills li {
-          padding: 8px;
+          padding: 10px 8px;
           margin-bottom: 6px;
         }
       `;
