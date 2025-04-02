@@ -29,8 +29,7 @@
         "Adobe XD",
         "Atlassian Suite",
         "SCRUM",
-        "WCAG 2.x",
-        "Abcdefghijklmnop"
+        "WCAG 2.x"
       ],
       "experience": [
         {
@@ -38,10 +37,9 @@
           "title": "Freelance Web Developer",
           "subheader": "Self-Employed | May 2024 - Present",
           "data": [
-            "As a Freelance Web Developer, I collaborated with diverse clients across industries, including healthcare consulting and real estate advisory. My projects involved designing and developing custom websites with a focus on responsive design, accessibility, and SEO optimization.",
-            "For my primary client, [MitoKhon](https://mitokhon.com), I developed the website independently from start to finish, building on initial branding and design work. I exceeded deadlines and expectations for both design and functionality, earning commendations from the client, designer, and project manager for its exceptional visual appeal and seamless user experience.",
-            "In addition to MitoKhon, I worked with Enoch & Co, a real estate advisory firm, to develop and manage their website. I optimized site performance across projects by minifying images, streamlining code, and implementing SEO strategies to support long-term growth.",
-            "Utilizing tools like Elementor, Breakdance, and custom CSS, I delivered advanced customizations tailored to each client's needs, while ensuring alignment with their brand identity and mission."
+            "Collaborated with clients in consulting industries, designed and developed custom websites with a focus on accessibility, responsive design, and SEO & site optimization.",
+            "Developed [mitokhon.com](https://mitokhon.com) for MitoKhon, a consultancy advancing health equity and social justice across healthcare systems. Built the site in WordPress using Breakdance and custom CSS. Extended the initial Figma designs of three core pages into ten **fully responsive, accessible layouts**. Delivered **ahead of schedule and under budget**, earning praise from the client, designer, and project manager for clean implementation and seamless user experience.",
+            "Optimized SEO and performance for Enoch & Co, a real estate advisory firm. Minified images, streamlined code, and implemented SEO strategies."
           ],
           "dataType": "paragraph"
         },
@@ -51,9 +49,9 @@
 
           "subheader": "Pacific Northwest National Laboratory | Mar 2021 - Dec 2023",
           "data": [
-            "As a Front End Developer at Pacific Northwest National Lab, I collaborated closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilizing my expertise in React, TypeScript, and Python, I contributed to the creation of cutting-edge solutions tailored to meet project requirements.",
-            "I also took the lead in UI/UX design, implementing enhancements that proved instrumental in securing an additional $50k in funding. Under tight deadlines, I demonstrated my ability to thrive under pressure by implementing last-minute bug fixes and features, ensuring client satisfaction through reliable and informative demos.",
-            "Furthermore, I played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment."
+            "Worked closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilized expertise in React, TypeScript, and Python to contribute to the creation of cutting-edge solutions tailored to meet project requirements.",
+            "Took ownership of UI design for a key project, creating a feature that helped secure an additional **$50K in funding**. Anticipated needs ahead of client demos to polish the product, resolving last-minute bugs and shipping features under pressure to ensure a seamless, high-quality presentation.",
+            "Played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment."
           ],
           "dataType": "paragraph"
         },
@@ -63,8 +61,8 @@
 
           "subheader": "Pacific Northwest National Laboratory | May 2020 - Aug 2020",
           "data": [
-            "During my tenure as a Web Development Intern at Pacific Northwest National Lab in the summer of 2020, I gained valuable hands-on experience in frontend development. I was responsible for developing UI features in a React application and implementing efficient real-time charting using D3.js.",
-            "This internship provided me with the opportunity to enhance my skills in React, Node.js, JavaScript, CSS3, and HTML5 while contributing to real-world projects in a professional environment."
+            "Contributed to the early development of a React-based data visualization tool, implementing core logic and structure based on design mockups.",
+            "Supported technical decision-making by researching and recommending charting libraries, including the team's eventual adoption of D3.js."
           ],
           "dataType": "paragraph"
         },
@@ -74,8 +72,8 @@
 
           "subheader": "UT Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
           "data": [
-            "In my role as an Undergraduate Research Assistant at The University of Texas at Austin Nuclear Engineering Teaching Lab, I led software development projects focused on autonomous outdoor air samplers. Leveraging my knowledge of Python, Django, JavaScript, and HTML/CSS, I developed a local Django server for result processing.",
-            "This experience allowed me to apply my technical skills to address real-world challenges and further develop my expertise in software development and project management."
+            "**Led software development** for outdoor air samplers, using Python, Django, JavaScript, and HTML/CSS to build a Django-based server for local result processing.",
+            "Worked with a multidisciplinary undergraduate team across the sciences, contributing to a successful field test that informed further development by collaborators at a national lab. Later **co-authored a publication** detailing the system's methodology."
           ],
           "dataType": "paragraph"
         }

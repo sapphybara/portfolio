@@ -129,24 +129,12 @@ const getDynamicCSS = (skillLines) => {
       `;
     case 4:
       return `
-        h2:not(.education) {
-          padding: 6px 0;
-        }
-        ul.skills {
-          padding: 10px 0;
-        }
-        .job-details {
-          padding: 6px 0 10px;
+        .job-title {
+          margin-top: -15px;
+          margin-bottom: 10px;
         }
         hr {
-          margin-block: 38px;
-        }
-        .contact {
-          line-height: 2;
-        }
-        .skills li {
-          padding: 8px;
-          margin-bottom: 6px;
+          margin-block: 0;
         }
       `;
     case 5:
