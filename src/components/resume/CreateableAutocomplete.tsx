@@ -29,6 +29,11 @@ const CreatableAutocomplete = <T,>({
     onInputChange={(_event, newInputValue) => {
       setInputValue(newInputValue);
     }}
+    onKeyDown={(event) => {
+      if (event.key === "Tab") {
+        event.key = "Enter"; // will call `onChange`
+      }
+    }}
     value={value}
     onChange={handleChange}
     filterOptions={filterOptions}

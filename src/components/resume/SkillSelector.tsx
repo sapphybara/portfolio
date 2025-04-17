@@ -73,6 +73,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] =
     useState<AutoCompleteOption>(emptyValue);
+  const [shouldFormat, setShouldFormat] = useState(true);
   // Add a ref to the Autocomplete component
   const autocompleteRef = useRef<HTMLDivElement>(null);
 
@@ -89,14 +90,17 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const capitalizedValue = {
-      ...dialogValue,
-      section: capitalizeWords(dialogValue.section),
-      label: capitalizeWords(dialogValue.label),
-      selected: true,
-    };
-    setValue(capitalizedValue);
-    handleSkillChange(capitalizedValue);
+    let valueToUse = dialogValue;
+    if (shouldFormat) {
+      valueToUse = {
+        ...dialogValue,
+        section: capitalizeWords(dialogValue.section),
+        label: capitalizeWords(dialogValue.label),
+        selected: true,
+      };
+    }
+    setValue(valueToUse);
+    handleSkillChange(valueToUse);
     handleClose();
   };
 
@@ -350,6 +354,8 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
           handleSubmit,
           open,
           sectionContent,
+          setShouldFormat,
+          shouldFormat,
         }}
         availableSections={uniqueSections}
       />

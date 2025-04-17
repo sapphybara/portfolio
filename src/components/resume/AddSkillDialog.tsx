@@ -5,6 +5,9 @@ import {
   DialogActions,
   Button,
   UseAutocompleteProps,
+  styled,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import { FC, useState, useEffect, useRef } from "react";
@@ -19,6 +22,8 @@ interface AddSkillDialogProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   open: boolean;
   sectionContent: SectionContent;
+  setShouldFormat: (value: boolean) => void;
+  shouldFormat: boolean;
 }
 
 type SectionAutocompleteProps = UseAutocompleteProps<
@@ -34,6 +39,12 @@ type SkillAutocompleteProps = UseAutocompleteProps<
   true
 >;
 
+const StyledDialog = styled(Dialog)(() => ({
+  "& .MuiPaper-root": {
+    minWidth: "min(350px, 90%)",
+  },
+}));
+
 const skillFilter = createFilterOptions<string>();
 const sectionFilter = createFilterOptions<AutoCompleteOption>();
 
@@ -45,6 +56,8 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
   handleSubmit,
   open,
   sectionContent,
+  setShouldFormat,
+  shouldFormat,
 }) => {
   const [sectionInputValue, setSectionInputValue] = useState("");
   const [skillInputValue, setSkillInputValue] = useState("");
@@ -105,21 +118,18 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
     newValue
   ) => {
     if (typeof newValue === "string") {
-      // Handle "Add [skill]" click
-      const skillName = newValue.match(/^Add\s+"(.*)"/)?.[1];
-      if (skillName) {
-        setDialogValue({
-          ...dialogValue,
-          label: skillName,
-        });
-        setSkillInputValue(skillName);
-      }
-    } else if (newValue?.inputValue) {
       // user just pressed enter
+      setDialogValue({
+        ...dialogValue,
+        label: newValue,
+      });
+    } else if (newValue?.inputValue) {
+      // Handle "Add [skill]" click
       setDialogValue({
         ...dialogValue,
         label: newValue.inputValue,
       });
+      setSkillInputValue(newValue.inputValue);
     } else {
       if (newValue) {
         // user selected an existing option
@@ -178,7 +188,7 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <StyledDialog open={open} onClose={handleClose}>
       <form onSubmit={handleSubmit}>
         <DialogTitle>Add a new skill</DialogTitle>
         <DialogContent>
@@ -201,13 +211,22 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
             setInputValue={setSkillInputValue}
             value={dialogValue}
           />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={shouldFormat}
+                onChange={() => setShouldFormat(!shouldFormat)}
+              />
+            }
+            label="Bypass Formatting"
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit">Add</Button>
         </DialogActions>
       </form>
-    </Dialog>
+    </StyledDialog>
   );
 };
 
