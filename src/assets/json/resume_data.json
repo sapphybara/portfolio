@@ -11,14 +11,15 @@
           "React",
           "JavaScript/ES6+",
           "TypeScript",
-          "CSS3/HTML5"
+          "CSS3/HTML5",
+          "Responsive Design"
         ],
         "dataType": "list"
       },
       {
         "id": "backend",
         "title": "Backend Development",
-        "data": ["Node.js", "Python", "MySQL"],
+        "data": ["Node.js", "Python", "MySQL", "OOP"],
         "dataType": "list"
       },
       {
@@ -30,7 +31,7 @@
       {
         "id": "cloud",
         "title": "Cloud & DevOps",
-        "data": ["AWS Amplify", "Git"],
+        "data": ["Git/GitLab/Bitbucket", "AWS Amplify"],
         "dataType": "list"
       },
       {
