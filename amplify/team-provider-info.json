@@ -99,7 +99,7 @@
         "generatepdf": {
           "secretsPathAmplifyAppId": "dvomf8qiulkgc",
           "deploymentBucketName": "amplify-portfolio-local-6d520-deployment",
-          "s3Key": "amplify-builds/generatepdf-2b5a7847373344543135-build.zip"
+          "s3Key": "amplify-builds/generatepdf-774164754276354d4558-build.zip"
         },
         "getcardscore": {
           "deploymentBucketName": "amplify-portfolio-local-6d520-deployment",
