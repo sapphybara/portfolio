@@ -128,13 +128,14 @@ const getDynamicCSS = (skillLines) => {
           margin-block: 0;
         }
       `;
+    case 3:
     case 5:
       return `
         h2:not(.education) {
           padding: 6px 0;
         }
         ul.skills {
-          padding: 10px 0;
+          padding: 12px 0;
         }
         .job-details {
           padding: 6px 0 10px;
@@ -149,8 +150,11 @@ const getDynamicCSS = (skillLines) => {
           padding: 10px 8px;
           margin-bottom: 6px;
         }
+        .summary {
+          margin: 30px 0;
+          line-height: 2;
+        }
       `;
-    case 3:
     default:
       return "";
   }
@@ -175,7 +179,7 @@ const generateContactInfo = (jobTitle) => `
   <p class="contact">🏠 Denver, CO | 📧
   <a href="mailto:sapphyra.wiser@gmail.com" target="_blank">sapphyra.wiser@gmail.com</a>
     | 📞 (720) 839-7618 <br /> 🔗
-  <a href="https://linkedin.com/in/sapphyra-wiser" target="_blank">LinkedIn</a> | 🌐
+  <a href="https://linkedin.com/in/sapphyra-wiser" target="_blank">linkedin.com/in/sapphyra-wiser</a> | 🌐
   <a href="https://sapphyrawiser.com" target="_blank">sapphyrawiser.com</a>
   </p>
 `;
@@ -230,6 +234,7 @@ module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines 
       <body>
         ${generateHTMLHead(jobTitle, css).trim()}
         ${generateContactInfo(jobTitle).trim()}
+        <p class="summary" style="text-align: center">Creative and driven Front End Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
         ${generateSkills(selectedSkills).trim()}
         ${generateExperience(experience).trim()}
         ${generateEducation(education).trim()}

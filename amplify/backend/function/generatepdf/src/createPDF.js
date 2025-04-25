@@ -5,6 +5,7 @@ const generateResumeHTML = require("./generateResumeHTML");
 module.exports = {
   generatePDF: async ({ isSandboxMode, ...resumeData }, apiKey) => {
     const html = generateResumeHTML(resumeData);
+    console.log(html);
 
     const response = await fetch("https://api.pdfshift.io/v3/convert/pdf", {
       method: "POST",

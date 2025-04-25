@@ -7,33 +7,24 @@
         "id": "frontend",
         "title": "Frontend Development",
         "data": [
+          "Angular",
           "React",
           "JavaScript/ES6+",
           "TypeScript",
-          "CSS3/HTML5",
-          "SCSS/Bootstrap/Tailwind",
-          "React Native",
-          "styled-components"
+          "CSS3/HTML5"
         ],
         "dataType": "list"
       },
       {
         "id": "backend",
         "title": "Backend Development",
-        "data": [
-          "Node.js",
-          "Python",
-          "Django Web Framework",
-          "GraphQL",
-          "MySQL",
-          "PostgreSQL"
-        ],
+        "data": ["Node.js", "Python", "MySQL"],
         "dataType": "list"
       },
       {
         "id": "testing",
         "title": "Testing",
-        "data": ["Pytest", "Jest", "Cypress"],
+        "data": ["Unit Testing", "Pytest", "Jest"],
         "dataType": "list"
       },
       {
@@ -45,18 +36,13 @@
       {
         "id": "design",
         "title": "Design & Documentation",
-        "data": [
-          "Technical Documentation",
-          "UI/UX Design",
-          "Figma",
-          "Adobe XD"
-        ],
+        "data": ["UI/UX Design", "Figma", "Adobe XD"],
         "dataType": "list"
       },
       {
         "id": "other",
         "title": "Other Skills",
-        "data": ["Atlassian Suite", "SCRUM", "WCAG 2.x"],
+        "data": ["Agile/SCRUM", "WCAG 2.x"],
         "dataType": "list"
       }
     ],
@@ -84,7 +70,7 @@
 
         "subheader": "Pacific Northwest National Laboratory | Mar 2021 - Dec 2023",
         "data": [
-          "Worked closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilized expertise in React, TypeScript, and Python to contribute to the creation of cutting-edge solutions tailored to meet project requirements.",
+          "Worked closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilized expertise in Angular, React, TypeScript, and Python to contribute to the creation of cutting-edge solutions tailored to meet project requirements.",
           "Took ownership of UI design for a key project, creating a feature that helped secure an additional **$50K in funding**. Anticipated needs ahead of client demos to polish the product, resolving last-minute bugs and shipping features under pressure to ensure a seamless, high-quality presentation.",
           "Played a key role in improving code quality, reducing technical debt, and mentoring junior staff members, fostering a collaborative and growth-oriented work environment."
         ],

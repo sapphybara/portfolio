@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "compileAPI": "amplify api gql-compile",
     "codegen": "amplify codegen",
-    "updateAPI": "pnpm compileAPI && pnpm codegen"
+    "updateAPI": "pnpm compileAPI && pnpm codegen",
+    "mockPDF": "amplify mock function generatepdf --event src/event.json"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.592.0",
