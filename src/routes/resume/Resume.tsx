@@ -137,15 +137,28 @@ const Resume = () => {
       <Typography variant="decoration">View my</Typography>
       <Typography variant="h1">Resume</Typography>
       <Stack alignItems="flex-end">
-        <Button
-          download
-          href="/Sapphyra_Wiser_Resume.pdf"
-          LinkComponent="a"
-          startIcon={<Download />}
-          variant="outlined"
+        <Stack
+          alignItems="start"
+          gap={{ xs: 0.5, sm: 3 }}
+          direction={{ xs: "column", sm: "row" }}
+          marginTop={2}
         >
-          Download Resume
-        </Button>
+          <Typography className="max-w-[48rem]" paragraph>
+            Creative and driven Front End Developer with a strong foundation in
+            both design and development, and a passion for both. Thrives in
+            collaborative environments - and on the volleyball court.
+          </Typography>
+          <Button
+            className="flex-[1_0_auto]"
+            download
+            href="/Sapphyra_Wiser_Resume.pdf"
+            LinkComponent="a"
+            startIcon={<Download />}
+            variant="outlined"
+          >
+            Download Resume
+          </Button>
+        </Stack>
         <Box className="flex flex-col gap-8 my-4">
           {(resumeData as ResumeDataItem[]).map((d) => renderResumeData(d))}
         </Box>
