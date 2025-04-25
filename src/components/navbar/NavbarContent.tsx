@@ -15,7 +15,6 @@ import {
   List,
   keyframes,
   ListProps,
-  Badge,
 } from "@mui/material";
 import ResponsiveLogo from "@components/ResponsiveLogo";
 import { ThemeModeContext } from "@context/ThemeModeContext";
@@ -153,9 +152,7 @@ const NavbarContent: (
       >
         {!isMobile && (
           <IconButton aria-label="this website is in beta" className="p-0">
-            <Badge badgeContent="Beta" color="warning" overlap="rectangular">
-              <ResponsiveLogo logoInitial={logoInitial} rotation={rotation} />
-            </Badge>
+            <ResponsiveLogo logoInitial={logoInitial} rotation={rotation} />
           </IconButton>
         )}
         <Typography color="common.white" {...typographyProps}>
