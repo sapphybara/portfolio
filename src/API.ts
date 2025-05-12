@@ -16,6 +16,7 @@ export type ExperienceInput = {
   subheader: string,
   data: Array< string >,
   dateRange: DateRange,
+  id: string,
 };
 
 export type DateRange = {
@@ -27,6 +28,7 @@ export type EducationInput = {
   title: string,
   subheader: string,
   dateRange: DateRange,
+  id: string,
 };
 
 export type GeneratePDFResponse = {

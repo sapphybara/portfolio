@@ -48,12 +48,14 @@ input ExperienceInput {
   subheader: String!
   data: [String!]!
   dateRange: DateRange!
+  id: String!
 }
 
 input EducationInput {
   title: String!
   subheader: String!
   dateRange: DateRange!
+  id: String!
 }
 
 input ResumeDataInput {

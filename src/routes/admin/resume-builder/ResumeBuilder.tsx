@@ -120,6 +120,7 @@ const ResumeBuilder: React.FC = () => {
           subheader: exp.subheader,
           data: exp.data,
           dateRange: exp.dateRange,
+          id: exp.id,
         }))
       )
     );
@@ -130,6 +131,7 @@ const ResumeBuilder: React.FC = () => {
           title: edu.title,
           subheader: edu.subheader,
           dateRange: edu.dateRange,
+          id: edu.id,
         }))
       )
     );
