@@ -207,13 +207,33 @@ const generateSkills = (selectedSkills) =>
     : ""
   ;
 
+const formatYM = (date) => {
+  const [year, month] = date.split("-");
+  const jsDate = new Date(year, month - 1);
+  if (isNaN(jsDate.getTime())) {
+    return date;
+  }
+  return jsDate.toLocaleDateString("en-US", { year: "numeric", month: "long" });
+}
+
+const renderExperienceOrEducationDates = (expOrEdu) => {
+  const { title, subheader, dateRange: { start, end }, id } = expOrEdu;
+  const clsPrefix = id.startsWith("education") ? "" : "job-";
+  const formattedStart = formatYM(start);
+  const formattedEnd = end ? formatYM(end) : "Present";
+
+  return `
+    <h3 class="${clsPrefix}header">${title}</h3>
+    <p class="${clsPrefix}details">${subheader} | <time datetime=${start}>${formattedStart}</time> - <time datetime=${end}>${formattedEnd}</time></p>
+  `
+}
+
 const generateExperience = (experience) => `
   <h2>Experience</h2>
   ${experience
     .map(
       (exp) => `
-        <h3 class="job-header">${exp.title}</h3>
-        <p class="job-details">${exp.subheader} | ${exp.dateRange.start} - ${exp.dateRange.end || "Present"}</p>
+        ${renderExperienceOrEducationDates(exp)}
         <ul>
           ${exp.data
           .map((detail) => `<li>${marked(detail, { renderer })}</li>`)
@@ -228,12 +248,7 @@ const generateExperience = (experience) => `
 const generateEducation = (education) => `
   <h2 class="education">Education</h2>
   ${education
-    .map(
-      (edu) => `
-        <h3 class="header">${edu.title}</h3>
-        <p class="details">${edu.subheader}</p>
-      `
-    )
+  .map(renderExperienceOrEducationDates)
     .join("")
   }
 `;

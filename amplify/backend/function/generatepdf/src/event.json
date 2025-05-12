@@ -30,7 +30,7 @@
           "title": "Freelance Web Developer",
           "subheader": "Self-Employed",
           "dateRange": {
-            "start": "May 2024"
+            "start": "2024-05"
           },
           "data": [
             "Collaborated with clients in consulting industries, designed and developed custom websites with a focus on accessibility, responsive design, and SEO & site optimization.",
@@ -44,8 +44,8 @@
           "title": "Full Stack Developer",
           "subheader": "Pacific Northwest National Laboratory",
           "dateRange": {
-            "start": "March 2021",
-            "end": "December 2023"
+            "start": "2021-03",
+            "end": "2023-12"
           },
           "data": [
             "Worked closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilized expertise in Angular, React, TypeScript, and Python to contribute to the creation of cutting-edge solutions tailored to meet project requirements.",
@@ -59,8 +59,8 @@
           "title": "Web Development Intern",
           "subheader": "Pacific Northwest National Laboratory",
           "dateRange": {
-            "start": "May 2020",
-            "end": "August 2020"
+            "start": "2020-05",
+            "end": "2020-08"
           },
           "data": [
             "Contributed to the early development of a React-based data visualization tool, implementing core logic and structure based on design mockups.",
@@ -73,8 +73,8 @@
           "title": "Undergrad Research Assistant",
           "subheader": "UT Austin Nuclear Engineering Teaching Lab",
           "dateRange": {
-            "start": "July 2018",
-            "end": "December 2020"
+            "start": "2018-07",
+            "end": "2020-12"
           },
           "data": [
             "**Led software development** for outdoor air samplers, using Python, Django, JavaScript, and HTML/CSS to build a Django-based server for local result processing.",
