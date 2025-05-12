@@ -192,8 +192,8 @@ const generateContactInfo = (jobTitle) => `
   </p>
 `;
 
-const generateSummary = () => `
-  <p class="summary">Creative and driven Full Stack Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
+const generateSummary = (jobTitle) => `
+  <p class="summary">Creative and driven ${jobTitle} with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
 `;
 
 const generateSkills = (selectedSkills) =>
@@ -216,8 +216,9 @@ const formatYM = (date) => {
   return jsDate.toLocaleDateString("en-US", { year: "numeric", month: "long" });
 }
 
-const renderExperienceOrEducationDates = (expOrEdu) => {
-  const { title, subheader, dateRange: { start, end }, id } = expOrEdu;
+const renderExperienceOrEducationDates = (expOrEdu, shouldUseTitleForPNNLRole, jobTitle) => {
+  const { subheader, dateRange: { start, end }, id } = expOrEdu;
+  const title = id === "pnnl" && shouldUseTitleForPNNLRole ? jobTitle : expOrEdu.title;
   const clsPrefix = id.startsWith("education") ? "" : "job-";
   const formattedStart = formatYM(start);
   const formattedEnd = end ? formatYM(end) : "Present";
@@ -228,12 +229,12 @@ const renderExperienceOrEducationDates = (expOrEdu) => {
   `
 }
 
-const generateExperience = (experience) => `
+const generateExperience = (experience, shouldUseTitleForPNNLRole, jobTitle) => `
   <h2>Experience</h2>
   ${experience
     .map(
       (exp) => `
-        ${renderExperienceOrEducationDates(exp)}
+        ${renderExperienceOrEducationDates(exp, shouldUseTitleForPNNLRole, jobTitle)}
         <ul>
           ${exp.data
           .map((detail) => `<li>${marked(detail, { renderer })}</li>`)
@@ -253,7 +254,7 @@ const generateEducation = (education) => `
   }
 `;
 
-module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines }) => {
+module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines, shouldUseTitleForPNNLRole }) => {
   const css = getCommonCSS() + getDynamicCSS(skillLines);
 
   return `
@@ -264,10 +265,10 @@ module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines 
           ${generateContactInfo(jobTitle).trim()}
         </section>
         <section id="summary">
-          ${generateSummary().trim()}
+          ${generateSummary(jobTitle).trim()}
         </section>
         <section id="skills">${generateSkills(selectedSkills).trim()}</section>
-        <section id="experience">${generateExperience(experience).trim()}</section>
+        <section id="experience">${generateExperience(experience, shouldUseTitleForPNNLRole, jobTitle).trim()}</section>
         <section id="education">${generateEducation(education).trim()}</section>
       </body>
     </html>

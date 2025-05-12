@@ -9,6 +9,7 @@ export type ResumeDataInput = {
   skillLines: number,
   experience: Array< ExperienceInput >,
   education: Array< EducationInput >,
+  shouldUseTitleForPNNLRole: boolean,
 };
 
 export type ExperienceInput = {

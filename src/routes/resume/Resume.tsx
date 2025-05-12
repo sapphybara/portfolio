@@ -18,6 +18,7 @@ import {
   SchoolOutlined,
   ScienceOutlined,
   TerminalOutlined,
+  Web,
 } from "@mui/icons-material";
 import resumeData from "@assets/json/resume_data.json";
 import { isResumeDataItem } from "@utils/typeGuards";
@@ -27,12 +28,11 @@ import { Fragment } from "react";
 const avatarRecord = {
   skills: TerminalOutlined,
   experience: BusinessCenterOutlined,
-  experience1: DeveloperBoardOutlined,
-  experience2: LightbulbOutlined,
-  experience3: ScienceOutlined,
+  freelance: Web,
+  pnnl: DeveloperBoardOutlined,
+  pnnl_intern: LightbulbOutlined,
+  ut: ScienceOutlined,
   education: SchoolOutlined,
-  education1: null,
-  education2: null,
 };
 
 const StyledList = styled(List)(({ theme }) => ({

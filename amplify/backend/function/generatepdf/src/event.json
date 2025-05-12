@@ -2,6 +2,7 @@
   "arguments": {
     "data": {
       "isSandboxMode": true,
+      "shouldUseTitleForPNNLRole": true,
       "skillLines": 5,
       "jobTitle": "Software Engineer",
       "selectedSkills": [
@@ -26,7 +27,7 @@
       ],
       "experience": [
         {
-          "id": "experience0",
+          "id": "freelance",
           "title": "Freelance Web Developer",
           "subheader": "Self-Employed",
           "dateRange": {
@@ -40,7 +41,7 @@
           "dataType": "paragraph"
         },
         {
-          "id": "experience1",
+          "id": "pnnl",
           "title": "Full Stack Developer",
           "subheader": "Pacific Northwest National Laboratory",
           "dateRange": {
@@ -55,7 +56,7 @@
           "dataType": "paragraph"
         },
         {
-          "id": "experience2",
+          "id": "pnnl_intern",
           "title": "Web Development Intern",
           "subheader": "Pacific Northwest National Laboratory",
           "dateRange": {
@@ -69,7 +70,7 @@
           "dataType": "paragraph"
         },
         {
-          "id": "experience3",
+          "id": "ut",
           "title": "Undergrad Research Assistant",
           "subheader": "UT Austin Nuclear Engineering Teaching Lab",
           "dateRange": {

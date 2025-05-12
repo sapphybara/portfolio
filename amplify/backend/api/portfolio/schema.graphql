@@ -65,6 +65,7 @@ input ResumeDataInput {
   skillLines: Int!
   experience: [ExperienceInput!]!
   education: [EducationInput!]!
+  shouldUseTitleForPNNLRole: Boolean!
 }
 
 type Mutation {

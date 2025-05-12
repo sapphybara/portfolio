@@ -55,21 +55,21 @@
     "title": "Experience",
     "data": [
       {
-        "id": "experience0",
+        "id": "freelance",
         "title": "Freelance Web Developer",
         "subheader": "Self-Employed",
         "dateRange": {
           "start": "2024-05"
         },
         "data": [
-          "Collaborated with clients in consulting industries, designed and developed custom websites with a focus on accessibility, responsive design, and SEO & site optimization.",
+          "Collaborated with clients in consulting industries, designing and developing custom websites with a focus on accessibility, responsive design, and SEO & site optimization.",
           "Developed [mitokhon.com](https://mitokhon.com) for MitoKhon, a consultancy advancing health equity and social justice across healthcare systems. Built the site in WordPress using Breakdance and custom CSS. Extended the initial Figma designs of three core pages into ten **fully responsive, accessible layouts**. Delivered **ahead of schedule and under budget**, earning praise from the client, designer, and project manager for clean implementation and seamless user experience.",
           "Optimized SEO and performance for Enoch & Co, a real estate advisory firm. Minified images, streamlined code, and implemented SEO strategies."
         ],
         "dataType": "paragraph"
       },
       {
-        "id": "experience1",
+        "id": "pnnl",
         "title": "Full Stack Developer",
         "subheader": "Pacific Northwest National Laboratory",
         "dateRange": {
@@ -84,7 +84,7 @@
         "dataType": "paragraph"
       },
       {
-        "id": "experience2",
+        "id": "pnnl_intern",
         "title": "Web Development Intern",
         "subheader": "Pacific Northwest National Laboratory",
         "dateRange": {
@@ -98,7 +98,7 @@
         "dataType": "paragraph"
       },
       {
-        "id": "experience3",
+        "id": "ut",
         "title": "Undergrad Research Assistant",
         "subheader": "UT Austin Nuclear Engineering Teaching Lab",
         "dateRange": {

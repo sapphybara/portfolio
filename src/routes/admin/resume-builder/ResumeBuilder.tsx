@@ -33,6 +33,8 @@ const ResumeBuilder: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");
   const [isSandboxMode, setIsSandboxMode] = useState<boolean>(true);
+  const [shouldUseTitleForPNNLRole, setShouldUseTitleForPNNLRole] =
+    useState<boolean>(true);
 
   const fetcher = useFetcher();
 
@@ -115,27 +117,31 @@ const ResumeBuilder: React.FC = () => {
     formData.append(
       "experience",
       JSON.stringify(
-        experienceData.map((exp) => ({
-          title: exp.title,
-          subheader: exp.subheader,
-          data: exp.data,
-          dateRange: exp.dateRange,
-          id: exp.id,
+        experienceData.map(({ title, subheader, data, dateRange, id }) => ({
+          title,
+          subheader,
+          data,
+          dateRange,
+          id,
         }))
       )
     );
     formData.append(
       "education",
       JSON.stringify(
-        educationData.map((edu) => ({
-          title: edu.title,
-          subheader: edu.subheader,
-          dateRange: edu.dateRange,
-          id: edu.id,
+        educationData.map(({ title, subheader, dateRange, id }) => ({
+          title,
+          subheader,
+          dateRange,
+          id,
         }))
       )
     );
     formData.append("isSandboxMode", isSandboxMode.toString());
+    formData.append(
+      "shouldUseTitleForPNNLRole",
+      shouldUseTitleForPNNLRole.toString()
+    );
     formData.append(
       "skillLines",
       computeSkillLines(selectedSkills, 696).toString()
@@ -165,6 +171,15 @@ const ResumeBuilder: React.FC = () => {
           value={jobTitle}
           onChange={(e) => setJobTitle(e.target.value)}
           variant="standard"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() => setShouldUseTitleForPNNLRole((prev) => !prev)}
+              checked={shouldUseTitleForPNNLRole}
+            />
+          }
+          label="Use Job Title for PNNL role?"
         />
         <Typography variant="h6">Select Skills</Typography>
         <SkillSelector
