@@ -99,11 +99,11 @@
         "generatepdf": {
           "secretsPathAmplifyAppId": "dvomf8qiulkgc",
           "deploymentBucketName": "amplify-portfolio-local-6d520-deployment",
-          "s3Key": "amplify-builds/generatepdf-774164754276354d4558-build.zip"
+          "s3Key": "amplify-builds/generatepdf-41736f7150777a383155-build.zip"
         },
         "getcardscore": {
           "deploymentBucketName": "amplify-portfolio-local-6d520-deployment",
-          "s3Key": "amplify-builds/getcardscore-536d4730526b6a377954-build.zip"
+          "s3Key": "amplify-builds/getcardscore-342f5073526476716c72-build.zip"
         },
         "portfolio": {},
         "portfolio9da5fd1f": {}

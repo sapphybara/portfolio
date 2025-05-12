@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import { CardHeaderProps } from "@mui/material";
 import { roles } from "@utils/utils";
+import { DateRange } from "@API";
 
 export interface PropsWithRoutes {
   routes: RouteObject[];
@@ -128,6 +129,7 @@ interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
   defaultIsOpen?: boolean;
   id: string;
   title: string;
+  dateRange?: DateRange;
 }
 
 interface StringResumeDataItem extends BaseResumeDataItem {

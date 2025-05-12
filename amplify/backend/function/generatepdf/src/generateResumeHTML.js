@@ -213,7 +213,7 @@ const generateExperience = (experience) => `
     .map(
       (exp) => `
         <h3 class="job-header">${exp.title}</h3>
-        <p class="job-details">${exp.subheader}</p>
+        <p class="job-details">${exp.subheader} | ${exp.dateRange.start} - ${exp.dateRange.end || "Present"}</p>
         <ul>
           ${exp.data
           .map((detail) => `<li>${marked(detail, { renderer })}</li>`)

@@ -38,15 +38,22 @@ type GeneratePDFResponse {
   url: String!
 }
 
+input DateRange {
+  end: String
+  start: String!
+}
+
 input ExperienceInput {
   title: String!
   subheader: String!
   data: [String!]!
+  dateRange: DateRange!
 }
 
 input EducationInput {
   title: String!
   subheader: String!
+  dateRange: DateRange!
 }
 
 input ResumeDataInput {

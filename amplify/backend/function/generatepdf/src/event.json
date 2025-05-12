@@ -28,7 +28,10 @@
         {
           "id": "experience0",
           "title": "Freelance Web Developer",
-          "subheader": "Self-Employed | May 2024 - Present",
+          "subheader": "Self-Employed",
+          "dateRange": {
+            "start": "May 2024"
+          },
           "data": [
             "Collaborated with clients in consulting industries, designed and developed custom websites with a focus on accessibility, responsive design, and SEO & site optimization.",
             "Developed [mitokhon.com](https://mitokhon.com) for MitoKhon, a consultancy advancing health equity and social justice across healthcare systems. Built the site in WordPress using Breakdance and custom CSS. Extended the initial Figma designs of three core pages into ten **fully responsive, accessible layouts**. Delivered **ahead of schedule and under budget**, earning praise from the client, designer, and project manager for clean implementation and seamless user experience.",
@@ -38,9 +41,12 @@
         },
         {
           "id": "experience1",
-          "title": "Front End Developer",
-
-          "subheader": "Pacific Northwest National Laboratory | Mar 2021 - Dec 2023",
+          "title": "Full Stack Developer",
+          "subheader": "Pacific Northwest National Laboratory",
+          "dateRange": {
+            "start": "March 2021",
+            "end": "December 2023"
+          },
           "data": [
             "Worked closely with cross-functional teams to develop interactive, data-driven visualization platforms for scientific collaboration. Utilized expertise in Angular, React, TypeScript, and Python to contribute to the creation of cutting-edge solutions tailored to meet project requirements.",
             "Took ownership of UI design for a key project, creating a feature that helped secure an additional **$50K in funding**. Anticipated needs ahead of client demos to polish the product, resolving last-minute bugs and shipping features under pressure to ensure a seamless, high-quality presentation.",
@@ -51,8 +57,11 @@
         {
           "id": "experience2",
           "title": "Web Development Intern",
-
-          "subheader": "Pacific Northwest National Laboratory | May 2020 - Aug 2020",
+          "subheader": "Pacific Northwest National Laboratory",
+          "dateRange": {
+            "start": "May 2020",
+            "end": "August 2020"
+          },
           "data": [
             "Contributed to the early development of a React-based data visualization tool, implementing core logic and structure based on design mockups.",
             "Supported technical decision-making by researching and recommending charting libraries, including the team's eventual adoption of D3.js."
@@ -62,8 +71,11 @@
         {
           "id": "experience3",
           "title": "Undergrad Research Assistant",
-
-          "subheader": "UT Austin Nuclear Engineering Teaching Lab | July 2018 - Dec 2020",
+          "subheader": "UT Austin Nuclear Engineering Teaching Lab",
+          "dateRange": {
+            "start": "July 2018",
+            "end": "December 2020"
+          },
           "data": [
             "**Led software development** for outdoor air samplers, using Python, Django, JavaScript, and HTML/CSS to build a Django-based server for local result processing.",
             "Worked with a multidisciplinary undergraduate team across the sciences, contributing to a successful field test that informed further development by collaborators at a national lab. Later **co-authored a publication** detailing the system's methodology."
@@ -75,7 +87,11 @@
         {
           "id": "education1",
           "title": "B.S. Mathematics",
-          "subheader": "University of Texas at Austin | 2019 - 2023",
+          "subheader": "University of Texas at Austin",
+          "dateRange": {
+            "start": "2019",
+            "end": "2023"
+          },
           "subheaderTypographyProps": {
             "component": "h6",
             "variant": "subtitle1"
@@ -89,6 +105,10 @@
           "id": "education2",
           "title": "Certificate in Computer Science",
           "subheader": "University of Texas at Austin | 2020 - 2023",
+          "dateRange": {
+            "start": "2020",
+            "end": "2023"
+          },
           "subheaderTypographyProps": {
             "component": "h6",
             "variant": "subtitle1"
@@ -101,7 +121,11 @@
         {
           "id": "education3",
           "title": "A.S. Mathematics",
-          "subheader": "Austin Community College | 2018 - 2019",
+          "subheader": "Austin Community College",
+          "dateRange": {
+            "start": "2018",
+            "end": "2019"
+          },
           "subheaderTypographyProps": {
             "component": "h6",
             "variant": "subtitle1"

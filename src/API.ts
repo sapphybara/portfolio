@@ -15,11 +15,18 @@ export type ExperienceInput = {
   title: string,
   subheader: string,
   data: Array< string >,
+  dateRange: DateRange,
+};
+
+export type DateRange = {
+  end?: string | null,
+  start: string,
 };
 
 export type EducationInput = {
   title: string,
   subheader: string,
+  dateRange: DateRange,
 };
 
 export type GeneratePDFResponse = {
