@@ -221,7 +221,7 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
           <FormControlLabel
             control={
               <Checkbox
-                value={shouldFormat}
+                checked={shouldFormat}
                 onChange={() => setShouldFormat((prev) => !prev)}
               />
             }
