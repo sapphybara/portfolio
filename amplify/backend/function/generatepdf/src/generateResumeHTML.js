@@ -23,6 +23,14 @@ const getCommonCSS = () => `
     font-family: "Merriweather Sans", sans-serif;
     color: var(--primary-color);
   }
+  h1 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 2em;
+  }
+  .summary {
+    text-align: center;
+  }
   .job-title {
     text-align: center;
     font-style: italic;
@@ -173,7 +181,7 @@ const generateHTMLHead = (jobTitle, css) => `
 `;
 
 const generateContactInfo = (jobTitle) => `
-  <h1 style="text-align: center; margin-top: 0">Sapphyra Wiser</h1>
+  <h1>Sapphyra Wiser</h1>
   <h3 class="job-title">${jobTitle}</h3>
   <hr />
   <p class="contact">🏠 Denver, CO | 📧
@@ -182,6 +190,10 @@ const generateContactInfo = (jobTitle) => `
   <a href="https://linkedin.com/in/sapphyra-wiser" target="_blank">linkedin.com/in/sapphyra-wiser</a> | 🌐
   <a href="https://sapphyrawiser.com" target="_blank">sapphyrawiser.com</a>
   </p>
+`;
+
+const generateSummary = () => `
+  <p class="summary">Creative and driven Full Stack Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
 `;
 
 const generateSkills = (selectedSkills) =>
@@ -231,13 +243,17 @@ module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines 
 
   return `
     <html lang="en">
+      ${generateHTMLHead(jobTitle, css).trim()}
       <body>
-        ${generateHTMLHead(jobTitle, css).trim()}
-        ${generateContactInfo(jobTitle).trim()}
-        <p class="summary" style="text-align: center">Creative and driven Full Stack Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
-        ${generateSkills(selectedSkills).trim()}
-        ${generateExperience(experience).trim()}
-        ${generateEducation(education).trim()}
+        <section id="contact">
+          ${generateContactInfo(jobTitle).trim()}
+        </section>
+        <section id="summary">
+          ${generateSummary().trim()}
+        </section>
+        <section id="skills">${generateSkills(selectedSkills).trim()}</section>
+        <section id="experience">${generateExperience(experience).trim()}</section>
+        <section id="education">${generateEducation(education).trim()}</section>
       </body>
     </html>
   `;
