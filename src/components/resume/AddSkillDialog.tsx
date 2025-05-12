@@ -10,7 +10,14 @@ import {
   Checkbox,
 } from "@mui/material";
 import { createFilterOptions } from "@mui/material/Autocomplete";
-import { FC, useState, useEffect, useRef } from "react";
+import {
+  FC,
+  useState,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { AutoCompleteOption, SectionContent } from "types/global";
 import CreatableAutocomplete from "./CreateableAutocomplete";
 
@@ -22,7 +29,7 @@ interface AddSkillDialogProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   open: boolean;
   sectionContent: SectionContent;
-  setShouldFormat: (value: boolean) => void;
+  setShouldFormat: Dispatch<SetStateAction<boolean>>;
   shouldFormat: boolean;
 }
 
@@ -215,7 +222,7 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
             control={
               <Checkbox
                 value={shouldFormat}
-                onChange={() => setShouldFormat(!shouldFormat)}
+                onChange={() => setShouldFormat((prev) => !prev)}
               />
             }
             label="Bypass Formatting"
