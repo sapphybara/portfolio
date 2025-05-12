@@ -32,7 +32,7 @@ const ResumeBuilder: React.FC = () => {
   const [err, setErr] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");
-  const [isSandboxMode, setIsSandboxMode] = useState<boolean>(false);
+  const [isSandboxMode, setIsSandboxMode] = useState<boolean>(true);
 
   const fetcher = useFetcher();
 
