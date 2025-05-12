@@ -234,7 +234,7 @@ module.exports = ({ jobTitle, selectedSkills, experience, education, skillLines 
       <body>
         ${generateHTMLHead(jobTitle, css).trim()}
         ${generateContactInfo(jobTitle).trim()}
-        <p class="summary" style="text-align: center">Creative and driven Front End Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
+        <p class="summary" style="text-align: center">Creative and driven Full Stack Developer with a strong foundation in both design and development, and a passion for both. Thrives in collaborative environments - and on the volleyball court.</p>
         ${generateSkills(selectedSkills).trim()}
         ${generateExperience(experience).trim()}
         ${generateEducation(education).trim()}
