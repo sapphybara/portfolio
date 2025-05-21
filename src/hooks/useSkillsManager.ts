@@ -72,30 +72,31 @@ const useSkillsManager = (skillData: StringResumeDataItem[]) => {
   };
 
   useEffect(() => {
-    skillData.forEach(({ data = [], title: section }) => {
-      let allSelected = true;
-      let someSelected = false;
-      let skills: AutoCompleteOption[] = [];
-      const currentSection = sectionContent[section];
-      if (currentSection) {
-        allSelected = currentSection.allSelected;
-        someSelected = currentSection.someSelected;
-        skills = [...currentSection.skills];
-      }
-
-      data.forEach((skill) => {
-        const currentSkill = skills.find((s) => s.label === skill);
-        if (!currentSkill) {
-          someSelected = true;
-          skills.push({ label: skill, section, selected: true });
+    setSectionContent((prev) => {
+      const updatedContent = { ...prev };
+      skillData.forEach(({ data = [], title: section }) => {
+        let allSelected = true;
+        let someSelected = false;
+        let skills: AutoCompleteOption[] = [];
+        const currentSection = updatedContent[section];
+        if (currentSection) {
+          allSelected = currentSection.allSelected;
+          someSelected = currentSection.someSelected;
+          skills = [...currentSection.skills];
         }
+
+        data.forEach((skill) => {
+          const currentSkill = skills.find((s) => s.label === skill);
+          if (!currentSkill) {
+            someSelected = true;
+            skills.push({ label: skill, section, selected: true });
+          }
+        });
+        updatedContent[section] = { allSelected, someSelected, skills };
       });
-      setSectionContent((prev) => ({
-        ...prev,
-        [section]: { allSelected, someSelected, skills },
-      }));
+      return updatedContent;
     });
-  }, [sectionContent, skillData]);
+  }, [skillData]);
 
   return {
     autoCompleteOptions: Object.values(sectionContent).reduce(
