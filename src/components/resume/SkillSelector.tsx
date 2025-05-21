@@ -152,7 +152,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
 
     newDialogValue = {
       label: skill,
-      section: capitalizeWords(section),
+      section,
       selected: true,
     };
     if (shouldTimeout) {

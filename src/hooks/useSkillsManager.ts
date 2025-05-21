@@ -38,30 +38,53 @@ const useSkillsManager = (skillData: StringResumeDataItem[]) => {
   const handleSkillSelection = (skill: AutoCompleteOption) => {
     setSectionContent((prev) => {
       const updatedContent = { ...prev };
-      const section = skill.section;
-      const currentSection = updatedContent[section];
+      let { label, section } = skill;
+      label = label.toLowerCase();
+      section = section.toLowerCase();
+      // find the section using a lowercase key
+      const selectedSectionData = Object.entries(updatedContent).find(
+        ([k]) => k.toLowerCase() === section
+      )?.[1] as SectionContent[string] | undefined;
 
-      if (currentSection) {
-        let updatedSkills: AutoCompleteOption[] = [...currentSection.skills];
-        const currentSkill = updatedSkills.find((s) => s.label === skill.label);
+      // Remove the skill from any other section if it exists
+      const matchedSection = Object.keys(updatedContent)
+        .find((key) =>
+          updatedContent[key].skills.some(
+            (s) => s.label.toLowerCase() === label
+          )
+        )
+        ?.toLowerCase();
+      if (matchedSection && matchedSection !== section) {
+        updatedContent[matchedSection].skills = updatedContent[
+          matchedSection
+        ].skills.filter((s) => s.label.toLowerCase() !== label);
+      }
+
+      if (selectedSectionData) {
+        let updatedSkills: AutoCompleteOption[] = [
+          ...selectedSectionData.skills,
+        ];
+        const currentSkill = updatedSkills.find(
+          (s) => s.label.toLowerCase() === label
+        );
 
         if (!currentSkill) {
           updatedSkills.push(skill);
         } else {
           updatedSkills = updatedSkills.map((s) =>
-            s.label === skill.label ? { ...s, selected: !s.selected } : { ...s }
+            s.label.toLowerCase() === label
+              ? { ...s, selected: !s.selected }
+              : { ...s }
           );
         }
         const allSelected = updatedSkills.every((s) => s.selected);
         const someSelected = updatedSkills.some((s) => s.selected);
 
-        updatedContent[section] = {
-          allSelected,
-          someSelected,
-          skills: updatedSkills,
-        };
+        selectedSectionData.allSelected = allSelected;
+        selectedSectionData.someSelected = someSelected;
+        selectedSectionData.skills = updatedSkills;
       } else {
-        updatedContent[section] = {
+        updatedContent[skill.section] = {
           allSelected: true,
           someSelected: true,
           skills: [skill],
