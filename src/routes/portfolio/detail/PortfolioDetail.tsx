@@ -120,7 +120,7 @@ const PortfolioDetail = () => {
       >
         <Typography
           component={Link}
-          href="/#portfolio"
+          href="/portfolio"
           underline="hover"
           variant="decoration"
         >
@@ -136,7 +136,7 @@ const PortfolioDetail = () => {
           <Button
             className="justify-around"
             fullWidth
-            href="/#portfolio"
+            href="/portfolio"
             startIcon={<ArrowBack />}
             variant="outlined"
           >

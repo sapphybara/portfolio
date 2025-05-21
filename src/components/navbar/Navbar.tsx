@@ -37,14 +37,12 @@ const Navbar = (props: PropsWithRoutes) => {
           const { path = "" } = route;
           if (
             (path === "admin" && import.meta.env.PROD && !user) ||
-            ["login", "logout", "portfolio"].includes(path)
+            ["login", "logout"].includes(path)
           ) {
             return null;
           }
           const name =
-            path === ""
-              ? "Portfolio"
-              : path.charAt(0).toUpperCase() + path.slice(1);
+            path === "" ? "Home" : path.charAt(0).toUpperCase() + path.slice(1);
           return (
             <ListItem className={isMobile ? "mobile" : undefined} key={path}>
               {path === "resume" ? (

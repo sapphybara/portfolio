@@ -1,4 +1,4 @@
-import { Outlet, RouteObject, redirect } from "react-router-dom";
+import { Outlet, RouteObject } from "react-router-dom";
 import App from "@/App";
 import Error from "@routes/error/ErrorPage";
 import Admin from "@routes/admin/Admin";
@@ -7,22 +7,10 @@ import Home from "@routes/home/Home";
 import rootLoader from "@routes/loader";
 import ccLoader from "@routes/admin/credit-cards/loader";
 import adminLoader from "@routes/admin/loader";
-import { useState } from "react";
-import { TabState } from "types/global";
 import CreditCardLoader from "@routes/admin/credit-cards/CreditCardLoader";
-
-interface TabData extends Pick<TabState, "maxTabHeight" | "tabIdx"> {}
+import PortfolioWrapper from "@routes/portfolio/PortfolioWrapper";
 
 export const useRoutes = () => {
-  const [tabState, setTabState] = useState<TabData>({
-    maxTabHeight: 0,
-    tabIdx: 0,
-  });
-
-  const tabStateSetter = (key: keyof TabData) => (value: number) => {
-    setTabState((prev) => ({ ...prev, [key]: value }));
-  };
-
   const routes = [
     {
       id: "root",
@@ -37,24 +25,16 @@ export const useRoutes = () => {
       children: [
         {
           path: "",
-          element: (
-            <Home
-              maxTabHeight={tabState.maxTabHeight}
-              setMaxTabHeight={tabStateSetter("maxTabHeight")}
-              setTabIdx={tabStateSetter("tabIdx")}
-              tabIdx={tabState.tabIdx}
-            />
-          ),
+          element: <Home />,
         },
         {
           path: "portfolio",
-          loader: ({ params }) => {
-            if (params.projectId) {
-              return null;
-            }
-            return redirect("/#portfolio");
-          },
+          element: <Outlet />,
           children: [
+            {
+              path: "",
+              element: <PortfolioWrapper />,
+            },
             {
               path: ":projectId",
               lazy: () => import("@routes/portfolio/detail/lazy"),

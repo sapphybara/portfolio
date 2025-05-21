@@ -1,9 +1,6 @@
-import { Box, Divider, Link, Stack, Typography, styled } from "@mui/material";
+import { Box, Divider, Stack, Typography, styled } from "@mui/material";
 import ResumeLinkWithTooltip from "@components/ResumeLinkWithTooltip";
 import AboutHeader from "@components/AboutHeader";
-import Portfolio from "@components/Portfolio";
-import { FC } from "react";
-import { TabState } from "types/global";
 
 const TypographyStack = styled(Stack)(({ theme }) => ({
   margin: theme.spacing(1, 0),
@@ -23,7 +20,7 @@ const TypographyStack = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const Home: FC<TabState> = (props) => {
+const Home = () => {
   return (
     <Stack component="section">
       <Stack justifyContent="space-around">
@@ -75,20 +72,6 @@ const Home: FC<TabState> = (props) => {
           variant: "contained",
         }}
       />
-      <Typography id="portfolio" variant="decoration">
-        View
-      </Typography>
-      <Typography
-        color="text.primary"
-        className="mb-4"
-        component={Link}
-        href="#portfolio"
-        underline="none"
-        variant="h3"
-      >
-        My Projects
-      </Typography>
-      <Portfolio {...props} />
     </Stack>
   );
 };
