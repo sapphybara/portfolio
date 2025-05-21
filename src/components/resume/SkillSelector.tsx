@@ -118,7 +118,7 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
     setInputValue("");
 
     let section = match[1]?.trim() || "Other Skills";
-    const skill = capitalizeWords(match[2].trim());
+    const skill = match[2].trim();
 
     let newDialogValue = autoCompleteOptions.find(
       (s) => s.label.toLowerCase() === skill.toLowerCase()
