@@ -2,15 +2,15 @@ import { Stack, Tab, Tabs, Theme, useMediaQuery } from "@mui/material";
 import { FC } from "react";
 import PortfolioCard from "./PortfolioCard";
 import portfolioCards from "@assets/json/portfolio_cards.json";
-import { PortfolioItem, TabState } from "types/global";
+import { PortfolioItem } from "types/global";
 import CustomTabPanel from "@components/CustomTabPanel";
 
-const Portfolio: FC<TabState> = ({
-  maxTabHeight,
-  setMaxTabHeight,
-  setTabIdx,
-  tabIdx,
-}) => {
+interface PortfolioProps {
+  setTabIdx: (value: number) => void;
+  tabIdx: number;
+}
+
+const Portfolio: FC<PortfolioProps> = ({ setTabIdx, tabIdx }) => {
   const isMdUp = useMediaQuery("(min-width: 730px)");
   const isSmDown = useMediaQuery((theme) =>
     (theme as Theme).breakpoints.down("sm")
@@ -45,8 +45,6 @@ const Portfolio: FC<TabState> = ({
           idPrefix="project"
           index={index}
           key={project.id}
-          maxTabHeight={maxTabHeight}
-          setMaxTabHeight={setMaxTabHeight}
           value={tabIdx}
         >
           <PortfolioCard {...(project as PortfolioItem)} />

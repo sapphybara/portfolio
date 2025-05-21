@@ -116,13 +116,6 @@ export interface ContactFormField {
   type: "text" | "email";
 }
 
-export interface TabState {
-  maxTabHeight: number;
-  setMaxTabHeight: (value: number) => void;
-  setTabIdx: (value: number) => void;
-  tabIdx: number;
-}
-
 type ResumeDataType = "list" | "paragraph" | "flat";
 
 interface BaseResumeDataItem extends Omit<SharedCardHeaderProps, "title"> {
