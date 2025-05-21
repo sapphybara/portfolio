@@ -124,11 +124,6 @@ const SkillSelector: FC<ResumeBuilderOption> = ({
       (s) => s.label.toLowerCase() === skill.toLowerCase()
     );
 
-    if (newDialogValue) {
-      // ignore the user's section if the skill already exists
-      return handleSkillChange(newDialogValue);
-    }
-
     // Look for best matching section if the user provided a section
     if (match[1]) {
       const sectionLower = section.toLowerCase();
