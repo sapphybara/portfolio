@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { PortfolioItem } from "types/global";
 import { GitHub, LinkOutlined } from "@mui/icons-material";
-import TagChips from "./TagChips";
+import TagChips from "@components/TagChips";
 
 const PortfolioWrapper = styled(Card)(({ theme }) => ({
   ...(theme.palette.mode === "dark" && {

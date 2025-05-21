@@ -1,9 +1,9 @@
 import { Stack, Tab, Tabs, Theme, useMediaQuery } from "@mui/material";
 import { FC } from "react";
-import PortfolioCard from "@components/PortfolioCard";
+import PortfolioCard from "./PortfolioCard";
 import portfolioCards from "@assets/json/portfolio_cards.json";
 import { PortfolioItem, TabState } from "types/global";
-import CustomTabPanel from "./CustomTabPanel";
+import CustomTabPanel from "@components/CustomTabPanel";
 
 const Portfolio: FC<TabState> = ({
   maxTabHeight,
