@@ -136,8 +136,11 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
         ...[1, 2, 3, 4, 5, 6].reduce(
           (acc, val) => ({
             ...acc,
+            [`&[data-h-level="${val}"]`]: {
+              fontSize: `${(7 - val) / 8 + 0.75}rem`,
+            },
             [`& + .MuiTypography-h${val}`]: {
-              marginTop: theme.spacing(-(0.08 * val + 0.8)),
+              marginTop: `${-1 + 0.125 * val}rem`,
             },
           }),
           {}
