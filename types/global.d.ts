@@ -90,6 +90,7 @@ export interface PortfolioItem {
   problemSolving: string[];
   shortDescription: string;
   images?: PortfolioItemImage[];
+  isFeaturedOnHome?: boolean;
 }
 
 export type CCScoreLevel = 1 | 2 | 3 | 4;
@@ -151,3 +152,9 @@ export type SectionContent = {
     skills: AutoCompleteOption[];
   };
 };
+
+export interface DecoratedHeaderProps {
+  decoration: string;
+  header: string;
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+}

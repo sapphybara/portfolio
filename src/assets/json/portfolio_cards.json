@@ -44,7 +44,8 @@
       "Enhanced website accessibility to meet WCAG guidelines and improve usability for all visitors.",
       "Facilitated cross-functional communication to manage feedback efficiently and keep projects ahead of schedule."
     ],
-    "shortDescription": "A healthcare consulting website focused on equity-driven organizational transformation, accessibility, and secure, compliant web practices, with strong project and stakeholder management."
+    "shortDescription": "A healthcare consulting website focused on equity-driven organizational transformation, accessibility, and secure, compliant web practices, with strong project and stakeholder management.",
+    "isFeaturedOnHome": true
   },
   {
     "id": "developer-portfolio",
@@ -153,7 +154,8 @@
         "alt": "HySCAN Results Page: related questions",
         "description": "An example of how related questions were grouped together, where multiple elements of the components in the system can all relate to the same code or standard."
       }
-    ]
+    ],
+    "isFeaturedOnHome": true
   },
   {
     "id": "explainable-ai",
