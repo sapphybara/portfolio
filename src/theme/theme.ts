@@ -138,9 +138,10 @@ const createCustomTheme = (rootElement: Element, mode: PaletteMode) => {
             ...acc,
             [`&[data-h-level="${val}"]`]: {
               fontSize: `${(7 - val) / 8 + 0.75}rem`,
+              lineHeight: `${(7 - val) / 8 + 1}rem`,
             },
             [`& + .MuiTypography-h${val}`]: {
-              marginTop: `${-1 + 0.125 * val}rem`,
+              marginTop: `-0.3rem`,
             },
           }),
           {}
