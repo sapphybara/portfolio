@@ -22,7 +22,7 @@ const Portfolio: FC<PortfolioProps> = ({ setTabIdx, tabIdx }) => {
   });
 
   return (
-    <Stack component="section" direction={isMdUp ? "row" : "column"}>
+    <Stack direction={isMdUp ? "row" : "column"} py={1}>
       <Tabs
         aria-label="portfolio project selection"
         onChange={(_, value) => setTabIdx(value)}
