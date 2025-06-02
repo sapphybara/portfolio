@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { Form, useActionData, useLocation } from "react-router-dom";
 import { LoaderActionError } from "types/global";
+import DecoratedHeader from "./DecoratedHeader";
 
 const SignIn = () => {
   const actionData = useActionData() as LoaderActionError | undefined;
@@ -36,8 +37,7 @@ const SignIn = () => {
 
   return (
     <Stack alignItems="flex-start" component={Form} method="post" replace>
-      <Typography variant="decoration">Please</Typography>
-      <Typography variant="h1">Sign In</Typography>
+      <DecoratedHeader decoration="please" header="Sign In" level={1} />
       <Input name="tabIndex" type="hidden" value={tabIndex} />
       <Input name="redirectTo" type="hidden" value={from} />
       <Typography color="error">{actionData?.status}</Typography>

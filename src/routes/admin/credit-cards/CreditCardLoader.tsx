@@ -6,6 +6,7 @@ import CreditCardTable from "@components/CreditCardTable/CreditCardTable";
 import { ListCreditCardsQuery } from "@/API";
 import Fallback from "@components/CreditCardTable/Fallback";
 import { LoaderActionError } from "types/global";
+import DecoratedHeader from "@/components/DecoratedHeader";
 
 const CreditCardLoader = () => {
   const fetcher = useFetcher();
@@ -18,8 +19,7 @@ const CreditCardLoader = () => {
   return (
     <Box>
       <Outlet />
-      <Typography variant="decoration">Manage</Typography>
-      <Typography variant="h1">Admin</Typography>
+      <DecoratedHeader decoration="view" header="Credit Cards" level={1} />
       {"creditCards" in creditCardData ? (
         <>
           <Suspense fallback={<Fallback />}>

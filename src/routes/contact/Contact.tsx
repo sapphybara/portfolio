@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Form, useActionData } from "react-router-dom";
 import { ContactFormField, LoaderActionError } from "types/global";
+import DecoratedHeader from "@/components/DecoratedHeader";
 
 const formFields: ContactFormField[] = [
   { key: "name", label: "Name", type: "text" },
@@ -17,8 +18,11 @@ const Contact = () => {
   if (actionData?.status === "success") {
     return (
       <>
-        <Typography variant="decoration">Thanks for</Typography>
-        <Typography variant="h1">Reaching out</Typography>
+        <DecoratedHeader
+          decoration="thanks for"
+          header="Reaching Out"
+          level={1}
+        />
         <Typography className="mt-4" paragraph>
           Your message has been sent successfully. I'll get back to you as soon
           as possible.
@@ -29,8 +33,7 @@ const Contact = () => {
 
   return (
     <section>
-      <Typography variant="decoration">Get in</Typography>
-      <Typography variant="h1">Contact</Typography>
+      <DecoratedHeader decoration="get in" header="Contact" level={1} />
       <Typography paragraph>
         If you'd like to get in touch with me, please fill out the form below. I
         am currently accepting freelance work and am open to new opportunities.

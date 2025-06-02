@@ -3,6 +3,7 @@ import { useRouteError } from "react-router-dom";
 import { PropsWithRoutes } from "types/global";
 import { ReactNode } from "react";
 import Navbar from "@components/navbar/Navbar";
+import DecoratedHeader from "@/components/DecoratedHeader";
 
 const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
   const error = useRouteError() as { statusText?: string } | Error;
@@ -25,8 +26,7 @@ const ErrorPage: (props: PropsWithRoutes) => ReactNode = ({ routes }) => {
     <>
       <Navbar routes={routes} />
       <Box className="mt-16 mx-8" component="main">
-        <Typography variant="decoration">Error</Typography>
-        <Typography variant="h1">Oops!</Typography>
+        <DecoratedHeader decoration="error" header="Oops!" level={1} />
         <Typography className="text-center" paragraph>
           Sorry, an unexpected error has occurred.
         </Typography>

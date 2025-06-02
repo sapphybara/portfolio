@@ -24,6 +24,7 @@ import resumeData from "@assets/json/resume_data.json";
 import { isResumeDataItem } from "@utils/typeGuards";
 import ReactMarkdown from "react-markdown";
 import { Fragment } from "react";
+import DecoratedHeader from "@/components/DecoratedHeader";
 
 const avatarRecord = {
   skills: TerminalOutlined,
@@ -134,8 +135,7 @@ const Resume = () => {
 
   return (
     <Box component="section">
-      <Typography variant="decoration">View my</Typography>
-      <Typography variant="h1">Resume</Typography>
+      <DecoratedHeader decoration="view my" header="Resume" level={1} />
       <Stack alignItems="flex-end">
         <Stack
           alignItems="start"
