@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import Portfolio from "@components/portfolio/Portfolio";
 import DecoratedHeader from "@components/DecoratedHeader";
 
@@ -6,16 +6,21 @@ const PortfolioWrapper = () => {
   return (
     <Stack direction="column" gap={3} component="section">
       <DecoratedHeader decoration="View" header="My Projects" level={1} />
-      <Typography>
-        Here's a curated selection of my recent work spanning front-end
-        development, fullstack builds, UI/UX design, and technical strategy.
-      </Typography>
-      <Typography>
-        Each project reflects my commitment to building accessible, user-first
-        solutions with clean code and thoughtful design. Whether it's a
-        freelance client, a personal challenge, or a team effort — these
-        projects demonstrate how I turn ideas into polished digital experiences.
-      </Typography>
+      <Grid container columns={2} spacing={2}>
+        <Grid item xs={2} md={1} component={Typography}>
+          This is a list of some of my favorite projects from over the years. It
+          combines work completed during college, personal projects, and some of
+          my freelance endeavors. My experience covers the full stack, starting
+          at the backend with machine learning and creating RESTful APIs.
+        </Grid>
+        <Grid item xs={2} md={1} component={Typography}>
+          Transiting to the frontend, I have worked extensively with TypeScript
+          & modern frameworks to create custom-coded websites, as well as
+          website builders in Content Management Systems. Beyond the development
+          stack, I have designed multiple web applications using Adobe XD and,
+          more recently, Figma.
+        </Grid>
+      </Grid>
       <Portfolio />
     </Stack>
   );
