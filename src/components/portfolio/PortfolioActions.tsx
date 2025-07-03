@@ -1,6 +1,6 @@
 import { Clear, FilterListOff } from "@mui/icons-material";
 import { IconButton, Stack, TextField, Button } from "@mui/material";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { PortfolioItem } from "types/global";
 import FilterAutocomplete from "@components/FilterAutocomplete";
 
@@ -18,35 +18,8 @@ const PortfolioActions = ({
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
   const [affiliationFilter, setAffiliationFilter] = useState<string[]>([]);
 
-  // State to store unique values initialized once
-  const [uniqueTechStackCardTypes, setUniqueTechStackCardTypes] = useState<
-    Set<string>
-  >(new Set());
-  const [uniqueRoles, setUniqueRoles] = useState<Set<string>>(new Set());
-  const [uniqueAffiliations, setUniqueAffiliations] = useState<Set<string>>(
-    new Set()
-  );
-
-  useEffect(() => {
-    // Initialize unique filters once on load
-    const techStackTypes = new Set(
-      portfolioCardsJSON.flatMap((card) =>
-        card.techStack.map((tech) => tech.name)
-      )
-    );
-
-    const roles = new Set(portfolioCardsJSON.flatMap((card) => card.roles));
-
-    const affiliations = new Set(
-      portfolioCardsJSON.map((card) => card.affiliation)
-    );
-
-    setUniqueTechStackCardTypes(techStackTypes);
-    setUniqueRoles(roles);
-    setUniqueAffiliations(affiliations);
-  }, [portfolioCardsJSON]);
-
-  const applyFilters = (
+  // Shared filtering logic
+  const getFilteredCards = (
     textVal: string,
     techStackVal: string[],
     roleVal: string[],
@@ -80,6 +53,54 @@ const PortfolioActions = ({
       );
     }
 
+    return filteredCards;
+  };
+
+  // Get filtered options based on current filter state
+  const getFilteredOptions = (
+    filterType: "techStack" | "role" | "affiliation"
+  ) => {
+    // Apply existing filters except for the current filter type
+    const filteredCards = getFilteredCards(
+      textFilter,
+      filterType !== "techStack" ? techStackFilter : [],
+      filterType !== "role" ? roleFilter : [],
+      filterType !== "affiliation" ? affiliationFilter : []
+    );
+
+    // Extract unique values for the requested filter type
+    switch (filterType) {
+      case "techStack":
+        return Array.from(
+          new Set(
+            filteredCards.flatMap((card) =>
+              card.techStack.map((tech) => tech.name)
+            )
+          )
+        );
+      case "role":
+        return Array.from(new Set(filteredCards.flatMap((card) => card.roles)));
+      case "affiliation":
+        return Array.from(
+          new Set(filteredCards.map((card) => card.affiliation))
+        );
+      default:
+        return [];
+    }
+  };
+
+  const applyFilters = (
+    textVal: string,
+    techStackVal: string[],
+    roleVal: string[],
+    affiliationVal: string[]
+  ) => {
+    const filteredCards = getFilteredCards(
+      textVal,
+      techStackVal,
+      roleVal,
+      affiliationVal
+    );
     setPortfolioCards(filteredCards);
   };
 
@@ -148,7 +169,7 @@ const PortfolioActions = ({
         <FilterAutocomplete
           label="Tech Stack"
           placeholder="Filter Tech Stack"
-          options={Array.from(uniqueTechStackCardTypes)}
+          options={getFilteredOptions("techStack")}
           value={techStackFilter}
           onChange={(value) => {
             setTechStackFilter(value);
@@ -158,7 +179,7 @@ const PortfolioActions = ({
         <FilterAutocomplete
           label="Role"
           placeholder="Filter by Role"
-          options={Array.from(uniqueRoles)}
+          options={getFilteredOptions("role")}
           value={roleFilter}
           onChange={(value) => {
             setRoleFilter(value);
@@ -168,7 +189,7 @@ const PortfolioActions = ({
         <FilterAutocomplete
           label="Affiliation"
           placeholder="Filter by Affiliation"
-          options={Array.from(uniqueAffiliations)}
+          options={getFilteredOptions("affiliation")}
           value={affiliationFilter}
           onChange={(value) => {
             setAffiliationFilter(value);
