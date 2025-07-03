@@ -101,7 +101,6 @@ const Navbar = (props: PropsWithRoutes) => {
               width: "100%",
             }}
             typographyProps={{
-              sx: { display: { xs: "none", sm: "block" } },
               variant: "h6",
             }}
           />
