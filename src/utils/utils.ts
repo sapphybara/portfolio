@@ -4,10 +4,16 @@ export const toSentenceCase = (str: string) => {
   if (!str) {
     return "";
   }
-  const result = str
+  // If the string already has formatting, assume this is correct already
+  if (str.match(/[A-Z]{2,}/)) {
+    return str;
+  }
+  let result = str
     .replace(/([A-Z])/g, " $1") // convert camelCase
     .replace(/-/g, " ") // convert kebab-case
     .replace(/_/g, " "); // convert snake_case
+  result = result.replace("seo", "SEO");
+  result = result.replace("aws", "AWS");
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
