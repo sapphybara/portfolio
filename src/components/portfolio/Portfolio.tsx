@@ -1,16 +1,13 @@
 import { Stack, Tab, Tabs, Theme, useMediaQuery } from "@mui/material";
-import { FC } from "react";
+import { useState } from "react";
 import PortfolioCard from "./PortfolioCard";
 import portfolioCards from "@assets/json/portfolio_cards.json";
 import { PortfolioItem } from "types/global";
 import CustomTabPanel from "@components/CustomTabPanel";
 
-interface PortfolioProps {
-  setTabIdx: (value: number) => void;
-  tabIdx: number;
-}
+const Portfolio = () => {
+  const [tabIdx, setTabIdx] = useState(0);
 
-const Portfolio: FC<PortfolioProps> = ({ setTabIdx, tabIdx }) => {
   const isMdUp = useMediaQuery("(min-width: 730px)");
   const isSmDown = useMediaQuery((theme) =>
     (theme as Theme).breakpoints.down("sm")

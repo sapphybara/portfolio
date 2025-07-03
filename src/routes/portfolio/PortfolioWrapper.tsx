@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { Stack, Typography } from "@mui/material";
 import Portfolio from "@components/portfolio/Portfolio";
 import DecoratedHeader from "@components/DecoratedHeader";
 
 const PortfolioWrapper = () => {
-  const [tabIdx, setTabIdx] = useState(0);
-
   return (
     <Stack direction="column" gap={3} component="section">
       <DecoratedHeader decoration="View" header="My Projects" level={1} />
@@ -19,7 +16,7 @@ const PortfolioWrapper = () => {
         freelance client, a personal challenge, or a team effort — these
         projects demonstrate how I turn ideas into polished digital experiences.
       </Typography>
-      <Portfolio setTabIdx={setTabIdx} tabIdx={tabIdx} />
+      <Portfolio />
     </Stack>
   );
 };
