@@ -204,7 +204,8 @@ const PortfolioActions = ({
           sx={{
             minWidth: "auto",
             whiteSpace: "nowrap",
-            alignSelf: { xs: "stretch", sm: "flex-start" },
+            alignSelf: "stretch",
+            maxHeight: "56px",
           }}
         >
           Clear Filters
