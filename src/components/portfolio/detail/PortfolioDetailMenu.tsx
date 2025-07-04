@@ -14,10 +14,6 @@ import { toSentenceCase } from "@utils/utils";
 import { forwardRef } from "react";
 import { PortfolioItem } from "types/global";
 
-interface AnchorWrapperProps extends BoxProps {
-  isMobile?: boolean;
-}
-
 interface PortfolioDetailMenuProps {
   headers: (keyof PortfolioItem)[];
   portfolioDetail: PortfolioItem;
@@ -29,9 +25,7 @@ const AnchorLink = styled(Link)(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-const AnchorWrapper = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "isMobile",
-})<AnchorWrapperProps>(({ isMobile, theme }) => ({
+const AnchorWrapper = styled(Box)(({ theme }) => ({
   minWidth: "fit-content",
   "& .MuiTypography-root": {
     textAlign: "right",
@@ -45,8 +39,6 @@ const AnchorWrapper = styled(Box, {
     ? {
         position: "sticky",
         top: theme.spacing(8.25),
-        // todo this height is only for the desktop view, should be adjusted for mobile
-        ...(isMobile ? {} : { height: "calc(100vh - 103px)" }),
         paddingRight: theme.spacing(2),
       }
     : {}),
@@ -62,7 +54,7 @@ const PortfolioDetailMenu = forwardRef(
     }: PortfolioDetailMenuProps,
     ref
   ) => (
-    <AnchorWrapper display={display} isMobile={isMobile} ref={ref}>
+    <AnchorWrapper display={display} ref={ref}>
       {!isMobile && (
         <Button
           className="justify-around"
