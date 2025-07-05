@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { ThemeModeContext } from "@context/ThemeModeContext";
 
 const Logo = styled("img")(() => ({
@@ -13,7 +13,7 @@ interface ResponsiveLogoProps {
   rotation: number;
 }
 
-const ResponsiveLogo: FC<ResponsiveLogoProps> = ({ logoInitial, rotation }) => {
+const ResponsiveLogo = ({ logoInitial, rotation }: ResponsiveLogoProps) => {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (

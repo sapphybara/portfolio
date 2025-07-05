@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -28,7 +28,7 @@ const educationData =
   (resumeData.find((item: ResumeDataItem) => item.id === "education")
     ?.data as ResumeDataItem[]) || [];
 
-const ResumeBuilder: React.FC = () => {
+const ResumeBuilder = () => {
   const [err, setErr] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");

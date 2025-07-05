@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Autocomplete, AutocompleteProps, TextField } from "@mui/material";
 
 interface CreditCardOwnerAutocompleteProps
@@ -9,10 +8,10 @@ interface CreditCardOwnerAutocompleteProps
   id: string;
 }
 
-const CreditCardOwnerAutocomplete: FC<CreditCardOwnerAutocompleteProps> = ({
+const CreditCardOwnerAutocomplete = ({
   id,
   ...props
-}) => (
+}: CreditCardOwnerAutocompleteProps) => (
   <Autocomplete
     autoSelect
     id={id}

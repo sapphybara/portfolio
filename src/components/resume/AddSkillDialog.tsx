@@ -10,14 +10,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import { createFilterOptions } from "@mui/material/Autocomplete";
-import {
-  FC,
-  useState,
-  useEffect,
-  useRef,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import { AutoCompleteOption, SectionContent } from "types/global";
 import CreatableAutocomplete from "./CreateableAutocomplete";
 
@@ -55,7 +48,7 @@ const StyledDialog = styled(Dialog)(() => ({
 const skillFilter = createFilterOptions<string>();
 const sectionFilter = createFilterOptions<AutoCompleteOption>();
 
-const AddSkillDialog: FC<AddSkillDialogProps> = ({
+const AddSkillDialog = ({
   availableSections,
   dialogValue,
   setDialogValue,
@@ -65,7 +58,7 @@ const AddSkillDialog: FC<AddSkillDialogProps> = ({
   sectionContent,
   setShouldFormat,
   shouldFormat,
-}) => {
+}: AddSkillDialogProps) => {
   const [sectionInputValue, setSectionInputValue] = useState("");
   const [skillInputValue, setSkillInputValue] = useState("");
   const [availableSkills, setAvailableSkills] = useState<AutoCompleteOption[]>(

@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useRef } from "react";
+import { PropsWithChildren, useRef } from "react";
 import { Box } from "@mui/material";
 
 interface CustomTabPanelProps extends PropsWithChildren {
@@ -7,12 +7,12 @@ interface CustomTabPanelProps extends PropsWithChildren {
   value: number;
 }
 
-const CustomTabPanel: FC<CustomTabPanelProps> = ({
+const CustomTabPanel = ({
   children,
   idPrefix,
   index,
   value,
-}) => {
+}: CustomTabPanelProps) => {
   const tabRef = useRef<HTMLDivElement>(null);
   const isTabVisible = index === value;
 

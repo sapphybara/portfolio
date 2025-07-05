@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState, useRef } from "react";
+import { FormEvent, useState, useRef } from "react";
 import {
   Autocomplete,
   createFilterOptions,
@@ -61,13 +61,13 @@ const capitalizeWords = (str: string): string => {
     .join(" ");
 };
 
-const SkillSelector: FC<ResumeBuilderOption> = ({
+const SkillSelector = ({
   autoCompleteOptions,
   getSectionSelectionStatus,
   handleSkillChange,
   handleSectionSelection,
   sectionContent,
-}) => {
+}: ResumeBuilderOption) => {
   const [value, setValue] = useState<AutoCompleteOption | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const [open, toggleOpen] = useState(false);
