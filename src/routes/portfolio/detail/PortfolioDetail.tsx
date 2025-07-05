@@ -53,7 +53,7 @@ const PortfolioDetail = () => {
       >
         <Typography
           component={Link}
-          href="/portfolio"
+          href={`/portfolio?selectedProject=${portfolioDetail.id}`}
           underline="hover"
           variant="decoration"
         >

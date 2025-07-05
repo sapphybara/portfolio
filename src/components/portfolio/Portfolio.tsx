@@ -1,5 +1,6 @@
 import { Stack, Tab, Tabs, Theme, useMediaQuery } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import PortfolioCard from "./PortfolioCard";
 import PortfolioActions from "./PortfolioActions";
 import portfolioCardsJSON from "@assets/json/portfolio_cards.json";
@@ -7,7 +8,7 @@ import { PortfolioItem } from "types/global";
 import CustomTabPanel from "@components/CustomTabPanel";
 
 const Portfolio = () => {
-  const [tabIdx, setTabIdx] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [portfolioCards, setPortfolioCards] = useState(
     portfolioCardsJSON as PortfolioItem[]
   );
@@ -16,6 +17,35 @@ const Portfolio = () => {
   const isSmDown = useMediaQuery((theme) =>
     (theme as Theme).breakpoints.down("sm")
   );
+
+  const selectedProject = searchParams.get("selectedProject");
+
+  // Find the index of the selected project
+  const tabIdx = selectedProject
+    ? portfolioCards.findIndex((project) => project.id === selectedProject)
+    : -1;
+
+  // Handle invalid or missing selectedProject parameter
+  useEffect(() => {
+    if (!selectedProject || tabIdx === -1) {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.set("selectedProject", portfolioCards[0].id);
+      setSearchParams(newParams, { replace: true });
+    }
+  }, [selectedProject, tabIdx, searchParams, setSearchParams, portfolioCards]);
+
+  // If we're in an invalid state, show nothing while redirecting
+  if (!selectedProject || tabIdx === -1) {
+    return null;
+  }
+
+  const activeTabIdx = tabIdx;
+
+  const handleTabChange = (_: SyntheticEvent, newValue: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("selectedProject", portfolioCards[newValue].id);
+    setSearchParams(newParams);
+  };
 
   const a11yProps = (idPrefix: string, index: number) => ({
     id: `${idPrefix}-tab-${index}`,
@@ -31,11 +61,11 @@ const Portfolio = () => {
       <Stack direction={isMdUp ? "row" : "column"} py={1}>
         <Tabs
           aria-label="portfolio project selection"
-          onChange={(_, value) => setTabIdx(value)}
+          onChange={handleTabChange}
           orientation={isMdUp ? "vertical" : "horizontal"}
           selectionFollowsFocus
           sx={{ ...(isMdUp && { flex: "1 0 25%" }) }}
-          value={tabIdx}
+          value={activeTabIdx}
           variant={isSmDown ? "scrollable" : !isMdUp ? "fullWidth" : "standard"}
         >
           {portfolioCards.map((project, index) => (
@@ -51,7 +81,7 @@ const Portfolio = () => {
             idPrefix="project"
             index={index}
             key={project.id}
-            value={tabIdx}
+            value={activeTabIdx}
           >
             <PortfolioCard {...project} />
           </CustomTabPanel>

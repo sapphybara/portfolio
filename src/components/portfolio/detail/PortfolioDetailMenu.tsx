@@ -59,7 +59,7 @@ const PortfolioDetailMenu = forwardRef(
         <Button
           className="justify-around"
           fullWidth
-          href="/portfolio"
+          href={`/portfolio?selectedProject=${portfolioDetail.id}`}
           startIcon={<ArrowBack />}
           variant="outlined"
         >
