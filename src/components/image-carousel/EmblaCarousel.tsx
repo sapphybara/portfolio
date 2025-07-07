@@ -19,8 +19,8 @@ import EmblaCarouselContainer from "./EmblaCarouselContainer";
 import { toSentenceCase } from "@/utils/utils";
 
 interface EmblaCarouselProps {
-  ContentContainer?: React.ElementType; // todo
-  ActionsContainer?: React.ElementType; // todo
+  ContentContainer?: React.ElementType;
+  ActionsContainer?: React.ElementType;
   images: PortfolioItemImage[];
   isFullScreen?: boolean;
   toggleFullscreen: () => void;
@@ -156,7 +156,17 @@ const EmblaCarousel = ({
         my={1}
         p={1}
         justifyContent="center"
-        height={isMdUp ? "3lh" : isSmUp ? "4lh" : isMiniUp ? "5lh" : "6lh"}
+        height={
+          isFullScreen
+            ? "4lh"
+            : isMdUp
+            ? "3lh"
+            : isSmUp
+            ? "4lh"
+            : isMiniUp
+            ? "5lh"
+            : "6lh"
+        }
         bgcolor={buttonAndTagBgColor}
       >
         {images[selectedIndex].description}
