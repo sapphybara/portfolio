@@ -7,6 +7,7 @@ import {
   Typography,
   Box,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -71,6 +72,10 @@ const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const theme = useTheme();
+
+  const isMiniUp = useMediaQuery("(min-width: 405px)");
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
 
   const buttonAndTagBgColor =
     theme.palette.mode === "dark"
@@ -172,7 +177,7 @@ const ImageCarousel = ({ images }: { images: PortfolioItemImage[] }) => {
         mt={1}
         p={1}
         justifyContent="center"
-        height="4.5lh"
+        height={isMdUp ? "3lh" : isSmUp ? "4lh" : isMiniUp ? "5lh" : "6lh"}
         bgcolor={buttonAndTagBgColor}
       >
         {images[selectedIndex].description}
