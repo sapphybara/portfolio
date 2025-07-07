@@ -16,6 +16,7 @@ export default styled("div")(({ theme }) => {
       flex: "0 0 var(--embla-slide-width)",
       minWidth: 0,
       marginRight: "1em",
+      position: "relative",
     },
     ".embla__slide img": {
       width: "100%",
@@ -48,6 +49,16 @@ export default styled("div")(({ theme }) => {
         backgroundColor: isDarkMode
           ? theme.palette.grey[200]
           : theme.palette.grey[800],
+      },
+    },
+    ".embla__fullscreen": {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      "&:hover": {
+        backgroundColor: isDarkMode
+          ? theme.palette.grey[600]
+          : theme.palette.grey[400],
       },
     },
   };

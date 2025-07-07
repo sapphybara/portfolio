@@ -1,4 +1,9 @@
-import { Fullscreen, ChevronLeft, ChevronRight } from "@mui/icons-material";
+import {
+  Fullscreen,
+  ChevronLeft,
+  ChevronRight,
+  FullscreenExit,
+} from "@mui/icons-material";
 import {
   IconButton,
   Stack,
@@ -86,23 +91,22 @@ const EmblaCarousel = ({
         <ContentContainer className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {images.map((image, i) => (
-              <div className="embla__slide relative" key={image.src}>
+              <div className="embla__slide" key={image.src}>
                 <img
                   src={image.src}
                   alt={image.alt}
                   loading={i === 0 ? "eager" : "lazy"}
                 />
-                {/* todo switch to ternary with close button */}
-                {!isFullScreen && (
-                  <IconButton
-                    aria-label="Fullscreen"
-                    className="absolute top-0 right-0"
-                    sx={{ bgcolor: buttonAndTagBgColor }}
-                    onClick={toggleFullscreen}
-                  >
-                    <Fullscreen />
-                  </IconButton>
-                )}
+                <IconButton
+                  aria-label={`${
+                    isFullScreen ? "Exit Fullscreen" : "Enter Fullscreen"
+                  }`}
+                  className="embla__fullscreen"
+                  sx={{ bgcolor: buttonAndTagBgColor }}
+                  onClick={toggleFullscreen}
+                >
+                  {isFullScreen ? <FullscreenExit /> : <Fullscreen />}
+                </IconButton>
               </div>
             ))}
           </div>
