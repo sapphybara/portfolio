@@ -6,6 +6,9 @@ export default styled("div")(({ theme }) => {
   return {
     ".embla__viewport": {
       overflow: "hidden",
+      [theme.breakpoints.down("sm")]: {
+        padding: "0",
+      },
     },
     ".embla__container": {
       display: "flex",
