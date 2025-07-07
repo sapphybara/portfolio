@@ -12,10 +12,10 @@ export default styled("div")(({ theme }) => {
       width: "100%",
     },
     ".embla__slide": {
-      "--embla-slide-width": "95%",
+      "--embla-slide-width": "98%",
       flex: "0 0 var(--embla-slide-width)",
       minWidth: 0,
-      marginRight: "1em",
+      marginRight: "2%",
       position: "relative",
     },
     ".embla__slide img": {

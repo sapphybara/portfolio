@@ -5,6 +5,7 @@ import {
   FullscreenExit,
 } from "@mui/icons-material";
 import {
+  DialogTitle,
   IconButton,
   Stack,
   Typography,
@@ -15,6 +16,7 @@ import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
 import { PortfolioItemImage } from "types/global";
 import EmblaCarouselContainer from "./EmblaCarouselContainer";
+import { toSentenceCase } from "@/utils/utils";
 
 interface EmblaCarouselProps {
   ContentContainer?: React.ElementType; // todo
@@ -85,8 +87,12 @@ const EmblaCarousel = ({
       ? theme.palette.grey[800]
       : theme.palette.grey[300];
 
+  const titleText =
+    images[selectedIndex].src.split("/").pop()?.split(".")[0] || "Image";
+
   return (
-    <>
+    <Stack direction="column" alignItems="center" gap={1}>
+      {isFullScreen && <DialogTitle>{toSentenceCase(titleText)}</DialogTitle>}
       <EmblaCarouselContainer className="embla">
         <ContentContainer className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
@@ -143,21 +149,19 @@ const EmblaCarousel = ({
           </div>
         </ActionsContainer>
       </EmblaCarouselContainer>
-      {!isFullScreen && (
-        <Typography
-          variant="tag"
-          width="100%"
-          textAlign="center"
-          mt={1}
-          p={1}
-          justifyContent="center"
-          height={isMdUp ? "3lh" : isSmUp ? "4lh" : isMiniUp ? "5lh" : "6lh"}
-          bgcolor={buttonAndTagBgColor}
-        >
-          {images[selectedIndex].description}
-        </Typography>
-      )}
-    </>
+      <Typography
+        variant="tag"
+        width="98%"
+        textAlign="center"
+        my={1}
+        p={1}
+        justifyContent="center"
+        height={isMdUp ? "3lh" : isSmUp ? "4lh" : isMiniUp ? "5lh" : "6lh"}
+        bgcolor={buttonAndTagBgColor}
+      >
+        {images[selectedIndex].description}
+      </Typography>
+    </Stack>
   );
 };
 
