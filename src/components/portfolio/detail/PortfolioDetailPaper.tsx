@@ -27,7 +27,7 @@ import {
   useTheme,
   Collapse,
 } from "@mui/material";
-import ImageCarousel from "@components/ImageCarousel";
+import ImageCarousel from "@components/image-carousel/ImageCarousel";
 import TagChips from "@components/TagChips";
 import { isTechStack, isRole, isPortfolioImage } from "@utils/typeGuards";
 import { toSentenceCase } from "@utils/utils";
