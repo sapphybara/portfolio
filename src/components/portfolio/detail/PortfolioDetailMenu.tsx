@@ -40,6 +40,7 @@ const AnchorWrapper = styled(Box)(({ theme }) => ({
         position: "sticky",
         top: theme.spacing(8.25),
         paddingRight: theme.spacing(2),
+        maxHeight: "calc(100vh - 103px)",
       }
     : {}),
 }));
