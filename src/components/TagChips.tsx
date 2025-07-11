@@ -1,50 +1,16 @@
+import { Chip, Stack } from "@mui/material";
+import * as MuiIcons from "@mui/icons-material";
+import { Role, TechStack } from "types/global";
 import { ElementType } from "react";
-import { Chip, ChipProps, Stack } from "@mui/material";
-import {
-  BugReportOutlined,
-  BuildOutlined,
-  CodeOutlined,
-  DesktopWindowsOutlined,
-  DesignServicesOutlined,
-  ExtensionOutlined,
-  LibraryBooksOutlined,
-  StorageOutlined,
-  WebAssetOutlined,
-  DeveloperModeOutlined,
-  PaletteOutlined,
-  ScienceOutlined,
-  GavelOutlined,
-  SecurityOutlined,
-  TrendingUpOutlined,
-} from "@mui/icons-material";
-import { PortfolioIconName, Role, TechStack } from "types/global";
-import { isTechStack } from "@utils/typeGuards";
-import { toSentenceCase } from "@/utils/utils";
 
 type ChipItem = TechStack | Role;
 
-const iconMap: { [K in PortfolioIconName]: ElementType } = {
-  frontend: DesktopWindowsOutlined,
-  backend: StorageOutlined,
-  fullstack: WebAssetOutlined,
-  design: DesignServicesOutlined,
-  testing: BugReportOutlined,
-  tooling: BuildOutlined,
-  language: CodeOutlined,
-  library: LibraryBooksOutlined,
-  developer: DeveloperModeOutlined,
-  designer: PaletteOutlined,
-  researcher: ScienceOutlined,
-  seo: TrendingUpOutlined,
-  seoSpecialist: TrendingUpOutlined,
-  complianceManager: GavelOutlined,
-  securityManager: SecurityOutlined,
-};
-
 const TagChips = (props: { items: ChipItem[] }) => {
-  const renderTagIcon = (iconName: PortfolioIconName) => {
-    const Icon = iconMap[iconName] || ExtensionOutlined;
-    return <Icon color="primary" fontSize="small" />;
+  const renderTagIcon = (iconName: string) => {
+    const IconComponent =
+      (MuiIcons as Record<string, ElementType<object>>)[iconName] ||
+      MuiIcons.ExtensionOutlined;
+    return <IconComponent color="primary" fontSize="small" />;
   };
 
   return (
@@ -56,20 +22,11 @@ const TagChips = (props: { items: ChipItem[] }) => {
       gap={1}
     >
       {props.items.map((item) => {
-        const chipKeyAndLabel: Pick<ChipProps, "key" | "label"> = {
-          key: "",
-          label: "",
+        const chipKeyAndLabel = {
+          key: item.name,
+          label: item.name,
         };
-        let iconName: PortfolioIconName;
-        if (isTechStack(item)) {
-          chipKeyAndLabel.key = item.name;
-          chipKeyAndLabel.label = item.name;
-          iconName = item.cardType;
-        } else {
-          chipKeyAndLabel.key = item;
-          chipKeyAndLabel.label = toSentenceCase(item);
-          iconName = item;
-        }
+        const iconName = item.icon;
 
         return (
           <Chip
@@ -82,4 +39,5 @@ const TagChips = (props: { items: ChipItem[] }) => {
     </Stack>
   );
 };
+
 export default TagChips;

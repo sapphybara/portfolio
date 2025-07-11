@@ -6,12 +6,12 @@
     "affiliation": "Consulting",
     "description": "I led the branding, design, and front-end development for Outlast Power, a startup focused on bringing battery storage to underserved commercial facilities. Working closely with a founding team of high-level consultants and engineers, I created a tailored Squarespace site that balances technical credibility with accessibility. The work involved full-stack planning - from typography, icon sourcing, and LESS customization to image licensing, site SEO, and content hierarchy - all optimized to serve their strategic need to appear trustworthy and capable with limited budget.",
     "techStack": [
-      { "name": "Squarespace", "cardType": "frontend" },
-      { "name": "Figma", "cardType": "design" },
-      { "name": "Branding", "cardType": "design" },
-      { "name": "Custom CSS", "cardType": "design" },
-      { "name": "SEO Optimization", "cardType": "seo" },
-      { "name": "Google Search Console", "cardType": "seo" }
+      { "name": "Squarespace", "icon": "DesktopWindowsOutlined" },
+      { "name": "Figma", "icon": "DesignServicesOutlined" },
+      { "name": "Branding", "icon": "DesignServicesOutlined" },
+      { "name": "Custom CSS", "icon": "DesignServicesOutlined" },
+      { "name": "SEO Optimization", "icon": "TrendingUpOutlined" },
+      { "name": "Google Search Console", "icon": "Search" }
     ],
     "links": [
       {
@@ -20,10 +20,10 @@
       }
     ],
     "roles": [
-      "developer",
-      "designer",
-      "seoSpecialist",
-      "todo: could we add brand manager?"
+      { "name": "Developer", "icon": "Code" },
+      { "name": "Designer", "icon": "Palette" },
+      { "name": "SEO Specialist", "icon": "Search" },
+      { "name": "Brand Manager", "icon": "BusinessCenter" }
     ],
     "contributions": [
       "Designed and built the entire site in Squarespace with custom CSS and LESS, using a typography system that reinforces brand credibility.",
@@ -50,13 +50,13 @@
     "affiliation": "Consulting",
     "description": "I led the design and development of MitoKhon’s website, a healthcare consulting firm focused on equity-driven organizational transformation and social impact. With only the branding established at handoff, I took full responsibility for the site's design direction and complete development using Breakdance. This role extended beyond technical work, as I managed stakeholders across multiple levels, coordinated feedback loops, and ensured all project milestones were met ahead of schedule. The result was a cohesive, accessible, and secure user experience that exceeded client expectations.",
     "techStack": [
-      { "name": "WordPress", "cardType": "frontend" },
-      { "name": "Breakdance", "cardType": "frontend" },
-      { "name": "Figma", "cardType": "design" },
-      { "name": "Custom CSS", "cardType": "design" },
-      { "name": "SEO Optimization", "cardType": "seo" },
-      { "name": "Google Analytics", "cardType": "tooling" },
-      { "name": "Google Search Console", "cardType": "seo" }
+      { "name": "WordPress", "icon": "DesktopWindowsOutlined" },
+      { "name": "Breakdance", "icon": "DesktopWindowsOutlined" },
+      { "name": "Figma", "icon": "DesignServicesOutlined" },
+      { "name": "Custom CSS", "icon": "DesignServicesOutlined" },
+      { "name": "SEO Optimization", "icon": "TrendingUpOutlined" },
+      { "name": "Google Analytics", "icon": "BuildOutlined" },
+      { "name": "Google Search Console", "icon": "Search" }
     ],
     "links": [
       {
@@ -65,11 +65,11 @@
       }
     ],
     "roles": [
-      "developer",
-      "designer",
-      "seoSpecialist",
-      "complianceManager",
-      "securityManager"
+      { "name": "Developer", "icon": "Code" },
+      { "name": "Designer", "icon": "Palette" },
+      { "name": "SEO Specialist", "icon": "Search" },
+      { "name": "Compliance Manager", "icon": "Security" },
+      { "name": "Security Manager", "icon": "Shield" }
     ],
     "contributions": [
       "Took over the full design and development process after initial branding was established, creating a cohesive website using WordPress and Breakdance.",
@@ -97,17 +97,16 @@
     "affiliation": "Myself",
     "description": "A developer portfolio showcasing my projects and skills. Built with React, Vite, TypeScript, Material-UI, and Tailwind CSS. Designed to present my work in an organized and visually appealing manner.",
     "techStack": [
-      { "name": "TypeScript", "cardType": "language" },
-      { "name": "React", "cardType": "frontend" },
-      { "name": "React Router", "cardType": "frontend" },
-      { "name": "AWS Amplify", "cardType": "backend" },
-      { "name": "Material-UI", "cardType": "design" },
-      { "name": "Emotion", "cardType": "design" },
-      { "name": "Day.js", "cardType": "library" },
-      { "name": "Vite", "cardType": "tooling" },
-      { "name": "ESLint", "cardType": "tooling" },
-      { "name": "Tailwind CSS", "cardType": "design" },
-      { "name": "Code Splitting", "cardType": "tooling" }
+      { "name": "TypeScript", "icon": "CodeOutlined" },
+      { "name": "React", "icon": "DesktopWindowsOutlined" },
+      { "name": "React Router", "icon": "DesktopWindowsOutlined" },
+      { "name": "AWS Amplify", "icon": "StorageOutlined" },
+      { "name": "Material-UI", "icon": "DesignServicesOutlined" },
+      { "name": "Emotion", "icon": "DesignServicesOutlined" },
+      { "name": "Vite", "icon": "BuildOutlined" },
+      { "name": "ESLint", "icon": "BuildOutlined" },
+      { "name": "Tailwind CSS", "icon": "DesignServicesOutlined" },
+      { "name": "Code Splitting", "icon": "BuildOutlined" }
     ],
     "links": [
       {
@@ -115,7 +114,10 @@
         "href": "https://github.com/sapphybara/portfolio"
       }
     ],
-    "roles": ["developer", "designer"],
+    "roles": [
+      { "name": "Developer", "icon": "Code" },
+      { "name": "Designer", "icon": "Palette" }
+    ],
     "contributions": [
       "Developed the entire frontend of the portfolio using React and TypeScript.",
       "Designed the portfolio using Material-UI and Tailwind CSS to create a visually appealing and user-friendly interface.",
@@ -134,11 +136,11 @@
     "affiliation": "Pacific Northwest National Laboratory",
     "description": "As one of the developers, I contributed to HySCAN, a web application with intuitive, accessible workflows, designed to support users in navigating hydrogen (H2) codes and standards. It is a part of the H2Tools Suite, which is a group of tools developed and maintained by Pacific Northwest National Laboratory. It efficiently identified and categorized areas of adherence, empowering users with tailored solutions for enhanced safety and efficiency.",
     "techStack": [
-      { "name": "React", "cardType": "frontend" },
-      { "name": "styled-components", "cardType": "frontend" },
-      { "name": "Figma", "cardType": "design" },
-      { "name": "Node", "cardType": "backend" },
-      { "name": "Jest", "cardType": "testing" }
+      { "name": "React", "icon": "DesktopWindowsOutlined" },
+      { "name": "styled-components", "icon": "DesktopWindowsOutlined" },
+      { "name": "Figma", "icon": "DesignServicesOutlined" },
+      { "name": "Node", "icon": "StorageOutlined" },
+      { "name": "Jest", "icon": "BugReportOutlined" }
     ],
     "links": [
       {
@@ -147,7 +149,7 @@
       }
     ],
     "shareholderDescription": "HySCAN was jointly developed by Sandia National Laboratories (Sandia), National Renewable Energy Laboratory (NREL), and Pacific Northwest National Laboratory (PNNL) and operated and maintained by PNNL, with funding from the U.S. Department of Energy's Office of Energy Efficiency and Renewable Energy (EERE) under the Hydrogen and Fuel Cell Technologies Office (HFTO).",
-    "roles": ["developer"],
+    "roles": [{ "name": "Developer", "icon": "Code" }],
     "contributions": [
       "Created and maintained React components for the application using styled-components.",
       "**Key to the creation of algorithms** to understand the user's system, identify applicable codes and standards, and group related questions.",
@@ -207,13 +209,16 @@
     "affiliation": "Pacific Northwest National Laboratory",
     "description": "As part of a larger venture, this work focused on Explainable AI (XAI) to help stakeholders understand complex AI models. The project explored different XAI methods and implemented SHAP (Shapley Additive exPlanations), a Python package for XAI. The designs I created were seen as viable by the stakeholders, which was **instrumental in securing an additional $50k in funding** for this and other parts of the project.",
     "techStack": [
-      { "name": "Python", "cardType": "language" },
-      { "name": "AI", "cardType": "frontend" },
-      { "name": "Adobe XD", "cardType": "design" },
-      { "name": "Blueprint.js", "cardType": "design" }
+      { "name": "Python", "icon": "CodeOutlined" },
+      { "name": "AI", "icon": "BuildOutlined" },
+      { "name": "Adobe XD", "icon": "DesignServicesOutlined" },
+      { "name": "Blueprint.js", "icon": "DesignServicesOutlined" }
     ],
     "shareholderDescription": "This research was part of a larger, multi-lab venture, supported by the National Nuclear Security Administration, Office of Defense Nuclear Nonproliferation Research And Development.",
-    "roles": ["designer", "researcher"],
+    "roles": [
+      { "name": "Designer", "icon": "Palette" },
+      { "name": "Researcher", "icon": "Science" }
+    ],
     "contributions": [
       "Designed an intuitive interface to visualize the data output from the AI models, aiding in the understanding of complex AI models."
     ],

@@ -59,12 +59,3 @@ export const formatFinancialNumber = (
       return formattedValue;
   }
 };
-
-export const roles = [
-  "developer",
-  "designer",
-  "researcher",
-  "seoSpecialist",
-  "complianceManager",
-  "securityManager",
-] as const;

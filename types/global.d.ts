@@ -1,6 +1,5 @@
 import { RouteObject } from "react-router-dom";
 import { CardHeaderProps } from "@mui/material";
-import { roles } from "@utils/utils";
 import { DateRange } from "@API";
 
 export interface PropsWithRoutes {
@@ -55,13 +54,14 @@ type TechStackIcon =
   | "library"
   | "seo";
 
-type Role = (typeof roles)[number];
-
-type PortfolioIconName = TechStackIcon | Role;
-
-interface TechStack {
+export interface Role {
   name: string;
-  cardType: TechStackIcon;
+  icon: string;
+}
+
+export interface TechStack {
+  name: string;
+  icon: string;
 }
 
 // todo should we use the type of muis link component instead of this?

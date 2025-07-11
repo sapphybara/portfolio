@@ -43,7 +43,7 @@ const PortfolioActions = ({
 
     if (roleVal.length > 0) {
       filteredCards = filteredCards.filter((card) =>
-        card.roles.some((role) => roleVal.includes(role))
+        card.roles.some((role) => roleVal.includes(role.name))
       );
     }
 
@@ -79,7 +79,11 @@ const PortfolioActions = ({
           )
         );
       case "role":
-        return Array.from(new Set(filteredCards.flatMap((card) => card.roles)));
+        return Array.from(
+          new Set(
+            filteredCards.flatMap((card) => card.roles.map((role) => role.name))
+          )
+        );
       case "affiliation":
         return Array.from(
           new Set(filteredCards.map((card) => card.affiliation))
