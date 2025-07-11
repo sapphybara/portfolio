@@ -37,7 +37,7 @@ const PortfolioDetail = () => {
   if (!portfolioDetail) {
     return (
       <Box className="mt-4">
-        <Typography variant="decoration">Not found</Typography>
+        <Typography variant="decoration">Sorry!</Typography>
         <Typography component="h2" variant="h5">
           Portfolio not found
         </Typography>
