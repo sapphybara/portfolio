@@ -1,9 +1,53 @@
 [
   {
+    "id": "outlast-power",
+    "title": "Outlast Power",
+    "subheader": "Squarespace Branding & Web Development for Energy Startup",
+    "affiliation": "Consulting",
+    "description": "I led the branding, design, and front-end development for Outlast Power, a startup focused on bringing battery storage to underserved commercial facilities. Working closely with a founding team of high-level consultants and engineers, I created a tailored Squarespace site that balances technical credibility with accessibility. The work involved full-stack planning—from typography, icon sourcing, and LESS customization to image licensing, site SEO, and content hierarchy—all optimized to serve their strategic need to appear trustworthy and capable with limited budget.",
+    "techStack": [
+      { "name": "Squarespace", "cardType": "frontend" },
+      { "name": "Figma", "cardType": "design" },
+      { "name": "Branding", "cardType": "design" },
+      { "name": "Custom CSS", "cardType": "design" },
+      { "name": "SEO Optimization", "cardType": "seo" },
+      { "name": "Google Search Console", "cardType": "seo" }
+    ],
+    "links": [
+      {
+        "type": "live",
+        "href": "https://outlastpower.com"
+      }
+    ],
+    "roles": [
+      "developer",
+      "designer",
+      "seoSpecialist",
+      "todo: could we add brand manager?"
+    ],
+    "contributions": [
+      "Designed and built the entire site in Squarespace with custom CSS and LESS, using a typography system that reinforces brand credibility.",
+      "Developed a bold UI with a responsive layout optimized for mobile and desktop browsing.",
+      "Used clean lines and a black and yellow color scheme to both align with the brand's energy focus and resonate with their target audience of blue-collar commercial facility owners.",
+      "Created a structured, minimal information architecture that aligned with the startup's lean storytelling needs and B2B credibility goals.",
+      "Sourced, edited, and licensed images and icons with performance and SEO in mind.",
+      "Integrated accessibility-conscious practices for headings, color contrast, and legibility.",
+      "Wrote semantic markup, optimized metadata, and crafted a compelling meta description for organic discoverability."
+    ],
+    "problemSolving": [
+      "Worked within Squarespace’s limitations to develop a high-performing, polished front-end experience.",
+      "Strategized layout and copy hierarchy to appeal to a dual audience: facility managers and technical partners.",
+      "Overcame platform quirks with LESS variable escaping and dynamic width calculations to support custom branding elements.",
+      "Balanced founder vision with real UX limitations to preserve clarity while supporting future scalability."
+    ],
+    "shortDescription": "A high-credibility Squarespace site for an energy startup out of New York, balancing technical polish, brand clarity, and stakeholder diplomacy under tight constraints.",
+    "isFeaturedOnHome": true
+  },
+  {
     "id": "mitokhon",
     "title": "MitoKhon",
-    "subheader": "Equity-Driven Healthcare Consulting & Web Development",
-    "affiliation": "Freelance",
+    "subheader": "Equity-Focused Website for Healthcare Consulting Firm",
+    "affiliation": "Consulting",
     "description": "I led the design and development of MitoKhon’s website, a healthcare consulting firm focused on equity-driven organizational transformation and social impact. With only the branding established at handoff, I took full responsibility for the site's design direction and complete development using Breakdance. This role extended beyond technical work, as I managed stakeholders across multiple levels, coordinated feedback loops, and ensured all project milestones were met ahead of schedule. The result was a cohesive, accessible, and secure user experience that exceeded client expectations.",
     "techStack": [
       { "name": "WordPress", "cardType": "frontend" },
@@ -44,8 +88,7 @@
       "Enhanced website accessibility to meet WCAG guidelines and improve usability for all visitors.",
       "Facilitated cross-functional communication to manage feedback efficiently and keep projects ahead of schedule."
     ],
-    "shortDescription": "A healthcare consulting website focused on equity-driven organizational transformation, accessibility, and secure, compliant web practices, with strong project and stakeholder management.",
-    "isFeaturedOnHome": true
+    "shortDescription": "A healthcare consulting website focused on equity-driven organizational transformation, accessibility, and secure, compliant web practices, with strong project and stakeholder management."
   },
   {
     "id": "developer-portfolio",
