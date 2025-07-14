@@ -31,7 +31,7 @@ const educationData =
 const ResumeBuilder = () => {
   const [err, setErr] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [jobTitle, setJobTitle] = useState<string>("Front End Engineer");
+  const [jobTitle, setJobTitle] = useState<string>("Full Stack Developer");
   const [isSandboxMode, setIsSandboxMode] = useState<boolean>(true);
   const [shouldUseTitleForPNNLRole, setShouldUseTitleForPNNLRole] =
     useState<boolean>(true);
