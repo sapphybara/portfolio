@@ -68,6 +68,33 @@ const Resume = () => {
     }
     const newNestLevel = Math.min(nestLevel + 1, 5) as 2 | 3 | 4 | 5;
     const Avatar = avatarRecord[id as keyof typeof avatarRecord];
+    const { subheader, dateRange } = cardProps;
+    let cardSubheader = "";
+    if (subheader) {
+      cardSubheader += subheader;
+
+      if (dateRange?.start) {
+        cardSubheader += ` | ${new Date(dateRange.start).toLocaleDateString(
+          "default",
+          {
+            month: "long",
+            year: "numeric",
+          }
+        )}`;
+
+        if (dateRange?.end) {
+          cardSubheader += ` - ${new Date(dateRange.end).toLocaleDateString(
+            "default",
+            {
+              month: "long",
+              year: "numeric",
+            }
+          )}`;
+        } else {
+          cardSubheader += " - Present";
+        }
+      }
+    }
 
     return (
       <CollapsibleCard
@@ -76,6 +103,7 @@ const Resume = () => {
         subheaderTypographyProps={subheaderTypographyProps}
         titleTypographyProps={titleTypographyProps}
         {...cardProps}
+        subheader={cardSubheader}
         avatar={Avatar && <Avatar fontSize="large" />}
       >
         {data.length && (
